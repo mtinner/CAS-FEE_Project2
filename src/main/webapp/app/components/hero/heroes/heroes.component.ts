@@ -1,9 +1,10 @@
-import { Component, OnInit} from '@angular/core';
-import { Router } from '@angular/router-deprecated';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
-import { Hero } from './../hero';
-import { HeroDetailComponent } from './../heroDetail/hero-detail.component';
-import { HeroService } from './../hero.service';
+
+import {Hero} from './../hero';
+import {HeroDetailComponent} from './../heroDetail/hero-detail.component';
+import {HeroService} from './../hero.service';
 
 
 @Component({
@@ -17,11 +18,11 @@ export class HeroesComponent implements OnInit {
     heroes:Hero[];
     selectedHero:Hero;
     addingHero = false;
-    error: any;
+    error:any;
 
-    constructor(
-        private router: Router,
-        private heroService: HeroService) { }
+    constructor(private heroService:HeroService,
+                private router:Router) {
+    }
 
     getHeroes() {
         this.heroService.getHeroes().then(heroes => this.heroes = heroes);
@@ -32,32 +33,36 @@ export class HeroesComponent implements OnInit {
         this.selectedHero = null;
     }
 
-    delete(hero: Hero, event: any) {
+    delete(hero:Hero, event:any) {
         event.stopPropagation();
         this.heroService
             .delete(hero)
             .then(res => {
                 this.heroes = this.heroes.filter(h => h !== hero);
-                if (this.selectedHero === hero) { this.selectedHero = null; }
+                if (this.selectedHero === hero) {
+                    this.selectedHero = null;
+                }
             })
-            .catch(error => this.error = error); // TODO: Display error message
+            .catch(error => this.error = error);
     }
 
-    close(savedHero: Hero) {
+    close(savedHero:Hero) {
         this.addingHero = false;
-        if (savedHero) { this.getHeroes(); }
+        if (savedHero) {
+            this.getHeroes();
+        }
     }
 
     ngOnInit() {
         this.getHeroes();
     }
 
-    onSelect(hero: Hero) {
+    onSelect(hero:Hero) {
         this.selectedHero = hero;
         this.addingHero = false;
     }
 
     gotoDetail() {
-        this.router.navigate(['HeroDetail', { id: this.selectedHero.id }]);
+        this.router.navigate(['/hero', this.selectedHero.id]);
     }
 }
