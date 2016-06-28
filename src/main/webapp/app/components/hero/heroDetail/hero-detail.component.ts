@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 
-import {Hero} from '../hero';
-import {HeroService} from '../hero.service';
+import {Hero} from '../shared/hero';
+import {HeroService} from '../shared/hero.service';
 
 
 @Component({

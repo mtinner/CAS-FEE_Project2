@@ -1,7 +1,7 @@
 import {ROUTER_DIRECTIVES} from '@angular/router';
 
 import {Component} from '@angular/core'
-import {HeroService} from "./components/hero/hero.service";
+import {HeroService} from "./components/hero/shared/hero.service";
 
 
 @Component({
