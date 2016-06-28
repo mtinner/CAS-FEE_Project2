@@ -43,9 +43,9 @@ jspm_packages
 .dist
 
 #TypeScript
-src/main/**/*.js
-!src/main/**/systen.config.js
-src/main/**/*.map
+*.js
+*.map
+!systemjs.config.js
 
 #Typings
 typings
