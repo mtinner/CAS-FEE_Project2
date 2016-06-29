@@ -1,0 +1,17 @@
+/*---
+title:   Buttons
+section: Elements
+---
+
+Button styles can be applied to any element. Typically you'll want to use
+either a `<button>` or an `<a>` element:
+
+```example:html
+<button class="btn">Click</button>
+```
+*/
+
+.btn {
+  background-color: black;
+  color: white;
+}

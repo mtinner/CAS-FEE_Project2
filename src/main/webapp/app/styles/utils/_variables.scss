@@ -1,0 +1,33 @@
+/*---
+title:   Variables
+section: Utils
+---
+The following Colors are available:
+```example:color
+@color: #001155 @name: $test-navy
+@color: #11aaff @name: $test-blue
+@color: #85d5ff @name: $test-blue-20
+@color: #333 @name: $test-dark-grey
+@color: #666 @name: $test-mid-grey
+@color: #bbb @name: $test-light-grey
+@color: #ebebeb @name: $test-light-grey-50
+@color: #dd1122 @name: $test-red
+@color: rgba(255, 0, 0, 0.1) @name: $test-light-red-20
+@color: #551166 @name: $test-purple
+@color: #25B252 @name: $test-green
+@color: #2d90ec @name: $test-secondary
+```
+*/
+
+$test-navy: #001155;
+$test-blue: #11aaff;
+$test-blue-20: #85d5ff;
+$test-dark-grey: #333;
+$test-mid-grey: #666;
+$test-light-grey-50: #ebebeb;
+$test-light-grey: #bbb;
+$test-red: #dd1122;
+$test-light-red-20: rgba(255, 0, 0, 0.1);
+$test-purple: #551166;
+$test-green: #25B252;
+$test-secondary: #2d90ec;

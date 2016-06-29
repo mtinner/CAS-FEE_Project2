@@ -112,7 +112,7 @@ gulp.task('css', function () {
     return gulp.src('./.styleguide/styles/all.css').pipe( // any files have to existing
         postcss([
             require('mdcss')({
-                theme: require('mdcss-theme-github')({
+                theme: require('mdcss-theme-engage')({
                     logo: 'icon.png',
                     examples: {
                         css: ['./all.css']
