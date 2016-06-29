@@ -1,7 +1,7 @@
 import {provideRouter, RouterConfig}  from '@angular/router';
-import {HeroesRoutes} from "./components/hero/heroes/heroes.routes";
-import {DashboardRoutes} from "./components/hero/dashboard/dashboard.routes";
-import {HeroDetailRoutes} from "./components/hero/heroDetail/hero-detail.routes";
+import {HeroesRoutes} from "./hero/heroes/heroes.routes";
+import {DashboardRoutes} from "./hero/dashboard/dashboard.routes";
+import {HeroDetailRoutes} from "./hero/heroDetail/hero-detail.routes";
 
 
 export const routes:RouterConfig = [
