@@ -46,9 +46,10 @@ jspm_packages
 *.js
 *.map
 !systemjs.config.js
+!gulpfile.js
 
 #Typings
 typings
 
 #Styleguide
-.css
+.styleguide

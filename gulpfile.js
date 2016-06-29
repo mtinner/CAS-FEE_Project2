@@ -6,7 +6,8 @@ var gulp = require('gulp'),
     runSequence = require('run-sequence'),
     sourcemaps = require('gulp-sourcemaps'),
     sass = require('gulp-sass'),
-    postcss = require('gulp-postcss');
+    postcss = require('gulp-postcss'),
+    concat = require('gulp-concat');
 
 
 gulp.task('default', function (callback) {
@@ -22,6 +23,8 @@ gulp.task('default', function (callback) {
 gulp.task('serveStyleGuide', function (callback) {
     runSequence(
         ['cleanStyleguide'],
+        ['sassStyleguide'],
+        ['concatStyleguide'],
         ['css'],
         ['copyStyleguideIcon', 'connectStyleguide'],
         callback
@@ -34,8 +37,14 @@ gulp.task('cleanDist', function () {
 });
 
 gulp.task('cleanStyleguide', function () {
-    return gulp.src('.css', {read: false})
+    return gulp.src('.styleguide', {read: false})
         .pipe(clean());
+});
+
+gulp.task('concatStyleguide', function () {
+    return gulp.src('./.styleguide/styles/**/*.css')
+        .pipe(concat('all.css'))
+        .pipe(gulp.dest('./.styleguide/styles'));
 });
 
 gulp.task('transpiling', function () {
@@ -54,6 +63,12 @@ gulp.task('sass', function () {
         .pipe(gulp.dest('.dist/webapp'));
 });
 
+gulp.task('sassStyleguide', function () {
+    return gulp.src('./src/main/webapp/**/*.scss')
+        .pipe(sass().on('error', sass.logError))
+        .pipe(gulp.dest('.styleguide/styles'));
+});
+
 gulp.task('connectDist', function () {
     return connect.server({
         root: ['.dist/webapp', 'node_modules'],
@@ -63,16 +78,16 @@ gulp.task('connectDist', function () {
 
 gulp.task('connectStyleguide', function () {
     return connect.server({
-        root: ['.css'],
+        root: ['.styleguide'],
         port: 8000
     });
 });
 
 gulp.task('copyStyleguideIcon', function () {
     return gulp.src([
-        './src/main/webapp/resources/icon.png',
+        './src/main/webapp/resources/icon.png'
     ])
-        .pipe(gulp.dest('./.css'));
+        .pipe(gulp.dest('./.styleguide'));
 });
 
 gulp.task('copyApp', function () {
@@ -94,19 +109,19 @@ gulp.task('copyScripts', function () {
 });
 
 gulp.task('css', function () {
-    return gulp.src('./src/main/webapp/**/*.css').pipe(
+    return gulp.src('./.styleguide/styles/all.css').pipe( // any files have to existing
         postcss([
             require('mdcss')({
                 theme: require('mdcss-theme-github')({
                     logo: 'icon.png',
                     examples: {
-                        css: ['./styles.css']
+                        css: ['./all.css']
                     }
                 }),
-                destination: './.css'
+                destination: './.styleguide' // to create mdcss
             })
         ])
     ).pipe(
-        gulp.dest('./.css')
+        gulp.dest('./.styleguide') // dest des styles
     );
 });
