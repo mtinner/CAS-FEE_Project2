@@ -30,6 +30,7 @@
     "gulp-sass": "^2.3.2",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-typescript": "^2.13.6",
+    "load-gulp-config": "^1.3.0",
     "mdcss": "^1.5.2",
     "mdcss-theme-engage": "^2.3.0",
     "run-sequence": "^1.2.1",
