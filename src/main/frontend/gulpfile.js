@@ -10,7 +10,15 @@ config(gulp, {
     // path to task's files, defaults to gulp dir.
     configPath: config.util.path.join('gulp', '*.js'),
     // data passed into config task.
-    data: Object.assign({path: {root: '../../../'}, anyValue: 1, anyParams: []}, pack)
+    data: Object.assign({
+            path: {
+                root: '../../../',
+                e2e: '../test/e2e/'
+            },
+            anyValue: 1,
+            anyParams: []
+        },
+        pack)
 });
 
 
