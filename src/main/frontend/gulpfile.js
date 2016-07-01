@@ -13,7 +13,7 @@ config(gulp, {
     data: Object.assign({
             path: {
                 root: '../../../',
-                e2e: '../test/e2e/'
+                e2e: '../../test/e2e/'
             },
             anyValue: 1,
             anyParams: []
