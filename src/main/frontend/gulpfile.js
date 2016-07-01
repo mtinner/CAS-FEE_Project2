@@ -9,9 +9,8 @@ var pack = config.util.readJSON('package.json');
 config(gulp, {
     // path to task's files, defaults to gulp dir.
     configPath: config.util.path.join('gulp', '*.js'),
-
     // data passed into config task.
-    data: Object.assign({someCfg: {}, anyValue: 1, anyParams: []}, pack)
+    data: Object.assign({path: {root: '../../../'}, anyValue: 1, anyParams: []}, pack)
 });
 
 
