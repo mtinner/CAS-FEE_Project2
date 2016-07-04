@@ -1,12 +1,21 @@
-exports.modules = (function () {
+module.exports = (function () {
 
-    var heroes = element(by.css('e2e-id="dashboard-title"'));
+    var heroes = element.all(by.css('[e2e-class|="hero-box"]'));
+    var heroNames = element.all(by.css('[e2e-class="hero-names"]'));
+    var title = element(by.css('[e2e-id="dashboard-title"]'));
 
     return {
-        getNumbersOfHeroes: function () {
-            return heroes.length
+        heroNames: function () {
+            return heroNames;
         },
-        browse: 'http://localhost:9000/'
+        heroes: function () {
+            return heroes;
+        },
+        title: function () {
+            return title;
+        },
+        getUrl: function () {
+            return 'http://localhost:9000/';
+        }
     }
-
 })();
