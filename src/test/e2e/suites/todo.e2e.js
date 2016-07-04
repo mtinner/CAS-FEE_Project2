@@ -1,4 +1,4 @@
-var dashboardPage = require('../core/pageobjects/dashboard');
+var dashboardPage = require('../pageobjects/dashboard');
 
 describe('angularjs homepage todo list', function () {
     it('should add a todo', function () {
@@ -9,7 +9,6 @@ describe('angularjs homepage todo list', function () {
         expect(dashboardPage.title().getText().then(function (text) {
             expect(text).toEqual('Top Heroes');
         }));
-        expect(dashboardPage.heroNames().count()).toEqual(4);
         expect(dashboardPage.heroes().count()).toEqual(4);
     });
 });

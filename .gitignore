@@ -28,3 +28,6 @@ typings
 
 #Gulp
 !gulp/*
+
+#Test
+.tmp

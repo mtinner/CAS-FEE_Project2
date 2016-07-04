@@ -25,7 +25,7 @@ config(gulp, {
 gulp.task('default', function (callback) {
     runSequence(
         'clean:Dist',
-        ['transpiling', 'sass:Dist'],
+        ['transpiling:Dist', 'sass:Dist'],
         ['copy:App', 'copy:Scripts'],
         'connect:Dist',
         callback
@@ -39,6 +39,18 @@ gulp.task('serveStyleGuide', function (callback) {
         ['concat:Styleguide'],
         ['styleguide'],
         ['copy:StyleguideIcon', 'connect:Styleguide'],
+        callback
+    );
+});
+
+gulp.task('e2e', function (callback) {
+
+    runSequence(
+        'clean:E2e',
+        ['transpiling:E2e', 'sass:E2e'],
+        ['copy:E2eApp', 'copy:E2eScripts'],
+        'connect:E2e',
+        'angularProtractor',
         callback
     );
 });
