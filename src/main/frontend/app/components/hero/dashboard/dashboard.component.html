@@ -1,6 +1,7 @@
-<h3>Top Heroes</h3>
+<h3 e2e-id="dashboard-title">Top Heroes</h3>
 <div class="grid grid-pad">
-    <div *ngFor="let hero of heroes" (click)="gotoDetail(hero)" class="col-1-4">
+    <div *ngFor="let hero of heroes; let i = index" attr.e2e-class="hero-{{i}}"
+         (click)="gotoDetail(hero)" class="col-1-4">
         <div class="module hero">
             <h4>{{hero.name}}</h4>
         </div>

@@ -1,7 +1,10 @@
-describe('angularjs homepage todo list', function() {
-    it('should add a todo', function() {
-        browser.get('https://angularjs.org');
+var dashboardPage = require('../core/pageobjects/dashboard');
 
+describe('angularjs homepage todo list', function () {
+    it('should add a todo', function () {
+        //    browser.get(dashboardPage.browse);
+        //   console.log(dashboardPage.getNumbersOfHeroes());
+        browser.get('https://angularjs.org');
         element(by.model('todoList.todoText')).sendKeys('write first protractor test');
         element(by.css('[value="add"]')).click();
 
