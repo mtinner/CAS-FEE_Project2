@@ -15,7 +15,7 @@ module.exports = function (gulp, data, util, taskName) {
             '!./**/*.scss',
             './app/images/**',
             './app/scripts/**',
-            './*index.html'
+            './index.html'
         ], {base: './'})
             .pipe(gulp.dest(data.path.root + '.dist/frontend'));
     });
@@ -27,7 +27,7 @@ module.exports = function (gulp, data, util, taskName) {
             '!./**/*.scss',
             './app/images/**',
             './app/scripts/**',
-            './*index.html'
+            './index.html'
         ], {base: './'})
             .pipe(gulp.dest(data.path.root + '.tmp/frontend'));
     });
@@ -40,7 +40,7 @@ module.exports = function (gulp, data, util, taskName) {
         ])
             .pipe(gulp.dest(data.path.root + '.dist/frontend/app/scripts/vendor'));
     });
-    
+
     gulp.task(taskName + ':E2eScripts', function () {
         return gulp.src([
             'node_modules/core-js/client/shim.min.js',
