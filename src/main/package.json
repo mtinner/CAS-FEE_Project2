@@ -21,12 +21,14 @@
     "angular2-in-memory-web-api": "0.0.12"
   },
   "devDependencies": {
+    "express": "^4.14.0",
     "gulp": "^3.9.1",
     "gulp-angular-protractor": "^0.1.1",
     "gulp-clean": "^0.3.2",
     "gulp-concat": "^2.6.0",
     "gulp-connect": "^4.1.0",
     "gulp-copy": "0.0.2",
+    "gulp-express": "^0.3.5",
     "gulp-postcss": "^6.1.1",
     "gulp-sass": "^2.3.2",
     "gulp-sourcemaps": "^1.6.0",
