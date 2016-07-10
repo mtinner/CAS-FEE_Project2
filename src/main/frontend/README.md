@@ -6,5 +6,11 @@
 2. `npm run typings install`
 3. run gulp default
 
-## Install WebDriver for Protractor
+## WebDriver for Protractor
+### Installation
 node node_modules/protractor/bin/webdriver-manager update
+node node_modules/gulp-angular-protractor/node_modules/gulp-protractor/node_modules/protractor/bin/webdriver-mana
+ger update
+
+### Start
+node node_modules/protractor/bin/webdriver-manager start
