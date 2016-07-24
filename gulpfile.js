@@ -14,8 +14,10 @@ config(gulp, {
         {
             path: {
                 root: './',
-                frontend: './frontend/',
-                e2e: './e2e/'
+                frontend: './src/frontend/',
+                e2e: './src/e2e/',
+                dist: './src/.dist/',
+                styleguide: './src/.styleguide/'
             },
             anyValue: 1,
             anyParams: []
@@ -28,7 +30,7 @@ gulp.task('default', function (callback) {
     runSequence(
         'clean:Dist',
         ['transpiling:Dist', 'sass:Dist'],
-        ['copy:App', 'copy:Scripts'],
+        ['copy:App'],
         ['connect:Dist'],
         callback
     );

@@ -2,7 +2,7 @@ module.exports = function (gulp, data, util, taskName) {
 
     var clean = require('gulp-clean');
     gulp.task(taskName + ':Dist', function () {
-        return gulp.src(data.path.root + '.dist', {read: false})
+        return gulp.src(data.path.dist, {read: false})
             .pipe(clean({force: true}));
     });
 
@@ -12,7 +12,7 @@ module.exports = function (gulp, data, util, taskName) {
     });
 
     gulp.task(taskName + ':Styleguide', function () {
-        return gulp.src(data.path.root + '.styleguide', {read: false})
+        return gulp.src(data.path.styleguide, {read: false})
             .pipe(clean({force: true}));
     });
 };

@@ -7,7 +7,7 @@
     "experimentalDecorators": true,
     "removeComments": false,
     "noImplicitAny": false,
-    "rootDir": "frontend"
+    "rootDir": "src/frontend"
   },
   "exclude": [
     "node_modules"

@@ -4,7 +4,7 @@ module.exports = function (gulp, data, util, taskName) {
 
     gulp.task(taskName + ':Dist', function () {
         return connect.server({
-            root: [data.path.root + '.dist', 'node_modules'],
+            root: [data.path.dist, 'node_modules'],
             port: 9000
         });
     });
@@ -18,7 +18,7 @@ module.exports = function (gulp, data, util, taskName) {
 
     gulp.task(taskName + ':Styleguide', function () {
         return connect.server({
-            root: [data.path.root + '.styleguide'],
+            root: [data.path.styleguide],
             port: 8000
         });
     });
