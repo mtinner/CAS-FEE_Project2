@@ -11,7 +11,7 @@ module.exports = function (gulp, data, util, taskName) {
     gulp.task(taskName + ':E2e', function () {
         return gulp.src(data.path.frontend + '**/*.scss')
             .pipe(sass().on('error', sass.logError))
-            .pipe(gulp.dest(data.path.root + '.tmp/frontend'));
+            .pipe(gulp.dest(data.path.tmpE2e + 'frontend'));
     });
 
     gulp.task(taskName + ':Styleguide', function () {

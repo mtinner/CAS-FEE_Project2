@@ -7,7 +7,7 @@ module.exports = function (gulp, data, util, taskName) {
     });
 
     gulp.task(taskName + ':E2e', function () {
-        return gulp.src(data.path.root + '.tmp', {read: false})
+        return gulp.src(data.path.tmpE2e, {read: false})
             .pipe(clean({force: true}));
     });
 

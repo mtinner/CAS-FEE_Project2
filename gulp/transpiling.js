@@ -21,6 +21,6 @@ module.exports = function (gulp, data, util, taskName) {
 
         return tsResult.js
             .pipe(sourcemaps.write())
-            .pipe(gulp.dest(data.path.root + '.tmp/frontend'));
+            .pipe(gulp.dest(data.path.tmpE2e + 'frontend'));
     });
 };

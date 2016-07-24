@@ -17,6 +17,7 @@ config(gulp, {
                 root: './',
                 frontend: './src/frontend/',
                 backend: './src/backend/',
+                tmpE2e: './src/.tmpE2e/',
                 e2e: './src/e2e/',
                 dist: './src/.dist/',
                 styleguide: './src/.styleguide/'

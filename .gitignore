@@ -30,4 +30,4 @@ typings
 !gulp/*
 
 #Test
-.tmp
+.tmpE2e

@@ -45,7 +45,7 @@ module.exports = function (gulp, data, util, taskName) {
             data.path.frontend + 'scripts/**',
             './src/index.html'
         ], {base: './src'})
-            .pipe(gulp.dest(data.path.root + '.tmp/frontend'));
+            .pipe(gulp.dest(data.path.tmpE2e));
     });
 
     gulp.task(taskName + ':E2eScripts', function () {
@@ -54,6 +54,6 @@ module.exports = function (gulp, data, util, taskName) {
             'node_modules/systemjs/dist/system.src.js',
             'node_modules/zone.js/dist/zone.js'
         ])
-            .pipe(gulp.dest(data.path.root + '.tmp/frontend/frontend/scripts/vendor'));
+            .pipe(gulp.dest(data.path.tmpE2e + 'frontend/scripts/vendor'));
     });
 };

@@ -4,7 +4,7 @@ module.exports = function (gulp, data, util, taskName) {
 
     gulp.task(taskName + ':E2e', function () {
         return connect.server({
-            root: [data.path.root + '.tmp/frontend', 'node_modules'],
+            root: [data.path.tmpE2e, 'node_modules'],
             port: 9001
         });
     });
