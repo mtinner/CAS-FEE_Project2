@@ -10,6 +10,6 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use('/hero', heroRouting);
 
-var port = 9090;
+var port = 8080;
 app.listen(port);
 console.log('API listening on port ' + port + ' ...');
