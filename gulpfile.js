@@ -2,6 +2,7 @@ var gulp = require('gulp'),
     config = require('load-gulp-config'),
     runSequence = require('run-sequence');
 
+
 // Specifics of npm's package.json handling.
 // @see https://docs.npmjs.com/files/package.json
 var pack = config.util.readJSON('package.json');
@@ -15,6 +16,7 @@ config(gulp, {
             path: {
                 root: './',
                 frontend: './src/frontend/',
+                backend: './src/backend/',
                 e2e: './src/e2e/',
                 dist: './src/.dist/',
                 styleguide: './src/.styleguide/'
@@ -31,7 +33,7 @@ gulp.task('default', function (callback) {
         'clean:Dist',
         ['transpiling:Dist', 'sass:Dist'],
         ['copy:App'],
-        ['connect:Dist'],
+        ['serve:Dist'],
         callback
     );
 });
@@ -46,6 +48,7 @@ gulp.task('serveStyleGuide', function (callback) {
         callback
     );
 });
+
 
 gulp.task('e2e', function (callback) {
     runSequence(

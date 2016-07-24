@@ -19,6 +19,7 @@ module.exports = function (gulp, data, util, taskName) {
         ], {base: './src'})
             .pipe(gulp.dest(data.path.dist));
 
+
         var scripts = gulp.src([
             'node_modules/core-js/client/shim.min.js',
             'node_modules/systemjs/dist/system.src.js',
@@ -27,7 +28,12 @@ module.exports = function (gulp, data, util, taskName) {
             .pipe(gulp.dest(data.path.dist + 'frontend/scripts/vendor'));
 
 
-        return Promise.all([app, scripts])
+        var backend = gulp.src([
+            data.path.backend + '**'
+        ], {base: data.path.backend})
+            .pipe(gulp.dest(data.path.dist));
+
+        return Promise.all([app, backend, scripts])
     });
 
     gulp.task(taskName + ':E2eApp', function () {
