@@ -13,3 +13,8 @@
 
 ### Start
 `node node_modules/protractor/bin/webdriver-manager start`
+
+### Main Gulp Tasks
+ * Default (Start App http://:localhost:8080/)
+ * serveStyleGuide (Make Styleguide http://localhost:8000/)
+ * e2e (run Protractor tests)

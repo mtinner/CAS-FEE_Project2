@@ -37,7 +37,7 @@ module.exports = function (gulp, data, util, taskName) {
     });
 
     gulp.task(taskName + ':E2eApp', function () {
-        return gulp.src([
+        var app = gulp.src([
             data.path.frontend + 'components/**',
             '!./**/*.ts',
             '!./**/*.scss',
@@ -46,14 +46,15 @@ module.exports = function (gulp, data, util, taskName) {
             './src/index.html'
         ], {base: './src'})
             .pipe(gulp.dest(data.path.tmpE2e));
-    });
 
-    gulp.task(taskName + ':E2eScripts', function () {
-        return gulp.src([
+        var scripts = gulp.src([
             'node_modules/core-js/client/shim.min.js',
             'node_modules/systemjs/dist/system.src.js',
             'node_modules/zone.js/dist/zone.js'
         ])
             .pipe(gulp.dest(data.path.tmpE2e + 'frontend/scripts/vendor'));
+
+
+        return Promise.all([app, scripts])
     });
 };

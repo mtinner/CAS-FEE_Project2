@@ -14,7 +14,6 @@ config(gulp, {
     data: Object.assign(
         {
             path: {
-                root: './',
                 frontend: './src/frontend/',
                 backend: './src/backend/',
                 tmpE2e: './src/.tmpE2e/',
@@ -55,7 +54,7 @@ gulp.task('e2e', function (callback) {
     runSequence(
         'clean:E2e',
         ['transpiling:E2e', 'sass:E2e'],
-        ['copy:E2eApp', 'copy:E2eScripts'],
+        ['copy:E2eApp'],
         'connect:E2e',
         'angularProtractor',
         callback
