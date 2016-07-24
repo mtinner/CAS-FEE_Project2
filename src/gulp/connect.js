@@ -4,7 +4,7 @@ module.exports = function (gulp, data, util, taskName) {
 
     gulp.task(taskName + ':Dist', function () {
         return connect.server({
-            root: [data.path.root + '.dist/frontend', 'node_modules'],
+            root: [data.path.root + '.dist', 'node_modules'],
             port: 9000
         });
     });

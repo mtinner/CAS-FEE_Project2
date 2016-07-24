@@ -16,8 +16,8 @@ node_modules
 .dist
 
 #TypeScript
-src/app/**/*.js
-src/app/**/*.map
+src/frontend/**/*.js
+src/frontend/**/*.map
 !src/**/systemjs.config.js
 
 #Typings

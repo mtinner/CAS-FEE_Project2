@@ -11,7 +11,7 @@ module.exports = function (gulp, data, util, taskName) {
 
         return tsResult.js
             .pipe(sourcemaps.write())
-            .pipe(gulp.dest(data.path.root + '.dist/frontend/app'));
+            .pipe(gulp.dest(data.path.root + '.dist/frontend'));
     });
 
     gulp.task(taskName + ':E2e', function () {
@@ -21,6 +21,6 @@ module.exports = function (gulp, data, util, taskName) {
 
         return tsResult.js
             .pipe(sourcemaps.write())
-            .pipe(gulp.dest(data.path.root + '.tmp/frontend/app'));
+            .pipe(gulp.dest(data.path.root + '.tmp/frontend'));
     });
 };

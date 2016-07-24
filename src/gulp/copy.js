@@ -3,30 +3,31 @@ module.exports = function (gulp, data, util, taskName) {
 
     gulp.task(taskName + ':StyleguideIcon', function () {
         return gulp.src([
-            'app/images/icon.png'
+            'frontend/images/icon.png'
         ])
             .pipe(gulp.dest(data.path.root + '.styleguide'));
     });
 
     gulp.task(taskName + ':App', function () {
         return gulp.src([
-            './app/components/**',
+            data.path.frontend + 'components/**',
+            // './frontend/components/**',
             '!./**/*.ts',
             '!./**/*.scss',
-            './app/images/**',
-            './app/scripts/**',
+            './frontend/images/**',
+            './frontend/scripts/**',
             './index.html'
-        ], {base: './'})
+        ], {base: './frontend'})
             .pipe(gulp.dest(data.path.root + '.dist/frontend'));
     });
 
     gulp.task(taskName + ':E2eApp', function () {
         return gulp.src([
-            './app/components/**',
+            './frontend/components/**',
             '!./**/*.ts',
             '!./**/*.scss',
-            './app/images/**',
-            './app/scripts/**',
+            './frontend/images/**',
+            './frontend/scripts/**',
             './index.html'
         ], {base: './'})
             .pipe(gulp.dest(data.path.root + '.tmp/frontend'));
@@ -38,7 +39,7 @@ module.exports = function (gulp, data, util, taskName) {
             'node_modules/systemjs/dist/system.src.js',
             'node_modules/zone.js/dist/zone.js'
         ])
-            .pipe(gulp.dest(data.path.root + '.dist/frontend/app/scripts/vendor'));
+            .pipe(gulp.dest(data.path.root + '.dist/frontend/scripts/vendor'));
     });
 
     gulp.task(taskName + ':E2eScripts', function () {
@@ -47,6 +48,6 @@ module.exports = function (gulp, data, util, taskName) {
             'node_modules/systemjs/dist/system.src.js',
             'node_modules/zone.js/dist/zone.js'
         ])
-            .pipe(gulp.dest(data.path.root + '.tmp/frontend/app/scripts/vendor'));
+            .pipe(gulp.dest(data.path.root + '.tmp/frontend/frontend/scripts/vendor'));
     });
 };
