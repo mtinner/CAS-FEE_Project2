@@ -3,9 +3,9 @@ module.exports = function (gulp, data, util, taskName) {
 
     gulp.task(taskName + ':StyleguideIcon', function () {
         return gulp.src([
-            'frontend/images/icon.png'
+            data.path.frontend + 'images/icon.png'
         ])
-            .pipe(gulp.dest(data.path.root + '.styleguide'));
+            .pipe(gulp.dest(data.path.styleguide));
     });
 
     gulp.task(taskName + ':App', function () {
