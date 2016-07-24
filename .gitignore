@@ -31,3 +31,4 @@ typings
 
 #Test
 .tmpE2e
+src/spec/frontend/

@@ -15,4 +15,11 @@ module.exports = function (gulp, data, util, taskName) {
             port: 8000
         });
     });
+
+    gulp.task(taskName + ':Spec', function () {
+        return connect.server({
+            root: [data.path.spec, './'],
+            port: 9002
+        });
+    });
 };

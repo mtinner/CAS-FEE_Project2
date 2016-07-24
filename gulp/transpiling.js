@@ -14,6 +14,16 @@ module.exports = function (gulp, data, util, taskName) {
             .pipe(gulp.dest(data.path.dist + 'frontend'));
     });
 
+    gulp.task(taskName + ':Spec', function () {
+        var tsResult = tsProject.src()
+            .pipe(sourcemaps.init())
+            .pipe(ts(tsProject));
+
+        return tsResult.js
+            .pipe(sourcemaps.write())
+            .pipe(gulp.dest(data.path.spec + 'frontend'));
+    });
+
     gulp.task(taskName + ':E2e', function () {
         var tsResult = tsProject.src()
             .pipe(sourcemaps.init())

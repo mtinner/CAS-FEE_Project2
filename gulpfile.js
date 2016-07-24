@@ -18,6 +18,7 @@ config(gulp, {
                 backend: './src/backend/',
                 tmpE2e: './src/.tmpE2e/',
                 e2e: './src/e2e/',
+                spec: './src/spec/',
                 dist: './src/.dist/',
                 styleguide: './src/.styleguide/'
             },
@@ -49,6 +50,15 @@ gulp.task('serveStyleGuide', function (callback) {
     );
 });
 
+
+gulp.task('spec', function (callback) {
+    runSequence(
+        'clean:Spec',
+        ['transpiling:Spec'],
+        'connect:Spec',
+        callback
+    );
+});
 
 gulp.task('e2e', function (callback) {
     runSequence(
