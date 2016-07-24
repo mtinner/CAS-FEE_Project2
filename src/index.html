@@ -1,0 +1,25 @@
+<html>
+<head>
+    <base href=".">
+    <title>Angular 2 QuickStart</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="frontend/styles/all.css">
+    <!-- 1. Load libraries -->
+    <!-- Polyfill(s) for older browsers -->
+    <script src="frontend/scripts/vendor/shim.min.js"></script>
+    <script src="frontend/scripts/vendor/zone.js"></script>
+    <script src="frontend/scripts/vendor/system.src.js"></script>
+    <!-- 2. Configure SystemJS -->
+    <script src="frontend/scripts/systemjs.config.js"></script>
+    <script>
+        System.import('frontend').catch(function (err) {
+            console.error(err);
+        });
+    </script>
+</head>
+<!-- 3. Display the application -->
+<body>
+<my-app>Loading...</my-app>
+</body>
+</html>

@@ -1,1 +1,20 @@
 # CAS-FEE_Project2
+
+## Bootstrap Application
+
+1. `npm install`
+2. `npm run typings install`
+3. `gulp default`
+
+## WebDriver for Protractor
+### Installation
+`node node_modules/protractor/bin/webdriver-manager update`
+`node node_modules/gulp-angular-protractor/node_modules/gulp-protractor/node_modules/protractor/bin/webdriver-manager update`
+
+### Start
+`node node_modules/protractor/bin/webdriver-manager start`
+
+### Main Gulp Tasks
+ * Default (Start App http://:localhost:8080/)
+ * serveStyleGuide (Make Styleguide http://localhost:8000/)
+ * e2e (run Protractor tests)
