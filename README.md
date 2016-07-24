@@ -17,4 +17,5 @@
 ### Main Gulp Tasks
  * Default (Start App http://:localhost:8080/)
  * serveStyleGuide (Make Styleguide http://localhost:8000/)
- * e2e (run Protractor tests)
+ * spec (run Jasmine http://localhost:9002/)
+ * e2e (run Protractor tests http://localhost:9001/)
