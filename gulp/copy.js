@@ -15,6 +15,7 @@ module.exports = function (gulp, data, util, taskName) {
             '!./**/*.scss',
             data.path.frontend + 'images/**',
             data.path.frontend + 'scripts/**',
+            data.path.frontend + 'fonts/**',
             './src/index.html'
         ], {base: './src'})
             .pipe(gulp.dest(data.path.dist));

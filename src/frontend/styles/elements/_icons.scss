@@ -1,0 +1,25 @@
+
+.icon {
+  font-family: 'icomoon';
+  cursor: pointer;
+
+  &--burger:before {
+    content: "\e900";
+  }
+
+  &--shopping-list:before {
+    color: grey;
+    content: "\e903";
+  }
+
+  &--cost:before {
+    color: greenyellow;
+    content: "\e902";
+  }
+
+  &--user:before {
+    color: brown;
+    content: "\e901";
+  }
+}
+

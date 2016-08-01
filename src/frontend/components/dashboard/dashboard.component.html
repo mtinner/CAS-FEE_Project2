@@ -1,0 +1,9 @@
+<div class="icon icon--burger"></div>
+<ul class="list list--navigation">
+
+    <li *ngFor="let item of menuItems" class="list__item">
+        <span class="icon icon--{{item.icon}}"></span>
+        <span class="list__item__text">{{item.name}}</span>
+    </li>
+</ul>
+<div class="list__cover"></div>
