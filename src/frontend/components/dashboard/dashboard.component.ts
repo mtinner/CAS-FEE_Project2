@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {Router} from '@angular/router';
 
 
 @Component({
@@ -14,7 +13,21 @@ export class DashboardComponent {
         {name: 'Costs', icon: 'cost'},
         {name: 'Account', icon: 'user'}
     ];
+    private showNavigation = false;
 
-    constructor(private router:Router) {
+    constructor() {
+    }
+
+    slideNavigation() {
+        this.showNavigation = true;
+    }
+
+    hideNavigation() {
+        this.showNavigation = false;
+    }
+
+    goTo(item) {
+        console.log(item);
+        this.hideNavigation();
     }
 }

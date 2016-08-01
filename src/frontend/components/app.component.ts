@@ -1,14 +1,12 @@
-import {ROUTER_DIRECTIVES} from '@angular/router';
-
 import {Component} from '@angular/core'
+import {DashboardComponent} from "./dashboard/dashboard.component";
 
 
 @Component({
     selector: 'my-app',
     templateUrl: 'frontend/components/app.component.html',
     styleUrls: ['frontend/components/app.component.css'],
-    directives: [ROUTER_DIRECTIVES]
+    directives: [DashboardComponent]
 })
 export class AppComponent {
-    title = 'Tour of Heroes';
 }

@@ -1,6 +1,7 @@
 /*section:Base
 ---
 */
+@import "base/display";
 @import "base/typography";
 /*section:Utils
 ---
@@ -11,6 +12,7 @@ Contain variables
 ---
 Contain buttons
 */
+@import "elements/header";
 @import "elements/buttons";
 @import "elements/list";
 @import "elements/icons";
@@ -21,3 +23,6 @@ Contain buttons
   font-family: Arial, Helvetica, sans-serif;
 }
 
+body {
+  margin: 0;
+}

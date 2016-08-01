@@ -3,8 +3,14 @@
   font-family: 'icomoon';
   cursor: pointer;
 
-  &--burger:before {
-    content: "\e900";
+  &--burger {
+
+    &:before {
+      padding-top: 10px;
+      padding-left: 10px;
+      font-size: 1.5rem;
+      content: "\e900";
+    }
   }
 
   &--shopping-list:before {
@@ -13,7 +19,7 @@
   }
 
   &--cost:before {
-    color: greenyellow;
+    color: #5fbf0a;
     content: "\e902";
   }
 

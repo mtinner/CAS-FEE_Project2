@@ -1,9 +1,13 @@
-<div class="icon icon--burger"></div>
-<ul class="list list--navigation">
+<header class="header">
+    <span (click)="slideNavigation()" class="icon icon--burger display--no-desktop"></span>
 
-    <li *ngFor="let item of menuItems" class="list__item">
-        <span class="icon icon--{{item.icon}}"></span>
-        <span class="list__item__text">{{item.name}}</span>
-    </li>
-</ul>
-<div class="list__cover"></div>
+    <aside [ngClass]="{'hide--mobile': !showNavigation}">
+        <ul class="list list--navigation list--navigation--desktop">
+            <li *ngFor="let item of menuItems" (click)="goTo(item.name)" class="list__item list__item--desktop">
+                <span class="icon icon--{{item.icon}}"></span>
+                <span class="list__item__text">{{item.name}}</span>
+            </li>
+        </ul>
+        <div class="list__cover display--no-desktop"></div>
+    </aside>
+</header>
