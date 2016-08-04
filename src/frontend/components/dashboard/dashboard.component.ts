@@ -13,21 +13,16 @@ export class DashboardComponent {
         {name: 'Costs', icon: 'cost'},
         {name: 'Account', icon: 'user'}
     ];
-    private showNavigation = false;
+    private showNavigation = true;
 
     constructor() {
     }
 
-    slideNavigation() {
-        this.showNavigation = true;
-    }
-
-    hideNavigation() {
-        this.showNavigation = false;
+    toggleNavigation() {
+        this.showNavigation = !this.showNavigation;
     }
 
     goTo(item) {
         console.log(item);
-        this.hideNavigation();
     }
 }

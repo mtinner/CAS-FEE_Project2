@@ -4,10 +4,17 @@
   cursor: pointer;
 
   &--burger {
+    text-align: center;
+    float: left;
+    width: 80px;
+    opacity: 0.75;
+    color: #fff;
+
+    &:hover {
+      opacity: 1;
+    }
 
     &:before {
-      padding-top: 10px;
-      padding-left: 10px;
       font-size: 1.5rem;
       content: "\e900";
     }
