@@ -1,9 +1,9 @@
 .header {
-  background-color: #4285F4;
+  background-color: $sea;
   float: left;
   line-height: 3.8rem;
   width: 100%;
-  box-shadow: 0 0 4px rgba(0, 0, 0, .14), 0 4px 8px rgba(0, 0, 0, .28);
+  box-shadow: 0 0 4px rgba($manta, .14), 0 4px 8px rgba($manta, .28);
   position: fixed;
   z-index: 20;
 }

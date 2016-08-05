@@ -8,7 +8,13 @@
     float: left;
     width: 80px;
     opacity: 0.75;
-    color: #fff;
+    color: $snow;
+
+    &:active::before {
+      border-radius: 20px;
+      padding: 10px;
+      background-color: rgba(0, 0, 0, 0.1);
+    }
 
     &:hover {
       opacity: 1;
@@ -21,17 +27,17 @@
   }
 
   &--shopping-list:before {
-    color: grey;
+    color: $default;
     content: "\e903";
   }
 
   &--cost:before {
-    color: #5fbf0a;
+    color: $grass;
     content: "\e902";
   }
 
   &--user:before {
-    color: brown;
+    color: $copper;
     content: "\e901";
   }
 }
