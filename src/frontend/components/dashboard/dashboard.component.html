@@ -8,5 +8,5 @@
             <span class="list__item__text">{{item.name}}</span>
         </li>
     </ul>
-    <div *ngIf="showNavigation" class="list__cover"></div>
+    <div class="list__cover" [ngClass]="{'list__cover--slide-in': !showNavigation}"></div>
 </aside>

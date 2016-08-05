@@ -42,9 +42,37 @@
     top: 0;
     left: 0;
     background-color: rgba(dimgray, 0.4);
+    animation-name: white-dimgray;
+    animation-duration: 1s;
     @media only screen and (min-width: 600px) {
       display: none;
     }
+    &--slide-in {
+      top: 0;
+      height: 0;
+      animation-name: dimgray-white;
+      animation-duration: 1s;
+    }
+  }
+}
+
+@-webkit-keyframes white-dimgray {
+  from {
+    background-color: white;
+  }
+  to {
+    background-color: rgba(dimgray, 0.4);
+  }
+}
+
+@-webkit-keyframes dimgray-white {
+  from {
+    height: 100%;
+    background-color: rgba(dimgray, 0.4);
+  }
+  to {
+    height: 100%;
+    background-color: white;
   }
 }
 
