@@ -28,7 +28,7 @@ config(gulp, {
     )
 });
 
-gulp.task('default', function (callback) {
+gulp.task('Default', function (callback) {
     runSequence(
         'clean:Dist',
         ['transpiling:Dist', 'sass:Dist'],
@@ -38,7 +38,7 @@ gulp.task('default', function (callback) {
     );
 });
 
-gulp.task('serveStyleGuide', function (callback) {
+gulp.task('ServeStyleGuide', function (callback) {
     runSequence(
         ['clean:Styleguide'],
         ['sass:Styleguide'],
@@ -50,7 +50,7 @@ gulp.task('serveStyleGuide', function (callback) {
 });
 
 
-gulp.task('e2e', function (callback) {
+gulp.task('E2e', function (callback) {
     runSequence(
         'clean:E2e',
         ['transpiling:E2e', 'sass:E2e'],
