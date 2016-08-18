@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 app.get('/', function (req, res) {
-    res.sendfile('src/.dist/index.html');
+    res.sendFile('src/.dist/index.html');
 });
 
 app.use('/hero', heroRouting);

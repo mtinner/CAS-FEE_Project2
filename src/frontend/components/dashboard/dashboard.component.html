@@ -1,0 +1,12 @@
+<header class="header">
+    <span (click)="toggleNavigation()" class="icon icon--burger"></span>
+</header>
+<aside>
+    <ul class="list list--navigation" [ngClass]="{'list--navigation--slide': showNavigation}">
+        <li *ngFor="let item of menuItems" (click)="goTo(item.name)" class="list__item">
+            <span class="icon icon--{{item.icon}}"></span>
+            <span class="list__item__text">{{item.name}}</span>
+        </li>
+    </ul>
+    <div class="list__cover" [ngClass]="{'list__cover--slide-in': !showNavigation}"></div>
+</aside>

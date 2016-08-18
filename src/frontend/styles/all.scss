@@ -1,3 +1,7 @@
+/*section:Base
+---
+*/
+@import "base/typography";
 /*section:Utils
 ---
 Contain variables
@@ -7,31 +11,17 @@ Contain variables
 ---
 Contain buttons
 */
-@import "elements/_buttons";
-
-h1 {
-  color: #369;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 250%;
-}
-
-h2, h3 {
-  color: #444;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: lighter;
-}
-
-body {
-  margin: 2em;
-}
-
-body, input[text], button {
-  color: #888;
-  font-family: Cambria, Georgia;
-}
+@import "elements/header";
+@import "elements/buttons";
+@import "elements/list";
+@import "elements/icons";
 
 /* . . . */
 /* everywhere else */
 * {
   font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  margin: 0;
 }
