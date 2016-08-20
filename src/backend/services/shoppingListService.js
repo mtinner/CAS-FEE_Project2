@@ -25,7 +25,7 @@ const shoppingListService = (function () {
         let article = new Article(
             id++,
             article.name,
-            article.goup
+            article.group
         );
         articles.push(article);
         return article;
