@@ -9,7 +9,11 @@ module.exports = function (config) {
         preprocessors: {
             './src/backend/**/*spec.js': ['browserify']
         },
-        browserify: {},
+        browserify: {
+            transform: [
+                ['babelify', {presets: ['es2015']}]
+            ]
+        },
         exclude: []
 
     });
