@@ -1,36 +1,43 @@
 'use strict';
 
 const shoppingListService = (function () {
-    let shoppingListGroupes = ['Alle', 'Früche/Gemüse', 'Fleisch', 'Food', 'Non Food'];
+    let shoppingListGroupes = ['Alle', 'Früche/Gemüse', 'Fleisch', 'Food', 'Non Food'],
+        id = 0,
+        articles = [];
 
     return {
-        getShoppingListGroupes: getShoppingListGroupes
+        getShoppingListGroupes: getShoppingListGroupes,
+        getArticle: getArticle,
+        addArticle: addArticle,
+        updateArticle: updateArticle
     };
 
     function getShoppingListGroupes() {
         return shoppingListGroupes;
     }
 
-    /*  function addNote(note) {
-     var note = new Note(
-     id++,
-     new Date(note.dueDate),
-     note.title,
-     note.text,
-     note.priority,
-     note.done
-     );
-     notes.push(note);
-     return note;
-     }*/
+    function getArticle(id) {
+        id = parseInt(id);
+        return articles.find(article=>article.id === id)
+    }
 
-    /*   function updateNote(id, newNote) {
-     var oldNote = getNote(id);
-     if (!newNote || !oldNote) {
-     throw new Exception('new and old note expected');
-     }
-     return Object.assign(oldNote, newNote);
-     }*/
+    function addArticle(article) {
+        let article = new Article(
+            id++,
+            article.name,
+            article.goup
+        );
+        articles.push(article);
+        return article;
+    }
+
+    function updateArticle(id, newArticle) {
+        var oldArticle = getArticle(id);
+        if (!newArticle || !oldArticle) {
+            throw new Exception('new and old article expected');
+        }
+        return Object.assign(oldArticle, newArticle);
+    }
 
 })();
 
