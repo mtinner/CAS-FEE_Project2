@@ -3,8 +3,8 @@
 ## Bootstrap Application
 
 1. `npm install`
-2. `npm run typings install`
-3. `gulp default`
+2. `typings install`
+3. `gulp Default`
 
 ## WebDriver for Protractor
 ### Installation
