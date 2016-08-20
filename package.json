@@ -2,9 +2,6 @@
   "name": "CAS-FEE_Project2",
   "version": "1.0.0",
   "license": "ISC",
-  "scripts": {
-    "typings": "typings"
-  },
   "dependencies": {
     "@angular/common": "2.0.0-rc.2",
     "@angular/compiler": "2.0.0-rc.2",
