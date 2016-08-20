@@ -2,9 +2,6 @@
   "name": "CAS-FEE_Project2",
   "version": "1.0.0",
   "license": "ISC",
-  "scripts": {
-    "typings": "typings"
-  },
   "dependencies": {
     "@angular/common": "2.0.0-rc.2",
     "@angular/compiler": "2.0.0-rc.2",
@@ -34,6 +31,7 @@
     "gulp-sass": "^2.3.2",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-typescript": "^2.13.6",
+    "jasmine-core": "^2.4.1",
     "load-gulp-config": "^1.3.0",
     "mdcss": "^1.5.2",
     "mdcss-theme-engage": "^2.3.0",
