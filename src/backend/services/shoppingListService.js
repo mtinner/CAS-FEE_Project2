@@ -1,6 +1,8 @@
 'use strict';
+let Article = require('../models/Article');
 
-const shoppingListService = (function () {
+
+let shoppingListService = (function () {
     let shoppingListGroupes = ['Alle', 'Früche/Gemüse', 'Fleisch', 'Food', 'Non Food'],
         id = 0,
         articles = [];
@@ -18,27 +20,28 @@ const shoppingListService = (function () {
 
     function getArticle(id) {
         id = parseInt(id);
-        return articles.find(article=>article.id === id)
+        return articles.find(o=> {
+            o.id === id;
+        })
     }
 
     function addArticle(article) {
-        let article = new Article(
+        let a = new Article(
             id++,
             article.name,
             article.group
         );
         articles.push(article);
-        return article;
+        return a;
     }
 
     function updateArticle(id, newArticle) {
-        var oldArticle = getArticle(id);
+        let oldArticle = getArticle(id);
         if (!newArticle || !oldArticle) {
             throw new Exception('new and old article expected');
         }
         return Object.assign(oldArticle, newArticle);
     }
-
 })();
 
 module.exports = shoppingListService;

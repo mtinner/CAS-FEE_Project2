@@ -1,6 +1,6 @@
 'use strict';
 
-const Article = (id, name, group) => {
+let Article = function (id, name, group) {
     this.id = id;
     this.name = name;
     this.group = group;

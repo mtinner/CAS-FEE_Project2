@@ -1,15 +1,19 @@
 'use strict';
 
-import {Article} from './Article';
+let Article = require('./Article');
 
 
 describe('Article', ()=> {
+    it('has id', ()=> {
+        let article = new Article(1, 'Super Cat', 'Alle');
+        expect(article.id).toEqual(1);
+    });
     it('has name', ()=> {
-        var article = {id: 1, name: 'Super Cat', group: 'Alle'};
+        let article = new Article(1, 'Super Cat', 'Alle');
         expect(article.name).toEqual('Super Cat');
     });
     it('has group', ()=> {
-        var article = {id: 1, name: 'Super Cat', group: 'Alle'};
+        let article = new Article(1, 'Super Cat', 'Alle');
         expect(article.group).toEqual('Alle');
     });
 });
