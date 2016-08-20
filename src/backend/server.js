@@ -1,10 +1,9 @@
 'use strict';
+let express = require('express'),
+    bodyParser = require('body-parser'),
+    app = module.exports.app = exports.app = express();
 
-var express = require('express');
-var bodyParser = require('body-parser');
-var heroRouting = require('./routes/heroRouting');
-
-var app = module.exports.app = exports.app = express();
+let apiRouting = require('./routes/apiRouting');
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -13,7 +12,7 @@ app.get('/', function (req, res) {
     res.sendfile('src/.dist/index.html');
 });
 
-app.use('/hero', heroRouting);
+app.use('/api', apiRouting);
 
 app.use('/frontend', express.static('./src/.dist/frontend'));
 app.use('/@angular', express.static('node_modules/@angular'));
@@ -23,6 +22,6 @@ app.use('/rxjs', express.static('node_modules/rxjs'));
 app.use('/angular2-in-memory-web-api', express.static('node_modules/angular2-in-memory-web-api'));
 
 
-var port = 8080;
+let port = 8080;
 app.listen(port);
 console.log('API listening on port ' + port + ' ...');
