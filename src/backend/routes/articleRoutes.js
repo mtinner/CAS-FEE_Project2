@@ -9,7 +9,6 @@ router.get('/:id?', function (req, res) {
     res.status(200).send(shoppingListService.getArticle(req.params.id));
 });
 
-//todo test
 router.post('/', function (req, res) {
     res.status(201).send(shoppingListService.addArticle(req.body));
 });

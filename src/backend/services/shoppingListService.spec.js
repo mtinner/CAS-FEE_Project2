@@ -21,7 +21,6 @@ describe('shoppingListService', ()=> {
             shoppingListService.getArticle(0);
             expect(shoppingListService.getArticle).toHaveBeenCalled();
         });
-
     });
 
     describe('addArticle', ()=> {
@@ -37,6 +36,14 @@ describe('shoppingListService', ()=> {
             spyOn(shoppingListService, 'updateArticle');
             shoppingListService.updateArticle({});
             expect(shoppingListService.updateArticle).toHaveBeenCalled();
+        });
+    });
+
+    describe('deleteArticle', ()=> {
+        it('delete Article has to be called', ()=> {
+            spyOn(shoppingListService, 'deleteArticle');
+            shoppingListService.deleteArticle({});
+            expect(shoppingListService.deleteArticle).toHaveBeenCalled();
         });
     });
 });
