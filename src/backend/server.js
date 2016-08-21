@@ -3,7 +3,7 @@ let express = require('express'),
     bodyParser = require('body-parser'),
     app = module.exports.app = exports.app = express();
 
-let apiRouting = require('./routes/apiRouting');
+let apiRouting = require('./routes/apiRoutes');
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());

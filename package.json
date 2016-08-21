@@ -11,18 +11,19 @@
     "@angular/platform-browser-dynamic": "2.0.0-rc.2",
     "@angular/router": "3.0.0-alpha.8",
     "@angular/upgrade": "2.0.0-rc.2",
-    "systemjs": "0.19.27",
+    "angular2-in-memory-web-api": "0.0.12",
     "core-js": "^2.4.0",
+    "express": "^4.14.0",
     "rxjs": "5.0.0-beta.6",
-    "zone.js": "^0.6.12",
-    "angular2-in-memory-web-api": "0.0.12"
+    "systemjs": "0.19.27",
+    "zone.js": "^0.6.12"
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.13.2",
     "babelify": "^7.3.0",
     "body-parser": "^1.15.2",
     "browserify": "^13.1.0",
-    "express": "^4.14.0",
+    "chai": "^3.5.0",
     "gulp": "^3.9.1",
     "gulp-angular-protractor": "^0.1.1",
     "gulp-clean": "^0.3.2",
@@ -43,6 +44,8 @@
     "load-gulp-config": "^1.3.0",
     "mdcss": "^1.5.2",
     "mdcss-theme-engage": "^2.3.0",
+    "mocha": "^3.0.2",
+    "request": "^2.74.0",
     "run-sequence": "^1.2.1",
     "typings": "^1.3.0"
   }
