@@ -19,3 +19,7 @@
  * serveStyleGuide (Make Styleguide http://localhost:8000/)
  * spec (run Jasmine http://localhost:9002/)
  * e2e (run Protractor tests http://localhost:9001/)
+ 
+ 
+## Inspired Http-Response-Codes
+http://i.stack.imgur.com/whhD1.png

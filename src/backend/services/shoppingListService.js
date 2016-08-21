@@ -11,7 +11,8 @@ let shoppingListService = (function () {
         getShoppingListGroupes: getShoppingListGroupes,
         getArticle: getArticle,
         addArticle: addArticle,
-        updateArticle: updateArticle
+        updateArticle: updateArticle,
+        deleteArticle: deleteArticle
     };
 
     function getShoppingListGroupes() {
@@ -19,9 +20,15 @@ let shoppingListService = (function () {
     }
 
     function getArticle(id) {
+        if (!Number.isInteger(parseInt(id))) {
+            return articles;
+        }
         id = parseInt(id);
         return articles.find(o=> {
-            o.id === id;
+
+            {
+                return o.id === id;
+            }
         })
     }
 
@@ -31,16 +38,39 @@ let shoppingListService = (function () {
             article.name,
             article.group
         );
-        articles.push(article);
+        articles.push(a);
         return a;
     }
 
     function updateArticle(id, newArticle) {
-        let oldArticle = getArticle(id);
-        if (!newArticle || !oldArticle) {
-            throw new Exception('new and old article expected');
+        let oldArticle;
+        if (Number.isInteger(parseInt(id))) {
+            oldArticle = getArticle(id);
+        }
+        if (!newArticle) {
+            throw new Exception('no new article');
+        }
+        else if (newArticle && !oldArticle) {
+            return addArticle(newArticle);
         }
         return Object.assign(oldArticle, newArticle);
+    }
+
+    function deleteArticle(id) {
+        let article = getArticle(id);
+
+        if (!article || Number.isInteger(article.id)) {
+            throw new Exception('Article not found');
+        }
+        let pos = getPositionOfArticle(article);
+        if (pos < 0) {
+            throw new Exception('Position of article not found');
+        }
+        return articles.splice(pos, 1);
+    }
+
+    function getPositionOfArticle(article) {
+        return articles.findIndex(a=>a.id === article.id);
     }
 })();
 

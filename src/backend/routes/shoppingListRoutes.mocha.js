@@ -6,10 +6,9 @@ let expect = require("chai").expect,
 let url = "http://localhost:8080/api/shoppingList";
 
 
-describe('GET /shoppingList', function () {
-
-    it('respond with 200', function (done) {
-        request(`${url}/groupes`, function (error, response, body) {
+describe('/shoppingList', ()=> {
+    it('GET respond with 200', (done)=> {
+        request(`${url}/groupes`, (error, response, body)=> {
             expect(response.statusCode).to.equal(200);
             done();
         });
