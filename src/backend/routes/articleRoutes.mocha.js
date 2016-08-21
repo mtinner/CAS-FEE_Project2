@@ -11,14 +11,14 @@ describe('/article', ()=> {
     describe('/GET', ()=> {
 
         it('respond with 200', (done)=> {
-            request(url, (error, response, body)=> {
+            request(url, (error, response)=> {
                 expect(response.statusCode).to.equal(200);
                 done();
             });
         });
 
         it('respond id 0 with 200', (done)=> {
-            request(`${url}/0`, (error, response, body)=> {
+            request(`${url}/0`, (error, response)=> {
                 expect(response.statusCode).to.equal(200);
                 done();
             });
@@ -28,7 +28,7 @@ describe('/article', ()=> {
     describe('/POST', ()=> {
 
         it('respond with 200', (done)=> {
-            request.post(url, {name: 'Gurken', group: 'Alle'}, (error, response, body)=> {
+            request.post(url, {name: 'Gurken', group: 'Alle'}, (error, response)=> {
                 expect(response.statusCode).to.equal(201);
                 done();
             });
@@ -56,7 +56,7 @@ describe('/article', ()=> {
     describe('/PUT', ()=> {
 
         it('respond with 200', (done)=> {
-            request.put(url, {name: 'Gurken', group: 'Alle'}, (error, response, body)=> {
+            request.put(url, {name: 'Gurken', group: 'Alle'}, (error, response)=> {
                 expect(response.statusCode).to.equal(200);
                 done();
             });
@@ -113,14 +113,14 @@ describe('/article', ()=> {
     describe('/DELETE', ()=> {
 
         it('respond with 404', (done)=> {
-            request.delete(url, (error, response, body)=> {
+            request.delete(url, (error, response)=> {
                 expect(response.statusCode).to.equal(404);
                 done();
             });
         });
 
         it('respond id 9999999999 with 404', (done)=> {
-            request.delete(`${url}/9999999999`, (error, response, body)=> {
+            request.delete(`${url}/9999999999`, (error, response)=> {
                 expect(response.statusCode).to.equal(404);
                 done();
             });
@@ -136,15 +136,15 @@ describe('/article', ()=> {
                 body: JSON.stringify({name: 'Gurken', group: 'Alle'})
             }, (error, response, body) => {
                 let article = JSON.parse(body);
-                request.delete(`${url}/${article.id}`, (error, response, body)=> {
-                    expect(response.statusCode).to.equal(404);
+                request.delete(`${url}/${article.id}`, (error, response)=> {
+                    expect(response.statusCode).to.equal(204);
                     done();
                 });
             });
         });
 
         it('respond id asdf with 404', (done)=> {
-            request.delete(`${url}/asdf`, (error, response, body)=> {
+            request.delete(`${url}/asdf`, (error, response)=> {
                 expect(response.statusCode).to.equal(404);
                 done();
             });
