@@ -59,7 +59,7 @@ let shoppingListService = (function () {
     function deleteArticle(id) {
         let article = getArticle(id);
 
-        if (!article || Number.isInteger(article.id)) {
+        if (!article || !Number.isInteger(article.id)) {
             throw new Exception('Article not found');
         }
         let pos = getPositionOfArticle(article);
