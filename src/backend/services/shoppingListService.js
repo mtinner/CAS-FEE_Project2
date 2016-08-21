@@ -3,20 +3,20 @@ let Article = require('../models/Article');
 
 
 let shoppingListService = (function () {
-    let shoppingListGroupes = ['Alle', 'Früche/Gemüse', 'Fleisch', 'Food', 'Non Food'],
+    let shoppingListGroups = ['Alle', 'Früchte/Gemüse', 'Fleisch', 'Food', 'Non Food'],
         id = 0,
         articles = [];
 
     return {
-        getShoppingListGroupes: getShoppingListGroupes,
+        getShoppingListGroups: getShoppingListGroups,
         getArticle: getArticle,
         addArticle: addArticle,
         updateArticle: updateArticle,
         deleteArticle: deleteArticle
     };
 
-    function getShoppingListGroupes() {
-        return shoppingListGroupes;
+    function getShoppingListGroups() {
+        return shoppingListGroups;
     }
 
     function getArticle(id) {

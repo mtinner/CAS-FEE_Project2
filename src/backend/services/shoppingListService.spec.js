@@ -3,14 +3,14 @@
 let shoppingListService = require('./shoppingListService');
 
 describe('shoppingListService', ()=> {
-    describe('getShoppingListGroupes', ()=> {
-        it('getShoppingListGroupes size', ()=> {
-            let shoppingListGroupes = shoppingListService.getShoppingListGroupes();
-            expect(shoppingListGroupes.length).toBeGreaterThan(0);
+    describe('getShoppingListGroups', ()=> {
+        it('getShoppingListGroups size', ()=> {
+            let shoppingListGroups = shoppingListService.getShoppingListGroups();
+            expect(shoppingListGroups.length).toBeGreaterThan(0);
         });
-        it('getShoppingListGroupes contains Alle', ()=> {
-            let shoppingListGroupes = shoppingListService.getShoppingListGroupes();
-            expect(shoppingListGroupes).toContain('Alle');
+        it('getShoppingListGroups contains Alle', ()=> {
+            let shoppingListGroups = shoppingListService.getShoppingListGroups();
+            expect(shoppingListGroups).toContain('Alle');
         });
     });
 

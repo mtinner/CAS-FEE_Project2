@@ -6,8 +6,8 @@ let express = require('express'),
 let articleRouting = require('./articleRoutes'),
     shoppingListService = require('../services/shoppingListService');
 
-router.get('/groupes', function (req, res) {
-    res.status(200).send(shoppingListService.getShoppingListGroupes());
+router.get('/groups', function (req, res) {
+    res.status(200).send(shoppingListService.getShoppingListGroups());
 });
 
 router.use('/article', articleRouting);

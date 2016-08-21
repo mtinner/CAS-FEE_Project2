@@ -8,7 +8,7 @@ let url = "http://localhost:8080/api/shoppingList";
 
 describe('/shoppingList', ()=> {
     it('GET respond with 200', (done)=> {
-        request(`${url}/groupes`, (error, response, body)=> {
+        request(`${url}/groups`, (error, response, body)=> {
             expect(response.statusCode).to.equal(200);
             done();
         });
