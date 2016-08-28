@@ -2,16 +2,22 @@
 
 let express = require('express'),
   router = express.Router(),
-  expressJwt = require('express-jwt'),
-  jwt = require('jsonwebtoken');
+  authService = require('../services/authService');
 
 router.get('/token', function (req, res) {
-  var token = jwt.sign('myData', 'secret1');
-  res.status(200).send({token: token});
+  res.status(200).send(authService.createToken({
+      username: 'tobi',
+      roles: [
+        'user',
+        'power-user',
+        'admin'
+      ]
+    }
+  ));
 });
 
 router.get('/test',
-  expressJwt({secret: 'secret1'}),
+  authService.protect(),
   function (req, res) {
     res.status(200).send(req.user);
   });
