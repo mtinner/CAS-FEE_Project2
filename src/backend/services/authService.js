@@ -25,13 +25,10 @@ let authService = (function () {
   };
 
   function protect(guardedRoles) {
-    return middleware;
-
-    function middleware(req, res, next) {
-      expressJwt({secret: SECRET})(req, res, injectedNext);
-      function injectedNext() {
+    return function (req, res, next) {
+      expressJwt({secret: SECRET})(req, res, function () {
         guard.check(guardedRoles)(req, res, next);
-      }
+      });
     }
   }
 
