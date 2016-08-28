@@ -5,18 +5,39 @@ let expressJwt = require('express-jwt'),
 
 let authService = (function () {
   const SECRET = 'c4ntT0uchTh1s';
+  const users = [ //todo: get from DB
+    {
+      username: 'admin',
+      password: 'adminPwd',
+      roles: ['user', 'admin']
+    },
+    {
+      username: 'appUser',
+      password: 'pwd',
+      roles: ['user']
+    }
+  ];
 
   return {
     protect: protect,
-    createToken: createToken
+    signIn: signIn
   };
 
-  function protect(roles){
+  function protect(roles) {
     return expressJwt({secret: SECRET})
   }
 
-  function createToken(content){
-    return jwt.sign(content, SECRET)
+  function signIn(username, password) {
+    let matchedUsers = users.filter(user =>
+      user.username === username &&
+      user.password === password
+    );
+    if(matchedUsers && matchedUsers.length > 0){
+      let signedInUser = Object.assign({}, matchedUsers[0]);
+      delete signedInUser.password;
+      return jwt.sign(signedInUser, SECRET);
+    }
+    return null;
   }
 })();
 

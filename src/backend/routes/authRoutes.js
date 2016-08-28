@@ -5,15 +5,13 @@ let express = require('express'),
   authService = require('../services/authService');
 
 router.get('/token', function (req, res) {
-  res.status(200).send(authService.createToken({
-      username: 'tobi',
-      roles: [
-        'user',
-        'power-user',
-        'admin'
-      ]
-    }
-  ));
+  let token = authService.signIn(
+    req.query.username,
+    req.query.password);
+  if (token) {
+    res.status(200).send(token);
+  }
+  res.status(401).send();
 });
 
 router.get('/test',
