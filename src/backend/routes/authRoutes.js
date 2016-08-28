@@ -15,7 +15,7 @@ router.get('/token', function (req, res) {
 });
 
 router.get('/test',
-  authService.protect(),
+  authService.protect('admin'),
   function (req, res) {
     res.status(200).send(req.user);
   });
