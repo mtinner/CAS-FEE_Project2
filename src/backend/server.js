@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 app.get('/', function (req, res) {
-    res.sendfile('src/.dist/index.html');
+    res.sendFile(__dirname + '/index.html');
 });
 
 app.use('/api', apiRouting);
