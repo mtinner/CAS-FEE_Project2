@@ -1,10 +1,12 @@
 import {Component} from '@angular/core';
+import {LoginComponent} from '../login/login.component'
 
 
 @Component({
     selector: 'my-dashboard',
     templateUrl: 'frontend/components/dashboard/dashboard.component.html',
-    styleUrls: ['frontend/components/dashboard/dashboard.component.css']
+    styleUrls: ['frontend/components/dashboard/dashboard.component.css'],
+    directives: [LoginComponent]
 })
 export class DashboardComponent {
 
