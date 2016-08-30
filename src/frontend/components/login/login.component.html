@@ -2,12 +2,12 @@
     <label for="login-username">
         Username:
     </label>
-    <input id="login-username" type="text" [(value)]="username"/>
+    <input id="login-username" type="text" (keyup)="setUsername($event)" value="{{username}}"/>
 
     <label for="login-password">
         Password:
     </label>
-    <input id="login-password" type="password" [(value)]="password"/>
+    <input id="login-password" type="password" (keyup)="setPassword($event)" value="{{password}}"/>
 
     <button (click)="login()">Login</button>
 

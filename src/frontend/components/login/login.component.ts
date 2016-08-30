@@ -1,5 +1,6 @@
 import {Component, Injectable} from '@angular/core';
-import {Http, Response} from '@angular/http';
+import {Http} from '@angular/http';
+import { Observable } from 'rxjs/Observable';
 // import 'rxjs/Rx'; // adds ALL RxJS statics & operators to Observable
 // See node_module/rxjs/Rxjs.js
 // Import just the rxjs statics and operators we need for THIS app.
@@ -28,7 +29,15 @@ export class LoginComponent {
     password = 'pwd';
     response = '';
 
-    login() {
+    setUsername = (event) => {
+        this.username = event.target.value;
+    };
+
+    setPassword = (event) => {
+        this.password = event.target.value;
+    };
+
+    login = () => {
         this.http
             .get(`/api/auth/token?username=${this.username}&password=${this.password}`)
             .map(res => res.json())
@@ -37,12 +46,14 @@ export class LoginComponent {
                 console.log(value);
                 this.response = value.token;
             });
-    }
+    };
 
-    private handleError(error: any) {
+    private handleError = (error: any) => {
         const errMsg = error.message
             ? error.message : error.status
             ? `${error.status} - ${error.statusText}` : 'Server error';
+        this.response = '';
         alert(errMsg);
-    }
+        return Observable.throw(errMsg);
+    };
 }
