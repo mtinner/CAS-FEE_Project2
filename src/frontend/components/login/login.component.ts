@@ -31,7 +31,7 @@ export class LoginComponent {
     login() {
         this.http
             .get(`/api/auth/token?username=${this.username}&password=${this.password}`)
-            .map(this.extractData)
+            .map(res => res.json())
             .catch(this.handleError)
             .subscribe((value: any) => {
                 console.log(value);
@@ -40,12 +40,9 @@ export class LoginComponent {
     }
 
     private handleError(error: any) {
-        const errMsg = (error.message) ? error.message :
-            error.status ? `${error.status} - ${error.statusText}` : 'Server error';
-        alert(errMsg); // log to console instead
-    }
-
-    private extractData(res: Response) {
-        return res.json();
+        const errMsg = error.message
+            ? error.message : error.status
+            ? `${error.status} - ${error.statusText}` : 'Server error';
+        alert(errMsg);
     }
 }
