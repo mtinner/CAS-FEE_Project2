@@ -12,7 +12,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/toPromise';
-import {Observable} from "rxjs";
+
 
 @Injectable()
 @Component({
@@ -26,27 +26,26 @@ export class LoginComponent {
 
     username = 'admin';
     password = 'pwd';
+    response = '';
 
     login() {
-        let observable : Observable = this.http
-            .get(`/api/auth/token?username=${this.username}&username=${this.password}`)
+        this.http
+            .get(`/api/auth/token?username=${this.username}&password=${this.password}`)
             .map(this.extractData)
-            .catch(this.handleError);
-        observable.subscribe(value => {
-           alert(value);
-        });
+            .catch(this.handleError)
+            .subscribe((value: any) => {
+                console.log(value);
+                this.response = value.token;
+            });
     }
 
-    private handleError (error: any) {
-        // In a real world app, we might use a remote logging infrastructure
-        // We'd also dig deeper into the error to get a better message
-        let errMsg = (error.message) ? error.message :
+    private handleError(error: any) {
+        const errMsg = (error.message) ? error.message :
             error.status ? `${error.status} - ${error.statusText}` : 'Server error';
         alert(errMsg); // log to console instead
     }
 
     private extractData(res: Response) {
-        let body = res.json();
-        return body.data || {};
+        return res.json();
     }
 }
