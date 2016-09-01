@@ -5,7 +5,7 @@ module.exports = function (config) {
         files: [
             {pattern: './src/backend/**/*spec.js', watched: false}
         ],
-        frameworks: ['browserify', 'jasmine', 'mocha', 'chai'],
+        frameworks: ['browserify', 'jasmine'],
         preprocessors: {
             './src/backend/**/*spec.js': ['browserify']
         },
