@@ -61,7 +61,7 @@
 
 @-webkit-keyframes white-dimgray {
   from {
-    background-color: $snow;
+    background-color: rgba($snow,0);
   }
   to {
     background-color: rgba(dimgray, 0.4);
@@ -75,7 +75,7 @@
   }
   to {
     height: 100%;
-    background-color: $snow;
+    background-color: rgba($snow,0);
   }
 }
 
