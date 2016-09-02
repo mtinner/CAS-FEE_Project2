@@ -4,8 +4,10 @@
 <aside>
     <ul class="list list--navigation" [ngClass]="{'list--navigation--slide': showNavigation}">
         <li *ngFor="let item of menuItems" (click)="goTo(item.name)" class="list__item">
-            <span class="icon icon--{{item.icon}}"></span>
-            <span class="list__item__text">{{item.name}}</span>
+            <a class="link" routerLink="{{item.route}}" routerLinkActive="active">
+                <span class="icon icon--{{item.icon}}"></span>
+                <span class="list__item__text">{{item.name}}</span>
+            </a>
         </li>
     </ul>
     <div class="list__cover" [ngClass]="{'list__cover--slide-in': !showNavigation}"></div>

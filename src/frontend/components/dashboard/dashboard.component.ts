@@ -9,8 +9,8 @@ import {Component} from '@angular/core';
 export class DashboardComponent {
 
     private menuItems = [
-        {name: 'Shopping List', icon: 'shopping-list'},
-        {name: 'Costs', icon: 'cost'},
+        {name: 'Shopping List', icon: 'shopping-list', route: '/shopping-list'},
+        {name: 'Costs', icon: 'cost', route: '/cost-management'},
         {name: 'Account', icon: 'user'}
     ];
     private showNavigation = true;
