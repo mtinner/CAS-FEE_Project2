@@ -9,7 +9,8 @@ router.get('/token', function (req, res) {
     req.query.username,
     req.query.password);
   if (token) {
-    res.status(200).send(token);
+    res.setHeader('X-Auth-Token', token);
+    res.status(200).send();
   }
   res.status(401).send();
 });

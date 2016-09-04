@@ -40,7 +40,7 @@ let authService = (function () {
     if (matchedUsers && matchedUsers.length > 0) {
       let signedInUser = Object.assign({}, matchedUsers[0]);
       delete signedInUser.password;
-      return {token: jwt.sign(signedInUser, SECRET)};
+      return jwt.sign(signedInUser, SECRET);
     }
     return null;
   }

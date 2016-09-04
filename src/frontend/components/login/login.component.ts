@@ -40,11 +40,11 @@ export class LoginComponent {
     login = () => {
         this.http
             .get(`/api/auth/token?username=${this.username}&password=${this.password}`)
-            .map(res => res.json())
             .catch(this.handleError)
-            .subscribe((value: any) => {
-                console.log(value);
-                this.response = value.token;
+            .subscribe((res) => {
+                const token = res.headers.get('X-Auth-Token');
+                console.log(token);
+                this.response = token;
             });
     };
 
