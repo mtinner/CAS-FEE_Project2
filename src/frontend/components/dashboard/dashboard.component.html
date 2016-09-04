@@ -1,4 +1,6 @@
-<header class="header">
+<header class="header"
+        [ngClass]="{'header--cost-management': selectedIndex===1,
+        'header--settings': selectedIndex===2}">
     <span (click)="toggleNavigation()" class="icon icon--burger"></span>
     <div>{{menuItems[selectedIndex].name}}</div>
 </header>

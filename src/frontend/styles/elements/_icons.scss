@@ -22,23 +22,22 @@
 
     &:before {
       font-size: 1.5rem;
-      content: "\e900";
+      content: "\e901";
     }
   }
 
   &--shopping-list:before {
-    color: $default;
+    color: $shopping-primary-dark;
     content: "\e903";
   }
 
-  &--cost:before {
-    color: $grass;
+  &--cost-management:before {
+    color: $cost-management-primary-dark;
     content: "\e902";
   }
 
-  &--user:before {
-    color: $copper;
-    content: "\e901";
+  &--settings:before {
+    content: "\e900";
   }
 }
 
