@@ -8,6 +8,10 @@
       background-color: $dark-snow;
       border-radius: 5px;
     }
+    &--selected {
+      background-color: $dark-snow;
+      border-radius: 5px;
+    }
 
     &__text {
       padding-left: 25px;
@@ -27,7 +31,7 @@
     animation: slidein 1s;
     animation-timing-function: ease-in;
     @media only screen and (min-width: 600px) {
-      width: 180px;
+      width: 220px;
     }
 
     &--slide {
@@ -61,7 +65,7 @@
 
 @-webkit-keyframes white-dimgray {
   from {
-    background-color: rgba($snow,0);
+    background-color: rgba($snow, 0);
   }
   to {
     background-color: rgba(dimgray, 0.4);
@@ -75,7 +79,7 @@
   }
   to {
     height: 100%;
-    background-color: rgba($snow,0);
+    background-color: rgba($snow, 0);
   }
 }
 

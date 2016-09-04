@@ -1,9 +1,11 @@
 <header class="header">
     <span (click)="toggleNavigation()" class="icon icon--burger"></span>
+    <div>{{menuItems[selectedIndex].name}}</div>
 </header>
 <aside>
     <ul class="list list--navigation" [ngClass]="{'list--navigation--slide': showNavigation}">
-        <li *ngFor="let item of menuItems" (click)="goTo(item.name)" class="list__item">
+        <li *ngFor="let item of menuItems;let i = index;" (click)="setSelectedIndex(i)" class="list__item"
+            [ngClass]="{'list__item--selected':selectedIndex===i}">
             <a class="link" routerLink="{{item.route}}" routerLinkActive="active">
                 <span class="icon icon--{{item.icon}}"></span>
                 <span class="list__item__text">{{item.name}}</span>
