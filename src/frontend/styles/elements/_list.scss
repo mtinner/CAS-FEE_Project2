@@ -31,13 +31,18 @@
     animation: slidein 1s;
     animation-timing-function: ease-in;
     @media only screen and (min-width: 600px) {
+      left: -260px;
       width: 220px;
+      animation: slidein-desktop 1s;
     }
 
     &--slide {
       left: 0;
       animation: slideout 0.7s;
       animation-timing-function: ease-out;
+      @media only screen and (min-width: 600px) {
+        animation: slideout-desktop 0.7s;
+      }
     }
   }
 
@@ -110,9 +115,27 @@
   }
 }
 
+@keyframes slidein-desktop {
+  from {
+    left: 0;
+  }
+  to {
+    left: -260px;
+  }
+}
+
 @keyframes slideout {
   from {
     left: -70%;
+  }
+  to {
+    left: 0;
+  }
+}
+
+@keyframes slideout-desktop {
+  from {
+    left: -260px;
   }
   to {
     left: 0;
