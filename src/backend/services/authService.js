@@ -6,6 +6,7 @@ let jwt = require('jsonwebtoken'),
 
 let authService = (function () {
     const SECRET = 'c4ntT0uchTh1s';
+    const JWT_RESPONSE_HEADER = 'X-Auth-Token';
     const users = [ //todo: get from DB
         {
             username: 'admin',
@@ -27,33 +28,36 @@ let authService = (function () {
     function protect(guardedRoles) {
         return function (req, res, next) {
             expressJwt({secret: SECRET})(req, res, function () {
-                if(!req.user){
+                if (!req.user) {
                     res.status(401).send();
+                    return;
                 }
                 let matchedUsers = users.filter(user => user.username === req.user.username);
                 if (matchedUsers && matchedUsers.length > 0) {
-                    res.setHeader('X-Auth-Token', createToken(matchedUsers[0]));
+                    res.setHeader(JWT_RESPONSE_HEADER, createToken(matchedUsers[0]));
                     guard.check(guardedRoles)(req, res, next);
-                }else {
+                } else {
                     res.status(500).send(`username ${req.username} not found`);
                 }
             });
         }
     }
 
-    function signIn(username, password) {
+    function signIn(req, res) {
         let matchedUsers = users.filter(user =>
-            user.username === username &&
-            user.password === password
+            user.username === req.query.username &&
+            user.password === req.query.password
         );
         if (matchedUsers && matchedUsers.length > 0) {
-            return createToken(matchedUsers[0]);
+            res.setHeader(JWT_RESPONSE_HEADER, createToken(matchedUsers[0]));
+            res.status(200).send();
+        } else {
+            res.status(401).send('username and/or password wrong');
         }
-        return null;
     }
 
-    function createToken(user){
-        let signedInUser = Object.assign({}, user[0]);
+    function createToken(user) {
+        let signedInUser = Object.assign({}, user);
         delete signedInUser.password;
         return jwt.sign(signedInUser, SECRET);
     }
