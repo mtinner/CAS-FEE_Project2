@@ -61,6 +61,24 @@
       animation-duration: 1s;
     }
   }
+
+  &__solid-imitator {
+    display: none;
+    height: calc(100% - 60px);
+    float: left;
+    animation: slidein-imitator 1s;
+    animation-timing-function: ease-in;
+    @media only screen and (min-width: 600px) {
+      width: 1px;
+      display: block;
+    }
+
+    &--slide {
+      width: 260px;
+      animation: slideout-imitator 0.7s;
+      animation-timing-function: ease-out;
+    }
+  }
 }
 
 @-webkit-keyframes white-dimgray {
@@ -98,5 +116,23 @@
   }
   to {
     left: 0;
+  }
+}
+
+@keyframes slidein-imitator {
+  from {
+    width: 260px;
+  }
+  to {
+    width: 1px;
+  }
+}
+
+@keyframes slideout-imitator {
+  from {
+    width: 1px;
+  }
+  to {
+    width: 260px;
   }
 }
