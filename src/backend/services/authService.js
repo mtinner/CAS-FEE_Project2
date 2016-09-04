@@ -32,10 +32,7 @@ let authService = (function () {
                 }
                 let matchedUsers = users.filter(user => user.username === req.user.username);
                 if (matchedUsers && matchedUsers.length > 0) {
-                    let signedInUser = Object.assign({}, matchedUsers[0]);
-                    delete signedInUser.password;
-                    var token = jwt.sign(signedInUser, SECRET);
-                    res.setHeader('X-Auth-Token', token);
+                    res.setHeader('X-Auth-Token', createToken(matchedUsers[0]));
                     guard.check(guardedRoles)(req, res, next);
                 }else {
                     res.status(500).send(`username ${req.username} not found`);
@@ -50,11 +47,15 @@ let authService = (function () {
             user.password === password
         );
         if (matchedUsers && matchedUsers.length > 0) {
-            let signedInUser = Object.assign({}, matchedUsers[0]);
-            delete signedInUser.password;
-            return jwt.sign(signedInUser, SECRET);
+            return createToken(matchedUsers[0]);
         }
         return null;
+    }
+
+    function createToken(user){
+        let signedInUser = Object.assign({}, user[0]);
+        delete signedInUser.password;
+        return jwt.sign(signedInUser, SECRET);
     }
 })();
 
