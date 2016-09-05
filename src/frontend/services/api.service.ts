@@ -14,23 +14,29 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/toPromise';
 
+const JWT_RESPONSE_HEADER = 'X-Auth-Token';
+
 @Injectable()
 export class ApiService {
+
     constructor(private http: Http) {
     }
 
     get(url, callback: (result) => void) {
-        return this.http
-            .get(url, {headers: ApiService.createHeaders()})
+        return this.http.get(url, {headers: ApiService.createHeaders()})
             .catch(this.handleError)
             .subscribe((res) => {
-                const token = res.headers.get('X-Auth-Token');
+                const token = res.headers.get(JWT_RESPONSE_HEADER);
                 if (token) {
-                    localStorage.setItem('X-Auth-Token', token);
+                    localStorage.setItem(JWT_RESPONSE_HEADER, token);
                     console.log('saved new token to storage');
                 }
                 callback && callback(res);
             });
+    }
+
+    logout() {
+        localStorage.removeItem(JWT_RESPONSE_HEADER);
     }
 
     private handleError = (error: any) => {
@@ -42,7 +48,7 @@ export class ApiService {
     };
 
     private static createHeaders() {
-        const token = localStorage.getItem('X-Auth-Token');
-        return new Headers(token ? ['Authorization', `Bearer ${token}`] : null);
+        const token = localStorage.getItem(JWT_RESPONSE_HEADER);
+        return new Headers(token ? {'Authorization': `Bearer ${token}`} : null);
     }
 }

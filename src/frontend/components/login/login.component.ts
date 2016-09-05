@@ -25,14 +25,24 @@ export class LoginComponent {
     };
 
     login = () => {
-        this.api.get(
-            `/api/auth/token?username=${this.username}&password=${this.password}`,
+        this.api.get(`/api/auth/token?username=${this.username}&password=${this.password}`,
             (res) => {
                 const token = res.headers.get('X-Auth-Token');
                 console.log(token);
                 this.response = token;
-            });
+            }
+        );
     };
 
+    logout = () => {
+        this.api.logout();
+    };
 
+    test = () => {
+        this.api.get('/api/auth/test',
+            (res) => {
+                this.response = JSON.stringify(res.json());
+            }
+        );
+    };
 }

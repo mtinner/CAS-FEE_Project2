@@ -32,6 +32,7 @@ let authService = (function () {
                     res.status(401).send();
                     return;
                 }
+                // to get user updates as fast as possible, we fetch it each time from the DB
                 let matchedUsers = users.filter(user => user.username === req.user.username);
                 if (matchedUsers && matchedUsers.length > 0) {
                     res.setHeader(JWT_RESPONSE_HEADER, createToken(matchedUsers[0]));
