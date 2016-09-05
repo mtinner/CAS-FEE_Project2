@@ -7,7 +7,8 @@ import {ApiService} from './services/api.service';
 
 
 @NgModule({
-    imports: [BrowserModule, HttpModule, JsonpModule, ApiService],
+    imports: [BrowserModule, HttpModule, JsonpModule],
+    providers: [ApiService],
     declarations: [AppComponent],
     bootstrap: [AppComponent]
 })
