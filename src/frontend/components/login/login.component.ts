@@ -25,13 +25,11 @@ export class LoginComponent {
     };
 
     login = () => {
-        this.api.get(`/api/auth/token?username=${this.username}&password=${this.password}`,
-            (res) => {
-                const token = res.headers.get('X-Auth-Token');
-                console.log(token);
-                this.response = token;
-            }
-        );
+        this.api.login(this.username, this.password, (res) => {
+            const token = res.headers.get('X-Auth-Token');
+            console.log(token);
+            this.response = token;
+        });
     };
 
     logout = () => {
@@ -39,10 +37,8 @@ export class LoginComponent {
     };
 
     test = () => {
-        this.api.get('/api/auth/test',
-            (res) => {
-                this.response = JSON.stringify(res.json());
-            }
-        );
+        this.api.get('/api/auth/test', (res) => {
+            this.response = JSON.stringify(res.json());
+        });
     };
 }

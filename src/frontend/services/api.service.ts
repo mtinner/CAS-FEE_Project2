@@ -22,7 +22,11 @@ export class ApiService {
     constructor(private http: Http) {
     }
 
-    get(url, callback: (result) => void) {
+    login(username, password, callback: (result) => void) {
+        this.get(`/api/auth/token?username=${username}&password=${password}`, callback);
+    }
+
+    get(url, callback: (response) => void) {
         return this.http.get(url, {headers: ApiService.createHeaders()})
             .catch(this.handleError)
             .subscribe((res) => {
