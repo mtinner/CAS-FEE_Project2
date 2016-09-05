@@ -27,7 +27,6 @@ export class LoginComponent {
     login = () => {
         this.api.login(this.username, this.password, (res) => {
             const token = res.headers.get('X-Auth-Token');
-            console.log(token);
             this.response = token;
         });
     };

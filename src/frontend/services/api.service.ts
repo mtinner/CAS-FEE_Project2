@@ -33,7 +33,6 @@ export class ApiService {
                 const token = res.headers.get(JWT_RESPONSE_HEADER);
                 if (token) {
                     localStorage.setItem(JWT_RESPONSE_HEADER, token);
-                    console.log('saved new token to storage');
                 }
                 callback && callback(res);
             });
