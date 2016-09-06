@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Http, Headers} from '@angular/http';
+import {Http, Headers, Response} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 // import 'rxjs/Rx'; // adds ALL RxJS statics & operators to Observable
 // See node_module/rxjs/Rxjs.js
@@ -22,14 +22,14 @@ export class ApiService {
     constructor(private http: Http) {
     }
 
-    login(username, password, callback: (result) => void) {
+    login(username, password, callback: (response: Response) => void) {
         this.get(`/api/auth/token?username=${username}&password=${password}`, callback);
     }
 
-    get(url, callback: (response) => void) {
+    get(url, callback: (response: Response) => void) {
         return this.http.get(url, {headers: ApiService.createHeaders()})
             .catch(this.handleError)
-            .subscribe((res) => {
+            .subscribe((res: Response) => {
                 const token = res.headers.get(JWT_RESPONSE_HEADER);
                 if (token) {
                     localStorage.setItem(JWT_RESPONSE_HEADER, token);
