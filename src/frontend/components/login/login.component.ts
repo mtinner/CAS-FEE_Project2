@@ -25,7 +25,7 @@ export class LoginComponent {
     };
 
     login = () => {
-        this.api.login(this.username, this.password, (res) => {
+        this.api.login(this.username, this.password, (res: Response) => {
             const token = res.headers.get('X-Auth-Token');
             this.response = token;
         });
@@ -36,7 +36,7 @@ export class LoginComponent {
     };
 
     test = () => {
-        this.api.get('/api/auth/test', (res) => {
+        this.api.get('/api/auth/test', (res: Response) => {
             this.response = JSON.stringify(res.json());
         });
     };
