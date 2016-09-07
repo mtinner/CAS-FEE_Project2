@@ -1,12 +1,13 @@
 import {Component} from '@angular/core';
 import {DashboardService} from "./dashboard.service";
-
+import {CardComponent} from "../card/card.component";
 
 @Component({
     selector: 'my-dashboard',
     templateUrl: 'frontend/components/dashboard/dashboard.component.html',
     styleUrls: ['frontend/components/dashboard/dashboard.component.css'],
-    providers: [DashboardService]
+    providers: [DashboardService],
+    directives: [CardComponent]
 })
 export class DashboardComponent {
 
