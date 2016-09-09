@@ -1,0 +1,19 @@
+<div>
+    <label for="login-username">
+        Username:
+    </label>
+    <input id="login-username" type="text" (keyup)="setUsername($event)" value="{{username}}"/>
+
+    <label for="login-password">
+        Password:
+    </label>
+    <input id="login-password" type="password" (keyup)="setPassword($event)" value="{{password}}"/>
+
+    <button (click)="login()">Login</button>
+
+    <button (click)="logout()">Logout</button>
+
+    <button (click)="test()">Test</button>
+
+    <div class="response">{{response}}</div>
+</div>

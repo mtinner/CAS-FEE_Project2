@@ -1,7 +1,8 @@
 'use strict';
 
 let expect = require("chai").expect,
-    request = require("request");
+    request = require("request"),
+    jwt = require('express-jwt');
 
 let url = "http://localhost:8080/api/shoppingList/article";
 
