@@ -4,10 +4,13 @@ import {CostManagementComponent} from "./pages/cost-management.component";
 import {ShoppingListComponent} from "./pages/shopping-list.component";
 import {BrowserModule} from "@angular/platform-browser";
 import {NgModule} from "@angular/core";
+import {HttpModule, JsonpModule} from "@angular/http";
 @NgModule({
     imports: [
         BrowserModule,
-        routing
+        routing,
+        HttpModule,
+        JsonpModule
     ],
     declarations: [
         AppComponent,
