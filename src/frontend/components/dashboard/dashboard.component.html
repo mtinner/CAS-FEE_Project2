@@ -4,8 +4,8 @@
     <span (click)="toggleNavigation()" class="icon icon--burger"></span>
     <div>{{menuItems[selectedIndex].name}}</div>
 </header>
-<aside class="navigation">
-    <ul class="navigation-drawer">
+<aside>
+    <ul class="navigation-drawer" [ngClass]="{'navigation-drawer--hide': !showNavigation}">
         <li *ngFor="let item of menuItems;let i = index;" (click)="setSelectedIndex(i)" routerLink="{{item.route}}"
             routerLinkActive="active" class="navigation-drawer__item"
             [ngClass]="{'navigation-drawer__item--selected':selectedIndex===i}">
@@ -15,5 +15,5 @@
             </a>
         </li>
     </ul>
-    <div class="navigation-drawer__cover"></div>
+    <div class="navigation-drawer__cover" [ngClass]="{'navigation-drawer__cover--hide': !showNavigation}"></div>
 </aside>
