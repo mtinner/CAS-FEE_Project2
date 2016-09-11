@@ -3,7 +3,7 @@ let Article = require('../models/Article');
 
 
 let shoppingListService = (function () {
-    let shoppingListGroups = {groups: [{name: 'Alle'}, {name: 'Früchte/Gemüse'}, {name: 'Fleisch'}, {name: 'Food'}, {name: 'Non Food'}]},
+    let shoppingListGroups = {groups: [{name: 'Alle'}, {name: 'Früchte/Gemüse'}, {name: 'Milchwaren'}, {name: 'Fleisch'}, {name: 'Sonstiges'}, {name: 'Non Food'}]},
         id = 0,
         articles = [];
 
