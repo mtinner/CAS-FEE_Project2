@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs/Rx';
 import {Http} from "@angular/http";
 import {Group} from "../../models/Group";
 import {AppService} from "../app.service";
@@ -13,7 +13,7 @@ export class ShoppingListService extends AppService {
 
     private shoppingListUrl = `${this.baseUrl}shoppinglist`;
 
-    getGroupItems(): Observable<Group[]> {
+    getGroupItems(): Observable<any> {
         return this.http.get(`${this.shoppingListUrl}/groups`)
             .map(this.extractData)
             .catch(this.handleError);

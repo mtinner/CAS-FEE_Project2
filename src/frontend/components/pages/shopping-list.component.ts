@@ -11,11 +11,10 @@ export class ShoppingListComponent implements OnInit {
     private groups: Group[] = [];
 
     constructor(private shoppingListService: ShoppingListService) {
-        //  this.groups = [{name: 'Alle'}, {name: 'Früchte/Gemüse'}, {name: 'Fleisch'}, {name: 'Food'}, {name: 'Non Food'}];
     }
 
     ngOnInit(): void {
         this.shoppingListService.getGroupItems()
-            .subscribe(groups => this.groups = groups);
+            .subscribe(groupObj => this.groups = groupObj.groups);
     }
 }

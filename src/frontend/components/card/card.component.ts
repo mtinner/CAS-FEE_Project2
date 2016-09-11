@@ -1,4 +1,5 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {Group} from "../../models/Group";
 
 
 @Component({
@@ -7,4 +8,6 @@ import {Component} from '@angular/core';
     styleUrls: ['frontend/components/card/card.component.css'],
 })
 export class CardComponent {
+    @Input()
+    group: Group;
 }

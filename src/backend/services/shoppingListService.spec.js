@@ -6,11 +6,13 @@ describe('shoppingListService', ()=> {
     describe('getShoppingListGroups', ()=> {
         it('getShoppingListGroups size', ()=> {
             let shoppingListGroups = shoppingListService.getShoppingListGroups();
-            expect(shoppingListGroups.length).toBeGreaterThan(0);
+            expect(shoppingListGroups.groups.length).toBeGreaterThan(0);
         });
         it('getShoppingListGroups contains Alle', ()=> {
             let shoppingListGroups = shoppingListService.getShoppingListGroups();
-            expect(shoppingListGroups).toContain('Alle');
+            expect(shoppingListGroups.groups.some(obj=> {
+                return obj.name === 'Alle';
+            })).toBeTruthy();
         });
     });
 
