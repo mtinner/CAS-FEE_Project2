@@ -1,7 +1,6 @@
-import {Injectable} from '@angular/core';
+import {Injectable, OnInit} from '@angular/core';
 import {Observable} from 'rxjs/Rx';
 import {Http} from "@angular/http";
-import {Group} from "../../models/Group";
 import {AppService} from "../app.service";
 
 @Injectable()
@@ -13,8 +12,15 @@ export class ShoppingListService extends AppService {
 
     private shoppingListUrl = `${this.baseUrl}shoppinglist`;
 
-    getGroupItems(): Observable<any> {
+    fetchGroupItems(): Observable<any> {
         return this.http.get(`${this.shoppingListUrl}/groups`)
+            .map(this.extractData)
+            .catch(this.handleError)
+    }
+
+    fetchArticles(): Observable<any> {
+        console.log('asdfasdfasd');
+        return this.http.get(`${this.shoppingListUrl}/article`)
             .map(this.extractData)
             .catch(this.handleError);
     }

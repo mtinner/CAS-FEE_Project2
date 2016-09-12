@@ -5,7 +5,7 @@ let Article = require('../models/Article');
 let shoppingListService = (function () {
     let shoppingListGroups = {groups: [{name: 'Alle'}, {name: 'Früchte/Gemüse'}, {name: 'Milchwaren'}, {name: 'Fleisch'}, {name: 'Sonstiges'}, {name: 'Non Food'}]},
         id = 0,
-        articles = [];
+        articles = [new Article(1, 'Bananen', 'Früchte/Gemüse'), new Article(2, 'Rüebli', 'Früchte/Gemüse'), new Article(3, 'Äpfel', 'Früchte/Gemüse')];
 
     return {
         getShoppingListGroups: getShoppingListGroups,
@@ -21,7 +21,7 @@ let shoppingListService = (function () {
 
     function getArticle(id) {
         if (!Number.isInteger(parseInt(id))) {
-            return articles;
+            return {articles: articles};
         }
         id = parseInt(id);
         return articles.find(o=> {
