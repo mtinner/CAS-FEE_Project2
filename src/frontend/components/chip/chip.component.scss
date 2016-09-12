@@ -3,13 +3,7 @@
 .chip {
   background-color: $shopping-primary-light;
   display: inline-block;
-  padding: 5px 10px 5px 15px;
+  padding: 2px 5px 2px 15px;
   border-radius: 14px;
   margin: 10px;
-
-  &__icon {
-    font-size: 17px;
-    margin-left: 10px;
-    vertical-align: text-bottom;
-  }
 }
