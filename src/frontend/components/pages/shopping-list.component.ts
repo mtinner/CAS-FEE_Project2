@@ -15,6 +15,16 @@ export class ShoppingListComponent implements OnInit {
     constructor(private shoppingListService: ShoppingListService) {
     }
 
+    getArticlesForGroup(id: number) {
+        if (id === 0) {
+            return this.articles;
+        }
+        return this.articles.filter(article => {
+                    return article.group === id
+                }
+            ) || [];
+    }
+
     ngOnInit(): void {
         this.shoppingListService.fetchGroupItems()
             .subscribe(groupObj => this.groups = groupObj.groups);

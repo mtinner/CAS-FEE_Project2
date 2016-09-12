@@ -1,5 +1,4 @@
 import {Component, Input} from '@angular/core';
-import {Group} from "../../models/Group";
 import {ChipComponent} from "../chip/chip.component";
 
 
@@ -11,5 +10,7 @@ import {ChipComponent} from "../chip/chip.component";
 })
 export class CardComponent {
     @Input()
-    group: Group;
+    title: any;
+    @Input()
+    items: any[];
 }

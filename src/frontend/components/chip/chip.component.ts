@@ -1,5 +1,4 @@
 import {Component, Input} from '@angular/core';
-import {Group} from "../../models/Group";
 
 
 @Component({
@@ -8,5 +7,6 @@ import {Group} from "../../models/Group";
     styleUrls: ['frontend/components/chip/chip.component.css'],
 })
 export class ChipComponent {
-
+    @Input()
+    item: any;
 }

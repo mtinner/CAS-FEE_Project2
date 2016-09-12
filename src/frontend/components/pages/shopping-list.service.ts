@@ -19,7 +19,6 @@ export class ShoppingListService extends AppService {
     }
 
     fetchArticles(): Observable<any> {
-        console.log('asdfasdfasd');
         return this.http.get(`${this.shoppingListUrl}/article`)
             .map(this.extractData)
             .catch(this.handleError);

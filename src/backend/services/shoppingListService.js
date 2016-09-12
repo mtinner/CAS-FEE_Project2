@@ -3,9 +3,18 @@ let Article = require('../models/Article');
 
 
 let shoppingListService = (function () {
-    let shoppingListGroups = {groups: [{name: 'Alle'}, {name: 'Früchte/Gemüse'}, {name: 'Milchwaren'}, {name: 'Fleisch'}, {name: 'Sonstiges'}, {name: 'Non Food'}]},
+    let shoppingListGroups = {
+            groups: [
+                {id: 0, name: 'Alle'},
+                {id: 1, name: 'Früchte/Gemüse'},
+                {id: 2, name: 'Milchwaren'},
+                {id: 3, name: 'Fleisch'},
+                {id: 4, name: 'Sonstiges'},
+                {id: 5, name: 'Non Food'}
+            ]
+        },
         id = 0,
-        articles = [new Article(1, 'Bananen', 'Früchte/Gemüse'), new Article(2, 'Rüebli', 'Früchte/Gemüse'), new Article(3, 'Äpfel', 'Früchte/Gemüse')];
+        articles = [new Article(0, 'Milch', 2), new Article(1, 'Bananen', 1), new Article(2, 'Rüebli', 1), new Article(3, 'Äpfel', 1)];
 
     return {
         getShoppingListGroups: getShoppingListGroups,

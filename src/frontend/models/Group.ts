@@ -1,5 +1,6 @@
 export class Group {
-    constructor(private name: string) {
+    constructor(private id: number, private name: string) {
+        this.id = id;
         this.name = name;
     }
 }
