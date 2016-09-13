@@ -4,8 +4,8 @@ import {CardComponent} from "../card/card.component";
 
 @Component({
     selector: 'my-dashboard',
-    templateUrl: 'frontend/components/dashboard/dashboard.component.html',
-    styleUrls: ['frontend/components/dashboard/dashboard.component.css'],
+    templateUrl: 'frontend/components/elements/dashboard/dashboard.component.html',
+    styleUrls: ['frontend/components/elements/dashboard/dashboard.component.css'],
     providers: [DashboardService],
     directives: [CardComponent]
 })

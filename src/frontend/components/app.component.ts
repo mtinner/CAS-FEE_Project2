@@ -1,5 +1,5 @@
 import {Component} from '@angular/core'
-import {DashboardComponent} from "./dashboard/dashboard.component";
+import {DashboardComponent} from "./elements/dashboard/dashboard.component";
 
 
 @Component({

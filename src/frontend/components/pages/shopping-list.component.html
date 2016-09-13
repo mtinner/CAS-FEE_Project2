@@ -1,3 +1,6 @@
 <div class="container__page">
-    <card *ngFor="let group of groups" [title]="group" [items]=getArticlesForGroup(group.id)></card>
+    <card *ngFor="let group of groups" [title]="group.name">
+        <chip *ngFor="let article of getArticlesForGroup(group.id)" [title]="article.name"></chip>
+        <add [text]="addText"></add>
+    </card>
 </div>
