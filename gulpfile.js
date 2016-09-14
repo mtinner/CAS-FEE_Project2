@@ -35,6 +35,7 @@ gulp.task('Default', function (callback) {
         ['transpiling:Dist', 'sass:Dist'],
         ['copy:App'],
         ['serve:Dist'],
+        ['watch:Transpiling'],
         callback
     );
 });
