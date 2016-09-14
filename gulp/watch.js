@@ -13,10 +13,13 @@ module.exports = function (gulp, data, util, taskName) {
     });
 
     gulp.task(taskName + ':Sass', function () {
-        livereload.listen();
         return watch(data.path.frontend + '**/*.scss', function (file) {
             runSequence('sass:Dist');
         }).pipe(_printChanges());
+    });
+
+    gulp.task(taskName + ':Listen', function () {
+        livereload.listen();
     });
 
     function _printChanges() {
