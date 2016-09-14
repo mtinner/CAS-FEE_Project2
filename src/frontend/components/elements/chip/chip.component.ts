@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
 
 @Component({
     selector: 'chip',
@@ -8,4 +8,14 @@ import {Component, Input} from '@angular/core';
 export class ChipComponent {
     @Input()
     title: string;
+    @Output()
+    chipClicked = new EventEmitter();
+
+    constructor() {
+    }
+
+    clicked() {
+        this.chipClicked.emit(this.title);
+    }
+
 }

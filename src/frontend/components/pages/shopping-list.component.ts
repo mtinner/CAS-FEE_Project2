@@ -20,7 +20,6 @@ export class ShoppingListComponent implements OnInit {
 
 
     constructor(private shoppingListService: ShoppingListService) {
-
     }
 
     getArticlesForGroup(id: number) {
@@ -32,6 +31,11 @@ export class ShoppingListComponent implements OnInit {
                 }
             ) || [];
     }
+
+    chipClicked(o) {
+        console.log(o)
+    }
+
 
     ngOnInit(): void {
         this.shoppingListService.fetchGroupItems();

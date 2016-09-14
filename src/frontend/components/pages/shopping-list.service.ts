@@ -5,6 +5,8 @@ import {AppService} from "../app.service";
 
 @Injectable()
 export class ShoppingListService extends AppService {
+    private shoppingListUrl = `${this.baseUrl}shoppinglist`;
+
     private groupObserver;
     private groupObj: any = {};
     private articleObj: any = {};
@@ -21,7 +23,6 @@ export class ShoppingListService extends AppService {
         super();
     }
 
-    private shoppingListUrl = `${this.baseUrl}shoppinglist`;
 
     fetchGroupItems(): Observable<any> {
         let response = this.http.get(`${this.shoppingListUrl}/groups`)
