@@ -32,10 +32,9 @@ export class ShoppingListComponent implements OnInit {
             ) || [];
     }
 
-    chipClicked(o) {
-        console.log(o)
+    deleteArticle(article) {
+        this.shoppingListService.deleteArticle(article.id)
     }
-
 
     ngOnInit(): void {
         this.shoppingListService.fetchGroupItems();

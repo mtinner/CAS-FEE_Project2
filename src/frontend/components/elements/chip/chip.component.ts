@@ -7,7 +7,7 @@ import {Component, Input, Output, EventEmitter} from '@angular/core';
 })
 export class ChipComponent {
     @Input()
-    title: string;
+    item: string;
     @Output()
     chipClicked = new EventEmitter();
 
@@ -15,7 +15,7 @@ export class ChipComponent {
     }
 
     clicked() {
-        this.chipClicked.emit(this.title);
+        this.chipClicked.emit(this.item);
     }
 
 }

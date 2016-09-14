@@ -19,7 +19,7 @@ router.put('/:id?', function (req, res) {
 
 router.delete('/:id', function (req, res) {
     try {
-        res.status(204).send(shoppingListService.deleteArticle(req.params.id));
+        res.status(200).send(shoppingListService.deleteArticle(req.params.id));
     }
     catch (e) {
         console.log(e);

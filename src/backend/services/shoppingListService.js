@@ -75,7 +75,7 @@ let shoppingListService = (function () {
         if (pos < 0) {
             throw new Exception('Position of article not found');
         }
-        return articles.splice(pos, 1);
+        return articles.splice(pos, 1)[0];
     }
 
     function getPositionOfArticle(article) {
