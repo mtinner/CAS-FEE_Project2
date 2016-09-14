@@ -1,19 +1,43 @@
 {
-    "parserOptions": {
-        "ecmaVersion": 6,
-        "sourceType": "module",
-        "ecmaFeatures": {
-            "impliedStrict": true
-        }
-    },
-    "env": {
-        "browser": true,
-        "es6": true,
-        "commonjs": true
-    },
-    "rules": {
-        "comma-dangle": 1,
-        "no-undef": 1,
-        "no-unused-vars": 1
+  "parserOptions": {
+    "ecmaVersion": 5,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "impliedStrict": true
     }
+  },
+  "env": {
+    "node": true,
+    "mocha": true,
+    "jasmine": true,
+    "commonjs": true,
+    "protractor": true
+  },
+  "rules": {
+    // warnings
+    "comma-dangle": 1,
+    "no-unused-vars": 1,
+    "no-useless-constructor": 1,
+    "quotes": [
+      1,
+      "single",
+      {
+        "avoidEscape": true,
+        "allowTemplateLiterals": false
+      }
+    ],
+    //errors
+    "object-shorthand": [
+      2,
+      "never"
+    ],
+    "no-eq-null": 2,
+    "no-class-assign": 2,
+    "no-const-assign": 2,
+    "no-dupe-class-members": 2,
+    "no-new-symbol": 2,
+    "no-this-before-super": 2,
+    "no-undef": 2,
+    "no-delete-var": 2
+  }
 }
