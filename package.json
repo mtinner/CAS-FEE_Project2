@@ -35,6 +35,7 @@
     "gulp-connect": "^4.1.0",
     "gulp-copy": "^0.0.2",
     "gulp-express": "^0.3.5",
+    "gulp-livereload": "^3.8.1",
     "gulp-postcss": "^6.1.1",
     "gulp-print": "^2.0.1",
     "gulp-sass": "^2.3.2",
