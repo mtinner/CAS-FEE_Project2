@@ -1,8 +1,9 @@
-import {Response}        from '@angular/http';
+import {Response,Headers, RequestOptions}        from '@angular/http';
 import {Observable}     from 'rxjs/Observable';
 
 export abstract class AppService {
-
+    private headers = new Headers({ 'Content-Type': 'application/json' });
+    protected jsonOptions = new RequestOptions({ headers: this.headers });
     baseUrl: string = 'api/';
 
     extractData(res: Response): { } {

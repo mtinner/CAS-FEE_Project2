@@ -60,4 +60,15 @@ export class ShoppingListService extends AppService {
         });
         return response;
     }
+
+    addArticle(body):Observable<any> {
+        let response = this.http.post(`${this.shoppingListUrl}/article`,body,this.jsonOptions)
+            .map(this.extractData)
+            .catch(this.handleError);
+        response.subscribe((article: Article) => {
+            this.articleObj.articles.push(article);
+            this.articleObserver.next(this.articleObj);
+        });
+        return response;
+    }
 }

@@ -37,7 +37,7 @@ export class ShoppingListComponent implements OnInit {
     }
 
     addArticle(item, group) {
-        console.log(item, group);
+        this.shoppingListService.addArticle({name:item,group:group.id});
     }
 
     ngOnInit(): void {
