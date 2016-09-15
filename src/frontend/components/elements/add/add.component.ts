@@ -13,7 +13,10 @@ export class AddComponent {
     enterText = new EventEmitter();
 
     enterPressed(text) {
-        console.log('asdf');
-        this.enterText.emit(text);
+        if (text.value) {
+            this.enterText.emit(text.value);
+            text.value = '';
+        }
+        text.focus();
     }
 }
