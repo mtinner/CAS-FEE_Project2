@@ -36,6 +36,10 @@ export class ShoppingListComponent implements OnInit {
         this.shoppingListService.deleteArticle(article.id)
     }
 
+    addArticle(item, group) {
+        console.log(item, group);
+    }
+
     ngOnInit(): void {
         this.shoppingListService.fetchGroupItems();
         this.shoppingListService.groups$.subscribe(groupsObj=> {

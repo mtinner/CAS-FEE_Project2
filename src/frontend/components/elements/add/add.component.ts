@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, EventEmitter, Output} from '@angular/core';
 
 @Component({
     selector: 'add',
@@ -9,7 +9,11 @@ export class AddComponent {
     @Input()
     text: string;
 
+    @Output()
+    enterText = new EventEmitter();
+
     enterPressed(text) {
-        console.log(text);
+        console.log('asdf');
+        this.enterText.emit(text);
     }
 }
