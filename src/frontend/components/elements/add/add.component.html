@@ -1,4 +1,5 @@
 <div>
     <span class="icon icon--centered icon--plus"></span>
-    <span>{{text}}</span>
+    <input #input (keyup.enter)="enterPressed(input.value); input.value=''"
+           placeholder="{{text}}">
 </div>

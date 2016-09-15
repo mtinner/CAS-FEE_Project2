@@ -8,4 +8,8 @@ import {Component, Input} from '@angular/core';
 export class AddComponent {
     @Input()
     text: string;
+
+    enterPressed(text) {
+        console.log(text);
+    }
 }
