@@ -1,12 +1,12 @@
 <header class="header"
-        [ngClass]="{'header--cost-management': selectedRoute==='cost-management',
-        'header--settings': selectedRoute==='settings'}">
+        [ngClass]="{'header--cost-management': menuItems[selectedIndex].route==='/cost-management',
+        'header--settings': menuItems[selectedIndex].route==='/settings'}">
     <span (click)="toggleNavigation()" class="icon icon--burger"></span>
     <div>{{menuItems[selectedIndex].name}}</div>
 </header>
 <aside>
     <ul class="navigation-drawer" [ngClass]="{'navigation-drawer--slide': showNavigation}">
-        <li *ngFor="let item of menuItems;let i = index;" (click)="setSelectedIndex(i)" routerLink="{{item.route}}"
+        <li *ngFor="let item of menuItems;let i = index;" routerLink="{{item.route}}"
             routerLinkActive="active" class="navigation-drawer__item"
             [ngClass]="{'navigation-drawer__item--selected':selectedIndex===i}">
             <a class="link">
