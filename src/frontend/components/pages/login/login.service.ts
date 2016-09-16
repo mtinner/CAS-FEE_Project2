@@ -17,7 +17,7 @@ import 'rxjs/add/operator/toPromise';
 const JWT_RESPONSE_HEADER = 'X-Auth-Token';
 
 @Injectable()
-export class ApiService {
+export class LoginService {
 
     constructor(private http: Http) {
     }
@@ -27,7 +27,7 @@ export class ApiService {
     }
 
     get(url, callback: (response: Response) => void) {
-        return this.http.get(url, {headers: ApiService.createHeaders()})
+        return this.http.get(url, {headers: LoginService.createHeaders()})
             .catch(this.handleError)
             .subscribe((res: Response) => {
                 const token = res.headers.get(JWT_RESPONSE_HEADER);

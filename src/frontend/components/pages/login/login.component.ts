@@ -1,16 +1,15 @@
 import {Component, Injectable} from '@angular/core';
 import {Response} from '@angular/http';
-import {ApiService} from '../../services/api.service';
+import {LoginService} from "./login.service";
 
 
 @Injectable()
 @Component({
-    selector: 'login',
-    templateUrl: 'frontend/components/login/login.component.html',
-    styleUrls: ['frontend/components/login/login.component.css']
+    templateUrl: 'frontend/components/pages/login/login.component.html',
+    styleUrls: ['frontend/components/pages/login/login.component.css']
 })
 export class LoginComponent {
-    constructor(private api: ApiService) {
+    constructor(private loginService: LoginService) {
     }
 
     username = 'admin';
@@ -26,18 +25,18 @@ export class LoginComponent {
     };
 
     login = () => {
-        this.api.login(this.username, this.password, (res: Response) => {
+        this.loginService.login(this.username, this.password, (res: Response) => {
             const token = res.headers.get('X-Auth-Token');
             this.response = token;
         });
     };
 
     logout = () => {
-        this.api.logout();
+        this.loginService.logout();
     };
 
     test = () => {
-        this.api.get('/api/auth/test', (res: Response) => {
+        this.loginService.get('/api/auth/test', (res: Response) => {
             this.response = JSON.stringify(res.json());
         });
     };
