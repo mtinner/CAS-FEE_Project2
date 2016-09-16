@@ -1,10 +1,19 @@
 # CAS-FEE_Project2
 
-## Bootstrap Application
+## Installation
 
-1. `npm install`
-2. `typings install`
-3. `gulp Default`
+* `npm install`
+* `typings install`
+
+## Run
+
+* `gulp Default`
+
+## Main Gulp Tasks
+ * Default (Start App http://:localhost:8080/)
+ * serveStyleGuide (Make Styleguide http://localhost:8000/)
+ * Spec (run Jasmine http://localhost:9002/)
+ * E2e (run Protractor tests http://localhost:9001/)
 
 ## WebDriver for Protractor
 ### Installation
@@ -13,9 +22,3 @@
 
 ### Start
 `node node_modules/protractor/bin/webdriver-manager start`
-
-### Main Gulp Tasks
- * Default (Start App http://:localhost:8080/)
- * serveStyleGuide (Make Styleguide http://localhost:8000/)
- * spec (run Jasmine http://localhost:9002/)
- * e2e (run Protractor tests http://localhost:9001/)
