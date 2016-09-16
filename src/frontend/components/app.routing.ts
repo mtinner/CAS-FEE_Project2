@@ -1,6 +1,6 @@
 import {Routes, RouterModule} from '@angular/router';
-import {ShoppingListComponent} from "./pages/shopping-list.component";
-import {CostManagementComponent} from "./pages/cost-management.component";
+import {ShoppingListComponent} from "./pages/shoppingList/shopping-list.component";
+import {CostManagementComponent} from "./pages/costManagement/cost-management.component";
 import {ModuleWithProviders} from "@angular/core";
 
 const appRoutes: Routes = [

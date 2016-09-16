@@ -1,7 +1,7 @@
 import {AppComponent} from "./app.component";
 import {appRoutingProviders, routing} from "./app.routing";
-import {CostManagementComponent} from "./pages/cost-management.component";
-import {ShoppingListComponent} from "./pages/shopping-list.component";
+import {CostManagementComponent} from "./pages/costManagement/cost-management.component";
+import {ShoppingListComponent} from "./pages/shoppingList/shopping-list.component";
 import {BrowserModule} from "@angular/platform-browser";
 import {NgModule} from "@angular/core";
 import {HttpModule} from "@angular/http";

@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Rx';
 import {Http} from "@angular/http";
-import {AppService} from "../app.service";
-import {Article} from "../../models/Article";
+import {AppService} from "../../app.service";
+import {Article} from "../../../models/Article";
 
 @Injectable()
 export class ShoppingListService extends AppService {
