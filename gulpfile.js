@@ -39,6 +39,15 @@ gulp.task('Default', function (callback) {
     );
 });
 
+gulp.task('Build', function (callback) {
+    runSequence(
+        'clean:Dist',
+        ['transpiling:Dist', 'sass:Dist'],
+        ['copy:App'],
+        callback
+    );
+});
+
 gulp.task('ServeStyleGuide', function (callback) {
     runSequence(
         ['clean:Styleguide'],
