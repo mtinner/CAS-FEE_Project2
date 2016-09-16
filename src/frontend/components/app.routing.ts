@@ -1,8 +1,8 @@
 import {Routes, RouterModule} from '@angular/router';
-import {ShoppingListComponent} from "./pages/shopping-list.component";
-import {CostManagementComponent} from "./pages/cost-management.component";
-import {LoginComponent} from "./login/login.component";
 import {ModuleWithProviders} from "@angular/core";
+import {LoginComponent} from "./login/login.component";
+import {ShoppingListComponent} from "./pages/shoppingList/shopping-list.component";
+import {CostManagementComponent} from "./pages/costManagement/cost-management.component";
 
 const appRoutes: Routes = [
     {path: 'login', component: LoginComponent},

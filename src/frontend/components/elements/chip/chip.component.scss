@@ -1,0 +1,9 @@
+@import "../../../styles/utils/variables";
+
+.chip {
+  background-color: $shopping-primary-light;
+  display: inline-block;
+  padding: 2px 5px 2px 15px;
+  border-radius: 14px;
+  margin: 10px;
+}

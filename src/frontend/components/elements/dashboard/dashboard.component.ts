@@ -1,13 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {DashboardService} from "./dashboard.service";
+import {CardComponent} from "../card/card.component";
 import {Router} from '@angular/router';
 
 
 @Component({
     selector: 'my-dashboard',
-    templateUrl: 'frontend/components/dashboard/dashboard.component.html',
-    styleUrls: ['frontend/components/dashboard/dashboard.component.css'],
-    providers: [DashboardService]
+    templateUrl: 'frontend/components/elements/dashboard/dashboard.component.html',
+    styleUrls: ['frontend/components/elements/dashboard/dashboard.component.css'],
+    providers: [DashboardService],
+    directives: [CardComponent]
 })
 export class DashboardComponent implements OnInit {
 
@@ -15,7 +17,7 @@ export class DashboardComponent implements OnInit {
     private menuItems: Array<any> = [];
     private selectedIndex: number = 0;
 
-    constructor(private dashboardService: DashboardService, private router: Router) {
+    constructor(private router: Router,dashboardService: DashboardService) {
         this.menuItems = dashboardService.getMenuItems();
     }
 

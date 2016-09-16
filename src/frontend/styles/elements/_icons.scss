@@ -3,6 +3,12 @@
   font-family: 'icomoon';
   cursor: pointer;
 
+  &--centered {
+    font-size: 25px;
+    margin-left: 10px;
+    vertical-align: middle;
+  }
+
   &--burger {
     text-align: center;
     float: left;
@@ -38,6 +44,14 @@
 
   &--settings:before {
     content: "\e900";
+  }
+
+  &--cross:before {
+    content: "\e905";
+  }
+  &--plus:before {
+    font-size: 30px;
+    content: "\e904";
   }
 }
 

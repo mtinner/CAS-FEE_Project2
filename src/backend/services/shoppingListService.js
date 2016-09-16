@@ -3,9 +3,18 @@ let Article = require('../models/Article');
 
 
 let shoppingListService = (function () {
-    let shoppingListGroups = ['Alle', 'Früchte/Gemüse', 'Fleisch', 'Food', 'Non Food'],
+    let shoppingListGroups = {
+            groups: [
+                {id: 0, name: 'Alle'},
+                {id: 1, name: 'Früchte/Gemüse'},
+                {id: 2, name: 'Milchwaren'},
+                {id: 3, name: 'Fleisch'},
+                {id: 4, name: 'Sonstiges'},
+                {id: 5, name: 'Non Food'}
+            ]
+        },
         id = 0,
-        articles = [];
+        articles = [new Article(0, 'Milch', 2), new Article(1, 'Bananen', 1), new Article(2, 'Rüebli', 1), new Article(3, 'Äpfel', 1)];
 
     return {
         getShoppingListGroups: getShoppingListGroups,
@@ -21,7 +30,7 @@ let shoppingListService = (function () {
 
     function getArticle(id) {
         if (!Number.isInteger(parseInt(id))) {
-            return articles;
+            return {articles: articles};
         }
         id = parseInt(id);
         return articles.find(o=> {
@@ -66,7 +75,7 @@ let shoppingListService = (function () {
         if (pos < 0) {
             throw new Exception('Position of article not found');
         }
-        return articles.splice(pos, 1);
+        return articles.splice(pos, 1)[0];
     }
 
     function getPositionOfArticle(article) {
