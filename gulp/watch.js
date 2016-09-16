@@ -6,6 +6,10 @@ module.exports = function (gulp, data, util, taskName) {
         runSequence = require('run-sequence'),
         livereload = require('gulp-livereload');
 
+    gulp.task(taskName + ':Listen', function () {
+        livereload.listen();
+    });
+
     gulp.task(taskName + ':Transpiling', function () {
         return watch(data.path.frontend + '**/*.ts', function () {
             runSequence('transpiling:Dist');
@@ -13,13 +17,16 @@ module.exports = function (gulp, data, util, taskName) {
     });
 
     gulp.task(taskName + ':Sass', function () {
-        return watch(data.path.frontend + '**/*.scss', function (file) {
+        return watch(data.path.frontend + '**/*.scss', function () {
             runSequence('sass:Dist');
         }).pipe(_printChanges());
     });
 
-    gulp.task(taskName + ':Listen', function () {
-        livereload.listen();
+    gulp.task(taskName + ':Html', function () {
+        return watch(data.path.frontend + '**/*.html')
+            .pipe(_printChanges())
+            .pipe(gulp.dest(data.path.dist + 'frontend/'))
+            .pipe(livereload());
     });
 
     function _printChanges() {
