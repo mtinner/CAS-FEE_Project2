@@ -22,7 +22,7 @@ export class ShoppingListComponent implements OnInit {
     constructor(private shoppingListService: ShoppingListService) {
     }
 
-    getArticlesForGroup(id: number) {
+    getArticlesForGroup(id: number): Article[] {
         if (id === 0) {
             return this.articles;
         }
@@ -32,11 +32,11 @@ export class ShoppingListComponent implements OnInit {
             ) || [];
     }
 
-    deleteArticle(article) {
+    deleteArticle(article: Article) {
         this.shoppingListService.deleteArticle(article.id)
     }
 
-    addArticle(item, group) {
+    addArticle(item: string, group: Group) {
         this.shoppingListService.addArticle({name: item, group: group.id});
     }
 

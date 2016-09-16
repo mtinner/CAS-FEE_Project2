@@ -2,15 +2,16 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Rx';
 import {Http} from "@angular/http";
 import {AppService} from "../../app.service";
-import {Article} from "../../../models/Article";
+import {Article, ArticleObj} from "../../../models/Article";
+import {GroupObj} from "../../../models/Group";
 
 @Injectable()
 export class ShoppingListService extends AppService {
     private shoppingListUrl = `${this.baseUrl}shoppinglist`;
 
     private groupObserver;
-    private groupObj: any = {groups: []};
-    private articleObj: any = {articles: []};
+    private groupObj: GroupObj = new GroupObj([]);
+    private articleObj: ArticleObj = new ArticleObj([]);
     private articleObserver;
     public groups$: Observable<any> = new Observable(observer=> {
         this.groupObserver = observer;
@@ -42,10 +43,10 @@ export class ShoppingListService extends AppService {
         let response = this.http.get(`${this.shoppingListUrl}/groups`)
             .map(this.extractData)
             .catch(this.handleError);
-        response.subscribe(groupObj => {
-            this.groupObj = groupObj;
-            this.groupObserver.next(groupObj);
-        });
+         response.subscribe((groupObj: GroupObj) => {
+         this.groupObj = groupObj;
+         this.groupObserver.next(groupObj);
+         });
 
         return response;
     }
@@ -54,15 +55,15 @@ export class ShoppingListService extends AppService {
         let response = this.http.get(`${this.shoppingListUrl}/article`)
             .map(this.extractData)
             .catch(this.handleError);
-        response.subscribe(articleObj => {
+        response.subscribe((articleObj: ArticleObj) => {
             this.articleObj = articleObj;
             this.articleObserver.next(articleObj);
         });
         return response;
     }
 
-    addArticle(body):Observable<any> {
-        let response = this.http.post(`${this.shoppingListUrl}/article`,body,this.jsonOptions)
+    addArticle(body): Observable<any> {
+        let response = this.http.post(`${this.shoppingListUrl}/article`, body, this.jsonOptions)
             .map(this.extractData)
             .catch(this.handleError);
         response.subscribe((article: Article) => {

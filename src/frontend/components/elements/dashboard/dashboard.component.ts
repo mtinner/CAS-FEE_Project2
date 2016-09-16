@@ -15,7 +15,7 @@ export class DashboardComponent {
     private menuItems: string[] = [];
     private selectedIndex: number = 0;
 
-    constructor(private dashboardService: DashboardService) {
+    constructor(dashboardService: DashboardService) {
         this.menuItems = dashboardService.getMenuItems();
     }
 

@@ -1,6 +1,9 @@
 export class Group {
-    constructor(private id: number, private name: string) {
-        this.id = id;
-        this.name = name;
+    constructor(public id: number, public name: string) {
+    }
+}
+
+export class GroupObj {
+    constructor(public groups: Group[]) {
     }
 }
