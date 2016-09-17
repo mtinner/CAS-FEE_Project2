@@ -2,7 +2,8 @@ module.exports = function (gulp, data, util, taskName) {
 
     var ts = require('gulp-typescript'),
         tsProject = ts.createProject("tsconfig.json"),
-        sourcemaps = require('gulp-sourcemaps');
+        sourcemaps = require('gulp-sourcemaps'),
+        livereload = require('gulp-livereload');
 
     gulp.task(taskName + ':Dist', function () {
         var tsResult = tsProject.src()
@@ -11,7 +12,8 @@ module.exports = function (gulp, data, util, taskName) {
 
         return tsResult.js
             .pipe(sourcemaps.write())
-            .pipe(gulp.dest(data.path.dist + 'frontend'));
+            .pipe(gulp.dest(data.path.dist + 'frontend'))
+            .pipe(livereload());
     });
 
     gulp.task(taskName + ':Spec', function () {
