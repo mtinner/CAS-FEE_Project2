@@ -6,9 +6,8 @@
 </header>
 <aside>
     <ul class="navigation-drawer" [ngClass]="{'navigation-drawer--hide': !showNavigation}">
-        <li *ngFor="let item of menuItems;let i = index;" routerLink="{{item.route}}"
-            routerLinkActive="active" class="navigation-drawer__item"
-            [ngClass]="{'navigation-drawer__item--selected':selectedIndex===i}">
+        <li *ngFor="let item of menuItems" routerLink="{{item.route}}"
+            routerLinkActive="navigation-drawer__item--selected" class="navigation-drawer__item">
             <a class="link">
                 <span class="navigation-drawer__item__icon icon icon--{{item.icon}}"></span>
                 <span class="navigation-drawer__item__text">{{item.name}}</span>
