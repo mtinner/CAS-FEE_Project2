@@ -57,7 +57,7 @@ let shoppingListService = (function () {
             oldArticle = getArticle(id);
         }
         if (!newArticle) {
-            throw new Exception('no new article');
+            throw new Error('no new article');
         }
         else if (newArticle && !oldArticle) {
             return addArticle(newArticle);
@@ -69,11 +69,11 @@ let shoppingListService = (function () {
         let article = getArticle(id);
 
         if (!article || !Number.isInteger(article.id)) {
-            throw new Exception('Article not found');
+            throw new Error('Article not found');
         }
         let pos = getPositionOfArticle(article);
         if (pos < 0) {
-            throw new Exception('Position of article not found');
+            throw new Error('Position of article not found');
         }
         return articles.splice(pos, 1)[0];
     }

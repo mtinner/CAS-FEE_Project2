@@ -1,15 +1,15 @@
 'use strict';
 
-let expect = require("chai").expect,
-    request = require("request");
+let expect = require('chai').expect,
+    request = require('request');
 
-let url = "http://localhost:8080";
+let url = 'http://localhost:8080';
 
 
-describe('/index', ()=> {
+describe('/index', () => {
 
-    it('GET respond with 200', (done)=> {
-        request(url, (error, response, body)=> {
+    it('GET respond with 200', (done) => {
+        request(url, (error, response) => {
             expect(response.statusCode).to.equal(200);
             done();
         });

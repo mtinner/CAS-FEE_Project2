@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {DashboardService} from "./dashboard.service";
-import {CardComponent} from "../card/card.component";
+import {DashboardService} from './dashboard.service';
+import {CardComponent} from '../card/card.component';
 import {Router} from '@angular/router';
 
 
@@ -17,7 +17,7 @@ export class DashboardComponent implements OnInit {
     private menuItems: Array<any> = [];
     private selectedIndex: number = 0;
 
-    constructor(private router: Router,dashboardService: DashboardService) {
+    constructor(private router: Router, dashboardService: DashboardService) {
         this.menuItems = dashboardService.getMenuItems();
     }
 
@@ -31,7 +31,7 @@ export class DashboardComponent implements OnInit {
 
     determineActiveRoute() {
         this.router.events.subscribe((val) => {
-            let index = this.menuItems.findIndex(menuItem=>
+            let index = this.menuItems.findIndex(menuItem =>
                 val.url === menuItem.route
             );
             this.selectedIndex = index < 0 ? 0 : index;

@@ -1,10 +1,9 @@
 'use strict';
 
-let expect = require("chai").expect,
-    request = require("request"),
-    jwt = require('express-jwt');
+let expect = require('chai').expect,
+    request = require('request');
 
-let url = "http://localhost:8080/api/shoppingList/article";
+let url = 'http://localhost:8080/api/shoppingList/article';
 
 
 describe('/article', ()=> {
@@ -39,7 +38,7 @@ describe('/article', ()=> {
             request.post({
                 url: url,
                 headers: {
-                    "content-type": "application/json",
+                    'content-type': 'application/json'
                 },
                 body: JSON.stringify({name: 'Gurken', group: 'Alle'})
             }, (error, response, body) => {
@@ -67,7 +66,7 @@ describe('/article', ()=> {
             request.put({
                 url: url,
                 headers: {
-                    "content-type": "application/json",
+                    'content-type': 'application/json'
                 },
                 body: JSON.stringify({name: 'Gurken', group: 'Alle'})
             }, (error, response, body)=> {
@@ -85,7 +84,7 @@ describe('/article', ()=> {
             request.put({
                 url: url,
                 headers: {
-                    "content-type": "application/json",
+                    'content-type': 'application/json'
                 },
                 body: JSON.stringify({name: 'Gurken', group: 'Alle'})
             }, (error, response, body) => {
@@ -94,7 +93,7 @@ describe('/article', ()=> {
                 request.put({
                     url: `${url}/${id}`,
                     headers: {
-                        "content-type": "application/json",
+                        'content-type': 'application/json'
                     },
                     body: JSON.stringify({name: 'Gurken', group: 'Früchte'})
                 }, (error, response, body) => {
@@ -132,7 +131,7 @@ describe('/article', ()=> {
             request.post({
                 url: url,
                 headers: {
-                    "content-type": "application/json",
+                    'content-type': 'application/json'
                 },
                 body: JSON.stringify({name: 'Gurken', group: 'Alle'})
             }, (error, response, body) => {

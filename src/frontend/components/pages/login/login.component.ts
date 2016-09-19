@@ -1,6 +1,6 @@
 import {Component, Injectable} from '@angular/core';
 import {Response} from '@angular/http';
-import {LoginService} from "./login.service";
+import {LoginService} from './login.service';
 
 
 @Injectable()
