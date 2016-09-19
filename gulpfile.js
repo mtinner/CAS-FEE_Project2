@@ -31,6 +31,8 @@ config(gulp, {
 
 gulp.task('Default', function (callback) {
     runSequence(
+        'lint:Es',
+        'lint:Ts',
         'clean:Dist',
         ['transpiling:Dist', 'sass:Dist'],
         ['copy:App'],
