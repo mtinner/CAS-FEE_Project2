@@ -1,6 +1,7 @@
 import {Component, Injectable} from '@angular/core';
 import {Response} from '@angular/http';
 import {LoginService} from "./login.service";
+import {Router} from "@angular/router";
 
 
 @Injectable()

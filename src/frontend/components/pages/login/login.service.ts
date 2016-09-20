@@ -13,15 +13,20 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/toPromise';
+import {Router} from "@angular/router";
 
 const JWT_RESPONSE_HEADER = 'X-Auth-Token';
 
 @Injectable()
 export class LoginService {
+    isLoggedIn = false;
+    redirectUrl: string;
 
-    constructor(private http: Http) {
+    constructor(private http: Http, private router: Router) {
+        this.isLoggedIn = !!localStorage.getItem(JWT_RESPONSE_HEADER);
     }
 
+    //Todo refactoring https://angular.io/docs/ts/latest/guide/server-communication.html#!#fetch-data and use app.service.ts
     login(username, password, callback: (response: Response) => void) {
         this.get(`/api/auth/token?username=${username}&password=${password}`, callback);
     }
@@ -33,6 +38,13 @@ export class LoginService {
                 const token = res.headers.get(JWT_RESPONSE_HEADER);
                 if (token) {
                     localStorage.setItem(JWT_RESPONSE_HEADER, token);
+                    this.isLoggedIn = true;
+                    if (this.redirectUrl) {
+                        this.router.navigate([this.redirectUrl]);
+                    }
+                    else {
+                        this.router.navigate(['shopping-list']);
+                    }
                 }
                 callback && callback(res);
             });
@@ -40,6 +52,7 @@ export class LoginService {
 
     logout() {
         localStorage.removeItem(JWT_RESPONSE_HEADER);
+        this.isLoggedIn = false;
     }
 
     private handleError = (error: any) => {
