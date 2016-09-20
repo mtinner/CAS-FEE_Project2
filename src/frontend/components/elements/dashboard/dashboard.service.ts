@@ -9,7 +9,7 @@ export class DashboardService {
         new MenuItem('Cost Management', 'cost-management', '/cost-management'),
         new MenuItem('Auth', '', '/login'),
         new MenuItem('Settings', 'settings', '/settings'),
-        new MenuItem('Logout', 'logout', undefined)
+        new MenuItem('Logout', 'logout', '/login')
     ];
 
     getMenuItems(): Array<any> {
