@@ -8,8 +8,7 @@ import {Router} from '@angular/router';
     selector: 'my-dashboard',
     templateUrl: 'frontend/components/elements/dashboard/dashboard.component.html',
     styleUrls: ['frontend/components/elements/dashboard/dashboard.component.css'],
-    providers: [DashboardService],
-    directives: [CardComponent]
+    providers: [DashboardService]
 })
 export class DashboardComponent implements OnInit {
 
@@ -17,7 +16,7 @@ export class DashboardComponent implements OnInit {
     private menuItems: Array<any> = [];
     private selectedIndex: number = 0;
 
-    constructor(private router: Router,dashboardService: DashboardService) {
+    constructor(private router: Router, dashboardService: DashboardService) {
         this.menuItems = dashboardService.getMenuItems();
     }
 

@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Rx';
 import {Http} from "@angular/http";
-import {AppService} from "../../app.service";
-import {Article, ArticleObj} from "../../../models/Article";
-import {GroupObj} from "../../../models/Group";
+import {AppService} from "../../../app.service";
+import {GroupObj} from "../../../../models/Group";
+import {ArticleObj, Article} from "../../../../models/Article";
 
 @Injectable()
 export class ShoppingListService extends AppService {
@@ -43,10 +43,10 @@ export class ShoppingListService extends AppService {
         let response = this.http.get(`${this.shoppingListUrl}/groups`)
             .map(this.extractData)
             .catch(this.handleError);
-         response.subscribe((groupObj: GroupObj) => {
-         this.groupObj = groupObj;
-         this.groupObserver.next(groupObj);
-         });
+        response.subscribe((groupObj: GroupObj) => {
+            this.groupObj = groupObj;
+            this.groupObserver.next(groupObj);
+        });
 
         return response;
     }
