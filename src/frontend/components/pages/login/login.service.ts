@@ -1,9 +1,5 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers, Response} from '@angular/http';
-import {Observable} from 'rxjs/Observable';
-// import 'rxjs/Rx'; // adds ALL RxJS statics & operators to Observable
-// See node_module/rxjs/Rxjs.js
-// Import just the rxjs statics and operators we need for THIS app.
 // Statics
 import 'rxjs/add/observable/throw';
 // Operators
@@ -50,7 +46,9 @@ export class LoginService extends AppService {
     logout() {
         localStorage.removeItem(JWT_RESPONSE_HEADER);
         this.isLoggedIn = false;
-        this.router.navigate(['login']);
+        //TODO bug
+        console.log('navigate');
+        this.router.navigate(['/login']);
     }
 
     private static createHeaders() {
