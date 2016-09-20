@@ -15,7 +15,6 @@ export class LoginComponent {
 
     username = 'admin';
     password = 'pwd';
-    response = '';
 
     setUsername = (event) => {
         this.username = event.target.value;
@@ -26,19 +25,10 @@ export class LoginComponent {
     };
 
     login = () => {
-        this.loginService.login(this.username, this.password, (res: Response) => {
-            const token = res.headers.get('X-Auth-Token');
-            this.response = token;
-        });
+        this.loginService.login(this.username, this.password);
     };
 
     logout = () => {
         this.loginService.logout();
-    };
-
-    test = () => {
-        this.loginService.get('/api/auth/test', (res: Response) => {
-            this.response = JSON.stringify(res.json());
-        });
     };
 }
