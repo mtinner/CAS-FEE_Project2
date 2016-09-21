@@ -1,7 +1,7 @@
 <div class="input-field">
 
-    <input (focus)="setFocus(true)" (blur)="setFocus(false)"
-           class="input-field__input" type="{{type}}" value=""
+    <input #input (focus)="setFocus(true)" (blur)="setFocus(false, input.value)"
+           (keyup)="textEntered(input.value)" class="input-field__input" type="{{type}}" value=""
            autocomplete="off">
     <label class="input-field__label" [class.input-field__label--focus]=isFocused>{{placeholder}}</label>
 </div>

@@ -10,7 +10,10 @@ import {InputFieldComponent} from "../../elements/inputField/input-field.compone
     directives: [InputFieldComponent]
 })
 export class LoginComponent {
-    private inputField: Object = {username: {placeholder: 'Username', type: 'text'}};
+    private inputField: Object = {
+        username: {placeholder: 'Username', type: 'text'},
+        password: {placeholder: 'Password', type: 'password'}
+    };
 
     constructor(private loginService: LoginService) {
     }
@@ -18,19 +21,15 @@ export class LoginComponent {
     username = 'admin';
     password = 'pwd';
 
-    setUsername = (event) => {
-        this.username = event.target.value;
+    setUsername(value) {
+        this.username = value;
     };
 
-    setPassword = (event) => {
-        this.password = event.target.value;
+    setPassword(value) {
+        this.password = value;
     };
 
     login = () => {
         this.loginService.login(this.username, this.password);
-    };
-
-    logout = () => {
-        this.loginService.logout();
     };
 }

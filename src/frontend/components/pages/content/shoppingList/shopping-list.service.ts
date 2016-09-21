@@ -19,7 +19,7 @@ export class ShoppingListService extends AppService {
 
     public articles$: Observable<any> = new Observable(observer=> {
         this.articleObserver = observer;
-    });
+    });//TODO .share();
 
     constructor(private http: Http) {
         super();

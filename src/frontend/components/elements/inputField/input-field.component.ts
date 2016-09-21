@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
 
 @Component({
     selector: 'input-field',
@@ -12,10 +12,18 @@ export class InputFieldComponent {
     @Input()
     type: string;
 
+    @Output()
+    enteredText = new EventEmitter();
+
+    textEntered(text:string) {
+        this.enteredText.emit(text);
+    }
+
     private isFocused: boolean = false;
 
-    setFocus(val: boolean) {
-        console.log(val);
-        this.isFocused = val;
+    setFocus<T>(...val: Array<T>) {
+        this.isFocused = [...val].some(entry=> {
+            return !!entry
+        });
     }
 }

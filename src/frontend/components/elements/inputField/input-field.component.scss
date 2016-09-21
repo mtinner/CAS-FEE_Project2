@@ -5,14 +5,13 @@
   font-size: 16px;
   display: inline-block;
   box-sizing: border-box;
-  width: 100px;
   max-width: 100%;
   margin: 0;
   padding: 20px 0;
 
   &__label {
     bottom: 0;
-    color: rgba(0, 0, 0, .26);
+    color: $shopping-secondary;
     font-size: 16px;
     left: 0;
     right: 0;
@@ -35,15 +34,13 @@
 
   &__input {
     border: none;
-    border-bottom: 1px solid rgba(0, 0, 0, .12);
-    display: block;
+    border-bottom: 1px solid $shopping-secondary;
     font-size: 16px;
     font-family: "Helvetica", "Arial", sans-serif;
-    margin: 0;
     padding: 4px 0;
     width: 100%;
-    background: 0 0;
-    text-align: left;
-    color: inherit;
+    &:focus {
+      outline: none;
+    }
   }
 }

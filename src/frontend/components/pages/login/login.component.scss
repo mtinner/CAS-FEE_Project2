@@ -1,3 +1,10 @@
-.response {
-  margin: 1em;
+.login-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  margin-top: 15%;
+  align-items: center;
+  @media (min-width: 720px) {
+    margin-top: 5%;
+  }
 }
