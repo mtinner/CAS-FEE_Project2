@@ -46,9 +46,6 @@ export class LoginService extends AppService {
     logout() {
         localStorage.removeItem(JWT_RESPONSE_HEADER);
         this.isLoggedIn = false;
-        //TODO bug
-        /*  console.log('navigate');
-         this.router.navigate(['/login']);*/
     }
 
     private static createHeaders() {
