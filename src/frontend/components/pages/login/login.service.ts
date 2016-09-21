@@ -37,7 +37,7 @@ export class LoginService extends AppService {
                         this.router.navigate([this.redirectUrl]);
                     }
                     else {
-                        this.router.navigate(['shopping-list']);
+                        this.router.navigate(['']);
                     }
                 }
             });
