@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {ShoppingListService} from "./shopping-list.service";
-import {CardComponent} from "../../../elements/card/card.component";
-import {ChipComponent} from "../../../elements/chip/chip.component";
-import {AddComponent} from "../../../elements/add/add.component";
-import {Group} from "../../../../models/Group";
-import {Article} from "../../../../models/Article";
+import {ShoppingListService} from './shopping-list.service';
+import {CardComponent} from '../../../elements/card/card.component';
+import {ChipComponent} from '../../../elements/chip/chip.component';
+import {AddComponent} from '../../../elements/add/add.component';
+import {Group} from '../../../../models/Group';
+import {Article} from '../../../../models/Article';
 
 
 @Component({
@@ -28,13 +28,13 @@ export class ShoppingListComponent implements OnInit {
             return this.articles;
         }
         return this.articles.filter(article => {
-                    return article.group === id
+                    return article.group === id;
                 }
             ) || [];
     }
 
     deleteArticle(article: Article) {
-        this.shoppingListService.deleteArticle(article.id)
+        this.shoppingListService.deleteArticle(article.id);
     }
 
     addArticle(item: string, group: Group) {
@@ -43,12 +43,12 @@ export class ShoppingListComponent implements OnInit {
 
     ngOnInit(): void {
         this.shoppingListService.fetchGroupItems();
-        this.shoppingListService.groups$.subscribe(groupsObj=> {
+        this.shoppingListService.groups$.subscribe(groupsObj => {
             this.groups = groupsObj.groups;
         });
 
         this.shoppingListService.fetchArticles();
-        this.shoppingListService.articles$.subscribe(articleObj=> {
+        this.shoppingListService.articles$.subscribe(articleObj => {
             this.articles = articleObj.articles;
         });
     }

@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Rx';
-import {Http} from "@angular/http";
-import {AppService} from "../../../app.service";
-import {GroupObj} from "../../../../models/Group";
-import {ArticleObj, Article} from "../../../../models/Article";
+import {Http} from '@angular/http';
+import {AppService} from '../../../app.service';
+import {GroupObj} from '../../../../models/Group';
+import {ArticleObj, Article} from '../../../../models/Article';
 
 @Injectable()
 export class ShoppingListService extends AppService {
@@ -13,13 +13,13 @@ export class ShoppingListService extends AppService {
     private groupObj: GroupObj = new GroupObj([]);
     private articleObj: ArticleObj = new ArticleObj([]);
     private articleObserver;
-    public groups$: Observable<any> = new Observable(observer=> {
+    public groups$: Observable<any> = new Observable(observer => {
         this.groupObserver = observer;
     });
 
-    public articles$: Observable<any> = new Observable(observer=> {
+    public articles$: Observable<any> = new Observable(observer => {
         this.articleObserver = observer;
-    });//TODO .share();
+    }); // TODO .share();
 
     constructor(private http: Http) {
         super();
@@ -30,7 +30,7 @@ export class ShoppingListService extends AppService {
             .map(this.extractData)
             .catch(this.handleError);
         response.subscribe((deletedArticle: Article) => {
-            this.articleObj.articles = this.articleObj.articles.filter(article=>
+            this.articleObj.articles = this.articleObj.articles.filter(article =>
                 deletedArticle.id !== article.id
             );
             this.articleObserver.next(this.articleObj);

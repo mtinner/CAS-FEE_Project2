@@ -15,15 +15,15 @@ export class InputFieldComponent {
     @Output()
     enteredText = new EventEmitter();
 
-    textEntered(text:string) {
+    textEntered(text: string) {
         this.enteredText.emit(text);
     }
 
     private isFocused: boolean = false;
 
     setFocus<T>(...val: Array<T>) {
-        this.isFocused = [...val].some(entry=> {
-            return !!entry
+        this.isFocused = [...val].some(entry => {
+            return !! entry;
         });
     }
 }

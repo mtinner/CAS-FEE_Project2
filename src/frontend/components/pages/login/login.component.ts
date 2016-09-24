@@ -1,6 +1,6 @@
 import {Component, Injectable} from '@angular/core';
-import {LoginService} from "./login.service";
-import {InputFieldComponent} from "../../elements/inputField/input-field.component";
+import {LoginService} from './login.service';
+import {InputFieldComponent} from '../../elements/inputField/input-field.component';
 
 
 @Injectable()

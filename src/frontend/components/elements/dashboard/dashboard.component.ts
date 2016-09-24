@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {DashboardService} from "./dashboard.service";
+import {DashboardService} from './dashboard.service';
 import {Router} from '@angular/router';
-import {LoginService} from "../../pages/login/login.service";
-import {MenuItem} from "../../../models/MenuItem";
+import {LoginService} from '../../pages/login/login.service';
+import {MenuItem} from '../../../models/MenuItem';
 
 
 @Component({
