@@ -1,10 +1,10 @@
 <div class="login-container">
-    <input-field [placeholder]="inputField.username.placeholder"
+    <input-field class="input--login" [placeholder]="inputField.username.placeholder"
                  [type]="inputField.username.type" (enteredText)="setUsername($event)"></input-field>
 
-    <input-field [placeholder]="inputField.password.placeholder"
+    <input-field class="input--login" [placeholder]="inputField.password.placeholder"
                  [type]="inputField.password.type" (enteredText)="setPassword($event)"></input-field>
 
-    <button (click)="login()">Login</button>
+    <button class="btn btn--login" (click)="login()">Login</button>
 
 </div>
