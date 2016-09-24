@@ -14,22 +14,9 @@ import {AddComponent} from '../../elements/add/add.component';
 
 })
 export class ShoppingListComponent implements OnInit {
-    private groups: Group[] = [];
-    private articles: Article[] = [];
     private addText: string = 'Add article';
 
-
     constructor(private shoppingListService: ShoppingListService) {
-    }
-
-    getArticlesForGroup(id: number): Article[] {
-        if (id === 0) {
-            return this.articles;
-        }
-        return this.articles.filter(article => {
-                    return article.group === id;
-                }
-            ) || [];
     }
 
     deleteArticle(article: Article) {
@@ -42,13 +29,7 @@ export class ShoppingListComponent implements OnInit {
 
     ngOnInit(): void {
         this.shoppingListService.fetchGroupItems();
-        this.shoppingListService.groups$.subscribe(groupsObj => {
-            this.groups = groupsObj.groups;
-        });
 
         this.shoppingListService.fetchArticles();
-        this.shoppingListService.articles$.subscribe(articleObj => {
-            this.articles = articleObj.articles;
-        });
     }
 }
