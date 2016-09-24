@@ -18,9 +18,6 @@ app.use('/frontend', express.static('./src/.dist/frontend'));
 app.use('/@angular', express.static('node_modules/@angular'));
 app.use('/rxjs', express.static('node_modules/rxjs'));
 
-//TODO remove if no in memory is needed
-app.use('/angular2-in-memory-web-api', express.static('node_modules/angular2-in-memory-web-api'));
-
 
 let port = 8080;
 app.listen(port);

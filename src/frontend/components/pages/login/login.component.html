@@ -1,19 +1,10 @@
-<div class="container__page">
-    <label for="login-username">
-        Username:
-    </label>
-    <input id="login-username" type="text" (keyup)="setUsername($event)" value="{{username}}"/>
+<div class="login-container">
+    <input-field class="input--login" [placeholder]="inputField.username.placeholder"
+                 [type]="inputField.username.type" (enteredText)="setUsername($event)"></input-field>
 
-    <label for="login-password">
-        Password:
-    </label>
-    <input id="login-password" type="password" (keyup)="setPassword($event)" value="{{password}}"/>
+    <input-field class="input--login" [placeholder]="inputField.password.placeholder"
+                 [type]="inputField.password.type" (enteredText)="setPassword($event)"></input-field>
 
-    <button (click)="login()">Login</button>
+    <button class="btn btn--login" (click)="login()">Login</button>
 
-    <button (click)="logout()">Logout</button>
-
-    <button (click)="test()">Test</button>
-
-    <div class="response">{{response}}</div>
 </div>

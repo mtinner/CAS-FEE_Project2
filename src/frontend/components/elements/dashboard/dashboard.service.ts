@@ -1,13 +1,15 @@
 import {Injectable} from '@angular/core';
+import {MenuItem} from "../../../models/MenuItem";
 
 @Injectable()
 export class DashboardService {
 
-    private menuItems = [
-        {name: 'Shopping List', icon: 'shopping-list', route: '/shopping-list'},
-        {name: 'Cost Management', icon: 'cost-management', route: '/cost-management'},
-        {name: 'Auth', icon: 'settings', route: '/login'},
-        {name: 'Settings', icon: 'settings', route: '/settings'}
+    private menuItems: MenuItem[] = [
+        new MenuItem('Shopping List', 'shopping-list', '/shopping-list'),
+        new MenuItem('Cost Management', 'cost-management', '/cost-management'),
+        new MenuItem('Auth', '', '/login'),
+        new MenuItem('Settings', 'settings', '/settings'),
+        new MenuItem('Logout', 'logout', '/login')
     ];
 
     getMenuItems(): Array<any> {

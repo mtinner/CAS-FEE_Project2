@@ -1,15 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import {DashboardService} from './dashboard.service';
-import {CardComponent} from '../card/card.component';
+import {DashboardService} from "./dashboard.service";
 import {Router} from '@angular/router';
+import {LoginService} from "../../pages/login/login.service";
+import {MenuItem} from "../../../models/MenuItem";
 
 
 @Component({
     selector: 'my-dashboard',
     templateUrl: 'frontend/components/elements/dashboard/dashboard.component.html',
     styleUrls: ['frontend/components/elements/dashboard/dashboard.component.css'],
-    providers: [DashboardService],
-    directives: [CardComponent]
+    providers: [DashboardService]
 })
 export class DashboardComponent implements OnInit {
 
@@ -17,7 +17,7 @@ export class DashboardComponent implements OnInit {
     private menuItems: Array<any> = [];
     private selectedIndex: number = 0;
 
-    constructor(private router: Router, dashboardService: DashboardService) {
+    constructor(private router: Router, dashboardService: DashboardService, private loginService: LoginService) {
         this.menuItems = dashboardService.getMenuItems();
     }
 
@@ -36,5 +36,15 @@ export class DashboardComponent implements OnInit {
             );
             this.selectedIndex = index < 0 ? 0 : index;
         });
+    }
+
+    itemClicked(item: MenuItem) {
+        if (item.name.toLocaleLowerCase().includes('logout')) {
+            this.logout();
+        }
+    }
+
+    logout() {
+        this.loginService.logout();
     }
 }

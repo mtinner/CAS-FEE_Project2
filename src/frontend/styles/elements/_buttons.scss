@@ -1,17 +1,24 @@
-/*---
-title:   Buttons
-section: Elements
----
-
-Button styles can be applied to any element. Typically you'll want to use
-either a `<button>` or an `<a>` element:
-
-```example:html
-<button class="btn">Click</button>
-```
-*/
-
 .btn {
-  background-color: $manta;
-  color: $snow;
+  background: rgb(158, 158, 158);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+  border: none;
+  border-radius: 2px;
+  color: $manta;
+  height: 36px;
+  min-width: 64px;
+  padding: 0 16px;
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0.8;
+  &:active {
+    opacity: 1;
+  }
+
+  &:focus {
+    outline: none;
+  }
+  &--login {
+    background: $shopping-secondary;
+    color: $snow;
+  }
 }
