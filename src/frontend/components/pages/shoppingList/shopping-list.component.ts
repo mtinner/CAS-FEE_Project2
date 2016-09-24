@@ -14,7 +14,6 @@ import {AddComponent} from '../../elements/add/add.component';
 
 })
 export class ShoppingListComponent implements OnInit {
-    private groups: Group[] = [];
     private articles: Article[] = [];
     private addText: string = 'Add article';
 
@@ -42,9 +41,6 @@ export class ShoppingListComponent implements OnInit {
 
     ngOnInit(): void {
         this.shoppingListService.fetchGroupItems();
-        this.shoppingListService.groups$.subscribe(groupsObj => {
-            this.groups = groupsObj.groups;
-        });
 
         this.shoppingListService.fetchArticles();
         this.shoppingListService.articles$.subscribe(articleObj => {

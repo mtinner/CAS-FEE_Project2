@@ -3,19 +3,17 @@ import {Observable} from 'rxjs/Rx';
 import {Http} from '@angular/http';
 import {AppService} from '../../app.service';
 import {Article, ArticleObj} from '../../../models/Article';
-import {GroupObj} from '../../../models/Group';
+import {GroupObj, Group} from '../../../models/Group';
 
 @Injectable()
 export class ShoppingListService extends AppService {
     private shoppingListUrl = `${this.baseUrl}shoppinglist`;
 
     private groupObserver;
-    private groupObj: GroupObj = new GroupObj([]);
+    private groups: Group[] = [];
     private articleObj: ArticleObj = new ArticleObj([]);
     private articleObserver;
-    public groups$: Observable<any> = new Observable(observer => {
-        this.groupObserver = observer;
-    });
+    public groups$: Observable<any>;
 
     public articles$: Observable<any> = new Observable(observer => {
         this.articleObserver = observer;
@@ -23,6 +21,9 @@ export class ShoppingListService extends AppService {
 
     constructor(private http: Http) {
         super();
+        this.groups$ = new Observable(observer => {
+            this.groupObserver = observer;
+        });
     }
 
     deleteArticle(id): Observable<any> {
@@ -43,10 +44,10 @@ export class ShoppingListService extends AppService {
         let response = this.http.get(`${this.shoppingListUrl}/groups`)
             .map(this.extractData)
             .catch(this.handleError);
-         response.subscribe((groupObj: GroupObj) => {
-         this.groupObj = groupObj;
-         this.groupObserver.next(groupObj);
-         });
+        response.subscribe((groupObj: GroupObj) => {
+            this.groups = groupObj.groups;
+            this.groupObserver.next(this.groups);
+        });
 
         return response;
     }
