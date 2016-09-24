@@ -1,6 +1,5 @@
 module.exports = function (gulp, data, util, taskName) {
-    var gulp = require('gulp'),
-        angularProtractor = require('gulp-angular-protractor'),
+    var angularProtractor = require('gulp-angular-protractor'),
         connect = require('gulp-connect');
 
     gulp.task(taskName, function () {

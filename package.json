@@ -29,6 +29,7 @@
     "browserify": "^13.1.0",
     "chai": "^3.5.0",
     "eslint": "^3.5.0",
+    "event-stream": "^3.3.4",
     "gulp": "^3.9.1",
     "gulp-angular-protractor": "^0.1.1",
     "gulp-clean": "^0.3.2",

@@ -1,7 +1,6 @@
 module.exports = function (gulp, data, util, taskName) {
 
-    var gulp = require('gulp'),
-        watch = require('gulp-watch'),
+    var watch = require('gulp-watch'),
         print = require('gulp-print'),
         runSequence = require('run-sequence'),
         livereload = require('gulp-livereload');
