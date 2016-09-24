@@ -38,7 +38,7 @@ let shoppingListService = (function () {
             {
                 return o.id === id;
             }
-        })
+        });
     }
 
     function addArticle(article) {

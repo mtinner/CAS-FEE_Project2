@@ -26,6 +26,8 @@
         "allowTemplateLiterals": false
       }
     ],
+    "semi": 1,
+    "no-extra-semi": 1,
     //errors
     "object-shorthand": [
       2,

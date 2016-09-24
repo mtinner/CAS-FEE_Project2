@@ -41,7 +41,7 @@ let authService = (function () {
                     res.status(500).send(`username ${req.username} not found`);
                 }
             });
-        }
+        };
     }
 
     function signIn(req, res) {

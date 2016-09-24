@@ -49,7 +49,7 @@ describe('/article', ()=> {
                 expect(article.name).to.be.a('string');
                 expect(article.group).to.be.a('string');
                 done();
-            })
+            });
         });
     });
 
@@ -77,7 +77,7 @@ describe('/article', ()=> {
                 expect(article.name).to.be.a('string');
                 expect(article.group).to.be.a('string');
                 done();
-            })
+            });
         });
 
         it('respond with updated object', (done)=> {
@@ -105,8 +105,8 @@ describe('/article', ()=> {
                     expect(article.name).to.be.a('string');
                     expect(article.group).to.be.a('string');
                     done();
-                })
-            })
+                });
+            });
         });
     });
 

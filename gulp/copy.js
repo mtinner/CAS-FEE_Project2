@@ -1,6 +1,6 @@
 module.exports = function (gulp, data, util, taskName) {
 
-    let stream = require("event-stream");
+    let stream = require('event-stream');
 
     gulp.task(taskName + ':StyleguideIcon', function () {
         return gulp.src([
@@ -33,7 +33,7 @@ module.exports = function (gulp, data, util, taskName) {
         ], {base: data.path.backend})
             .pipe(gulp.dest(data.path.dist));
 
-        return stream.merge([app, scripts, backend])
+        return stream.merge([app, scripts, backend]);
     });
 
     gulp.task(taskName + ':E2eApp', function () {
@@ -54,7 +54,6 @@ module.exports = function (gulp, data, util, taskName) {
         ])
             .pipe(gulp.dest(data.path.tmpE2e + 'frontend/scripts/vendor'));
 
-
-        return Promise.all([app, scripts])
+        return stream.merge([app, scripts]);
     });
 };
