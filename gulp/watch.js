@@ -10,6 +10,18 @@ module.exports = function (gulp, data, util, taskName) {
         livereload.listen();
     });
 
+    gulp.task(taskName + ':All', function () {
+        return watch(data.path.frontend + '**/*', function () {
+            runSequence(
+                'lint:Es',
+                'lint:Ts',
+                'clean:Dist',
+                ['transpiling:Dist', 'sass:Dist'],
+                'copy:App'
+            );
+        }).pipe(_printChanges());
+    });
+
     gulp.task(taskName + ':Transpiling', function () {
         return watch(data.path.frontend + '**/*.ts', function () {
             runSequence('transpiling:Dist');
