@@ -13,13 +13,13 @@ export class ShoppingListService extends AppService {
 
     private groups: Group[] = [];
     private articles: Article[] = [];
-    public groups$: Subject<any>;
-    public articles$: Subject<any>;
+    public groups$: Subject<Group[]>;
+    public articles$: Subject<Article[]>;
 
     constructor(private http: Http) {
         super();
-        this.groups$ = new BehaviorSubject<any>(null);
-        this.articles$ = new BehaviorSubject<any>(null);
+        this.groups$ = new BehaviorSubject<Group[]>(null);
+        this.articles$ = new BehaviorSubject<Article[]>(null);
     }
 
     deleteArticle(id): Observable<any> {
