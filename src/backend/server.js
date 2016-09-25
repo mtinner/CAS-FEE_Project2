@@ -12,6 +12,10 @@ app.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
 });
 
+app.get('/favicon.ico', function (req, res) {
+    res.sendFile(__dirname + '/favicon.ico');
+});
+
 app.use('/api', apiRouting);
 
 app.use('/frontend', express.static('./src/.dist/frontend'));

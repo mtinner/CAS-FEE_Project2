@@ -17,7 +17,8 @@ module.exports = function (gulp, data, util, taskName) {
             data.path.frontend + 'images/**',
             data.path.frontend + 'scripts/**',
             data.path.frontend + 'fonts/**',
-            './src/index.html'
+            './src/index.html',
+            './src/favicon.ico'
         ], {base: './src'})
             .pipe(gulp.dest(data.path.dist));
 
