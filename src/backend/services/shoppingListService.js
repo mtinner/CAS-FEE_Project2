@@ -29,25 +29,28 @@ let shoppingListService = (function () {
     }
 
     function getArticle(id, callback) {
-        if (!Number.isInteger(parseInt(id))) {
-            articles.find({}, (err, docs) => {
-                callback({articles: docs});
+        if (id) {
+            articles.findOne({ _id: id }, (err, doc) => {
+                doc.id = doc._id;
+                callback(doc);
             });
         } else {
-            id = parseInt(id);
-            articles.findOne({ id: id }, (err, doc) => {
-                callback(doc);
+            articles.find({}, (err, docs) => {
+                docs.forEach(a => a.id = a._id);
+                var arr = { articles: docs };
+                callback(arr);
             });
         }
     }
 
     function addArticle(article, callback) {
         let a = new Article(
-            id++,
+            0,
             article.name,
             article.group
         );
         articles.insert(a, (err, doc) => {
+            doc.id = doc._id;
             callback(doc);
         });
     }
@@ -64,16 +67,17 @@ let shoppingListService = (function () {
             return addArticle(newArticle);
         }
         return articles.update(Object.assign(oldArticle, newArticle), (err, doc => {
+            doc.id = doc._id;
             callback(doc);
         }));
     }
 
     function deleteArticle(id, callback) {
         getArticle(id, article => {
-            if (!article || !Number.isInteger(article.id)) {
+            if (!article || !article.id) {
                 throw new Error('Article not found');
             }
-            articles.remove(article, () => {
+            articles.remove({ _id: article.id }, () => {
                 callback(article);
             });
         });
