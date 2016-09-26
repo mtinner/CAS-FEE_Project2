@@ -44,20 +44,18 @@ let shoppingListService = (function () {
     }
 
     function addArticle(article, callback) {
-        let a = new Article(
-            0,
-            article.name,
-            article.group
+        articles.insert(
+            new Article(undefined, article.name, article.group),
+            (err, doc) => {
+                doc.id = doc._id;
+                callback(doc);
+            }
         );
-        articles.insert(a, (err, doc) => {
-            doc.id = doc._id;
-            callback(doc);
-        });
     }
 
     function updateArticle(id, newArticle, callback) {
         let oldArticle;
-        if (Number.isInteger(parseInt(id))) {
+        if (id) {
             oldArticle = getArticle(id);
         }
         if (!newArticle) {
@@ -66,10 +64,13 @@ let shoppingListService = (function () {
         else if (newArticle && !oldArticle) {
             return addArticle(newArticle);
         }
-        return articles.update(Object.assign(oldArticle, newArticle), (err, doc => {
-            doc.id = doc._id;
-            callback(doc);
-        }));
+        articles.update(
+            Object.assign(oldArticle, newArticle, { id: undefined }),
+            (err, doc) => {
+                doc.id = doc._id;
+                callback(doc);
+            }
+        );
     }
 
     function deleteArticle(id, callback) {
