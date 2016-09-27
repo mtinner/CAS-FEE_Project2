@@ -11,8 +11,7 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/toPromise';
 import {Router} from '@angular/router';
 import {AppService} from '../../app.service';
-
-const JWT_RESPONSE_HEADER = 'X-Auth-Token';
+import {JWT_RESPONSE_HEADER} from '../../api.service';
 
 @Injectable()
 export class LoginService extends AppService {

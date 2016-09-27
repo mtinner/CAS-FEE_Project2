@@ -1,11 +1,12 @@
 import {AppComponent} from './app.component';
 import {appRoutingProviders, routing} from './app.routing';
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
-import {HttpModule} from '@angular/http';
+import {NgModule, Provider} from '@angular/core';
+import {HttpModule, ConnectionBackend, RequestOptions, Http, XHRBackend} from '@angular/http';
 import {LoginComponent} from './pages/login/login.component';
 import {LoginService} from './pages/login/login.service';
 import {ContentModule} from './pages/content/content.module';
+import {ApiClient} from './api.service';
 
 @NgModule({
     imports: [
@@ -20,7 +21,12 @@ import {ContentModule} from './pages/content/content.module';
     ],
     providers: [
         appRoutingProviders,
-        LoginService
+        LoginService,
+        new Provider(Http, {
+            useFactory: (backend: XHRBackend, defaultOptions: RequestOptions) =>
+                new ApiClient(backend, defaultOptions),
+            deps: [XHRBackend, RequestOptions]
+        })
     ],
     bootstrap: [AppComponent]
 })
