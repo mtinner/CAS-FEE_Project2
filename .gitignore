@@ -32,4 +32,6 @@ typings
 #Test
 .tmpE2e
 src/spec/frontend/
-articles.db
+
+#Databases
+*.db

@@ -1,6 +1,6 @@
 'use strict';
 let Article = require('../models/Article'),
-    Datastore = require('nedb');
+    articleRepo = require('./nedbRepo')('article');
 
 let shoppingListService = (function () {
     let shoppingListGroups = {
@@ -12,9 +12,7 @@ let shoppingListService = (function () {
             { id: 4, name: 'Sonstiges' },
             { id: 5, name: 'Non Food' }
         ]
-    },
-        id = 0,
-        articles = new Datastore({ filename: 'articles.db', autoload: true });
+    };
 
     return {
         getShoppingListGroups: getShoppingListGroups,
@@ -29,59 +27,27 @@ let shoppingListService = (function () {
     }
 
     function getArticle(id, callback) {
-        if (id) {
-            articles.findOne({ _id: id }, (err, doc) => {
-                doc.id = doc._id;
-                callback(doc);
-            });
-        } else {
-            articles.find({}, (err, docs) => {
-                docs.forEach(a => a.id = a._id);
-                var arr = { articles: docs };
-                callback(arr);
-            });
-        }
+        articleRepo.get(id, article => {
+            if (Array.isArray(article)) {
+                callback({ 
+                    articles: article.map(a => new Article(a.id, a.name, a.group)) 
+                });
+            } else {
+                callback(new Article(article.id, article.name, article.group));
+            }
+        });
     }
 
     function addArticle(article, callback) {
-        articles.insert(
-            new Article(undefined, article.name, article.group),
-            (err, doc) => {
-                doc.id = doc._id;
-                callback(doc);
-            }
-        );
+        articleRepo.add(article, callback);
     }
 
     function updateArticle(id, newArticle, callback) {
-        let oldArticle;
-        if (id) {
-            oldArticle = getArticle(id);
-        }
-        if (!newArticle) {
-            throw new Error('no new article');
-        }
-        else if (newArticle && !oldArticle) {
-            return addArticle(newArticle);
-        }
-        articles.update(
-            Object.assign(oldArticle, newArticle, { id: undefined }),
-            (err, doc) => {
-                doc.id = doc._id;
-                callback(doc);
-            }
-        );
+        articleRepo.update(id, newArticle, callback);
     }
 
     function deleteArticle(id, callback) {
-        getArticle(id, article => {
-            if (!article || !article.id) {
-                throw new Error('Article not found');
-            }
-            articles.remove({ _id: article.id }, () => {
-                callback(article);
-            });
-        });
+        articleRepo.remove(id, callback);
     }
 })();
 
