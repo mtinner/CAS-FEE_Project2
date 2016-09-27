@@ -7,6 +7,8 @@ let express = require('express'),
 router.get('/:id?', function (req, res) {
     shoppingListService.getArticle(req.params.id).then(articles => {
         res.status(200).send(articles);
+    }).catch(() => {
+        res.status(404).send();
     });
 });
 

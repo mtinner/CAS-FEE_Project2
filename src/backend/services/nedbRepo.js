@@ -38,9 +38,8 @@ let shoppingListService = (function (entityName) {
         return get(id).then(oldDoc => {
             if (oldDoc) {
                 return update(id, oldDoc, newDoc);
-            } else {
-                return add(newDoc);
             }
+            return add(newDoc);
         });
     }
 
@@ -55,9 +54,7 @@ let shoppingListService = (function (entityName) {
 
     function remove(id) {
         return get(id).then(doc => {
-            if (!doc) {
-                throw new Error(entityName + ' not found');
-            }
+            if (!doc) throw new Error(entityName + ' not found');
             return new Promise(resolve => {
                 store.remove({ _id: id }, () => resolve(doc));
             });
