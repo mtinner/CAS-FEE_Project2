@@ -41,7 +41,8 @@ export class ApiClient extends Http {
       mergedOptions = options;
     }
     const token = localStorage.getItem(JWT_RESPONSE_HEADER);
-    if (token) mergedOptions.headers.append('Authorization', `Bearer ${token}`);
+    const isTokenSet = mergedOptions.headers.has('Authorization');
+    if (token && !isTokenSet) mergedOptions.headers.append('Authorization', `Bearer ${token}`);
     return mergedOptions;
   }
 }
