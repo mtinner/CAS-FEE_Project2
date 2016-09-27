@@ -15,6 +15,9 @@ app.get('/', function (req, res) {
 app.get('/favicon.ico', function (req, res) {
     res.sendFile(__dirname + '/favicon.ico');
 });
+app.get('/manifest.json', function (req, res) {
+    res.sendFile(__dirname + '/manifest.json');
+});
 
 app.use('/api', apiRouting);
 
