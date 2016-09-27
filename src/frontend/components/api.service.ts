@@ -14,33 +14,34 @@ export class ApiClient extends Http {
   }
 
   request(url: string | Request, options?: RequestOptionsArgs): Observable<Response> {
-    this.appendAuthHeader(options);
-    return super.request(url, options);
+    return super.request(url, this.appendAuthHeader(options));
   }
 
   get(url: string, options?: RequestOptionsArgs): Observable<Response> {
-    this.appendAuthHeader(options);
-    return super.get(url, options);
+    return super.get(url, this.appendAuthHeader(options));
   }
 
   post(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
-    this.appendAuthHeader(options);
-    return super.post(url, body, options);
+    return super.post(url, body, this.appendAuthHeader(options));
   }
 
   put(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
-    this.appendAuthHeader(options);
-    return super.put(url, body, options);
+    return super.put(url, body, this.appendAuthHeader(options));
   }
 
   delete(url: string, options?: RequestOptionsArgs): Observable<Response> {
-    this.appendAuthHeader(options);
-    return super.delete(url, options);
+    return super.delete(url, this.appendAuthHeader(options));
   }
 
-  private appendAuthHeader(options?: RequestOptionsArgs) {
-    if (!options) return;
+  private appendAuthHeader(options?: RequestOptionsArgs): RequestOptionsArgs {
+    let mergedOptions: RequestOptionsArgs;
+    if (!options) {
+      mergedOptions = { headers: new Headers() };
+    } else {
+      mergedOptions = options;
+    }
     const token = localStorage.getItem(JWT_RESPONSE_HEADER);
-    if (token) options.headers.append('Authorization', `Bearer ${token}`);
+    if (token) mergedOptions.headers.append('Authorization', `Bearer ${token}`);
+    return mergedOptions;
   }
 }
