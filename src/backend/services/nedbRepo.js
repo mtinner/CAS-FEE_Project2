@@ -8,21 +8,17 @@ let shoppingListService = (function (entityName) {
     return {
         get: get,
         add: add,
-        update: update,
+        update: updateOrInsert,
         remove: remove
     };
 
     function get(id) {
         return new Promise(resolve => {
             if (id) {
-                store.findOne({ _id: id }, (err, doc) => {
-                    resolve(moveId(doc));
-                });
+                store.findOne({ _id: id }, (err, doc) => resolve(moveId(doc)));
             } else {
                 store.find({}, (err, docs) => {
-                    docs.forEach(doc => {
-                        moveId(doc);
-                    });
+                    docs.forEach(doc => moveId(doc));
                     resolve(docs);
                 });
             }
@@ -30,23 +26,29 @@ let shoppingListService = (function (entityName) {
     }
 
     function add(newDoc) {
-        return new Promise(resolve => {
+        return new Promise(resolve =>
             store.insert(
                 Object.assign(newDoc, { _id: newDoc.id }, { id: undefined }),
-                (err, doc) => {
-                    resolve(moveId(doc));
-                }
-            );
+                (err, doc) => resolve(moveId(doc))
+            )
+        );
+    }
+
+    function updateOrInsert(id, newDoc) {
+        return get(id).then(oldDoc => {
+            if (oldDoc) {
+                return update(id, oldDoc, newDoc);
+            } else {
+                return add(newDoc);
+            }
         });
     }
 
-    function update(id, newDoc) {
+    function update(id, oldDoc, newDoc) {
         return new Promise(resolve => {
             store.update(
-                Object.assign(newDoc, { _id: newDoc.id }, { id: undefined }),
-                (err, doc) => {
-                    resolve(moveId(doc));
-                }
+                Object.assign(oldDoc, newDoc, { _id: id }, { id: undefined }),
+                (err, doc) => resolve(moveId(doc))
             );
         });
     }
@@ -57,14 +59,13 @@ let shoppingListService = (function (entityName) {
                 throw new Error(entityName + ' not found');
             }
             return new Promise(resolve => {
-                store.remove({ _id: id }, () => {
-                    resolve(doc);
-                });
+                store.remove({ _id: id }, () => resolve(doc));
             });
         });
     }
 
     function moveId(doc) {
+        if (!doc) return null;
         doc.id = doc._id;
         delete doc._id;
         return doc;

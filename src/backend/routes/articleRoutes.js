@@ -16,8 +16,8 @@ router.post('/', function (req, res) {
     });
 });
 
-router.put('/', function (req, res) {
-    shoppingListService.updateArticle(req.body).then(article => {
+router.put('/:id', function (req, res) {
+    shoppingListService.updateArticle(req.params.id, req.body).then(article => {
         res.status(200).send(article);
     });
 });
