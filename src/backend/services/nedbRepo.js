@@ -1,5 +1,6 @@
 'use strict';
-let Datastore = require('nedb');
+let Datastore = require('nedb'),
+    Promise = require('promise');
 
 let shoppingListService = (function (entityName) {
     let store = new Datastore({ filename: entityName + '.db', autoload: true });
@@ -11,65 +12,62 @@ let shoppingListService = (function (entityName) {
         remove: remove
     };
 
-    function get(id, callback) {
-        if (id) {
-            store.findOne({ _id: id }, (err, doc) => {
-                doc.id = doc._id;
-                callback(doc);
-            });
-        } else {
-            store.find({}, (err, docs) => {
-                docs.forEach(doc => {
-                    doc.id = doc._id;
-                    delete doc._id;
+    function get(id) {
+        return new Promise(resolve => {
+            if (id) {
+                store.findOne({ _id: id }, (err, doc) => {
+                    resolve(moveId(doc));
                 });
-                callback(docs);
-            });
-        }
-    }
-
-    function add(newDoc, callback) {
-        store.insert(
-            Object.assign(newDoc, { _id: newDoc.id }, { id: undefined }),
-            (err, doc) => {
-                doc.id = doc._id;
-                delete doc._id;
-                callback(doc);
+            } else {
+                store.find({}, (err, docs) => {
+                    docs.forEach(doc => {
+                        moveId(doc);
+                    });
+                    resolve(docs);
+                });
             }
-        );
+        });
     }
 
-    function update(id, newDoc, callback) {
-        let oldDoc;
-        if (id) {
-            oldDoc = get(id);
-        }
-        if (!newDoc) {
-            throw new Error('no new ' + entityName);
-        }
-        else if (newDoc && !oldDoc) {
-            return add(newDoc);
-        }
-        store.update(
-            Object.assign(oldDoc, newDoc, { id: undefined }),
-            (err, doc) => {
-                doc.id = doc._id;
-                delete doc._id;
-                callback(doc);
-            }
-        );
+    function add(newDoc) {
+        return new Promise(resolve => {
+            store.insert(
+                Object.assign(newDoc, { _id: newDoc.id }, { id: undefined }),
+                (err, doc) => {
+                    resolve(moveId(doc));
+                }
+            );
+        });
     }
 
-    function remove(id, callback) {
-        get(id, doc => {
+    function update(id, newDoc) {
+        return new Promise(resolve => {
+            store.update(
+                Object.assign(newDoc, { _id: newDoc.id }, { id: undefined }),
+                (err, doc) => {
+                    resolve(moveId(doc));
+                }
+            );
+        });
+    }
+
+    function remove(id) {
+        return get(id).then(doc => {
             if (!doc) {
                 throw new Error(entityName + ' not found');
             }
-            store.remove({ _id: id }, () => {
-                delete doc._id;
-                callback(doc);
+            return new Promise(resolve => {
+                store.remove({ _id: id }, () => {
+                    resolve(doc);
+                });
             });
         });
+    }
+
+    function moveId(doc) {
+        doc.id = doc._id;
+        delete doc._id;
+        return doc;
     }
 });
 

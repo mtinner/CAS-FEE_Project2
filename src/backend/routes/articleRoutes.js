@@ -5,26 +5,26 @@ let express = require('express'),
     shoppingListService = require('../services/shoppingListService');
 
 router.get('/:id?', function (req, res) {
-    shoppingListService.getArticle(req.params.id, article => {
-        res.status(200).send(article);
+    shoppingListService.getArticle(req.params.id).then(articles => {
+        res.status(200).send(articles);
     });
 });
 
 router.post('/', function (req, res) {
-    shoppingListService.addArticle(req.body, article => {
+    shoppingListService.addArticle(req.body).then(article => {
         res.status(201).send(article);
     });
 });
 
-router.put('/:id?', function (req, res) {
-    shoppingListService.updateArticle(req.params.id, req.body, article => {
+router.put('/', function (req, res) {
+    shoppingListService.updateArticle(req.body).then(article => {
         res.status(200).send(article);
     });
 });
 
 router.delete('/:id', function (req, res) {
     try {
-        shoppingListService.deleteArticle(req.params.id, article => {
+        shoppingListService.deleteArticle(req.params.id).then(article => {
             res.status(200).send(article);
         });
     }

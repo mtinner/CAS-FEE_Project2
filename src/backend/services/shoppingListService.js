@@ -26,28 +26,26 @@ let shoppingListService = (function () {
         return shoppingListGroups;
     }
 
-    function getArticle(id, callback) {
-        articleRepo.get(id, article => {
-            if (Array.isArray(article)) {
-                callback({ 
-                    articles: article.map(a => new Article(a.id, a.name, a.group)) 
-                });
+    function getArticle(id) {
+        return articleRepo.get(id).then(articles => {
+            if (Array.isArray(articles)) {
+                return { articles: articles.map(a => new Article(a.id, a.name, a.group)) };
             } else {
-                callback(new Article(article.id, article.name, article.group));
+                return new Article(articles.id, articles.name, articles.group);
             }
         });
     }
 
-    function addArticle(article, callback) {
-        articleRepo.add(article, callback);
+    function addArticle(article) {
+        return articleRepo.add(article);
     }
 
-    function updateArticle(id, newArticle, callback) {
-        articleRepo.update(id, newArticle, callback);
+    function updateArticle(id, newArticle) {
+        return articleRepo.update(id, newArticle);
     }
 
-    function deleteArticle(id, callback) {
-        articleRepo.remove(id, callback);
+    function deleteArticle(id) {
+        return articleRepo.remove(id);
     }
 })();
 

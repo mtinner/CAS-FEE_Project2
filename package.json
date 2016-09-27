@@ -19,6 +19,7 @@
     "express-jwt-permissions": "^0.2.2",
     "jsonwebtoken": "^7.1.9",
     "nedb": "^1.8.0",
+    "promise": "^7.1.1",
     "rxjs": "5.0.0-beta.11",
     "systemjs": "0.19.37",
     "zone.js": "^0.6.17"
