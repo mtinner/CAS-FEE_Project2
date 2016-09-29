@@ -14,23 +14,33 @@ export class ApiClient extends Http {
   }
 
   request(url: string | Request, options?: RequestOptionsArgs): Observable<Response> {
-    return super.request(url, this.appendAuthHeader(options));
+    const request = super.request(url, this.appendAuthHeader(options));
+    request.subscribe(this.saveToken);
+    return request;
   }
 
   get(url: string, options?: RequestOptionsArgs): Observable<Response> {
-    return super.get(url, this.appendAuthHeader(options));
+    const request = super.get(url, this.appendAuthHeader(options));
+    request.subscribe(this.saveToken);
+    return request;
   }
 
   post(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
-    return super.post(url, body, this.appendAuthHeader(options));
+    const request = super.post(url, body, this.appendAuthHeader(options));
+    request.subscribe(this.saveToken);
+    return request;
   }
 
   put(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
-    return super.put(url, body, this.appendAuthHeader(options));
+    const request = super.put(url, body, this.appendAuthHeader(options));
+    request.subscribe(this.saveToken);
+    return request;
   }
 
   delete(url: string, options?: RequestOptionsArgs): Observable<Response> {
-    return super.delete(url, this.appendAuthHeader(options));
+    const request = super.delete(url, this.appendAuthHeader(options));
+    request.subscribe(this.saveToken);
+    return request;
   }
 
   private appendAuthHeader(options?: RequestOptionsArgs): RequestOptionsArgs {
@@ -44,5 +54,10 @@ export class ApiClient extends Http {
     const isTokenSet = mergedOptions.headers.has('Authorization');
     if (token && !isTokenSet) mergedOptions.headers.append('Authorization', `Bearer ${token}`);
     return mergedOptions;
+  }
+
+  private saveToken(res: Response): void {
+    const token = res.headers.get(JWT_RESPONSE_HEADER);
+    if (token) localStorage.setItem(JWT_RESPONSE_HEADER, token);
   }
 }
