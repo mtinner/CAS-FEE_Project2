@@ -11,7 +11,7 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/toPromise';
 import {Router} from '@angular/router';
 import {AppService} from '../../app.service';
-import {JWT_RESPONSE_HEADER} from '../../authHttp.service';
+import {JWT_RESPONSE_HEADER} from '../../auth-http.service';
 
 @Injectable()
 export class LoginService extends AppService {
