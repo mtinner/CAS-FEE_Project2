@@ -8,7 +8,7 @@ import {Observable} from 'rxjs/Observable';
 export const JWT_RESPONSE_HEADER = 'X-Auth-Token';
 
 @Injectable()
-export class ApiClient extends Http {
+export class AuthHttp extends Http {
   constructor(backend: ConnectionBackend, defaultOptions: RequestOptions) {
     super(backend, defaultOptions);
   }

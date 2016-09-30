@@ -6,7 +6,7 @@ import {HttpModule, ConnectionBackend, RequestOptions, Http, XHRBackend} from '@
 import {LoginComponent} from './pages/login/login.component';
 import {LoginService} from './pages/login/login.service';
 import {ContentModule} from './pages/content/content.module';
-import {ApiClient} from './api.service';
+import {AuthHttp} from './authHttp.service';
 
 @NgModule({
     imports: [
@@ -24,7 +24,7 @@ import {ApiClient} from './api.service';
         LoginService,
         new Provider(Http, {
             useFactory: (backend: XHRBackend, defaultOptions: RequestOptions) =>
-                new ApiClient(backend, defaultOptions),
+                new AuthHttp(backend, defaultOptions),
             deps: [XHRBackend, RequestOptions]
         })
     ],
