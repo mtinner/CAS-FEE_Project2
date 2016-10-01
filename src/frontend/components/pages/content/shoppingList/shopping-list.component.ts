@@ -1,8 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {ShoppingListService} from './shopping-list.service';
-import {CardComponent} from '../../../elements/card/card.component';
-import {ChipComponent} from '../../../elements/chip/chip.component';
-import {AddComponent} from '../../../elements/add/add.component';
 import {Group} from '../../../../models/Group';
 import {Article} from '../../../../models/Article';
 
@@ -10,9 +7,7 @@ import {Article} from '../../../../models/Article';
 @Component({
     templateUrl: 'frontend/components/pages/content/shoppingList/shopping-list.component.html',
     styleUrls: ['frontend/components/pages/content/shoppingList/shopping-list.component.css'],
-    providers: [ShoppingListService],
-    directives: [CardComponent, ChipComponent, AddComponent]
-
+    providers: [ShoppingListService]
 })
 export class ShoppingListComponent implements OnInit {
     private groups: Group[] = [];

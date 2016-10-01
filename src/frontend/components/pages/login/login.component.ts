@@ -1,13 +1,11 @@
 import {Component, Injectable} from '@angular/core';
 import {LoginService} from './login.service';
-import {InputFieldComponent} from '../../elements/inputField/input-field.component';
 
 
 @Injectable()
 @Component({
     templateUrl: 'frontend/components/pages/login/login.component.html',
-    styleUrls: ['frontend/components/pages/login/login.component.css'],
-    directives: [InputFieldComponent]
+    styleUrls: ['frontend/components/pages/login/login.component.css']
 })
 export class LoginComponent {
     private inputField: Object = {
