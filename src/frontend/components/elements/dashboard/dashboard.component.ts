@@ -14,7 +14,7 @@ import {MenuItem} from '../../../models/MenuItem';
 })
 export class DashboardComponent implements OnInit {
 
-    private showNavigation = true;
+    private showNavigation = false;
     private menuItems: Array<any> = [];
     private selectedIndex: number = 0;
 
@@ -40,6 +40,7 @@ export class DashboardComponent implements OnInit {
     }
 
     itemClicked(item: MenuItem) {
+        this.toggleNavigation();
         if (item.name.toLocaleLowerCase().includes('logout')) {
             this.logout();
         }
