@@ -4,8 +4,9 @@ import {LoginService} from './login.service';
 
 @Injectable()
 @Component({
-    templateUrl: 'frontend/components/pages/login/login.component.html',
-    styleUrls: ['frontend/components/pages/login/login.component.css']
+    moduleId: module.id,
+    templateUrl: 'login.component.html',
+    styleUrls: ['login.component.css']
 })
 export class LoginComponent {
     private inputField: Object = {

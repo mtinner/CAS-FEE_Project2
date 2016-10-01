@@ -2,8 +2,9 @@ import {Component} from '@angular/core';
 
 
 @Component({
-    templateUrl: 'frontend/components/pages/content/content.component.html',
-    styleUrls: ['frontend/components/pages/content/content.component.css']
+    moduleId: module.id,
+    templateUrl: 'content.component.html',
+    styleUrls: ['content.component.css']
 })
 export class ContentComponent {
 

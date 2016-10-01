@@ -1,9 +1,10 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
 
 @Component({
+    moduleId: module.id,
     selector: 'chip',
-    templateUrl: 'frontend/components/elements/chip/chip.component.html',
-    styleUrls: ['frontend/components/elements/chip/chip.component.css'],
+    templateUrl: 'chip.component.html',
+    styleUrls: ['chip.component.css'],
 })
 export class ChipComponent {
     @Input()

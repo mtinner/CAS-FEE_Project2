@@ -6,9 +6,10 @@ import {MenuItem} from '../../../models/MenuItem';
 
 
 @Component({
+    moduleId: module.id,
     selector: 'my-dashboard',
-    templateUrl: 'frontend/components/elements/dashboard/dashboard.component.html',
-    styleUrls: ['frontend/components/elements/dashboard/dashboard.component.css'],
+    templateUrl: 'dashboard.component.html',
+    styleUrls: ['dashboard.component.css'],
     providers: [DashboardService]
 })
 export class DashboardComponent implements OnInit {

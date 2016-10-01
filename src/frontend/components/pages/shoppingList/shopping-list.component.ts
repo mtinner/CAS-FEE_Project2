@@ -4,8 +4,9 @@ import {Group} from '../../../models/Group';
 import {Article} from '../../../models/Article';
 
 @Component({
-    templateUrl: 'frontend/components/pages/shoppingList/shopping-list.component.html',
-    styleUrls: ['frontend/components/pages/shoppingList/shopping-list.component.css'],
+    moduleId: module.id,
+    templateUrl: 'shopping-list.component.html',
+    styleUrls: ['shopping-list.component.css'],
     providers: [ShoppingListService]
 })
 export class ShoppingListComponent implements OnInit {

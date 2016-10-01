@@ -2,9 +2,10 @@ import {Component, Input} from '@angular/core';
 
 
 @Component({
+    moduleId: module.id,
     selector: 'card',
-    templateUrl: 'frontend/components/elements/card/card.component.html',
-    styleUrls: ['frontend/components/elements/card/card.component.css']
+    templateUrl: 'card.component.html',
+    styleUrls: ['card.component.css']
 })
 export class CardComponent {
     @Input()
