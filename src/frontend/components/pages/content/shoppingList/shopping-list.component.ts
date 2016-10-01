@@ -7,7 +7,6 @@ import {Article} from '../../../../models/Article';
 @Component({
     moduleId: module.id,
     templateUrl: 'shopping-list.component.html',
-    styleUrls: ['shopping-list.component.css'],
     providers: [ShoppingListService]
 })
 export class ShoppingListComponent implements OnInit {
