@@ -6,11 +6,13 @@ import {HttpModule} from '@angular/http';
 import {LoginComponent} from './pages/login/login.component';
 import {LoginService} from './pages/login/login.service';
 import {ContentModule} from './pages/content/content.module';
+import {ElementModule} from './elements/element.module';
 
 @NgModule({
     imports: [
         BrowserModule,
         ContentModule,
+        ElementModule,
         routing,
         HttpModule
     ],

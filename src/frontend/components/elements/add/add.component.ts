@@ -1,9 +1,9 @@
 import {Component, Input, EventEmitter, Output} from '@angular/core';
 
 @Component({
+    moduleId: module.id,
     selector: 'add',
-    templateUrl: 'frontend/components/elements/add/add.component.html',
-    styleUrls: ['frontend/components/elements/add/add.component.css'],
+    templateUrl: 'add.component.html'
 })
 export class AddComponent {
     @Input()

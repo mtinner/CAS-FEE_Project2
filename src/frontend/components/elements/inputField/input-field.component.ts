@@ -1,9 +1,10 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
 
 @Component({
+    moduleId: module.id,
     selector: 'input-field',
-    templateUrl: 'frontend/components/elements/inputField/input-field.component.html',
-    styleUrls: ['frontend/components/elements/inputField/input-field.component.css'],
+    templateUrl: 'input-field.component.html',
+    styleUrls: ['input-field.component.css'],
 })
 export class InputFieldComponent {
     @Input()
@@ -23,7 +24,7 @@ export class InputFieldComponent {
 
     setFocus<T>(...val: Array<T>) {
         this.isFocused = [...val].some(entry => {
-            return !! entry;
+            return !!entry;
         });
     }
 }

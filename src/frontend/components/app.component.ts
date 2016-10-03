@@ -2,9 +2,9 @@ import {Component} from '@angular/core';
 
 
 @Component({
+    moduleId: module.id,
     selector: 'my-app',
-    templateUrl: 'frontend/components/app.component.html',
-    styleUrls: ['frontend/components/app.component.css']
+    templateUrl: 'app.component.html'
 })
 export class AppComponent {
 }

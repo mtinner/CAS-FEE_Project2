@@ -6,14 +6,15 @@ import {MenuItem} from '../../../models/MenuItem';
 
 
 @Component({
+    moduleId: module.id,
     selector: 'my-dashboard',
-    templateUrl: 'frontend/components/elements/dashboard/dashboard.component.html',
-    styleUrls: ['frontend/components/elements/dashboard/dashboard.component.css'],
+    templateUrl: 'dashboard.component.html',
+    styleUrls: ['dashboard.component.css'],
     providers: [DashboardService]
 })
 export class DashboardComponent implements OnInit {
 
-    private showNavigation = true;
+    private showNavigation = false;
     private menuItems: Array<any> = [];
     private selectedIndex: number = 0;
 
@@ -39,6 +40,7 @@ export class DashboardComponent implements OnInit {
     }
 
     itemClicked(item: MenuItem) {
+        this.toggleNavigation();
         if (item.name.toLocaleLowerCase().includes('logout')) {
             this.logout();
         }
