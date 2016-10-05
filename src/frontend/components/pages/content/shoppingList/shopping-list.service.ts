@@ -1,25 +1,16 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs/Rx';
+import {Observable} from 'rxjs/Observable';
 import {Http} from '@angular/http';
 import {AppService} from '../../../app.service';
-import {GroupObj} from '../../../../models/Group';
-import {ArticleObj, Article} from '../../../../models/Article';
+import {Article, ArticleObj} from '../../../../models/Article';
+import {GroupObj, Group} from '../../../../models/Group';
 
 @Injectable()
 export class ShoppingListService extends AppService {
     private shoppingListUrl = `${this.baseUrl}shoppinglist`;
 
-    private groupObserver;
-    private groupObj: GroupObj = new GroupObj([]);
-    private articleObj: ArticleObj = new ArticleObj([]);
-    private articleObserver;
-    public groups$: Observable<any> = new Observable(observer => {
-        this.groupObserver = observer;
-    });
-
-    public articles$: Observable<any> = new Observable(observer => {
-        this.articleObserver = observer;
-    }); // TODO .share();
+    public groups: Group[] = [];
+    public articles: Article[] = [];
 
     constructor(private http: Http) {
         super();
@@ -30,10 +21,9 @@ export class ShoppingListService extends AppService {
             .map(this.extractData)
             .catch(this.handleError);
         response.subscribe((deletedArticle: Article) => {
-            this.articleObj.articles = this.articleObj.articles.filter(article =>
+            this.articles = this.articles.filter(article =>
                 deletedArticle.id !== article.id
             );
-            this.articleObserver.next(this.articleObj);
         });
 
         return response;
@@ -44,8 +34,7 @@ export class ShoppingListService extends AppService {
             .map(this.extractData)
             .catch(this.handleError);
         response.subscribe((groupObj: GroupObj) => {
-            this.groupObj = groupObj;
-            this.groupObserver.next(groupObj);
+            this.groups = groupObj.groups;
         });
 
         return response;
@@ -56,8 +45,7 @@ export class ShoppingListService extends AppService {
             .map(this.extractData)
             .catch(this.handleError);
         response.subscribe((articleObj: ArticleObj) => {
-            this.articleObj = articleObj;
-            this.articleObserver.next(articleObj);
+            this.articles = articleObj.articles;
         });
         return response;
     }
@@ -67,8 +55,7 @@ export class ShoppingListService extends AppService {
             .map(this.extractData)
             .catch(this.handleError);
         response.subscribe((article: Article) => {
-            this.articleObj.articles.push(article);
-            this.articleObserver.next(this.articleObj);
+           this.articles.push(article);
         });
         return response;
     }
