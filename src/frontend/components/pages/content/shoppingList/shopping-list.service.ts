@@ -1,7 +1,5 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {Subject} from 'rxjs/Subject';
 import {Http} from '@angular/http';
 import {AppService} from '../../../app.service';
 import {Article, ArticleObj} from '../../../../models/Article';
@@ -11,15 +9,11 @@ import {GroupObj, Group} from '../../../../models/Group';
 export class ShoppingListService extends AppService {
     private shoppingListUrl = `${this.baseUrl}shoppinglist`;
 
-    private groups: Group[] = [];
-    private articles: Article[] = [];
-    public groups$: Subject<Group[]>;
-    public articles$: Subject<Article[]>;
+    public groups: Group[] = [];
+    public articles: Article[] = [];
 
     constructor(private http: Http) {
         super();
-        this.groups$ = new BehaviorSubject<Group[]>(null);
-        this.articles$ = new BehaviorSubject<Article[]>(null);
     }
 
     deleteArticle(id): Observable<any> {
@@ -30,7 +24,6 @@ export class ShoppingListService extends AppService {
             this.articles = this.articles.filter(article =>
                 deletedArticle.id !== article.id
             );
-            this.articles$.next(this.articles);
         });
 
         return response;
@@ -42,7 +35,6 @@ export class ShoppingListService extends AppService {
             .catch(this.handleError);
         response.subscribe((groupObj: GroupObj) => {
             this.groups = groupObj.groups;
-            this.groups$.next(this.groups);
         });
 
         return response;
@@ -54,7 +46,6 @@ export class ShoppingListService extends AppService {
             .catch(this.handleError);
         response.subscribe((articleObj: ArticleObj) => {
             this.articles = articleObj.articles;
-            this.articles$.next(this.articles);
         });
         return response;
     }
@@ -64,8 +55,7 @@ export class ShoppingListService extends AppService {
             .map(this.extractData)
             .catch(this.handleError);
         response.subscribe((article: Article) => {
-            this.articles.push(article);
-            this.articles$.next(this.articles);
+           this.articles.push(article);
         });
         return response;
     }
