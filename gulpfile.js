@@ -33,9 +33,7 @@ gulp.task('Default', function (callback) {
     runSequence(
         'lint:Es',
         'lint:Ts',
-        'clean:Dist',
-        ['transpiling:Dist', 'sass:Dist'],
-        'copy:App',
+        'Build',
         'serve:Dist',
         'watch:Listen',
         ['watch:Html', 'watch:Sass', 'watch:Transpiling'],

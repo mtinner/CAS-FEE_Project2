@@ -18,7 +18,7 @@ import {ArticlesByGroupPipe} from './shoppingList/articles-by-group.pipe';
         CostManagementComponent,
         ArticlesByGroupPipe
     ],
-    providers: []
+    providers: [authServiceProvider]
 })
 export class ContentModule {
 }

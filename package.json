@@ -2,6 +2,10 @@
   "name": "CAS-FEE_Project2",
   "version": "1.0.0",
   "license": "ISC",
+  "scripts": {
+    "start": "gulp Default",
+    "build": "gulp Build"
+  },
   "dependencies": {
     "@angular/common": "^2.0.1",
     "@angular/compiler": "^2.0.1",

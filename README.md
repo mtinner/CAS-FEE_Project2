@@ -1,13 +1,9 @@
 # CAS-FEE_Project2
 
-## Installation
+## Usage
 
-* `npm install`
-* `typings install`
-
-## Run
-
-* `gulp Default`
+* Install: `npm i`
+* Build, Run & Watch: `npm start`
 
 ## Main Gulp Tasks
  * Default (Start App http://:localhost:8080/)
