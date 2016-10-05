@@ -5,7 +5,7 @@ import {contentRouting} from './content.routing';
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {ElementModule} from '../../elements/element.module';
-import {ArticlesByGroupePipe} from './shoppingList/articles-by-group.pipe';
+import {ArticlesByGroupPipe} from './shoppingList/articles-by-group.pipe';
 @NgModule({
     imports: [
         BrowserModule,
@@ -16,7 +16,7 @@ import {ArticlesByGroupePipe} from './shoppingList/articles-by-group.pipe';
         ContentComponent,
         ShoppingListComponent,
         CostManagementComponent,
-        ArticlesByGroupePipe
+        ArticlesByGroupPipe
     ],
     providers: []
 })

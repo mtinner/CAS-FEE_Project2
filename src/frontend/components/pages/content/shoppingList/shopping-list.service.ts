@@ -69,14 +69,4 @@ export class ShoppingListService extends AppService {
         });
         return response;
     }
-
-    getArticlesForGroup(id: number): Article[] {
-        if (id === 0) {
-            return this.articles;
-        }
-        return this.articles.filter(article => {
-                    return article.group === id;
-                }
-            ) || [];
-    }
 }
