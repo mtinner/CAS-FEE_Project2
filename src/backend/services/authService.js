@@ -2,7 +2,11 @@
 
 let jwt = require('jsonwebtoken'),
     expressJwt = require('express-jwt'),
-    guard = require('express-jwt-permissions')({permissionsProperty: 'roles'});
+    guard = require('express-jwt-permissions')({permissionsProperty: 'roles'}),
+    UserService = require('./UserService'),
+    GroupService = require('./GroupService'),
+    MemberListService = require('./MemberListService'),
+    Promise = require('promise');
 
 let authService = (function () {
     const SECRET = 'c4ntT0uchTh1s';
@@ -21,6 +25,10 @@ let authService = (function () {
             roles: ['user']
         }
     ];
+
+    let userService = new UserService(),
+        groupService = new GroupService(),
+        memberListService = new MemberListService();
 
     return {
         protect: protect,
@@ -53,6 +61,19 @@ let authService = (function () {
         );
         if (matchedUser) {
             res.setHeader(JWT_RESPONSE_HEADER, createToken(matchedUser));
+            //Temp
+            let user = userService.add(matchedUser),
+                group = groupService.add({name: 'Private'});
+            Promise.all([user, group]).then(values=> {
+                    console.log(values);
+                    memberListService.add({
+                        email: values[0].email,
+                        active: true,
+                        groupId: values[1].id
+                    });
+                }
+            );
+            //end
             res.status(200).send();
         } else {
             res.status(401).send('email and/or password wrong');
