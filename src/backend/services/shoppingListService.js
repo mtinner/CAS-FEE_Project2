@@ -1,9 +1,10 @@
 'use strict';
-let Article = require('../models/Article');
-let NedbRepo = require ('./NedbRepo');
+let Article = require('../models/Article'),
+    ArticleRepo = require('./ArticleRepo');
+
 
 let shoppingListService = (function () {
-    let nedbRepo = new NedbRepo(),
+    let articleRepo = new ArticleRepo(),
      articleGroups = {
         groups: [
             { id: 0, name: 'Alle' },
@@ -28,7 +29,7 @@ let shoppingListService = (function () {
     }
 
     function getArticle(id) {
-        return nedbRepo.get(id).then(articles => {
+        return articleRepo.get(id).then(articles => {
             if (Array.isArray(articles)) {
                 return { articles: articles.map(a => new Article(a.id, a.name, a.group)) };
             } else {
@@ -38,15 +39,15 @@ let shoppingListService = (function () {
     }
 
     function addArticle(article) {
-        return nedbRepo.add(article);
+        return articleRepo.add(article);
     }
 
     function updateArticle(id, newArticle) {
-        return nedbRepo.update(id, newArticle);
+        return articleRepo.update(id, newArticle);
     }
 
     function deleteArticle(id) {
-        return nedbRepo.remove(id);
+        return articleRepo.remove(id);
     }
 })();
 

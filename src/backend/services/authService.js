@@ -35,9 +35,9 @@ let authService = (function () {
                     return;
                 }
                 // to get user updates as fast as possible, we fetch it each time from the DB
-                let matchedUsers = users.filter(user => user.email === req.user.email);
-                if (matchedUsers && matchedUsers.length > 0) {
-                    res.setHeader(JWT_RESPONSE_HEADER, createToken(matchedUsers[0]));
+                let matchedUser = users.find(user => user.email === req.user.email);
+                if (matchedUser) {
+                    res.setHeader(JWT_RESPONSE_HEADER, createToken(matchedUser));
                     guard.check(guardedRoles)(req, res, next);
                 } else {
                     res.status(500).send(`email-address ${req.email} not found`);
@@ -47,12 +47,12 @@ let authService = (function () {
     }
 
     function signIn(req, res) {
-        let matchedUsers = users.filter(user =>
-            user.email === req.query.email &&
+        let matchedUser = users.find(user =>
+           user.email === req.query.email &&
             user.password === req.query.password
         );
-        if (matchedUsers && matchedUsers.length > 0) {
-            res.setHeader(JWT_RESPONSE_HEADER, createToken(matchedUsers[0]));
+        if (matchedUser) {
+            res.setHeader(JWT_RESPONSE_HEADER, createToken(matchedUser));
             res.status(200).send();
         } else {
             res.status(401).send('email and/or password wrong');
