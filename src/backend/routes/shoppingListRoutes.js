@@ -7,7 +7,7 @@ let articleRouting = require('./articleRoutes'),
     shoppingListService = require('../services/shoppingListService');
 
 router.get('/groups', function (req, res) {
-    res.status(200).send(shoppingListService.getShoppingListGroups());
+    res.status(200).send(shoppingListService.getArticleGroups());
 });
 
 router.use('/article', articleRouting);
