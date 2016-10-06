@@ -12,8 +12,7 @@ import {ElementModule} from './elements/element.module';
         BrowserModule,
         ContentModule,
         ElementModule,
-        routing,
-        HttpModule
+        routing
     ],
     declarations: [
         AppComponent,

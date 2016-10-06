@@ -6,8 +6,11 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {ElementModule} from '../../elements/element.module';
 import {ArticlesByGroupPipe} from './shoppingList/articles-by-group.pipe';
+import {authServiceProvider} from '../../common/authentication/auth-http.provider';
+import {HttpModule} from '@angular/http';
 @NgModule({
     imports: [
+        HttpModule,
         BrowserModule,
         ElementModule,
         contentRouting
