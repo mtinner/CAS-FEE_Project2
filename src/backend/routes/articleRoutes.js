@@ -23,14 +23,6 @@ router.post('/',
         });
     });
 
-router.put('/:id',
-    authService.protect('user'),
-    function (req, res) {
-        shoppingListService.updateArticle(req.params.id, req.body).then(article => {
-            res.status(200).send(article);
-        });
-    });
-
 router.delete('/:id',
     authService.protect('user'),
     function (req, res) {

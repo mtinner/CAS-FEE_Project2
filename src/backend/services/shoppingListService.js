@@ -1,10 +1,10 @@
 'use strict';
 let Article = require('../models/Article'),
-    ArticleRepo = require('./ArticleRepo');
+    ArticleService = require('./ArticleService');
 
 
 let shoppingListService = (function () {
-    let articleRepo = new ArticleRepo(),
+    let articleService = new ArticleService(),
      articleGroups = {
         groups: [
             { id: 0, name: 'Alle' },
@@ -20,7 +20,6 @@ let shoppingListService = (function () {
         getArticleGroups: getArticleGroups,
         getArticle: getArticle,
         addArticle: addArticle,
-        updateArticle: updateArticle,
         deleteArticle: deleteArticle
     };
 
@@ -29,7 +28,7 @@ let shoppingListService = (function () {
     }
 
     function getArticle(id) {
-        return articleRepo.get(id).then(articles => {
+        return articleService.get(id).then(articles => {
             if (Array.isArray(articles)) {
                 return { articles: articles.map(a => new Article(a.id, a.name, a.group)) };
             } else {
@@ -39,15 +38,11 @@ let shoppingListService = (function () {
     }
 
     function addArticle(article) {
-        return articleRepo.add(article);
-    }
-
-    function updateArticle(id, newArticle) {
-        return articleRepo.update(id, newArticle);
+        return articleService.add(article);
     }
 
     function deleteArticle(id) {
-        return articleRepo.remove(id);
+        return articleService.remove(id);
     }
 })();
 

@@ -1,29 +1,25 @@
 'use strict';
 let NedbRepo = require ('./NedbRepo');
 
-class ArticleRepo{
+class ArticleService{
     constructor(){
         this.nedbRepo = new NedbRepo('article');
     }
 
     get(id) {
+        //TODO get userGroup and so on
         return this.nedbRepo.get(id);
     }
 
     add(newDoc) {
+        //TODO get userGroup and so on
         return this.nedbRepo.add(newDoc);
-    }
-    find(obj) {
-        return this.nedbRepo.find(obj);
-    }
-
-    update(id, oldDoc, newDoc) {
-        return this.nedbRepo.update(id,oldDoc,newDoc);
     }
 
     remove(id) {
-        return this.remove(id);
+        //TODO get userGroup and so on
+        return this.nedbRepo.remove(id);
     }
 }
 
-module.exports = ArticleRepo;
+module.exports = ArticleService;
