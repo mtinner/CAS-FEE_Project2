@@ -9,11 +9,13 @@ let authService = (function () {
     const JWT_RESPONSE_HEADER = 'X-Auth-Token';
     const users = [ //todo: get from DB
         {
+            email: 'admin',
             username: 'admin',
             password: 'pwd',
             roles: ['user', 'admin']
         },
         {
+            email:'appUser',
             username: 'appUser',
             password: 'pwd',
             roles: ['user']
@@ -33,12 +35,12 @@ let authService = (function () {
                     return;
                 }
                 // to get user updates as fast as possible, we fetch it each time from the DB
-                let matchedUsers = users.filter(user => user.username === req.user.username);
+                let matchedUsers = users.filter(user => user.email === req.user.email);
                 if (matchedUsers && matchedUsers.length > 0) {
                     res.setHeader(JWT_RESPONSE_HEADER, createToken(matchedUsers[0]));
                     guard.check(guardedRoles)(req, res, next);
                 } else {
-                    res.status(500).send(`username ${req.username} not found`);
+                    res.status(500).send(`email-address ${req.email} not found`);
                 }
             });
         };
@@ -46,14 +48,14 @@ let authService = (function () {
 
     function signIn(req, res) {
         let matchedUsers = users.filter(user =>
-            user.username === req.query.username &&
+            user.email === req.query.email &&
             user.password === req.query.password
         );
         if (matchedUsers && matchedUsers.length > 0) {
             res.setHeader(JWT_RESPONSE_HEADER, createToken(matchedUsers[0]));
             res.status(200).send();
         } else {
-            res.status(401).send('username and/or password wrong');
+            res.status(401).send('email and/or password wrong');
         }
     }
 

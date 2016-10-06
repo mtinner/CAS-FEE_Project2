@@ -10,18 +10,18 @@ import {LoginService} from './login.service';
 })
 export class LoginComponent {
     private inputField: Object = {
-        username: {placeholder: 'Username', type: 'text'},
+        email: {placeholder: 'Email', type: 'text'},
         password: {placeholder: 'Password', type: 'password'}
     };
 
     constructor(private loginService: LoginService) {
     }
 
-    username = 'admin';
+    email = 'admin';
     password = 'pwd';
 
-    setUsername(value) {
-        this.username = value;
+    setEmail(value) {
+        this.email = value;
     };
 
     setPassword(value) {
@@ -29,6 +29,6 @@ export class LoginComponent {
     };
 
     login = () => {
-        this.loginService.login(this.username, this.password);
+        this.loginService.login(this.email, this.password);
     };
 }

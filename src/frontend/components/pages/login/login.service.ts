@@ -24,7 +24,7 @@ export class LoginService extends AppService {
     }
 
     login(username, password) {
-        const url = `/api/auth/token?username=${username}&password=${password}`;
+        const url = `/api/auth/token?email=${username}&password=${password}`;
         return this.http.get(url, {headers: LoginService.createHeaders()})
             .catch(this.handleError)
             .subscribe((res: Response) => {
