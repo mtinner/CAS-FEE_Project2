@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {MenuItem} from '../../../models/MenuItem';
 
 @Injectable()
-export class DashboardService {
+export class SideNavService {
 
     private menuItems: MenuItem[] = [
         new MenuItem('Shopping List', 'shopping-list', '/shopping-list'),

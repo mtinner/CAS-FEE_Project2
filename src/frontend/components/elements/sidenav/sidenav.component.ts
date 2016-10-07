@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {DashboardService} from './dashboard.service';
+import {SideNavService} from './sidenav.service';
 import {Router} from '@angular/router';
 import {LoginService} from '../../pages/login/login.service';
 import {MenuItem} from '../../../models/MenuItem';
@@ -7,19 +7,19 @@ import {MenuItem} from '../../../models/MenuItem';
 
 @Component({
     moduleId: module.id,
-    selector: 'my-dashboard',
-    templateUrl: 'dashboard.component.html',
-    styleUrls: ['dashboard.component.css'],
-    providers: [DashboardService]
+    selector: 'my-sidenav',
+    templateUrl: 'sidenav.component.html',
+    styleUrls: ['sidenav.component.css'],
+    providers: [SideNavService]
 })
-export class DashboardComponent implements OnInit {
+export class SideNavComponent implements OnInit {
 
     private showNavigation = false;
     private menuItems: Array<any> = [];
     private selectedIndex: number = 0;
 
-    constructor(private router: Router, dashboardService: DashboardService, private loginService: LoginService) {
-        this.menuItems = dashboardService.getMenuItems();
+    constructor(private router: Router, sideNavService: SideNavService, private loginService: LoginService) {
+        this.menuItems = sideNavService.getMenuItems();
     }
 
     toggleNavigation() {

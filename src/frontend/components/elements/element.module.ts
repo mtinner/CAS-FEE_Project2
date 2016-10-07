@@ -3,7 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AddComponent} from './add/add.component';
 import {CardComponent} from './card/card.component';
 import {ChipComponent} from './chip/chip.component';
-import {DashboardComponent} from './dashboard/dashboard.component';
+import {SideNavComponent} from './sidenav/sidenav.component';
 import {InputFieldComponent} from './inputField/input-field.component';
 import {RouterModule} from '@angular/router';
 @NgModule({
@@ -15,14 +15,14 @@ import {RouterModule} from '@angular/router';
         AddComponent,
         CardComponent,
         ChipComponent,
-        DashboardComponent,
+        SideNavComponent,
         InputFieldComponent
     ],
     exports: [
         AddComponent,
         CardComponent,
         ChipComponent,
-        DashboardComponent,
+        SideNavComponent,
         InputFieldComponent
     ]
 })
