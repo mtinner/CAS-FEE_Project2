@@ -34,4 +34,4 @@ typings
 src/spec/frontend/
 
 #Databases
-/*.db
+*.db

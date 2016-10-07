@@ -36,7 +36,6 @@ let authService = (function () {
                      Object.assign(user,{activeGroup:resp.id,groups:[{id:resp.id}]});
                      userService.add(user);
                  });
-
          });
     //end
 
@@ -53,13 +52,17 @@ let authService = (function () {
                     return;
                 }
                 // to get user updates as fast as possible, we fetch it each time from the DB
-                let matchedUser = users.find(user => user.email === req.user.email);
-                if (matchedUser) {
-                    res.setHeader(JWT_RESPONSE_HEADER, createToken(matchedUser));
-                    guard.check(guardedRoles)(req, res, next);
-                } else {
-                    res.status(500).send(`email-address ${req.email} not found`);
-                }
+                userService.get({email:req.user.email})
+                    .then(
+                        (matchedUser)=>{
+                            if (matchedUser) {
+                                res.setHeader(JWT_RESPONSE_HEADER, createToken(matchedUser));
+                                guard.check(guardedRoles)(req, res, next);
+                            } else {
+                                res.status(500).send(`email-address ${req.email} not found`);
+                            }
+                        }
+                    );
             });
         };
     }

@@ -7,17 +7,23 @@ class NedbRepo {
         this.store = new Datastore({filename: `${filename}.db`, autoload: true});
     }
 
-    get(id) {
+    get(obj) {
         return new Promise(resolve => {
-            if (id) {
-                this.store.findOne({_id: id}, (err, doc) => resolve(this.moveId(doc)));
+            if (obj) {
+                this.store.findOne(obj, (err, doc) => resolve(this.moveId(doc)));
             } else {
-                this.store.find({}, (err, docs) => {
-                    docs.forEach(doc => this.moveId(doc));
-                    resolve(docs);
-                });
+               return null;
             }
         });
+    }
+
+    getAll(obj) {
+        return new Promise(resolve =>
+            this.store.find(obj, (err, docs) => {
+                docs.forEach(doc => this.moveId(doc));
+                resolve(docs);
+            })
+        );
     }
 
     add(newDoc) {
@@ -30,21 +36,12 @@ class NedbRepo {
     }
 
     updateOrInsert(id, newDoc) {
-        return this.get(id).then(oldDoc => {
+        return this.get({_id: id}).then(oldDoc => {
             if (oldDoc) {
                 return this.update(id, oldDoc, newDoc);
             }
             return this.add(newDoc);
         });
-    }
-
-    find(obj) {
-        return new Promise(resolve =>
-            this.store.find(obj, (err, docs) => {
-                docs.forEach(doc => this.moveId(doc));
-                resolve(docs);
-            })
-        );
     }
 
     update(id, oldDoc, newDoc) {
@@ -57,7 +54,7 @@ class NedbRepo {
     }
 
     remove(id) {
-        return this.get(id).then(doc => {
+        return this.get({_id: id}).then(doc => {
             if (!doc) throw new Error('casFee2 not found');
             return new Promise(resolve => {
                 this.store.remove({_id: id}, () => resolve(doc));

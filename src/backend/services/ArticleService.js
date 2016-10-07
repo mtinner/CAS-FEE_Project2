@@ -6,9 +6,9 @@ class ArticleService {
         this.nedbRepo = new NedbRepo('article');
     }
 
-    get(user) {
+    getAll(user) {
         let obj = {groupId:user.activeGroup};
-        return this.nedbRepo.find(obj);
+        return this.nedbRepo.getAll(obj);
     }
 
     add(newDoc,user) {

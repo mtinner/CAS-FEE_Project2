@@ -28,7 +28,7 @@ let shoppingListService = (function () {
     }
 
     function getArticles(user) {
-        return articleService.get(user).then(articles => {
+        return articleService.getAll(user).then(articles => {
             if (Array.isArray(articles)) {
                 return { articles: articles.map(a => new Article(a.id, a.name, a.articleGroup)) };
             } else {
