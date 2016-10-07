@@ -40,9 +40,10 @@ class NedbRepo {
 
     find(obj) {
         return new Promise(resolve =>
-            this.store.find(obj, (err, doc)=>
-                resolve(this.moveId(doc))
-            )
+            this.store.find(obj, (err, docs) => {
+                docs.forEach(doc => this.moveId(doc));
+                resolve(docs);
+            })
         );
     }
 

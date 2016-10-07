@@ -18,7 +18,7 @@ let shoppingListService = (function () {
 
     return {
         getArticleGroups: getArticleGroups,
-        getArticle: getArticle,
+        getArticles: getArticles,
         addArticle: addArticle,
         deleteArticle: deleteArticle
     };
@@ -27,18 +27,18 @@ let shoppingListService = (function () {
         return articleGroups;
     }
 
-    function getArticle(id) {
-        return articleService.get(id).then(articles => {
+    function getArticles(user) {
+        return articleService.get(user).then(articles => {
             if (Array.isArray(articles)) {
                 return { articles: articles.map(a => new Article(a.id, a.name, a.group)) };
             } else {
-                return new Article(articles.id, articles.name, articles.group);
+                return [];
             }
         });
     }
 
-    function addArticle(article) {
-        return articleService.add(article);
+    function addArticle(article,user) {
+        return articleService.add(article,user);
     }
 
     function deleteArticle(id) {

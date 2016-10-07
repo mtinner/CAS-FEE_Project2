@@ -5,10 +5,10 @@ let express = require('express'),
     shoppingListService = require('../services/shoppingListService'),
     authService = require('../services/authService');
 
-router.get('/:id?',
+router.get('/',
     authService.protect('user'),
     function (req, res) {
-        shoppingListService.getArticle(req.params.id).then(articles => {
+        shoppingListService.getArticles(req.user).then(articles => {
             res.status(200).send(articles);
         }).catch(() => {
             res.status(404).send();
@@ -18,7 +18,7 @@ router.get('/:id?',
 router.post('/',
     authService.protect('user'),
     function (req, res) {
-        shoppingListService.addArticle(req.body).then(article => {
+        shoppingListService.addArticle(req.body,req.user).then(article => {
             res.status(201).send(article);
         });
     });
