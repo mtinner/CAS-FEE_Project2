@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {DashboardService} from './dashboard.service';
 import {Router} from '@angular/router';
-import {LoginService} from '../../pages/login/login.service';
 import {MenuItem} from '../../../models/MenuItem';
+import {LoginManagingService} from '../../pages/login/login-managing.service';
 
 
 @Component({
@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit {
     private menuItems: Array<any> = [];
     private selectedIndex: number = 0;
 
-    constructor(private router: Router, dashboardService: DashboardService, private loginService: LoginService) {
+    constructor(private router: Router, dashboardService: DashboardService, private loginManaginService: LoginManagingService) {
         this.menuItems = dashboardService.getMenuItems();
     }
 
@@ -47,6 +47,6 @@ export class DashboardComponent implements OnInit {
     }
 
     logout() {
-        this.loginService.logout();
+        this.loginManaginService.logout();
     }
 }

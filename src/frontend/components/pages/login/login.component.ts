@@ -1,5 +1,5 @@
 import {Component, Injectable} from '@angular/core';
-import {LoginService} from './login.service';
+import {LoginHttpService} from './login-http.service';
 
 
 @Injectable()
@@ -14,7 +14,7 @@ export class LoginComponent {
         password: {placeholder: 'Password', type: 'password'}
     };
 
-    constructor(private loginService: LoginService) {
+    constructor(private loginService: LoginHttpService) {
     }
 
     email = 'appUser';

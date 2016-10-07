@@ -1,7 +1,7 @@
 import {Component, Injectable} from '@angular/core';
 import {RegisterService} from './register.service';
-import {LoginService} from '../login/login.service';
 import {User} from '../../../models/User';
+import {LoginHttpService} from '../login/login-http.service';
 
 
 @Injectable()
@@ -20,7 +20,7 @@ export class RegisterComponent {
     private email: String;
     private password: String;
 
-    constructor(private loginService: LoginService, private registerService: RegisterService) {
+    constructor(private loginService: LoginHttpService, private registerService: RegisterService) {
     }
 
     setUsername(value) {
@@ -36,7 +36,7 @@ export class RegisterComponent {
     };
 
     register = () => {
-        this.registerService.register({email: this.email, username: this.username,  password: this.password})
+        this.registerService.register({email: this.email, username: this.username, password: this.password})
             .subscribe((user: User) =>
                 this.loginService.login(user.email, user.password)
             );

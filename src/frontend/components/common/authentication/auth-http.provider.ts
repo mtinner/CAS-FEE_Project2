@@ -1,13 +1,14 @@
 import {Http, XHRBackend, RequestOptions} from '@angular/http';
 import {AuthHttp} from './auth-http.service';
+import {LoginManagingService} from '../../pages/login/login-managing.service';
 
 
-let authServiceFactory = (backend: XHRBackend, defaultOptions: RequestOptions) => {
-    return new AuthHttp(backend, defaultOptions);
+let authServiceFactory = (backend: XHRBackend, defaultOptions: RequestOptions, loginManaginService: LoginManagingService) => {
+    return new AuthHttp(backend, defaultOptions, loginManaginService);
 };
 
 export let authServiceProvider = {
     provide: Http,
     useFactory: authServiceFactory,
-    deps: [XHRBackend, RequestOptions]
+    deps: [XHRBackend, RequestOptions, LoginManagingService]
 };
