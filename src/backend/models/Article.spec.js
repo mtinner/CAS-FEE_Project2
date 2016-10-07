@@ -12,8 +12,8 @@ describe('Article', ()=> {
         let article = new Article(1, 'Super Cat', 'Alle');
         expect(article.name).toEqual('Super Cat');
     });
-    it('has group', ()=> {
+    it('has articleGroup', ()=> {
         let article = new Article(1, 'Super Cat', 'Alle');
-        expect(article.group).toEqual('Alle');
+        expect(article.articleGroup).toEqual('Alle');
     });
 });

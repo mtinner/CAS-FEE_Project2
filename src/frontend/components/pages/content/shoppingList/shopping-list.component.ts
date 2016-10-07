@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ShoppingListService} from './shopping-list.service';
-import {Group} from '../../../../models/Group';
+import {ArticleGroup} from '../../../../models/ArticleGroup';
 import {Article} from '../../../../models/Article';
 
 @Component({
@@ -19,12 +19,12 @@ export class ShoppingListComponent implements OnInit {
         this.shoppingListService.deleteArticle(article.id);
     }
 
-    addArticle(item: string, group: Group) {
-        this.shoppingListService.addArticle({name: item, group: group.id});
+    addArticle(item: string, articleGroup: ArticleGroup) {
+        this.shoppingListService.addArticle({name: item, articleGroup: articleGroup.id});
     }
 
     ngOnInit(): void {
-        this.shoppingListService.fetchGroupItems();
+        this.shoppingListService.fetchArticleGroups();
 
         this.shoppingListService.fetchArticles();
     }

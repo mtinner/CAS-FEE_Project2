@@ -6,7 +6,7 @@ let Article = require('../models/Article'),
 let shoppingListService = (function () {
     let articleService = new ArticleService(),
      articleGroups = {
-        groups: [
+        articleGroups: [
             { id: 0, name: 'Alle' },
             { id: 1, name: 'Früchte/Gemüse' },
             { id: 2, name: 'Milchwaren' },
@@ -30,7 +30,7 @@ let shoppingListService = (function () {
     function getArticles(user) {
         return articleService.get(user).then(articles => {
             if (Array.isArray(articles)) {
-                return { articles: articles.map(a => new Article(a.id, a.name, a.group)) };
+                return { articles: articles.map(a => new Article(a.id, a.name, a.articleGroup)) };
             } else {
                 return [];
             }

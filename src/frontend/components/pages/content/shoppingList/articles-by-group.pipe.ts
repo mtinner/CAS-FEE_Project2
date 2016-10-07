@@ -11,10 +11,10 @@ export class ArticlesByGroupPipe implements PipeTransform {
             return value;
         }
         return value.filter((item: Article) => {
-            if (typeof item.group === 'undefined') {
+            if (typeof item.articleGroup === 'undefined') {
                 throw 'relationAttribute in not found';
             }
-            return item.group === id;
+            return item.articleGroup === id;
         });
     }
 }

@@ -37,4 +37,8 @@ router.delete('/:id',
         }
     });
 
+router.get('/groups', function (req, res) {
+    res.status(200).send(shoppingListService.getArticleGroups());
+});
+
 module.exports = router;
