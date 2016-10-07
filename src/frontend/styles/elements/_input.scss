@@ -1,9 +1,5 @@
 .input {
-  &--login {
-    color: $shopping-secondary;
-  }
-
-  &--register {
+  &--login, &--register {
     color: $shopping-secondary;
   }
 }
