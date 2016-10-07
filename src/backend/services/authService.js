@@ -3,8 +3,7 @@
 let jwt = require('jsonwebtoken'),
     expressJwt = require('express-jwt'),
     guard = require('express-jwt-permissions')({permissionsProperty: 'roles'}),
-    UserService = require('./UserService'),
-    GroupService = require('./GroupService');
+    UserService = require('./UserService');
 
 let authService = (function () {
     const SECRET = 'c4ntT0uchTh1s';
@@ -26,17 +25,9 @@ let authService = (function () {
 
 
     //Temp
-    let userService = new UserService(),
-    groupService = new GroupService();
-
-
-         users.forEach(user=>{
-             groupService.add({name:'Private'})
-                 .then(resp=>{
-                     Object.assign(user,{activeGroup:resp.id,groups:[{id:resp.id}]});
-                     userService.add(user);
-                 });
-         });
+    users.forEach(user=> {
+        UserService.instance.add(user);
+    });
     //end
 
     return {
@@ -52,9 +43,9 @@ let authService = (function () {
                     return;
                 }
                 // to get user updates as fast as possible, we fetch it each time from the DB
-                userService.get({email:req.user.email})
+                UserService.instance.get({email: req.user.email})
                     .then(
-                        (matchedUser)=>{
+                        (matchedUser)=> {
                             if (matchedUser) {
                                 res.setHeader(JWT_RESPONSE_HEADER, createToken(matchedUser));
                                 guard.check(guardedRoles)(req, res, next);
@@ -68,16 +59,15 @@ let authService = (function () {
     }
 
     function signIn(req, res) {
-        let matchedUser = users.find(user =>
-            user.email === req.query.email &&
-            user.password === req.query.password
-        );
-        if (matchedUser) {
-            res.setHeader(JWT_RESPONSE_HEADER, createToken(matchedUser));
-            res.status(200).send();
-        } else {
-            res.status(401).send('email and/or password wrong');
-        }
+        UserService.instance.get({email: req.query.email, password: req.query.password})
+            .then(matchedUser=> {
+                if (matchedUser) {
+                    res.setHeader(JWT_RESPONSE_HEADER, createToken(matchedUser));
+                    res.status(200).send();
+                } else {
+                    res.status(401).send('email and/or password wrong');
+                }
+            });
     }
 
     function createToken(user) {

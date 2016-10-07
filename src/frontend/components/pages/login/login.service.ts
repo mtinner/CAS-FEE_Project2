@@ -23,8 +23,8 @@ export class LoginService extends AppService {
         this.isLoggedIn = !!localStorage.getItem(JWT_RESPONSE_HEADER);
     }
 
-    login(username, password) {
-        const url = `/api/auth/token?email=${username}&password=${password}`;
+    login(email, password) {
+        const url = `/api/auth/token?email=${email}&password=${password}`;
         return this.http.get(url, {headers: LoginService.createHeaders()})
             .catch(this.handleError)
             .subscribe((res: Response) => {

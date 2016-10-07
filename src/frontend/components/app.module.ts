@@ -6,6 +6,8 @@ import {LoginComponent} from './pages/login/login.component';
 import {LoginService} from './pages/login/login.service';
 import {ContentModule} from './pages/content/content.module';
 import {ElementModule} from './elements/element.module';
+import {RegisterService} from './pages/register/register.service';
+import {RegisterComponent} from './pages/register/register.component';
 
 @NgModule({
     imports: [
@@ -16,11 +18,13 @@ import {ElementModule} from './elements/element.module';
     ],
     declarations: [
         AppComponent,
-        LoginComponent
+        LoginComponent,
+        RegisterComponent
     ],
     providers: [
         appRoutingProviders,
-        LoginService
+        LoginService,
+        RegisterService
     ],
     bootstrap: [AppComponent]
 })
