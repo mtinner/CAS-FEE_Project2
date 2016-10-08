@@ -2,23 +2,33 @@
 
 let jwt = require('jsonwebtoken'),
     expressJwt = require('express-jwt'),
-    guard = require('express-jwt-permissions')({permissionsProperty: 'roles'});
+    guard = require('express-jwt-permissions')({permissionsProperty: 'roles'}),
+    UserService = require('./UserService');
 
 let authService = (function () {
     const SECRET = 'c4ntT0uchTh1s';
     const JWT_RESPONSE_HEADER = 'X-Auth-Token';
     const users = [ //todo: get from DB
         {
+            email: 'admin',
             username: 'admin',
             password: 'pwd',
             roles: ['user', 'admin']
         },
         {
+            email: 'appUser',
             username: 'appUser',
             password: 'pwd',
             roles: ['user']
         }
     ];
+
+
+    //Temp
+    users.forEach(user=> {
+        UserService.instance.add(user);
+    });
+    //end
 
     return {
         protect: protect,
@@ -33,28 +43,31 @@ let authService = (function () {
                     return;
                 }
                 // to get user updates as fast as possible, we fetch it each time from the DB
-                let matchedUsers = users.filter(user => user.username === req.user.username);
-                if (matchedUsers && matchedUsers.length > 0) {
-                    res.setHeader(JWT_RESPONSE_HEADER, createToken(matchedUsers[0]));
-                    guard.check(guardedRoles)(req, res, next);
-                } else {
-                    res.status(500).send(`username ${req.username} not found`);
-                }
+                UserService.instance.get({email: req.user.email})
+                    .then(
+                        (matchedUser)=> {
+                            if (matchedUser) {
+                                res.setHeader(JWT_RESPONSE_HEADER, createToken(matchedUser));
+                                guard.check(guardedRoles)(req, res, next);
+                            } else {
+                                res.status(500).send(`email-address ${req.email} not found`);
+                            }
+                        }
+                    );
             });
         };
     }
 
     function signIn(req, res) {
-        let matchedUsers = users.filter(user =>
-            user.username === req.query.username &&
-            user.password === req.query.password
-        );
-        if (matchedUsers && matchedUsers.length > 0) {
-            res.setHeader(JWT_RESPONSE_HEADER, createToken(matchedUsers[0]));
-            res.status(200).send();
-        } else {
-            res.status(401).send('username and/or password wrong');
-        }
+        UserService.instance.get({email: req.query.email, password: req.query.password})
+            .then(matchedUser=> {
+                if (matchedUser) {
+                    res.setHeader(JWT_RESPONSE_HEADER, createToken(matchedUser));
+                    res.status(200).send();
+                } else {
+                    res.status(401).send('email and/or password wrong');
+                }
+            });
     }
 
     function createToken(user) {

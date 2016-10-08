@@ -3,13 +3,13 @@ import {Observable} from 'rxjs/Observable';
 import {Http} from '@angular/http';
 import {AppService} from '../../../app.service';
 import {Article, ArticleObj} from '../../../../models/Article';
-import {GroupObj, Group} from '../../../../models/Group';
+import {ArticleGroup, ArticleGroupObj} from '../../../../models/ArticleGroup';
 
 @Injectable()
 export class ShoppingListService extends AppService {
     private shoppingListUrl = `${this.baseUrl}shoppinglist`;
 
-    public groups: Group[] = [];
+    public articleGroups: ArticleGroup[] = [];
     public articles: Article[] = [];
 
     constructor(private http: Http) {
@@ -29,12 +29,12 @@ export class ShoppingListService extends AppService {
         return response;
     }
 
-    fetchGroupItems(): Observable<any> {
-        let response = this.http.get(`${this.shoppingListUrl}/groups`)
+    fetchArticleGroups(): Observable<any> {
+        let response = this.http.get(`${this.shoppingListUrl}/article/groups`)
             .map(this.extractData)
             .catch(this.handleError);
-        response.subscribe((groupObj: GroupObj) => {
-            this.groups = groupObj.groups;
+        response.subscribe((articleGroupObj: ArticleGroupObj) => {
+            this.articleGroups = articleGroupObj.articleGroups;
         });
 
         return response;

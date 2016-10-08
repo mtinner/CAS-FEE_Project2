@@ -1,5 +1,5 @@
 import {Component, Injectable} from '@angular/core';
-import {LoginService} from './login.service';
+import {LoginHttpService} from './login-http.service';
 
 
 @Injectable()
@@ -10,18 +10,18 @@ import {LoginService} from './login.service';
 })
 export class LoginComponent {
     private inputField: Object = {
-        username: {placeholder: 'Username', type: 'text'},
+        email: {placeholder: 'Email', type: 'text'},
         password: {placeholder: 'Password', type: 'password'}
     };
 
-    constructor(private loginService: LoginService) {
+    constructor(private loginService: LoginHttpService) {
     }
 
-    username = 'admin';
+    email = 'appUser';
     password = 'pwd';
 
-    setUsername(value) {
-        this.username = value;
+    setEmail(value) {
+        this.email = value;
     };
 
     setPassword(value) {
@@ -29,6 +29,6 @@ export class LoginComponent {
     };
 
     login = () => {
-        this.loginService.login(this.username, this.password);
+        this.loginService.login(this.email, this.password);
     };
 }

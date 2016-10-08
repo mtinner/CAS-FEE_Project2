@@ -28,7 +28,7 @@ describe('/article', ()=> {
     describe('/POST', ()=> {
 
         it('respond with 200', (done)=> {
-            request.post(url, {name: 'Gurken', group: 'Alle'}, (error, response)=> {
+            request.post(url, {name: 'Gurken', articleGroup: 'Alle'}, (error, response)=> {
                 expect(response.statusCode).to.equal(201);
                 done();
             });
@@ -40,72 +40,15 @@ describe('/article', ()=> {
                 headers: {
                     'content-type': 'application/json'
                 },
-                body: JSON.stringify({name: 'Gurken', group: 'Alle'})
+                body: JSON.stringify({name: 'Gurken', articleGroup: 'Alle'})
             }, (error, response, body) => {
                 let article = JSON.parse(body);
                 expect(response.statusCode).to.equal(201);
                 expect(article).to.be.a('object');
                 expect(article.id).to.be.a('number');
                 expect(article.name).to.be.a('string');
-                expect(article.group).to.be.a('string');
+                expect(article.articleGroup).to.be.a('string');
                 done();
-            });
-        });
-    });
-
-    describe('/PUT', ()=> {
-
-        it('respond with 200', (done)=> {
-            request.put(url, {name: 'Gurken', group: 'Alle'}, (error, response)=> {
-                expect(response.statusCode).to.equal(200);
-                done();
-            });
-        });
-
-        it('respond with new object', (done)=> {
-            request.put({
-                url: url,
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify({name: 'Gurken', group: 'Alle'})
-            }, (error, response, body)=> {
-                let article = JSON.parse(body);
-                expect(response.statusCode).to.equal(200);
-                expect(article).to.be.a('object');
-                expect(article.id).to.be.a('number');
-                expect(article.name).to.be.a('string');
-                expect(article.group).to.be.a('string');
-                done();
-            });
-        });
-
-        it('respond with updated object', (done)=> {
-            request.put({
-                url: url,
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify({name: 'Gurken', group: 'Alle'})
-            }, (error, response, body) => {
-                let id = JSON.parse(body).id;
-
-                request.put({
-                    url: `${url}/${id}`,
-                    headers: {
-                        'content-type': 'application/json'
-                    },
-                    body: JSON.stringify({name: 'Gurken', group: 'Früchte'})
-                }, (error, response, body) => {
-                    let article = JSON.parse(body);
-                    expect(response.statusCode).to.equal(200);
-                    expect(article).to.be.a('object');
-                    expect(article.id).to.be.a('number');
-                    expect(article.id).to.equal(id);
-                    expect(article.name).to.be.a('string');
-                    expect(article.group).to.be.a('string');
-                    done();
-                });
             });
         });
     });
@@ -146,6 +89,15 @@ describe('/article', ()=> {
         it('respond id asdf with 404', (done)=> {
             request.delete(`${url}/asdf`, (error, response)=> {
                 expect(response.statusCode).to.equal(404);
+                done();
+            });
+        });
+    });
+
+    describe('/GET groups', ()=> {
+        it('GET respond with 200', (done) => {
+            request(`${url}/groups`, (error, response) => {
+                expect(response.statusCode).to.equal(200);
                 done();
             });
         });

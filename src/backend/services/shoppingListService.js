@@ -1,10 +1,12 @@
 'use strict';
 let Article = require('../models/Article'),
-    articleRepo = require('./nedbRepo')('article');
+    ArticleService = require('./ArticleService');
+
 
 let shoppingListService = (function () {
-    let shoppingListGroups = {
-        groups: [
+    let articleService = new ArticleService(),
+     articleGroups = {
+        articleGroups: [
             { id: 0, name: 'Alle' },
             { id: 1, name: 'Früchte/Gemüse' },
             { id: 2, name: 'Milchwaren' },
@@ -15,37 +17,32 @@ let shoppingListService = (function () {
     };
 
     return {
-        getShoppingListGroups: getShoppingListGroups,
-        getArticle: getArticle,
+        getArticleGroups: getArticleGroups,
+        getArticles: getArticles,
         addArticle: addArticle,
-        updateArticle: updateArticle,
         deleteArticle: deleteArticle
     };
 
-    function getShoppingListGroups() {
-        return shoppingListGroups;
+    function getArticleGroups() {
+        return articleGroups;
     }
 
-    function getArticle(id) {
-        return articleRepo.get(id).then(articles => {
+    function getArticles(user) {
+        return articleService.getAll(user).then(articles => {
             if (Array.isArray(articles)) {
-                return { articles: articles.map(a => new Article(a.id, a.name, a.group)) };
+                return { articles: articles.map(a => new Article(a.id, a.name, a.articleGroup)) };
             } else {
-                return new Article(articles.id, articles.name, articles.group);
+                return [];
             }
         });
     }
 
-    function addArticle(article) {
-        return articleRepo.add(article);
-    }
-
-    function updateArticle(id, newArticle) {
-        return articleRepo.update(id, newArticle);
+    function addArticle(article,user) {
+        return articleService.add(article,user);
     }
 
     function deleteArticle(id) {
-        return articleRepo.remove(id);
+        return articleService.remove(id);
     }
 })();
 

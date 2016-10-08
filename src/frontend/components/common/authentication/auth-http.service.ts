@@ -1,46 +1,41 @@
 import {
     Http, Headers, ConnectionBackend, Response,
-    RequestOptionsArgs, Request, RequestOptions
+    RequestOptionsArgs, RequestOptions, Request
 } from '@angular/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
+import {LoginManagingService} from '../../pages/login/login-managing.service';
 
 export const JWT_RESPONSE_HEADER = 'X-Auth-Token';
 
 @Injectable()
 export class AuthHttp extends Http {
-    constructor(backend: ConnectionBackend, defaultOptions: RequestOptions) {
+    constructor(backend: ConnectionBackend, defaultOptions: RequestOptions, private loginManaginService: LoginManagingService) {
         super(backend, defaultOptions);
-    }
-
-    request(url: string | Request, options?: RequestOptionsArgs): Observable<Response> {
-        const request = super.request(url, this.appendAuthHeader(options));
-        request.map(this.saveToken);
-        return request;
     }
 
     get(url: string, options?: RequestOptionsArgs): Observable<Response> {
         const request = super.get(url, this.appendAuthHeader(options));
         request.map(this.saveToken);
-        return request;
+        return this.interceptResponse(request);
     }
 
     post(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
         const request = super.post(url, body, this.appendAuthHeader(options));
         request.map(this.saveToken);
-        return request;
+        return this.interceptResponse(request);
     }
 
     put(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
         const request = super.put(url, body, this.appendAuthHeader(options));
         request.map(this.saveToken);
-        return request;
+        return this.interceptResponse(request);
     }
 
     delete(url: string, options?: RequestOptionsArgs): Observable<Response> {
         const request = super.delete(url, this.appendAuthHeader(options));
         request.map(this.saveToken);
-        return request;
+        return this.interceptResponse(request);
     }
 
     private appendAuthHeader(options?: RequestOptionsArgs): RequestOptionsArgs {
@@ -59,5 +54,17 @@ export class AuthHttp extends Http {
     private saveToken(res: Response): void {
         const token = res.headers.get(JWT_RESPONSE_HEADER);
         if (token) localStorage.setItem(JWT_RESPONSE_HEADER, token);
+    }
+
+    interceptResponse(observable: Observable<Response>): Observable<Response> {
+        return observable.catch((err) => {
+            if (err.status === 401) {
+                console.log('asdfsd');
+                this.loginManaginService.performNotAuthorized();
+                return Observable.create();
+            } else {
+                return Observable.throw(err);
+            }
+        });
     }
 }

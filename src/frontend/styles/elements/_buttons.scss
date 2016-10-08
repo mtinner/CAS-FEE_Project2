@@ -17,7 +17,7 @@
   &:focus {
     outline: none;
   }
-  &--login {
+  &--login, &--register {
     background: $shopping-secondary;
     color: $snow;
   }

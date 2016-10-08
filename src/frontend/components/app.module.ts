@@ -3,9 +3,12 @@ import {appRoutingProviders, routing} from './app.routing';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {LoginComponent} from './pages/login/login.component';
-import {LoginService} from './pages/login/login.service';
 import {ContentModule} from './pages/content/content.module';
 import {ElementModule} from './elements/element.module';
+import {RegisterService} from './pages/register/register.service';
+import {RegisterComponent} from './pages/register/register.component';
+import {LoginManagingService} from './pages/login/login-managing.service';
+import {LoginHttpService} from './pages/login/login-http.service';
 
 @NgModule({
     imports: [
@@ -16,11 +19,14 @@ import {ElementModule} from './elements/element.module';
     ],
     declarations: [
         AppComponent,
-        LoginComponent
+        LoginComponent,
+        RegisterComponent
     ],
     providers: [
         appRoutingProviders,
-        LoginService
+        LoginHttpService,
+        LoginManagingService,
+        RegisterService
     ],
     bootstrap: [AppComponent]
 })
