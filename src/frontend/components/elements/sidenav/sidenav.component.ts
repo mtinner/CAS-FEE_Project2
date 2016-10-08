@@ -6,7 +6,7 @@ import {MenuItem} from '../../../models/MenuItem';
 
 @Component({
     moduleId: module.id,
-    selector: 'my-sidenav',
+    selector: 'sidenav',
     templateUrl: 'sidenav.component.html',
     styleUrls: ['sidenav.component.css'],
     providers: [SideNavService]
