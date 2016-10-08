@@ -17,8 +17,8 @@ export class SideNavComponent implements OnInit {
     private menuItems: Array<any> = [];
     private selectedIndex: number = 0;
 
-    constructor(private router: Router, dashboardService: SideNavService, private loginManaginService: LoginManagingService) {
-        this.menuItems = dashboardService.getMenuItems();
+    constructor(private router: Router, sideNavService: SideNavService, private loginManaginService: LoginManagingService) {
+        this.menuItems = sideNavService.getMenuItems();
     }
 
     toggleNavigation() {
