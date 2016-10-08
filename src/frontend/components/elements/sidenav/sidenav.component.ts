@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {SideNavService} from './sidenav.service';
 import {Router} from '@angular/router';
-import {LoginService} from '../../pages/login/login.service';
+import {LoginManagingService} from '../../pages/login/login-managing.service';
 import {MenuItem} from '../../../models/MenuItem';
-
 
 @Component({
     moduleId: module.id,
@@ -18,8 +17,8 @@ export class SideNavComponent implements OnInit {
     private menuItems: Array<any> = [];
     private selectedIndex: number = 0;
 
-    constructor(private router: Router, sideNavService: SideNavService, private loginService: LoginService) {
-        this.menuItems = sideNavService.getMenuItems();
+    constructor(private router: Router, dashboardService: SideNavService, private loginManaginService: LoginManagingService) {
+        this.menuItems = dashboardService.getMenuItems();
     }
 
     toggleNavigation() {
@@ -47,6 +46,6 @@ export class SideNavComponent implements OnInit {
     }
 
     logout() {
-        this.loginService.logout();
+        this.loginManaginService.logout();
     }
 }
