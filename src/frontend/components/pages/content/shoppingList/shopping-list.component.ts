@@ -1,7 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {ShoppingListService} from './shopping-list.service';
 import {ArticleGroup} from '../../../../models/ArticleGroup';
 import {Article} from '../../../../models/Article';
+import {HeaderService} from '../../../elements/header/header.service';
+import {Header} from '../../../elements/header/header.enum';
 
 @Component({
     moduleId: module.id,
@@ -9,10 +11,10 @@ import {Article} from '../../../../models/Article';
     styleUrls: ['shopping-list.component.css'],
     providers: [ShoppingListService]
 })
-export class ShoppingListComponent implements OnInit {
+export class ShoppingListComponent implements OnInit, OnDestroy {
     private addText: string = 'Add article';
 
-    constructor(private shoppingListService: ShoppingListService) {
+    constructor(private shoppingListService: ShoppingListService, private headerService: HeaderService) {
     }
 
     deleteArticle(article: Article) {
@@ -24,8 +26,17 @@ export class ShoppingListComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.headerService.headerConfig = {
+            title: 'Shopping List',
+            type: Header.ShoppingList
+        };
         this.shoppingListService.fetchArticleGroups();
 
         this.shoppingListService.fetchArticles();
+    }
+
+
+    ngOnDestroy(): void {
+        this.headerService.resetHeader();
     }
 }

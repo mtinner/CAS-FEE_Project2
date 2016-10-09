@@ -1,5 +1,4 @@
 <div class="input-field">
-
     <input #input (focus)="setFocus(true)" (blur)="setFocus(false, input.value)"
            (keyup)="textEntered(input.value)" class="input-field__input" type="{{type}}" value=""
            autocomplete="off">
