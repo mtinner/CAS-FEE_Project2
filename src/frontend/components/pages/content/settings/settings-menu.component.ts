@@ -1,6 +1,4 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
-import {ArticleGroup} from '../../../../models/ArticleGroup';
-import {Article} from '../../../../models/Article';
+import {Component} from '@angular/core';
 import {HeaderService} from '../../../elements/header/header.service';
 import {HeaderStyle, HeaderIcon} from '../../../elements/header/header.enum';
 import {HeaderConfig} from '../../../../models/HeaderConfig';
