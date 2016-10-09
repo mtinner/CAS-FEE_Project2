@@ -18,4 +18,8 @@ export class HeaderComponent {
     clickLeftIcon() {
         this.headerService.clickLeftIcon();
     }
+
+    clickRightIcon() {
+        this.headerService.clickRightIcon();
+    }
 }

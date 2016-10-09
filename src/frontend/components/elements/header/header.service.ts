@@ -8,10 +8,8 @@ export class HeaderService {
 
     public headerConfig: HeaderConfig;
 
-    private leftFunctionCallback;
-
     constructor(private sideNavService: SideNavService) {
-        this.headerConfig = new HeaderConfig('', HeaderStyle.Default, HeaderIcon.burger);
+        this.resetHeader();
     }
 
     setHeader(headerConfig: HeaderConfig) {
@@ -23,11 +21,17 @@ export class HeaderService {
     }
 
     clickLeftIcon() {
-        if (this.leftFunctionCallback && typeof this.leftFunctionCallback === 'function') {
-
+        if (this.headerConfig.leftFunctionCallback && typeof this.headerConfig.leftFunctionCallback === 'function') {
+            this.headerConfig.leftFunctionCallback();
         }
         else {
             this.sideNavService.toggleNavigation();
+        }
+    }
+
+    clickRightIcon() {
+        if (this.headerConfig.rightFunctionCallback && typeof this.headerConfig.rightFunctionCallback === 'function') {
+            this.headerConfig.rightFunctionCallback();
         }
     }
 }
