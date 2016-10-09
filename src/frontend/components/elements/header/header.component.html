@@ -2,5 +2,7 @@
         'header--shopping-list': headerService.headerConfig.style===1}">
     <span [className]="['icon icon-header icon--'+headerService.headerConfig.leftIconString]"
           (click)="clickLeftIcon()"></span>
-    <div>{{headerService.headerConfig.title}}</div>
+    <span>{{headerService.headerConfig.title}}</span>
+    <span [className]="['icon icon-header icon-header--right icon--'+headerService.headerConfig.rightIconString]"
+          (click)="clickRightIcon()"></span>
 </header>

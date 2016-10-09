@@ -12,6 +12,10 @@
       opacity: 0.75;
     }
 
+    &--right {
+      float: right;
+    }
+
     &:active::before {
       border-radius: 20px;
       padding: 10px;

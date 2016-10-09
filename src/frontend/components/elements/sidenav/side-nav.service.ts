@@ -17,7 +17,8 @@ export class SideNavService {
         return this.menuItems;
     }
 
-    toggleNavigation() {
+    toggleNavigation = () => {
+        console.log('toogle');
         this.showNavigation = !this.showNavigation;
     }
 }
