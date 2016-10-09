@@ -7,6 +7,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {ElementModule} from '../../../elements/element.module';
 import {authServiceProvider} from '../../../common/authentication/auth-http.provider';
 import {HttpModule} from '@angular/http';
+
 @NgModule({
     imports: [
         HttpModule,

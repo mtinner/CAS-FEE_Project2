@@ -1,3 +1,7 @@
 <div class="container__page">
-    Group Settings
+    <div class="list">
+        <div class="list__item" *ngFor="let group of groups" routerLink="{{group.route}}">
+            <radio id="{{group.id}}" name="{{group.name}}" label="{{group.label}}"></radio>
+        </div>
+    </div>
 </div>
