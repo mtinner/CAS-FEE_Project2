@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {SideNavService} from '../sidenav/side-nav.service';
 import {HeaderConfig} from '../../../models/HeaderConfig';
-import {HeaderStyle, HeaderIcon} from './header.enum';
+import {HeaderStyle} from './header.enum';
 
 @Injectable()
 export class HeaderService {
@@ -21,8 +21,8 @@ export class HeaderService {
     }
 
     clickLeftIcon() {
-        if (this.headerConfig.leftFunctionCallback && typeof this.headerConfig.leftFunctionCallback === 'function') {
-            this.headerConfig.leftFunctionCallback();
+        if (this.headerConfig.leftCallback && typeof this.headerConfig.leftCallback === 'function') {
+            this.headerConfig.leftCallback();
         }
         else {
             this.sideNavService.toggleNavigation();
@@ -30,8 +30,8 @@ export class HeaderService {
     }
 
     clickRightIcon() {
-        if (this.headerConfig.rightFunctionCallback && typeof this.headerConfig.rightFunctionCallback === 'function') {
-            this.headerConfig.rightFunctionCallback();
+        if (this.headerConfig.rightCallback && typeof this.headerConfig.rightCallback === 'function') {
+            this.headerConfig.rightCallback();
         }
     }
 }
