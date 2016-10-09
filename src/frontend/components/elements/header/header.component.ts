@@ -4,8 +4,7 @@ import {HeaderService} from './header.service';
 @Component({
     moduleId: module.id,
     selector: 'custom-header',
-    templateUrl: 'header.component.html',
-    styleUrls: ['header.component.css']
+    templateUrl: 'header.component.html'
 })
 export class HeaderComponent {
 
