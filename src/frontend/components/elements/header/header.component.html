@@ -1,5 +1,6 @@
-<header class="header" [ngClass]="{'header--cost-management': headerService.headerConfig.type===2,
-        'header--shopping-list': headerService.headerConfig.type===1}">
-    <span class="icon icon--burger" (click)="clickLeftIcon()"></span>
+<header class="header" [ngClass]="{'header--cost-management': headerService.headerConfig.style===2,
+        'header--shopping-list': headerService.headerConfig.style===1}">
+    <span [className]="['icon icon-header icon--'+headerService.headerConfig.leftIconString]"
+          (click)="clickLeftIcon()"></span>
     <div>{{headerService.headerConfig.title}}</div>
 </header>

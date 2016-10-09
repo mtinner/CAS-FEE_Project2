@@ -1,6 +1,7 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {HeaderService} from '../../../elements/header/header.service';
-import {Header} from '../../../elements/header/header.enum';
+import {HeaderStyle, HeaderIcon} from '../../../elements/header/header.enum';
+import {HeaderConfig} from '../../../../models/HeaderConfig';
 
 @Component({
     moduleId: module.id,
@@ -12,10 +13,7 @@ export class CostManagementComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.headerService.headerConfig = {
-            title: 'Cost Management',
-            type: Header.CostManagement
-        };
+        this.headerService.headerConfig = new HeaderConfig('Cost Management', HeaderStyle.CostManagement, HeaderIcon.arrowleft);
     }
 
     ngOnDestroy(): void {

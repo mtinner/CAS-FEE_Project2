@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {SideNavService} from '../sidenav/side-nav.service';
 import {HeaderConfig} from '../../../models/HeaderConfig';
-import {Header} from './header.enum';
+import {HeaderStyle, HeaderIcon} from './header.enum';
 
 @Injectable()
 export class HeaderService {
@@ -11,7 +11,7 @@ export class HeaderService {
     private leftFunctionCallback;
 
     constructor(private sideNavService: SideNavService) {
-        this.headerConfig = new HeaderConfig('', Header.Default);
+        this.headerConfig = new HeaderConfig('', HeaderStyle.Default, HeaderIcon.burger);
     }
 
     setHeader(headerConfig: HeaderConfig) {
@@ -19,14 +19,11 @@ export class HeaderService {
     }
 
     resetHeader() {
-        this.headerConfig = {
-            title: '',
-            type: Header.Default
-        };
+        this.headerConfig = new HeaderConfig('', HeaderStyle.Default, HeaderIcon.burger);
     }
 
     clickLeftIcon() {
-        if (this.leftFunctionCallback) {
+        if (this.leftFunctionCallback && typeof this.leftFunctionCallback === 'function') {
 
         }
         else {

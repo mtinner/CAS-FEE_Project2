@@ -3,7 +3,8 @@ import {ShoppingListService} from './shopping-list.service';
 import {ArticleGroup} from '../../../../models/ArticleGroup';
 import {Article} from '../../../../models/Article';
 import {HeaderService} from '../../../elements/header/header.service';
-import {Header} from '../../../elements/header/header.enum';
+import {HeaderStyle} from '../../../elements/header/header.enum';
+import {HeaderConfig} from '../../../../models/HeaderConfig';
 
 @Component({
     moduleId: module.id,
@@ -26,10 +27,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.headerService.headerConfig = {
-            title: 'Shopping List',
-            type: Header.ShoppingList
-        };
+        this.headerService.headerConfig = new HeaderConfig('Shopping List', HeaderStyle.ShoppingList);
         this.shoppingListService.fetchArticleGroups();
 
         this.shoppingListService.fetchArticles();
