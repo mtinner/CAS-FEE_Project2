@@ -7,8 +7,7 @@ import {HeaderConfig} from '../../../../models/HeaderConfig';
 
 @Component({
     moduleId: module.id,
-    templateUrl: 'settings-menu.component.html',
-    styleUrls: ['settings-menu.component.css']
+    templateUrl: 'settings-menu.component.html'
 })
 export class SettingsMenuComponent {
     private addText: string = 'Add article';

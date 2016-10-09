@@ -1,0 +1,22 @@
+.list {
+    display: block;
+    width: 100%;
+
+    &__item {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 10px 50px;
+      height: 48px;
+      cursor: pointer;
+
+      &__description {
+          font-size: 0.8em;
+          color: #777;
+      }
+    }
+
+    &__item:hover {
+        background: #ddd;
+    }
+}
