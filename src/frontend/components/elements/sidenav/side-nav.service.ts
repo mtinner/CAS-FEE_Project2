@@ -18,7 +18,6 @@ export class SideNavService {
     }
 
     toggleNavigation = () => {
-        console.log('toogle');
         this.showNavigation = !this.showNavigation;
     }
 }

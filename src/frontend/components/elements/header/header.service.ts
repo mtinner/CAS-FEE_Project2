@@ -17,7 +17,7 @@ export class HeaderService {
     }
 
     resetHeader() {
-        this.headerConfig = new HeaderConfig('', HeaderStyle.Default, HeaderIcon.burger);
+        this.headerConfig = new HeaderConfig('', HeaderStyle.Default);
     }
 
     clickLeftIcon() {
