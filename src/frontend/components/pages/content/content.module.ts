@@ -1,5 +1,6 @@
 import {ContentComponent} from './content.component';
 import {CostManagementComponent} from './costManagement/cost-management.component';
+import {SettingsMenuComponent} from './settings/settings-menu.component';
 import {ShoppingListComponent} from './shoppingList/shopping-list.component';
 import {contentRouting} from './content.routing';
 import {NgModule} from '@angular/core';
@@ -19,6 +20,7 @@ import {HttpModule} from '@angular/http';
         ContentComponent,
         ShoppingListComponent,
         CostManagementComponent,
+        SettingsMenuComponent,
         ArticlesByGroupPipe
     ],
     providers: [authServiceProvider]
