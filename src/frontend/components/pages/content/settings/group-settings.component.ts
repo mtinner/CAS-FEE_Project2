@@ -9,9 +9,9 @@ import {HeaderConfig} from '../../../../models/HeaderConfig';
 })
 export class GroupSettingsComponent {
     private groups: GroupSetting[] = [
-        new GroupSetting('.', '1', 'selectedGroup', 'Group 1'),
-        new GroupSetting('.', '2', 'selectedGroup', 'Group 2'),
-        new GroupSetting('.', '3', 'selectedGroup', 'Group 3')
+        new GroupSetting('.', 'g1', 'selectedGroup', 'Group 1'),
+        new GroupSetting('.', 'g2', 'selectedGroup', 'Group 2'),
+        new GroupSetting('.', 'g3', 'selectedGroup', 'Group 3')
     ];
 
     constructor(private headerService: HeaderService) {
