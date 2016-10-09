@@ -10,9 +10,18 @@ import {HeaderConfig} from '../../../../models/HeaderConfig';
     templateUrl: 'settings-menu.component.html'
 })
 export class SettingsMenuComponent {
-    private addText: string = 'Add article';
+    settings: Setting[] = [
+        new Setting('Group Membership', 'Manage with whom you\'re sharing shopping list & expenditures'),
+        new Setting('Article Groups', 'Set how individual articles should be grouped'),
+        new Setting('History')
+    ];
 
     constructor(private headerService: HeaderService) {
         this.headerService.headerConfig = new HeaderConfig('Settings', HeaderStyle.Settings, HeaderIcon.burger);
+    }
+}
+
+class Setting {
+    constructor(private title: string, private description: string = null) {
     }
 }

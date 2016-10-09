@@ -1,16 +1,10 @@
 <div class="container__page">
     <div class="list">
-        <div class="list__item">
-            Group
-            <div class="list__item__description">Manage with whom your sharing your shopping list & expenditures</div>
-        </div>
-        <div class="list__item">
-            Article Groups
-            <div class="list__item__description">Manage with whom your sharing your shopping list & expenditures</div>
-        </div>
-        <div class="list__item">
-            History
-            
+        <div class="list__item" *ngFor="let setting of settings">
+            {{setting.title}}
+            <div class="list__item__description">
+                {{setting.description}}
+            </div>
         </div>
     </div>
 </div>
