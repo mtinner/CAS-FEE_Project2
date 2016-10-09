@@ -9,6 +9,6 @@ import {HeaderConfig} from '../../../../models/HeaderConfig';
 })
 export class GroupSettingsComponent {
     constructor(private headerService: HeaderService) {
-        this.headerService.headerConfig = new HeaderConfig('Group Settings', HeaderStyle.Settings, HeaderIcon.burger);
+        this.headerService.headerConfig = new HeaderConfig('Group Settings', HeaderStyle.Settings, HeaderIcon.arrowleft);
     }
 }

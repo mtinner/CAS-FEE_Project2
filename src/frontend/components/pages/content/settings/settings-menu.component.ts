@@ -9,9 +9,9 @@ import {HeaderConfig} from '../../../../models/HeaderConfig';
 })
 export class SettingsMenuComponent {
     private settings: Setting[] = [
-        new Setting('Group Membership', 'Manage with whom you\'re sharing shopping list & expenditures'),
-        new Setting('Article Groups', 'Set how individual articles should be grouped'),
-        new Setting('History')
+        new Setting('groups', 'Group Membership', 'Manage with whom you\'re sharing shopping list & expenditures'),
+        new Setting('.', 'Article Groups', 'Set how individual articles should be grouped'),
+        new Setting('.', 'History')
     ];
 
     constructor(private headerService: HeaderService) {
@@ -20,6 +20,6 @@ export class SettingsMenuComponent {
 }
 
 class Setting {
-    constructor(private title: string, private description: string = null) {
+    constructor(private route: string, private title: string, private description: string = null) {
     }
 }
