@@ -1,10 +1,10 @@
 import {ModuleWithProviders}  from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {CostManagementComponent} from './costManagement/cost-management.component';
-import {ShoppingListComponent} from './shoppingList/shopping-list.component';
 import {SettingsComponent} from './settings/settings.component';
 import {ContentComponent} from './content.component';
 import {AuthGuard} from '../login/auth-guard.service';
+import {shoppingListRoutes} from './shoppingList/shopping-list.routing';
 
 const contentRoutes: Routes = [
     {
@@ -13,7 +13,7 @@ const contentRoutes: Routes = [
         canActivate: [AuthGuard],
         children: [
             {path: '', redirectTo: '/shopping-list', pathMatch: 'full'},
-            {path: 'shopping-list', component: ShoppingListComponent},
+            shoppingListRoutes,
             {path: 'cost-management', component: CostManagementComponent},
             {path: 'settings', component: SettingsComponent}
         ]
