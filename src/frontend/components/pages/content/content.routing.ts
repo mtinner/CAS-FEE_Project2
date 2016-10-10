@@ -1,20 +1,21 @@
 import {ModuleWithProviders}  from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {CostManagementComponent} from './costManagement/cost-management.component';
 import {SettingsComponent} from './settings/settings.component';
 import {ContentComponent} from './content.component';
 import {AuthGuard} from '../login/auth-guard.service';
-import {shoppingListRoutes} from './shoppingList/shopping-list.routing';
+import {shoppingListRoutes} from './+shoppingList/shopping-list.routing';
+import {costManagementRoutes} from './+costManagement/cost-management.routing';
 
 const contentRoutes: Routes = [
     {
         path: '',
         component: ContentComponent,
         canActivate: [AuthGuard],
+        canLoad: [AuthGuard],
         children: [
             {path: '', redirectTo: '/shopping-list', pathMatch: 'full'},
             shoppingListRoutes,
-            {path: 'cost-management', component: CostManagementComponent},
+            costManagementRoutes,
             {path: 'settings', component: SettingsComponent}
         ]
     }
