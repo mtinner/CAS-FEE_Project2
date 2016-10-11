@@ -47,10 +47,15 @@ class NedbRepo {
     }
 
     update(id, oldDoc, newDoc) {
+        Object.assign(oldDoc, newDoc);
+
         return new Promise(resolve => {
             this.store.update(
-                Object.assign(oldDoc, newDoc, this.moveIdDb({id: id})),
-                (err, doc) => resolve(this.moveIdEntity(doc))
+                {_id: id},
+                this.moveIdDb(oldDoc),
+                {returnUpdatedDocs: true},
+                (err, numAffected, affectedDocuments) =>
+                    resolve(this.moveIdEntity(affectedDocuments))
             );
         });
     }

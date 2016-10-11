@@ -1,15 +1,15 @@
 'use strict';
-let NedbRepo = require ('./NedbRepo');
+let NedbRepo = require('./NedbRepo');
 
 let singleton;
 
-class GroupService{
-    constructor(){
+class GroupService {
+    constructor() {
         this.nedbRepo = new NedbRepo('group');
     }
 
-    static get instance(){
-        if(!this[singleton]){
+    static get instance() {
+        if (!this[singleton]) {
             this[singleton] = new GroupService();
         }
         return this[singleton];
@@ -20,7 +20,6 @@ class GroupService{
     }
 
     add(newDoc) {
-        //TODO get userGroup and so on
         return this.nedbRepo.add(newDoc);
     }
 

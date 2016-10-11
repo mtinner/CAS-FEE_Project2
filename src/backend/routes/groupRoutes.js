@@ -8,19 +8,19 @@ let express = require('express'),
 router.get('/',
     authService.protect('user'),
     function (req, res) {
-        UserService.instance.getGroups({email: req.user.email}).then(groups => {
+        UserService.instance.getGroups(req.user).then(groups => {
             res.status(200).send(groups);
         }).catch(() => {
             res.status(404).send();
         });
     });
 
-/*router.post('/',
+router.post('/',
     authService.protect('user'),
     function (req, res) {
-       // shoppingListService.addArticle(req.body,req.user).then(article => {
+        UserService.instance.addGroup(req.body, req.user).then(article => {
             res.status(201).send(article);
         });
-    });*/
+    });
 
 module.exports = router;

@@ -20,7 +20,7 @@ class UserService {
     }
 
     get(user) {
-        return this.nedbRepo.get(user);
+        return this.nedbRepo.get({email: user.email});
     }
 
     getGroups(user) {
@@ -35,6 +35,17 @@ class UserService {
                     return {groups: values};
                 });
         });
+    }
+
+    addGroup(newDoc, user) {
+        let dbUser = this.get(user);
+        let dbGroup = this.groupService.add(new Group(undefined, newDoc.name));
+
+        return Promise.all([dbUser, dbGroup])
+            .then(values => {
+                values[0].groups.push({id: values[1].id});
+                return this.nedbRepo.update(values[0].id, values[0], {activeGroup: values[1].id});
+            });
     }
 
     add(newDoc) {
