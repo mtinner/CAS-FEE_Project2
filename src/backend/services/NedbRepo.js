@@ -8,11 +8,12 @@ class NedbRepo {
     }
 
     get(obj) {
+        obj = this.moveIdDb(obj);
         return new Promise(resolve => {
             if (obj) {
-                this.store.findOne(obj, (err, doc) => resolve(this.moveId(doc)));
+                this.store.findOne(obj, (err, doc) => resolve(this.moveIdEntity(doc)));
             } else {
-               return null;
+                return null;
             }
         });
     }
@@ -20,17 +21,18 @@ class NedbRepo {
     getAll(obj) {
         return new Promise(resolve =>
             this.store.find(obj, (err, docs) => {
-                docs.forEach(doc => this.moveId(doc));
+                docs.forEach(doc => this.moveIdEntity(doc));
                 resolve(docs);
             })
         );
     }
 
     add(newDoc) {
+        newDoc = this.moveIdDb(newDoc);
         return new Promise(resolve =>
             this.store.insert(
-                Object.assign(newDoc, {_id: newDoc.id}, {id: undefined}),
-                (err, doc) => resolve(this.moveId(doc))
+                newDoc,
+                (err, doc) => resolve(this.moveIdEntity(doc))
             )
         );
     }
@@ -47,8 +49,8 @@ class NedbRepo {
     update(id, oldDoc, newDoc) {
         return new Promise(resolve => {
             this.store.update(
-                Object.assign(oldDoc, newDoc, {_id: id}, {id: undefined}),
-                (err, doc) => resolve(this.moveId(doc))
+                Object.assign(oldDoc, newDoc, this.moveIdDb({id: id})),
+                (err, doc) => resolve(this.moveIdEntity(doc))
             );
         });
     }
@@ -62,10 +64,18 @@ class NedbRepo {
         });
     }
 
-    moveId(doc) {
+    moveIdEntity(doc) {
         if (!doc) return null;
         doc.id = doc._id;
         delete doc._id;
+        return doc;
+    }
+
+    moveIdDb(doc) {
+        if (doc.id) {
+            Object.assign(doc, {_id: doc.id});
+            delete doc.id;
+        }
         return doc;
     }
 }

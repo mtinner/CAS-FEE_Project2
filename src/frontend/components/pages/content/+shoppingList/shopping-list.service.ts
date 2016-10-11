@@ -57,7 +57,7 @@ export class ShoppingListService extends AppService {
         response.subscribe((article: Article) => {
             this.articles.push(article);
             // create new reference to invoke pipe
-            this.articles = this.articles.map(x=>x);
+            this.articles = this.articles.map(x => x);
         });
         return response;
     }

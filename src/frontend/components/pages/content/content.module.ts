@@ -1,5 +1,4 @@
 import {ContentComponent} from './content.component';
-import {CostManagementComponent} from './+costManagement/cost-management.component';
 import {contentRouting} from './content.routing';
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
