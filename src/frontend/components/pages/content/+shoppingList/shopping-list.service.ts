@@ -55,7 +55,9 @@ export class ShoppingListService extends AppService {
             .map(this.extractData)
             .catch(this.handleError);
         response.subscribe((article: Article) => {
-           this.articles.push(article);
+            this.articles.push(article);
+            // create new reference to invoke pipe
+            this.articles = this.articles.map(x=>x);
         });
         return response;
     }
