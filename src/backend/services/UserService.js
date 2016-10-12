@@ -49,16 +49,8 @@ class UserService {
     }
 
     add(newDoc) {
-        return this.groupService.add(new Group(undefined, 'Private'))
-            .then(resp=> {
-                Object.assign(newDoc, {activeGroup: resp.id, groups: [{id: resp.id}], roles: ['user']});
-                return this.nedbRepo.add(newDoc);
-            });
-    }
-
-    remove(id) {
-        //TODO get userGroup and so on
-        return this.nedbRepo.remove(id);
+        return this.nedbRepo.add(Object.assign(newDoc, {activeGroup: -1, groups: [], roles: ['user']}))
+            .then(user=>this.addGroup({name:'Private'},user));
     }
 }
 

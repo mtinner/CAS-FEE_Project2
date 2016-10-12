@@ -22,11 +22,6 @@ class GroupService {
     add(newDoc) {
         return this.nedbRepo.add(newDoc);
     }
-
-    remove(id) {
-        //TODO get userGroup and so on
-        return this.nedbRepo.remove(id);
-    }
 }
 
 module.exports = GroupService;
