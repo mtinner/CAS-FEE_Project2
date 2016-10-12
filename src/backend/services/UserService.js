@@ -37,6 +37,29 @@ class UserService {
         });
     }
 
+    joinGroup(invitedGroupId, memberUser, invitedUser) {
+        if (!invitedGroupId || !memberUser || !invitedUser) {
+            return Promise.reject('Invalid Parameter');
+        }
+        return this.get(memberUser)
+            .then(hasGroup)
+            .then(user=> {
+                if (user) {
+                    return this.get(invitedUser)
+                        .then(user=> {
+                            user.groups.push({id: invitedGroupId});
+                            return this.nedbRepo.update(user.id, user, {});
+                        });
+                } else {
+                    return Promise.reject('Not allowed to join');
+                }
+            });
+
+        function hasGroup(user) {
+            return Promise.resolve(user.groups.find(group=> group.id === invitedGroupId));
+        }
+    }
+
     addGroup(newDoc, user) {
         let dbUser = this.get(user);
         let dbGroup = this.groupService.add(new Group(undefined, newDoc.name));
@@ -50,7 +73,7 @@ class UserService {
 
     add(newDoc) {
         return this.nedbRepo.add(Object.assign(newDoc, {activeGroup: -1, groups: [], roles: ['user']}))
-            .then(user=>this.addGroup({name:'Private'},user));
+            .then(user=>this.addGroup({name: 'Private'}, user));
     }
 }
 
