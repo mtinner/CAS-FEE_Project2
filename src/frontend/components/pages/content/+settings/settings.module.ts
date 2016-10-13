@@ -7,6 +7,7 @@ import {authServiceProvider} from '../../../common/authentication/auth-http.prov
 import {HttpModule} from '@angular/http';
 import {RouterModule} from '@angular/router';
 import {SettingsChildComponent} from './settings-child.component';
+import {GroupService} from './group.service';
 
 @NgModule({
     imports: [
@@ -20,7 +21,7 @@ import {SettingsChildComponent} from './settings-child.component';
         SettingsChildComponent,
         GroupSettingsComponent
     ],
-    providers: [authServiceProvider]
+    providers: [authServiceProvider,GroupService]
 })
 export class SettingsModule {
 }

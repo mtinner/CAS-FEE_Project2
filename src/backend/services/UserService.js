@@ -27,7 +27,17 @@ class UserService {
         return this.get(user).then((user)=> {
             let promises = [];
             user.groups.forEach((group)=> {
-                promises.push(this.groupService.get(group));
+
+                promises.push(this.groupService.get(group)
+                    .then((group=> {
+                    if (group.id === user.activeGroup) {
+                        group.activeGroup = true;
+                    }
+                    else {
+                        group.activeGroup = false;
+                    }
+                    return group;
+                })));
 
             });
             return Promise.all([...promises])
@@ -48,7 +58,10 @@ class UserService {
                     return this.get(invitedUser)
                         .then(user=> {
                             user.groups.push({id: invitedGroupId});
-                            return this.nedbRepo.update(user.id, user, {});
+                            return this.nedbRepo.update(user.id, user, {})
+                                .then(() => {
+                                    return;
+                                });
                         });
                 } else {
                     return Promise.reject('Not allowed to join');
@@ -67,7 +80,8 @@ class UserService {
         return Promise.all([dbUser, dbGroup])
             .then(values => {
                 values[0].groups.push({id: values[1].id});
-                return this.nedbRepo.update(values[0].id, values[0], {activeGroup: values[1].id});
+                return this.nedbRepo.update(values[0].id, values[0], {activeGroup: values[1].id})
+                    .then(()=>values[1]);
             });
     }
 
