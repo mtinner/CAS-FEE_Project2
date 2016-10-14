@@ -21,7 +21,7 @@ import {GroupService} from './group.service';
         SettingsChildComponent,
         GroupSettingsComponent
     ],
-    providers: [authServiceProvider,GroupService]
+    providers: [authServiceProvider, GroupService]
 })
 export class SettingsModule {
 }

@@ -40,7 +40,7 @@ class UserService {
                 })));
 
             });
-            return Promise.all([...promises])
+            return Promise.all(promises)
                 .then(values=> {
                     return {groups: values};
                 });
