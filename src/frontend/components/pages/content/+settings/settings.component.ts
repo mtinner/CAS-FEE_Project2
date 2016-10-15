@@ -15,7 +15,7 @@ export class SettingsComponent {
     ];
 
     constructor(private headerService: HeaderService) {
-        this.headerService.headerConfig = new HeaderConfig('Settings', HeaderStyle.Settings, HeaderIcon.burger);
+        this.headerService.headerConfig = new HeaderConfig('Settings', HeaderStyle.Settings, HeaderIcon.Burger);
     }
 }
 
