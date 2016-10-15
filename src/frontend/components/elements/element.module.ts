@@ -10,9 +10,11 @@ import {HeaderComponent} from './header/header.component';
 import {HeaderService} from './header/header.service';
 import {SideNavComponent} from './sidenav/side-nav.component';
 import {SideNavService} from './sidenav/side-nav.service';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
     imports: [
+        FormsModule,
         BrowserModule,
         RouterModule
     ],

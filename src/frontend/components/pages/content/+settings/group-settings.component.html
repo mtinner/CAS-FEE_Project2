@@ -1,7 +1,8 @@
 <div class="container__page">
     <div class="list">
-        <div class="list__item" *ngFor="let group of groupService.groups">
-            <radio id="{{group.id}}" name="group" label="{{group.name}}"></radio>
+        <div class="list__item" *ngFor="let group of let group of groupService.groups">
+            <radio id="{{group.id}}" model="{{group.activeGroup}}" name="groups" label="{{group.name}}"
+                   value="true"></radio>
         </div>
     </div>
 </div>

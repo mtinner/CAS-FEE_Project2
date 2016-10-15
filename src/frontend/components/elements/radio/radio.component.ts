@@ -13,6 +13,10 @@ export class RadioComponent {
     name: string;
     @Input()
     label: string;
+    @Input()
+    value: string;
+    @Input()
+    model: string;
 
     constructor() {
     }
