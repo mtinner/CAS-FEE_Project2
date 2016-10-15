@@ -1,10 +1,11 @@
 import {
     Http, Headers, ConnectionBackend, Response,
-    RequestOptionsArgs, RequestOptions, Request
+    RequestOptionsArgs, RequestOptions
 } from '@angular/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {LoginManagingService} from '../../pages/login/login-managing.service';
+import {EmptyObservable} from 'rxjs/observable/EmptyObservable';
 
 export const JWT_RESPONSE_HEADER = 'X-Auth-Token';
 
@@ -59,9 +60,8 @@ export class AuthHttp extends Http {
     interceptResponse(observable: Observable<Response>): Observable<Response> {
         return observable.catch((err) => {
             if (err.status === 401) {
-                console.log('asdfsd');
                 this.loginManaginService.performNotAuthorized();
-                return Observable.create();
+                return new EmptyObservable();
             } else {
                 return Observable.throw(err);
             }

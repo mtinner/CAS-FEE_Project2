@@ -3,6 +3,7 @@ import {MenuItem} from '../../../models/MenuItem';
 
 @Injectable()
 export class SideNavService {
+    public showNavigation = false;
 
     private menuItems: MenuItem[] = [
         new MenuItem('Shopping List', 'shopping-list', '/shopping-list'),
@@ -14,5 +15,9 @@ export class SideNavService {
 
     getMenuItems(): Array<any> {
         return this.menuItems;
+    }
+
+    toggleNavigation = () => {
+        this.showNavigation = !this.showNavigation;
     }
 }

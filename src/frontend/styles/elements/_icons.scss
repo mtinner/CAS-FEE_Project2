@@ -3,18 +3,18 @@
   font-family: 'icomoon';
   cursor: pointer;
 
-  &--centered {
-    font-size: 25px;
-    margin-left: 10px;
-    vertical-align: middle;
-  }
-
-  &--burger {
+  &-header {
+    width: 80px;
+    color: $snow;
     text-align: center;
     float: left;
-    width: 80px;
-    opacity: 0.75;
-    color: $snow;
+    @media (min-width: 720px) {
+      opacity: 0.75;
+    }
+
+    &--right {
+      float: right;
+    }
 
     &:active::before {
       border-radius: 20px;
@@ -28,8 +28,25 @@
 
     &:before {
       font-size: 1.5rem;
-      content: "\e901";
     }
+  }
+
+  &--centered {
+    font-size: 25px;
+    margin-left: 10px;
+    vertical-align: middle;
+  }
+
+  &--burger:before {
+    content: "\e901";
+  }
+
+  &--leave:before {
+    content: "\e906";
+  }
+
+  &--arrow-left:before {
+    content: "\e907";
   }
 
   &--shopping-list:before {
