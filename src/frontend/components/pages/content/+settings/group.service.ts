@@ -3,6 +3,7 @@ import {Observable} from 'rxjs/Observable';
 import {Http} from '@angular/http';
 import {AppService} from '../../../app.service';
 import {Group, GroupObj} from '../../../../models/Group';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class GroupService extends AppService {
@@ -10,7 +11,7 @@ export class GroupService extends AppService {
 
     public groups: Group[] = [];
 
-    constructor(private http: Http) {
+    constructor(private http: Http, private router: Router) {
         super();
     }
 
@@ -51,5 +52,9 @@ export class GroupService extends AppService {
             });
         });
         return response;
+    }
+
+    goToSettings = () => {
+        this.router.navigate(['settings']);
     }
 }

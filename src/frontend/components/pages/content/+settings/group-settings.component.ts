@@ -12,7 +12,7 @@ import {Group} from '../../../../models/Group';
 export class GroupSettingsComponent implements OnInit {
 
     constructor(private headerService: HeaderService, private groupService: GroupService) {
-        this.headerService.headerConfig = new HeaderConfig('Group Settings', HeaderStyle.Settings, HeaderIcon.arrowleft);
+        this.headerService.headerConfig = new HeaderConfig('Group Settings', HeaderStyle.Settings, HeaderIcon.arrowleft, this.groupService.goToSettings);
     }
 
     onChange(obj: Group) {
