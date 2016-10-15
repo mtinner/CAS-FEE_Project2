@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
     moduleId: module.id,
@@ -16,7 +16,7 @@ export class RadioComponent {
     @Input()
     value: string;
     @Input()
-    model: string;
+    model: boolean;
 
     constructor() {
     }
