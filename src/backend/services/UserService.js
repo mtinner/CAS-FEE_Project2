@@ -31,10 +31,10 @@ class UserService {
                 promises.push(this.groupService.get(group)
                     .then((group=> {
                         if (group.id === user.activeGroup) {
-                            group.activeGroup = true;
+                            group.isActiveGroup = true;
                         }
                         else {
-                            group.activeGroup = false;
+                            group.isActiveGroup = false;
                         }
                         return group;
                     })));

@@ -40,10 +40,16 @@ export class GroupService extends AppService {
         let response = this.http.post(`${this.groupUrl}/active/${id}`, null)
             .map(this.extractData)
             .catch(this.handleError);
-        response.subscribe((groupObj) => {
-            console.log(groupObj);
+        response.subscribe(() => {
+            this.groups.forEach((group: Group) => {
+                if (group.id !== id) {
+                    group.isActiveGroup = false;
+                }
+                else {
+                    group.isActiveGroup = true;
+                }
+            });
         });
-
         return response;
     }
 }
