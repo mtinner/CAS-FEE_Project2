@@ -26,13 +26,24 @@ export class GroupService extends AppService {
     }
 
     // not tested
-   /* addGroup(body): Observable<any> {
-        let response = this.http.post(`${this.groupUrl}`, body, this.jsonOptions)
+    /* addGroup(body): Observable<any> {
+     let response = this.http.post(`${this.groupUrl}`, body, this.jsonOptions)
+     .map(this.extractData)
+     .catch(this.handleError);
+     response.subscribe((group: Group) => {
+     this.groups.push(group);
+     });
+     return response;
+     }*/
+
+    setActiveGroup(id: number) {
+        let response = this.http.post(`${this.groupUrl}/active/${id}`, null)
             .map(this.extractData)
             .catch(this.handleError);
-        response.subscribe((group: Group) => {
-            this.groups.push(group);
+        response.subscribe((groupObj) => {
+            console.log(groupObj);
         });
+
         return response;
-    }*/
+    }
 }

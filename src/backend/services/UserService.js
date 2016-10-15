@@ -30,14 +30,14 @@ class UserService {
 
                 promises.push(this.groupService.get(group)
                     .then((group=> {
-                    if (group.id === user.activeGroup) {
-                        group.activeGroup = true;
-                    }
-                    else {
-                        group.activeGroup = false;
-                    }
-                    return group;
-                })));
+                        if (group.id === user.activeGroup) {
+                            group.activeGroup = true;
+                        }
+                        else {
+                            group.activeGroup = false;
+                        }
+                        return group;
+                    })));
 
             });
             return Promise.all(promises)
@@ -47,30 +47,43 @@ class UserService {
         });
     }
 
+    setActiveGroup(groupId, user) {
+        return this.get(user).then((user)=> {
+            return this.hasGroup(user, groupId)
+                .then((group)=> {
+                    if (group) {
+                        return this.nedbRepo.update(user.id, user, {activeGroup: groupId})
+                            .then((user) => {
+                                return user;
+                            });
+                    } else {
+                        return Promise.reject('Not allowed to change to this group');
+                    }
+                });
+        });
+    }
+
     joinGroup(invitedGroupId, memberUser, invitedUser) {
         if (!invitedGroupId || !memberUser || !invitedUser) {
             return Promise.reject('Invalid Parameter');
         }
         return this.get(memberUser)
-            .then(hasGroup)
-            .then(user=> {
-                if (user) {
-                    return this.get(invitedUser)
-                        .then(user=> {
-                            user.groups.push({id: invitedGroupId});
-                            return this.nedbRepo.update(user.id, user, {})
-                                .then(() => {
-                                    return;
+            .then((user)=> {
+                this.hasGroup(user, invitedGroupId)
+                    .then(group=> {
+                        if (group) {
+                            return this.get(invitedUser)
+                                .then(user=> {
+                                    user.groups.push({id: invitedGroupId});
+                                    return this.nedbRepo.update(user.id, user, {})
+                                        .then(() => {
+                                        });
                                 });
-                        });
-                } else {
-                    return Promise.reject('Not allowed to join');
-                }
+                        } else {
+                            return Promise.reject('Not allowed to join');
+                        }
+                    });
             });
-
-        function hasGroup(user) {
-            return Promise.resolve(user.groups.find(group=> group.id === invitedGroupId));
-        }
     }
 
     addGroup(newDoc, user) {
@@ -88,6 +101,10 @@ class UserService {
     add(newDoc) {
         return this.nedbRepo.add(Object.assign(newDoc, {activeGroup: -1, groups: [], roles: ['user']}))
             .then(user=>this.addGroup({name: 'Private'}, user));
+    }
+
+    hasGroup(user, groupId) {
+        return Promise.resolve(user.groups.find(group=> group.id === groupId));
     }
 }
 

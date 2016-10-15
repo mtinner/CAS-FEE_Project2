@@ -18,8 +18,8 @@ router.get('/',
 router.post('/',
     authService.protect('user'),
     function (req, res) {
-        UserService.instance.addGroup(req.body, req.user).then(user => {
-            res.status(201).send(user);
+        UserService.instance.addGroup(req.body, req.user).then(group => {
+            res.status(201).send(group);
         }).catch(() => {
             res.status(404).send();
         });
@@ -28,8 +28,18 @@ router.post('/',
 router.post('/join/:id',
     authService.protect('user'),
     function (req, res) {
-        UserService.instance.joinGroup(req.params.id, req.user,req.body).then(user => {
-            res.status(200).send(user);
+        UserService.instance.joinGroup(req.params.id, req.user, req.body).then(() => {
+            res.status(200).send({});
+        }).catch(() => {
+            res.status(400).send();
+        });
+    });
+
+router.post('/active/:id',
+    authService.protect('user'),
+    function (req, res) {
+        UserService.instance.setActiveGroup(req.params.id, req.user, req.body).then(() => {
+            res.status(200).send({});
         }).catch(() => {
             res.status(400).send();
         });
