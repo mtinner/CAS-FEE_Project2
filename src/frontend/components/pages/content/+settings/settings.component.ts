@@ -11,7 +11,7 @@ import {Setting} from '../../../../models/Setting';
 })
 export class SettingsComponent {
     private settings: Setting[] = [
-        new Setting('groups', 'Group Membership', 'Manage with whom you\'re sharing shopping list & expenditures'),
+        new Setting('groups', 'Group Membership', `Manage with whom you're sharing shopping list & expenditures`),
         new Setting('.', 'Article Groups', 'Set how individual articles should be grouped'),
         new Setting('.', 'History')
     ];
