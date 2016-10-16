@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {HeaderService} from '../../../elements/header/header.service';
 import {HeaderStyle, HeaderIcon} from '../../../elements/header/header.enum';
 import {HeaderConfig} from '../../../../models/HeaderConfig';
@@ -9,7 +9,7 @@ import {Group} from '../../../../models/Group';
     moduleId: module.id,
     templateUrl: 'group-settings.component.html'
 })
-export class GroupSettingsComponent implements OnInit {
+export class GroupSettingsComponent implements OnInit, OnDestroy  {
 
     constructor(private headerService: HeaderService, private groupService: GroupService) {
         this.headerService.headerConfig = new HeaderConfig('Group Settings', HeaderStyle.Settings, HeaderIcon.ArrowLeft, this.groupService.goToSettings);
@@ -21,5 +21,9 @@ export class GroupSettingsComponent implements OnInit {
 
     ngOnInit(): void {
         this.groupService.fetchGroups();
+    }
+
+    ngOnDestroy(): void {
+        this.headerService.resetHeader();
     }
 }
