@@ -2,6 +2,8 @@ import {Component} from '@angular/core';
 import {HeaderService} from '../../../elements/header/header.service';
 import {HeaderStyle, HeaderIcon} from '../../../elements/header/header.enum';
 import {HeaderConfig} from '../../../../models/HeaderConfig';
+import {Setting} from '../../../../models/Setting';
+
 
 @Component({
     moduleId: module.id,
@@ -16,10 +18,5 @@ export class SettingsComponent {
 
     constructor(private headerService: HeaderService) {
         this.headerService.headerConfig = new HeaderConfig('Settings', HeaderStyle.Settings, HeaderIcon.Burger);
-    }
-}
-
-class Setting {
-    constructor(private route: string, private title: string, private description: string = null) {
     }
 }
