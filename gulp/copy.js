@@ -1,3 +1,5 @@
+'use strict'
+
 module.exports = function (gulp, data, util, taskName) {
 
     let stream = require('event-stream');

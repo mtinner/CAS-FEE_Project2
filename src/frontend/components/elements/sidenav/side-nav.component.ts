@@ -1,28 +1,22 @@
 import {Component, OnInit} from '@angular/core';
-import {SideNavService} from './sidenav.service';
 import {Router} from '@angular/router';
 import {LoginManagingService} from '../../pages/login/login-managing.service';
 import {MenuItem} from '../../../models/MenuItem';
+import {SideNavService} from './side-nav.service';
 
 @Component({
     moduleId: module.id,
-    selector: 'my-sidenav',
-    templateUrl: 'sidenav.component.html',
-    styleUrls: ['sidenav.component.css'],
-    providers: [SideNavService]
+    selector: 'side-nav',
+    templateUrl: 'side-nav.component.html',
+    styleUrls: ['side-nav.component.css']
 })
 export class SideNavComponent implements OnInit {
 
-    private showNavigation = false;
     private menuItems: Array<any> = [];
     private selectedIndex: number = 0;
 
-    constructor(private router: Router, sideNavService: SideNavService, private loginManaginService: LoginManagingService) {
+    constructor(private router: Router, private sideNavService: SideNavService, private loginManagingService: LoginManagingService) {
         this.menuItems = sideNavService.getMenuItems();
-    }
-
-    toggleNavigation() {
-        this.showNavigation = !this.showNavigation;
     }
 
     ngOnInit(): void {
@@ -39,13 +33,13 @@ export class SideNavComponent implements OnInit {
     }
 
     itemClicked(item: MenuItem) {
-        this.toggleNavigation();
+        this.sideNavService.toggleNavigation();
         if (item.name.toLocaleLowerCase().includes('logout')) {
             this.logout();
         }
     }
 
     logout() {
-        this.loginManaginService.logout();
+        this.loginManagingService.logout();
     }
 }

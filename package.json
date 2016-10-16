@@ -4,7 +4,8 @@
   "license": "ISC",
   "scripts": {
     "start": "gulp Default",
-    "build": "gulp Build"
+    "build": "gulp Build",
+    "typings": "typings i"
   },
   "dependencies": {
     "@angular/common": "^2.0.1",

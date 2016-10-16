@@ -1,0 +1,10 @@
+<div class="container__page">
+    <div class="list">
+        <div class="list__item" *ngFor="let setting of settings" routerLink="{{setting.route}}">
+            {{setting.title}}
+            <div class="list__item__description">
+                {{setting.description}}
+            </div>
+        </div>
+    </div>
+</div>

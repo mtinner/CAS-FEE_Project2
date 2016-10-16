@@ -1,14 +1,12 @@
 import {Component} from '@angular/core';
 
-
 @Component({
     moduleId: module.id,
-    templateUrl: 'cost-management.component.html'
+    templateUrl: 'settings-child.component.html'
 })
-export class CostManagementComponent {
-
+export class SettingsChildComponent {
 
     constructor() {
     }
-
 }
+

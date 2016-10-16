@@ -1,0 +1,9 @@
+<div class="container__page">
+    <div class="list">
+        <div class="list__item" *ngFor="let group of let group of groupService.groups">
+            <radio id="{{group.id}}" model="{{group.isActiveGroup}}" (change)="onChange(group)" name="groups"
+                   label="{{group.name}}"
+                   value="true"></radio>
+        </div>
+    </div>
+</div>
