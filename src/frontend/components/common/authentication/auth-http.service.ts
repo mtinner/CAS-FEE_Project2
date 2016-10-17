@@ -64,7 +64,7 @@ export class AuthHttp extends Http {
                 this.loginManaginService.performNotAuthorized();
                 return new EmptyObservable();
             } else {
-                let message = err._body || 'any action was not successful';
+                let message = err._body || 'Something went wrong';
                 this.snackbarService.showSnackbar(message);
                 return Observable.throw(err);
             }
