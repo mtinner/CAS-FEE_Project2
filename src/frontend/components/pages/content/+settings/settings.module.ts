@@ -8,11 +8,13 @@ import {HttpModule} from '@angular/http';
 import {RouterModule} from '@angular/router';
 import {SettingsChildComponent} from './settings-child.component';
 import {GroupService} from './group.service';
+import {CommonModule} from '@angular/common';
 
 @NgModule({
     imports: [
         RouterModule,
         HttpModule,
+        CommonModule,
         BrowserModule,
         ElementModule,
     ],

@@ -45,6 +45,11 @@
   &:focus {
     outline: none;
   }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
   &--login, &--register {
     background: $shopping-secondary;
     color: $snow;

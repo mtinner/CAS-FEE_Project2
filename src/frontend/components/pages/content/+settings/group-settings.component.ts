@@ -17,13 +17,18 @@ export class GroupSettingsComponent implements OnInit, OnDestroy {
     };
 
     private groupname: string = '';
+    private showModal: boolean = false;
 
     constructor(private headerService: HeaderService, private groupService: GroupService) {
         this.headerService.headerConfig = new HeaderConfig('Group Settings', HeaderStyle.Settings, HeaderIcon.ArrowLeft, this.groupService.goToSettings);
     }
 
-    setGroupname(value) {
-        this.groupname = value;
+    setGroupname(value: string) {
+        this.groupname = value.trim();
+    }
+
+    setModalVisibility(value: boolean) {
+        this.showModal = value;
     }
 
     onGroupChange(obj: Group) {
