@@ -1,8 +1,20 @@
 <div class="container__page">
     <ul class="list">
-        <radio *ngFor="let group of groupService.groups" id="{{group.id}}" class="list__item" model="{{group.isActiveGroup}}"
-               (change)="onChange(group)" [name]="'groups'"
+        <radio *ngFor="let group of groupService.groups" id="{{group.id}}" class="list__item"
+               model="{{group.isActiveGroup}}"
+               (change)="onGroupChange(group)" [name]="'groups'"
                [label]="group.name"
                [value]="true"></radio>
     </ul>
+    <button class="btn btn--round btn--bottom-right icon icon--plus" (click)="setModalVisibility(true)"></button>
+    <div *ngIf="showModal" class="modal" (click)="setModalVisibility(false)">
+        <div class="modal__content" (click)="$event.stopPropagation()">
+            <input-field [placeholder]="inputField.groupname.placeholder"
+                         [type]="inputField.groupname.type" (enteredText)="setGroupname($event)"
+                         (keyup.enter)="!groupname || addGroup()"></input-field>
+
+            <button class="btn btn--bare" [disabled]="!groupname" (click)="addGroup()">Create</button>
+            <button class="btn btn--bare btn--bare--right" (click)="setModalVisibility(false)">Cancel</button>
+        </div>
+    </div>
 </div>

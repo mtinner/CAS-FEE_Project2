@@ -13,7 +13,7 @@ import {LoginHttpService} from '../login/login-http.service';
 export class RegisterComponent {
     private inputField: Object = {
         username: {placeholder: 'Username', type: 'text'},
-        email: {placeholder: 'Email', type: 'text'},
+        email: {placeholder: 'Email', type: 'email'},
         password: {placeholder: 'Password', type: 'password'}
     };
     private username: String;

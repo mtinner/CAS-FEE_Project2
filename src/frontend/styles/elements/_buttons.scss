@@ -9,13 +9,46 @@
   padding: 0 16px;
   font-size: 14px;
   font-weight: 500;
-  opacity: 0.8;
-  &:active {
-    opacity: 1;
+  cursor: pointer;
+
+  &--bare {
+    background: none;
+    box-shadow: none;
+    padding: 0;
+    text-align: left;
+    color: $default;
+    font-weight: normal;
+
+    &--right {
+      float: right;
+      text-align: right;
+    }
+  }
+
+  &--round {
+    background-color: #d23f31;
+    height: 56px;
+    position: fixed;
+    width: 56px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28);
+    border-radius: 56px;
+    min-width: 0;
+    padding: 0;
+    color: $snow;
+  }
+
+  &--bottom-right {
+    right: 15px;
+    bottom: 15px;
   }
 
   &:focus {
     outline: none;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
   }
   &--login, &--register {
     background: $shopping-secondary;
