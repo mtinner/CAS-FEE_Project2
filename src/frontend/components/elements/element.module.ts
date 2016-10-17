@@ -11,6 +11,7 @@ import {HeaderService} from './header/header.service';
 import {SideNavComponent} from './sidenav/side-nav.component';
 import {SideNavService} from './sidenav/side-nav.service';
 import {FormsModule} from '@angular/forms';
+import {PanelComponent} from './panel/panel.component';
 
 @NgModule({
     imports: [
@@ -25,7 +26,8 @@ import {FormsModule} from '@angular/forms';
         HeaderComponent,
         SideNavComponent,
         InputFieldComponent,
-        RadioComponent
+        RadioComponent,
+        PanelComponent
     ],
     exports: [
         AddComponent,
@@ -34,7 +36,8 @@ import {FormsModule} from '@angular/forms';
         HeaderComponent,
         SideNavComponent,
         InputFieldComponent,
-        RadioComponent
+        RadioComponent,
+        PanelComponent
     ],
     providers: [HeaderService, SideNavService]
 })

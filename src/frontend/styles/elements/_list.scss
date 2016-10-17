@@ -1,22 +1,12 @@
 .list {
-    display: block;
-    width: 100%;
+  margin: 0;
+  width: 100%;
 
-    &__item {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 10px 50px;
-      height: 48px;
-      cursor: pointer;
+  &--small {
+    padding: 0;
+  }
 
-      &__description {
-          font-size: 0.8em;
-          color: #777;
-      }
-    }
-
-    &__item:hover {
-        background: #ddd;
-    }
+  &__item {
+    padding: 10px 50px;
+  }
 }
