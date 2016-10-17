@@ -23,6 +23,11 @@
     color: $snow;
   }
 
+  &--bottom-right {
+    right: 15px;
+    bottom: 15px;
+  }
+
   &:focus {
     outline: none;
   }
