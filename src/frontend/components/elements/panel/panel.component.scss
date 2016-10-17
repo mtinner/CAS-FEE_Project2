@@ -1,7 +1,6 @@
 @import "./../../../styles/utils/variables";
 
 .panel {
-  padding: 10px 50px;
   height: 48px;
   cursor: pointer;
 
@@ -11,9 +10,5 @@
       font-size: 0.8em;
       color: $default;
     }
-  }
-
-  &:hover {
-    background: $dark-snow;
   }
 }

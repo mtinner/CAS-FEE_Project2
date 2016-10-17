@@ -1,5 +1,7 @@
 <div class="container__page">
-    <ul class="list list--small">
-        <panel *ngFor="let setting of settings" [title]="setting.title" [description]="setting.description" routerLink="{{setting.route}}"></panel>
+    <ul class="list">
+        <panel class="list__item" *ngFor="let setting of settings" [title]="setting.title"
+               [description]="setting.description"
+               routerLink="{{setting.route}}"></panel>
     </ul>
 </div>
