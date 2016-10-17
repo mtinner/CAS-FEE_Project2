@@ -8,7 +8,7 @@ module.exports = function (gulp, data, util, taskName) {
     gulp.task(taskName + ':Dist', function () {
         var tsResult = tsProject.src()
             .pipe(sourcemaps.init())
-            .pipe(ts(tsProject));
+            .pipe(tsProject());
 
         return tsResult.js
             .pipe(sourcemaps.write())
@@ -19,7 +19,7 @@ module.exports = function (gulp, data, util, taskName) {
     gulp.task(taskName + ':Spec', function () {
         var tsResult = tsProject.src()
             .pipe(sourcemaps.init())
-            .pipe(ts(tsProject));
+            .pipe(tsProject());
 
         return tsResult.js
             .pipe(sourcemaps.write())
@@ -29,7 +29,7 @@ module.exports = function (gulp, data, util, taskName) {
     gulp.task(taskName + ':E2e', function () {
         var tsResult = tsProject.src()
             .pipe(sourcemaps.init())
-            .pipe(ts(tsProject));
+            .pipe(tsProject());
 
         return tsResult.js
             .pipe(sourcemaps.write())
