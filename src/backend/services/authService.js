@@ -26,7 +26,13 @@ let authService = (function () {
 
     //Temp
     users.forEach(user=> {
-        UserService.instance.add(user);
+        UserService.instance.get(user)
+            .then(dbUser=> {
+                console.log(user, !user);
+                if (!dbUser) {
+                    UserService.instance.add(user);
+                }
+            });
     });
     //end
 
