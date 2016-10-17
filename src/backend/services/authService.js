@@ -28,7 +28,6 @@ let authService = (function () {
     users.forEach(user=> {
         UserService.instance.get(user)
             .then(dbUser=> {
-                console.log(user, !user);
                 if (!dbUser) {
                     UserService.instance.add(user);
                 }

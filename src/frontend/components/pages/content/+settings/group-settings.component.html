@@ -1,6 +1,6 @@
 <div class="container__page">
     <ul class="list">
-        <radio *ngFor="let group of groupService.groups" id="{{group.id}}" class="list__item" model="group.isActiveGroup"
+        <radio *ngFor="let group of groupService.groups" id="{{group.id}}" class="list__item" model="{{group.isActiveGroup}}"
                (change)="onChange(group)" [name]="'groups'"
                [label]="group.name"
                [value]="true"></radio>
