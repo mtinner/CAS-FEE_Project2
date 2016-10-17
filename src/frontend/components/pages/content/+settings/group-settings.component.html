@@ -1,12 +1,12 @@
 <div class="container__page">
     <ul class="list">
-        <div class="list__item" *ngFor="let group of groupService.groups">
-            <radio id="{{group.id}}"
+        <div class="list__item group" *ngFor="let group of groupService.groups">
+            <radio id="{{group.id}}" class="group__radio"
                    model="{{group.isActiveGroup}}"
                    (change)="onGroupChange(group)" [name]="'groups'"
                    [label]="group.name"
                    [value]="true"></radio>
-            <span class="icon icon--cross"></span>
+            <span class="icon icon--settings group__icon"></span>
         </div>
     </ul>
     <button class="btn btn--round btn--bottom-right icon icon--plus" (click)="setModalVisibility(true)"></button>

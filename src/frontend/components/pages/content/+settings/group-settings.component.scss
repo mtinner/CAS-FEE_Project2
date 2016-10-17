@@ -3,3 +3,15 @@
 .modal {
   color: $blue;
 }
+
+.group {
+
+  &__radio {
+    display: inline-block;
+  }
+
+  &__icon {
+    float: right;
+    font-size: 20px;
+  }
+}
