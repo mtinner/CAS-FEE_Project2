@@ -1,4 +1,5 @@
-import {Component, Input} from '@angular/core';
+import {Component} from '@angular/core';
+import {SnackbarService} from './snackbar.service';
 
 @Component({
     moduleId: module.id,
@@ -7,6 +8,6 @@ import {Component, Input} from '@angular/core';
     styleUrls: ['snackbar.component.css']
 })
 export class SnackbarComponent {
-    @Input()
-    text: string;
+    constructor(private snackbarService: SnackbarService) {
+    }
 }

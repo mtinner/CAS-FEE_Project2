@@ -1,3 +1,3 @@
-<div class="snackbar">
-    <span class="snackbar__text">{{text}}</span>
+<div class="snackbar" [ngClass]="{'snackbar--show': snackbarService.displaySnackbar}">
+    <span class="snackbar__text">{{snackbarService.text}}</span>
 </div>

@@ -6,12 +6,13 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {LoginManagingService} from '../../pages/login/login-managing.service';
 import {EmptyObservable} from 'rxjs/observable/EmptyObservable';
+import {SnackbarService} from '../../elements/snackbar/snackbar.service';
 
 export const JWT_RESPONSE_HEADER = 'X-Auth-Token';
 
 @Injectable()
 export class AuthHttp extends Http {
-    constructor(backend: ConnectionBackend, defaultOptions: RequestOptions, private loginManaginService: LoginManagingService) {
+    constructor(backend: ConnectionBackend, defaultOptions: RequestOptions, private loginManaginService: LoginManagingService, private snackbarService: SnackbarService) {
         super(backend, defaultOptions);
     }
 
@@ -63,6 +64,8 @@ export class AuthHttp extends Http {
                 this.loginManaginService.performNotAuthorized();
                 return new EmptyObservable();
             } else {
+                let message = err._body || 'any action was not successful';
+                this.snackbarService.showSnackbar(message);
                 return Observable.throw(err);
             }
         });

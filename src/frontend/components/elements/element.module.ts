@@ -13,6 +13,7 @@ import {SideNavService} from './sidenav/side-nav.service';
 import {FormsModule} from '@angular/forms';
 import {PanelComponent} from './panel/panel.component';
 import {SnackbarComponent} from './snackbar/snackbar.component';
+import {SnackbarService} from './snackbar/snackbar.service';
 
 @NgModule({
     imports: [
@@ -42,7 +43,7 @@ import {SnackbarComponent} from './snackbar/snackbar.component';
         PanelComponent,
         SnackbarComponent
     ],
-    providers: [HeaderService, SideNavService]
+    providers: [HeaderService, SideNavService, SnackbarService]
 })
 export class ElementModule {
 }
