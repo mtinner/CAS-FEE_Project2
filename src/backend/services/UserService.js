@@ -23,6 +23,26 @@ class UserService {
         return this.nedbRepo.get({email: user.email});
     }
 
+    getAll(user) {
+        return this.nedbRepo.getAll(user);
+    }
+
+    getGroupMembers(groupId, user) {
+        return this.get(user).then((user)=> {
+            return this.hasGroup(user, groupId)
+                .then((group)=> {
+                    if (group) {
+                        return this.nedbRepo.getAll({'groups.id': groupId})
+                            .then((users) => {
+                                return users;
+                            });
+                    } else {
+                        return Promise.reject('Not allowed to get group members');
+                    }
+                });
+        });
+    }
+
     getGroups(user) {
         return this.get(user).then((user)=> {
             let promises = [];

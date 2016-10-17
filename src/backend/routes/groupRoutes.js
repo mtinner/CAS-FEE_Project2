@@ -35,6 +35,17 @@ router.post('/join/:id',
         });
     });
 
+router.get('/:id/members',
+    authService.protect('user'),
+    function (req, res) {
+        UserService.instance.getGroupMembers(req.params.id, req.user)
+            .then((users) => {
+                res.status(200).send(users);
+            }).catch(() => {
+            res.status(400).send();
+        });
+    });
+
 router.post('/active/:id',
     authService.protect('user'),
     function (req, res) {
