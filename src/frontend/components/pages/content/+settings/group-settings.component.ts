@@ -27,6 +27,12 @@ export class GroupSettingsComponent implements OnInit, OnDestroy {
         this.groupname = value.trim();
     }
 
+    addGroup() {
+        this.groupService.addGroup({name: this.groupname});
+        this.groupname = '';
+        this.showModal = false;
+    }
+
     setModalVisibility(value: boolean) {
         this.showModal = value;
     }

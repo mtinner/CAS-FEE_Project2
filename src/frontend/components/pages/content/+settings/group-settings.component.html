@@ -12,7 +12,7 @@
             <input-field [placeholder]="inputField.groupname.placeholder"
                          [type]="inputField.groupname.type" (enteredText)="setGroupname($event)"></input-field>
 
-            <button class="btn btn--bare" [disabled]="!groupname">Create</button>
+            <button class="btn btn--bare" [disabled]="!groupname" (click)="addGroup()">Create</button>
             <button class="btn btn--bare btn--bare--right" (click)="setModalVisibility(false)">Cancel</button>
         </div>
     </div>
