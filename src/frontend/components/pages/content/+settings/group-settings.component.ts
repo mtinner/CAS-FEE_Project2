@@ -7,15 +7,26 @@ import {Group} from '../../../../models/Group';
 
 @Component({
     moduleId: module.id,
-    templateUrl: 'group-settings.component.html'
+    templateUrl: 'group-settings.component.html',
+    styleUrls: ['group-settings.component.css']
 })
-export class GroupSettingsComponent implements OnInit, OnDestroy  {
+export class GroupSettingsComponent implements OnInit, OnDestroy {
+
+    private inputField: Object = {
+        groupname: {placeholder: 'Groupname', type: 'text'}
+    };
+
+    private groupname: string = '';
 
     constructor(private headerService: HeaderService, private groupService: GroupService) {
         this.headerService.headerConfig = new HeaderConfig('Group Settings', HeaderStyle.Settings, HeaderIcon.ArrowLeft, this.groupService.goToSettings);
     }
 
-    onChange(obj: Group) {
+    setGroupname(value) {
+        this.groupname = value;
+    }
+
+    onGroupChange(obj: Group) {
         this.groupService.setActiveGroup(obj.id);
     }
 

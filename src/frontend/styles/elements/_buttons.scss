@@ -11,6 +11,20 @@
   font-weight: 500;
   cursor: pointer;
 
+  &--bare {
+    background: none;
+    box-shadow: none;
+    padding: 0;
+    text-align: left;
+    color: $default;
+    font-weight: normal;
+
+    &--right {
+      float: right;
+      text-align: right;
+    }
+  }
+
   &--round {
     background-color: #d23f31;
     height: 56px;
