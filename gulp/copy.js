@@ -27,6 +27,7 @@ module.exports = function (gulp, data, util, taskName) {
 
         var scripts = gulp.src([
             'node_modules/core-js/client/shim.min.js',
+            'node_modules/core-js/client/shim.min.js.map',
             'node_modules/systemjs/dist/system.src.js',
             'node_modules/zone.js/dist/zone.js'
         ])
