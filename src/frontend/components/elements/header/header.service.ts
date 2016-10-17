@@ -18,6 +18,7 @@ export class HeaderService {
 
     resetHeader() {
         this.headerConfig = new HeaderConfig('', HeaderStyle.Default);
+        this.sideNavService.showNavigation = false;
     }
 
     clickLeftIcon() {
