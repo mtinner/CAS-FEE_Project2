@@ -56,5 +56,13 @@ export class GroupService extends AppService {
 
     goToSettings = () => {
         this.router.navigate(['settings']);
-    }
+    };
+
+    goToGroups = () => {
+        this.router.navigate(['settings', 'groups']);
+    };
+
+    goToGroupMembers = (id) => {
+        this.router.navigate(['settings', 'groups', id]);
+    };
 }

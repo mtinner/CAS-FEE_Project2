@@ -6,7 +6,7 @@
                    (change)="onGroupChange(group)" [name]="'groups'"
                    [label]="group.name"
                    [value]="true"></radio>
-            <span class="icon icon--settings group__icon"></span>
+            <span class="icon icon--settings group__icon" (click)="groupService.goToGroupMembers(group.id)"></span>
         </div>
     </ul>
     <button class="btn btn--round btn--bottom-right icon icon--plus" (click)="setModalVisibility(true)"></button>
