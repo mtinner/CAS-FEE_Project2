@@ -23,10 +23,6 @@ class UserService {
         return this.nedbRepo.get({email: user.email});
     }
 
-    getAll(user) {
-        return this.nedbRepo.getAll(user);
-    }
-
     getGroupMembers(groupId, user) {
         return this.get(user).then((user)=> {
             return this.hasGroup(user, groupId)
@@ -34,7 +30,9 @@ class UserService {
                     if (group) {
                         return this.nedbRepo.getAll({'groups.id': groupId})
                             .then((users) => {
-                                return users;
+                                return users.map(user=> {
+                                    return {email: user.email, username: user.username};
+                                });
                             });
                     } else {
                         return Promise.reject('Not allowed to get group members');
