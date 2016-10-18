@@ -25,7 +25,7 @@ router.post('/',
         });
     });
 
-router.post('/join/:id',
+router.put('/join/:id',
     authService.protect('user'),
     function (req, res) {
         UserService.instance.joinGroup(req.params.id, req.user, req.body).then(() => {
