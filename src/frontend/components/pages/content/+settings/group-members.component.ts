@@ -3,6 +3,7 @@ import {HeaderService} from '../../../elements/header/header.service';
 import {HeaderStyle, HeaderIcon} from '../../../elements/header/header.enum';
 import {HeaderConfig} from '../../../../models/HeaderConfig';
 import {GroupService} from './group.service';
+import {Params, ActivatedRoute} from '@angular/router';
 
 @Component({
     moduleId: module.id,
@@ -11,11 +12,17 @@ import {GroupService} from './group.service';
 })
 export class GroupMembersComponent implements OnInit, OnDestroy {
 
-    constructor(private headerService: HeaderService, private groupService: GroupService) {
+    constructor(private headerService: HeaderService, private groupService: GroupService, private route: ActivatedRoute) {
         this.headerService.headerConfig = new HeaderConfig('Group Members', HeaderStyle.Settings, HeaderIcon.ArrowLeft, this.groupService.goToGroups, HeaderIcon.Leave);
     }
 
     ngOnInit(): void {
+
+        this.route.params.forEach((params: Params) => {
+            let id = params['id'];
+            this.groupService.getMembers(id);
+        });
+
         // this.groupService.fetchGroups();
     }
 

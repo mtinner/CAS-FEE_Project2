@@ -26,7 +26,18 @@ export class GroupService extends AppService {
         return response;
     }
 
-    // not tested
+
+    getMembers(id: string): Observable<any> {
+        let response = this.http.get(`${this.groupUrl}/${id}/members`)
+            .map(this.extractData)
+            .catch(this.handleError);
+        response.subscribe((groupObj: GroupObj) => {
+            this.groups = groupObj.groups;
+        });
+
+        return response;
+    }
+
     addGroup(body): Observable<any> {
         let response = this.http.post(`${this.groupUrl}`, body, this.jsonOptions)
             .map(this.extractData)
@@ -65,4 +76,5 @@ export class GroupService extends AppService {
     goToGroupMembers = (id) => {
         this.router.navigate(['settings', 'groups', id]);
     };
+
 }
