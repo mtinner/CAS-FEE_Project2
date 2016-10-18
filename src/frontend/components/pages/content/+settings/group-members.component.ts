@@ -17,13 +17,10 @@ export class GroupMembersComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-
         this.route.params.forEach((params: Params) => {
             let id = params['id'];
             this.groupService.getMembers(id);
         });
-
-        // this.groupService.fetchGroups();
     }
 
     ngOnDestroy(): void {

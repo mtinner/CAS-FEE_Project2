@@ -4,12 +4,14 @@ import {Http} from '@angular/http';
 import {AppService} from '../../../app.service';
 import {Group, GroupObj} from '../../../../models/Group';
 import {Router} from '@angular/router';
+import {Member, MemberObj} from '../../../../models/Member';
 
 @Injectable()
 export class GroupService extends AppService {
     private groupUrl = `${this.baseUrl}groups`;
 
     public groups: Group[] = [];
+    public members: Member[] = [];
 
     constructor(private http: Http, private router: Router) {
         super();
@@ -31,8 +33,8 @@ export class GroupService extends AppService {
         let response = this.http.get(`${this.groupUrl}/${id}/members`)
             .map(this.extractData)
             .catch(this.handleError);
-        response.subscribe((groupObj: GroupObj) => {
-            this.groups = groupObj.groups;
+        response.subscribe((memberObj: MemberObj) => {
+            this.members = memberObj.members;
         });
 
         return response;
