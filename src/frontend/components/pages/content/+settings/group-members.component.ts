@@ -52,10 +52,11 @@ export class GroupMembersComponent implements OnInit, OnDestroy {
             this.inputField['invitedEmail'].errorMessage = 'Emailaddress not valid';
         }
         else {
-            this.groupService.addMember(this.groupId, {email: this.invitedEmail});
-            // TODO just hide if added successfully
-            this.invitedEmail = '';
-            this.showModal = false;
+            this.groupService.addMember(this.groupId, {email: this.invitedEmail})
+                .subscribe(() => {
+                    this.invitedEmail = '';
+                    this.showModal = false;
+                });
         }
     }
 

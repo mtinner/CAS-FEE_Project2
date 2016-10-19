@@ -5,7 +5,8 @@ import {AppService} from '../../../app.service';
 import {Group, GroupObj} from '../../../../models/Group';
 import {Router} from '@angular/router';
 import {Member, MemberObj} from '../../../../models/Member';
-import {EmptyObservable} from 'rxjs/observable/EmptyObservable';
+import 'rxjs/add/operator/share';
+import 'rxjs/add/observable/of';
 
 @Injectable()
 export class GroupService extends AppService {
@@ -57,11 +58,12 @@ export class GroupService extends AppService {
 
 
     addMember(groupId: string, invitedUser: any): Observable<any> {
-        /* let member = this.members.some((member: Member) => member.email === invitedUser.email);
-         if (member) {
-         return new EmptyObservable();
-         }*/
+        let member = this.members.find((member: Member) => member.email === invitedUser.email);
+        if (member) {
+            return Observable.of(member);
+        }
         let response = this.http.put(`${this.groupUrl}/${groupId}/join`, invitedUser)
+            .share()
             .map(this.extractData)
             .catch(this.handleError);
         response.subscribe((member: Member) => {
