@@ -12,7 +12,7 @@ import {Params, ActivatedRoute} from '@angular/router';
 })
 export class GroupMembersComponent implements OnInit, OnDestroy {
     private inputField: Object = {
-        invitedEmail: {placeholder: 'Email', type: 'mail'}
+        invitedEmail: {placeholder: 'Email', type: 'mail', errorMessage: ''}
     };
 
 
@@ -26,15 +26,36 @@ export class GroupMembersComponent implements OnInit, OnDestroy {
 
     setInvitedEmail(value: string) {
         this.invitedEmail = value.trim();
+        if(this.isEmailValid()){
+            this.clearErrorMessage();
+        }
     }
 
     setModalVisibility(value: boolean) {
         this.showModal = value;
+        if (!value) {
+            this.clearErrorMessage();
+        }
+    }
+
+    isEmailValid() {
+        let regex = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
+        return this.invitedEmail.match(regex);
+    }
+
+    clearErrorMessage(){
+        this.inputField['invitedEmail'].errorMessage = '';
+    }
+
+    addMember() {
+        if (!this.isEmailValid()) {
+            this.inputField['invitedEmail'].errorMessage = 'Emailaddress not valid';
+        }
     }
 
     ngOnInit(): void {
         this.route.params.forEach((params: Params) => {
-            this.groupId= params['id'];
+            this.groupId = params['id'];
             this.groupService.getMembers(this.groupId);
         });
     }
