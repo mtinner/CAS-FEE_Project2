@@ -21,6 +21,7 @@ export class GroupService extends AppService {
 
     fetchGroups(): Observable<any> {
         let response = this.http.get(`${this.groupUrl}`)
+            .share()
             .map(this.extractData)
             .catch(this.handleError);
         response.subscribe((groupObj: GroupObj) => {
@@ -33,6 +34,7 @@ export class GroupService extends AppService {
 
     getMembers(id: string): Observable<any> {
         let response = this.http.get(`${this.groupUrl}/${id}/members`)
+            .share()
             .map(this.extractData)
             .catch(this.handleError);
         response.subscribe((memberObj: MemberObj) => {
@@ -44,6 +46,7 @@ export class GroupService extends AppService {
 
     addGroup(body): Observable<any> {
         let response = this.http.post(`${this.groupUrl}`, body, this.jsonOptions)
+            .share()
             .map(this.extractData)
             .catch(this.handleError);
         response.subscribe((group: Group) => {
@@ -68,12 +71,14 @@ export class GroupService extends AppService {
             .catch(this.handleError);
         response.subscribe((member: Member) => {
             this.members.push(member);
+        }, () => {
         });
         return response;
     }
 
     setActiveGroup(id: number): Observable<any> {
         let response = this.http.post(`${this.groupUrl}/${id}/active`, null)
+            .share()
             .map(this.extractData)
             .catch(this.handleError);
         response.subscribe(() => {
@@ -100,5 +105,4 @@ export class GroupService extends AppService {
     goToGroupMembers = (id) => {
         this.router.navigate(['settings', 'groups', id]);
     };
-
 }

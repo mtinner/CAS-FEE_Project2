@@ -54,9 +54,12 @@ export class GroupMembersComponent implements OnInit, OnDestroy {
         else {
             this.groupService.addMember(this.groupId, {email: this.invitedEmail})
                 .subscribe(() => {
-                    this.invitedEmail = '';
-                    this.showModal = false;
-                });
+                        this.invitedEmail = '';
+                        this.showModal = false;
+                    },
+                    () => {
+                        this.inputField['invitedEmail'].errorMessage = 'Email address not found';
+                    });
         }
     }
 

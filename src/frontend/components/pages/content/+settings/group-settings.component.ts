@@ -28,10 +28,11 @@ export class GroupSettingsComponent implements OnInit, OnDestroy {
     }
 
     addGroup() {
-        this.groupService.addGroup({name: this.groupname});
-        // TODO just hide if added successfully
-        this.groupname = '';
-        this.showModal = false;
+        this.groupService.addGroup({name: this.groupname})
+            .subscribe(() => {
+                this.groupname = '';
+                this.showModal = false;
+            });
     }
 
     setModalVisibility(value: boolean) {
