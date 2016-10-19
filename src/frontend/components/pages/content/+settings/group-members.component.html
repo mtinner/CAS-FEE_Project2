@@ -3,4 +3,14 @@
         <panel class="list__item" *ngFor="let member of groupService.members" [title]="member.username"
                [description]="member.email"></panel>
     </ul>
+    <button class="btn btn--round btn--bottom-right icon icon--plus" (click)="setModalVisibility(true)"></button>
+    <div *ngIf="showModal" class="modal" (click)="setModalVisibility(false)">
+        <div class="modal__content" (click)="$event.stopPropagation()">
+            <input-field [placeholder]="inputField.invitedEmail.placeholder"
+                         [type]="inputField.invitedEmail.type" (enteredText)="setInvitedEmail($event)"></input-field>
+
+            <button class="btn btn--bare" [disabled]="!invitedEmail">Add</button>
+            <button class="btn btn--bare btn--bare--right" (click)="setModalVisibility(false)">Cancel</button>
+        </div>
+    </div>
 </div>

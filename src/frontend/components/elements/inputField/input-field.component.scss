@@ -8,6 +8,11 @@
   margin: 0;
   padding: 20px 0;
 
+  &__error {
+    font-size: 12px;
+    color: $alert;
+  }
+
   &__label {
     bottom: 0;
     color: inherit;
