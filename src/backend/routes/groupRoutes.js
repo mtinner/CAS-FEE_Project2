@@ -25,11 +25,11 @@ router.post('/',
         });
     });
 
-router.put('/join/:id',
+router.put('/:id/join',
     authService.protect('user'),
     function (req, res) {
-        UserService.instance.joinGroup(req.params.id, req.user, req.body).then(() => {
-            res.status(200).send({});
+        UserService.instance.joinGroup(req.params.id, req.user, req.body).then((user) => {
+            res.status(200).send(user);
         }).catch(() => {
             res.status(400).send();
         });
@@ -46,7 +46,7 @@ router.get('/:id/members',
         });
     });
 
-router.post('/active/:id',
+router.post('/:id/active',
     authService.protect('user'),
     function (req, res) {
         UserService.instance.setActiveGroup(req.params.id, req.user, req.body).then(() => {

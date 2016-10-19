@@ -26,7 +26,7 @@ export class GroupMembersComponent implements OnInit, OnDestroy {
 
     setInvitedEmail(value: string) {
         this.invitedEmail = value.trim();
-        if(this.isEmailValid()){
+        if (this.isEmailValid()) {
             this.clearErrorMessage();
         }
     }
@@ -43,13 +43,19 @@ export class GroupMembersComponent implements OnInit, OnDestroy {
         return this.invitedEmail.match(regex);
     }
 
-    clearErrorMessage(){
+    clearErrorMessage() {
         this.inputField['invitedEmail'].errorMessage = '';
     }
 
     addMember() {
         if (!this.isEmailValid()) {
             this.inputField['invitedEmail'].errorMessage = 'Emailaddress not valid';
+        }
+        else {
+            this.groupService.addMember(this.groupId, {email: this.invitedEmail});
+            // TODO just hide if added successfully
+            this.invitedEmail = '';
+            this.showModal = false;
         }
     }
 

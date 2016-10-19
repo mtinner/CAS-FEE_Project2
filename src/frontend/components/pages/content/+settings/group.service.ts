@@ -5,6 +5,7 @@ import {AppService} from '../../../app.service';
 import {Group, GroupObj} from '../../../../models/Group';
 import {Router} from '@angular/router';
 import {Member, MemberObj} from '../../../../models/Member';
+import {EmptyObservable} from 'rxjs/observable/EmptyObservable';
 
 @Injectable()
 export class GroupService extends AppService {
@@ -45,13 +46,32 @@ export class GroupService extends AppService {
             .map(this.extractData)
             .catch(this.handleError);
         response.subscribe((group: Group) => {
+            this.groups.forEach((group: Group) => {
+                group.isActiveGroup = false;
+            });
+            group.isActiveGroup = true;
             this.groups.push(group);
         });
         return response;
     }
 
-    setActiveGroup(id: number) {
-        let response = this.http.post(`${this.groupUrl}/active/${id}`, null)
+
+    addMember(groupId: string, invitedUser: any): Observable<any> {
+        /* let member = this.members.some((member: Member) => member.email === invitedUser.email);
+         if (member) {
+         return new EmptyObservable();
+         }*/
+        let response = this.http.put(`${this.groupUrl}/${groupId}/join`, invitedUser)
+            .map(this.extractData)
+            .catch(this.handleError);
+        response.subscribe((member: Member) => {
+            this.members.push(member);
+        });
+        return response;
+    }
+
+    setActiveGroup(id: number): Observable<any> {
+        let response = this.http.post(`${this.groupUrl}/${id}/active`, null)
             .map(this.extractData)
             .catch(this.handleError);
         response.subscribe(() => {

@@ -10,13 +10,13 @@ let authService = (function () {
     const JWT_RESPONSE_HEADER = 'X-Auth-Token';
     const users = [ //todo: get from DB
         {
-            email: 'admin',
+            email: 'admin@admin.ch',
             username: 'admin',
             password: 'pwd',
             roles: ['user', 'admin']
         },
         {
-            email: 'appUser',
+            email: 'appUser@admin.ch',
             username: 'appUser',
             password: 'pwd',
             roles: ['user']

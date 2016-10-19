@@ -17,7 +17,7 @@ export class LoginComponent {
     constructor(private loginService: LoginHttpService) {
     }
 
-    email = 'appUser';
+    email = 'appUser@admin.ch';
     password = 'pwd';
 
     setEmail(value) {

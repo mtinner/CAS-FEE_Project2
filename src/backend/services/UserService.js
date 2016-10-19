@@ -19,6 +19,10 @@ class UserService {
         return this[singleton];
     }
 
+    secureUser(user) {
+        return {email: user.email, username: user.username};
+    }
+
     get(user) {
         return this.nedbRepo.get({email: user.email});
     }
@@ -31,7 +35,7 @@ class UserService {
                         return this.nedbRepo.getAll({'groups.id': groupId})
                             .then((users) => {
                                 let members = users.map(user=> {
-                                    return {email: user.email, username: user.username};
+                                    return this.secureUser(user);
                                 });
                                 return {members: members};
                             });
@@ -73,7 +77,7 @@ class UserService {
                     if (group) {
                         return this.nedbRepo.update(user.id, user, {activeGroup: groupId})
                             .then((user) => {
-                                return user;
+                                return this.secureUser(user);
                             });
                     } else {
                         return Promise.reject('Not allowed to change to this group');
@@ -88,14 +92,15 @@ class UserService {
         }
         return this.get(memberUser)
             .then((user)=> {
-                this.hasGroup(user, invitedGroupId)
+               return this.hasGroup(user, invitedGroupId)
                     .then(group=> {
                         if (group) {
                             return this.get(invitedUser)
                                 .then(user=> {
                                     user.groups.push({id: invitedGroupId});
                                     return this.nedbRepo.update(user.id, user, {})
-                                        .then(() => {
+                                        .then((user) => {
+                                            return this.secureUser(user);
                                         });
                                 });
                         } else {

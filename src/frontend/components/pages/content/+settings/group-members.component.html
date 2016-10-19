@@ -8,7 +8,8 @@
         <div class="modal__content" (click)="$event.stopPropagation()">
             <input-field [placeholder]="inputField.invitedEmail.placeholder"
                          [type]="inputField.invitedEmail.type" [errorMessage]="inputField.invitedEmail.errorMessage"
-                         (enteredText)="setInvitedEmail($event)"></input-field>
+                         (enteredText)="setInvitedEmail($event)"
+                         (keyup.enter)="addMember()"></input-field>
 
             <button class="btn btn--bare" (click)="addMember()">Add</button>
             <button class="btn btn--bare btn--bare--right" (click)="setModalVisibility(false)">Cancel</button>
