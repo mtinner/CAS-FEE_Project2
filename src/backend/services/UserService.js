@@ -34,7 +34,7 @@ class UserService {
                     if (group) {
                         return this.nedbRepo.getAll({ 'groups.id': groupId })
                             .then((users) => {
-                                let members = users.map(user => this.secureUser(user));
+                                let members = users.map(this.secureUser);
                                 return { members: members };
                             });
                     } else {
@@ -72,7 +72,7 @@ class UserService {
                 .then((group) => {
                     if (group) {
                         return this.nedbRepo.update(user.id, user, { activeGroup: groupId })
-                            .then((user) => this.secureUser(user));
+                            .then(this.secureUser);
                     } else {
                         return Promise.reject('Not allowed to change to this group');
                     }
@@ -93,7 +93,7 @@ class UserService {
                                 .then(user => {
                                     user.groups.push({ id: invitedGroupId });
                                     return this.nedbRepo.update(user.id, user, {})
-                                        .then((user) => this.secureUser(user));
+                                        .then(this.secureUser);
                                 });
                         } else {
                             return Promise.reject('Not allowed to join');
