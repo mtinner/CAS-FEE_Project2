@@ -4,7 +4,7 @@ let Datastore = require('nedb'),
 
 class NedbRepo {
     constructor(filename) {
-        this.store = new Datastore({filename: `${filename}.db`, autoload: true});
+        this.store = new Datastore({filename: `@@location${filename}.db`, autoload: true});
     }
 
     get(obj) {

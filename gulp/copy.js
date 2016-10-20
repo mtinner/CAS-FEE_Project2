@@ -1,8 +1,9 @@
-'use strict'
+'use strict';
 
 module.exports = function (gulp, data, util, taskName) {
 
-    let stream = require('event-stream');
+    let stream = require('event-stream'),
+        replace = require('gulp-replace-task');
 
     gulp.task(taskName + ':StyleguideIcon', function () {
         return gulp.src([
@@ -37,6 +38,14 @@ module.exports = function (gulp, data, util, taskName) {
             data.path.backend + '**',
             '!./**/*mocha.js',
         ], {base: data.path.backend})
+            .pipe(replace({
+                patterns: [
+                    {
+                        match: 'location',
+                        replacement: ''
+                    }
+                ]
+            }))
             .pipe(gulp.dest(data.path.dist));
 
 
@@ -69,6 +78,14 @@ module.exports = function (gulp, data, util, taskName) {
             data.path.backend + '**',
             '!./**/*mocha.js',
         ], {base: data.path.backend})
+            .pipe(replace({
+                patterns: [
+                    {
+                        match: 'location',
+                        replacement: data.path.tmpE2e
+                    }
+                ]
+            }))
             .pipe(gulp.dest(data.path.tmpE2e));
 
         return stream.merge([app, scripts,backend]);
