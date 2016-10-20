@@ -19,17 +19,38 @@ class UserService {
         return this[singleton];
     }
 
+    secureUser(user) {
+        return { email: user.email, username: user.username };
+    }
+
     get(user) {
-        return this.nedbRepo.get({email: user.email});
+        return this.nedbRepo.get({ email: user.email });
+    }
+
+    getGroupMembers(groupId, user) {
+        return this.get(user).then((user) => {
+            return this.hasGroup(user, groupId)
+                .then((group) => {
+                    if (group) {
+                        return this.nedbRepo.getAll({ 'groups.id': groupId })
+                            .then((users) => {
+                                let members = users.map(this.secureUser);
+                                return { members: members };
+                            });
+                    } else {
+                        return Promise.reject('Not allowed to get group members');
+                    }
+                });
+        });
     }
 
     getGroups(user) {
-        return this.get(user).then((user)=> {
+        return this.get(user).then((user) => {
             let promises = [];
-            user.groups.forEach((group)=> {
+            user.groups.forEach((group) => {
 
                 promises.push(this.groupService.get(group)
-                    .then((group=> {
+                    .then((group => {
                         if (group.id === user.activeGroup) {
                             group.isActiveGroup = true;
                         }
@@ -41,21 +62,17 @@ class UserService {
 
             });
             return Promise.all(promises)
-                .then(values=> {
-                    return {groups: values};
-                });
+                .then(values => ({ groups: values }));
         });
     }
 
     setActiveGroup(groupId, user) {
-        return this.get(user).then((user)=> {
+        return this.get(user).then((user) => {
             return this.hasGroup(user, groupId)
-                .then((group)=> {
+                .then((group) => {
                     if (group) {
-                        return this.nedbRepo.update(user.id, user, {activeGroup: groupId})
-                            .then((user) => {
-                                return user;
-                            });
+                        return this.nedbRepo.update(user.id, user, { activeGroup: groupId })
+                            .then(this.secureUser);
                     } else {
                         return Promise.reject('Not allowed to change to this group');
                     }
@@ -68,16 +85,15 @@ class UserService {
             return Promise.reject('Invalid Parameter');
         }
         return this.get(memberUser)
-            .then((user)=> {
-                this.hasGroup(user, invitedGroupId)
-                    .then(group=> {
+            .then((user) => {
+                return this.hasGroup(user, invitedGroupId)
+                    .then(group => {
                         if (group) {
                             return this.get(invitedUser)
-                                .then(user=> {
-                                    user.groups.push({id: invitedGroupId});
+                                .then(user => {
+                                    user.groups.push({ id: invitedGroupId });
                                     return this.nedbRepo.update(user.id, user, {})
-                                        .then(() => {
-                                        });
+                                        .then(this.secureUser);
                                 });
                         } else {
                             return Promise.reject('Not allowed to join');
@@ -92,19 +108,19 @@ class UserService {
 
         return Promise.all([dbUser, dbGroup])
             .then(values => {
-                values[0].groups.push({id: values[1].id});
-                return this.nedbRepo.update(values[0].id, values[0], {activeGroup: values[1].id})
-                    .then(()=>values[1]);
+                values[0].groups.push({ id: values[1].id });
+                return this.nedbRepo.update(values[0].id, values[0], { activeGroup: values[1].id })
+                    .then(() => values[1]);
             });
     }
 
     add(newDoc) {
-        return this.nedbRepo.add(Object.assign(newDoc, {activeGroup: -1, groups: [], roles: ['user']}))
-            .then(user=>this.addGroup({name: 'Private'}, user));
+        return this.nedbRepo.add(Object.assign(newDoc, { activeGroup: -1, groups: [], roles: ['user'] }))
+            .then(user => this.addGroup({ name: 'Private' }, user));
     }
 
     hasGroup(user, groupId) {
-        return Promise.resolve(user.groups.find(group=> group.id === groupId));
+        return Promise.resolve(user.groups.find(group => group.id === groupId));
     }
 }
 

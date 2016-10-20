@@ -3,4 +3,5 @@
            (keyup)="textEntered(input.value)" class="input-field__input" type="{{type}}" value=""
            autocomplete="off">
     <label class="input-field__label" [class.input-field__label--focus]=isFocused>{{placeholder}}</label>
+    <label class="input-field__error">{{errorMessage}}</label>
 </div>

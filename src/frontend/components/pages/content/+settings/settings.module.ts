@@ -9,6 +9,7 @@ import {RouterModule} from '@angular/router';
 import {SettingsChildComponent} from './settings-child.component';
 import {GroupService} from './group.service';
 import {CommonModule} from '@angular/common';
+import {GroupMembersComponent} from './group-members.component';
 
 @NgModule({
     imports: [
@@ -21,7 +22,8 @@ import {CommonModule} from '@angular/common';
     declarations: [
         SettingsComponent,
         SettingsChildComponent,
-        GroupSettingsComponent
+        GroupSettingsComponent,
+        GroupMembersComponent
     ],
     providers: [authServiceProvider, GroupService]
 })

@@ -8,6 +8,10 @@
     padding: 10px 50px;
     display: block;
 
+    &--selectable {
+      cursor: pointer;
+    }
+
     &:hover {
       background: $dark-snow;
     }

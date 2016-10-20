@@ -10,9 +10,7 @@ describe('shoppingListService', ()=> {
         });
         it('getArticleGroups contains Alle', ()=> {
             let articleGroups = shoppingListService.getArticleGroups();
-            expect(articleGroups.articleGroups.some(obj=> {
-                return obj.name === 'Alle';
-            })).toBeTruthy();
+            expect(articleGroups.articleGroups.some(obj=> obj.name === 'Alle')).toBeTruthy();
         });
     });
 

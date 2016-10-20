@@ -13,6 +13,9 @@ export class InputFieldComponent {
     @Input()
     type: string;
 
+    @Input()
+    errorMessage: string;
+
     @Output()
     enteredText = new EventEmitter();
 
