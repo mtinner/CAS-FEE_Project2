@@ -12,6 +12,8 @@ import {SideNavComponent} from './sidenav/side-nav.component';
 import {SideNavService} from './sidenav/side-nav.service';
 import {FormsModule} from '@angular/forms';
 import {PanelComponent} from './panel/panel.component';
+import {SnackbarComponent} from './snackbar/snackbar.component';
+import {SnackbarService} from './snackbar/snackbar.service';
 
 @NgModule({
     imports: [
@@ -27,7 +29,8 @@ import {PanelComponent} from './panel/panel.component';
         SideNavComponent,
         InputFieldComponent,
         RadioComponent,
-        PanelComponent
+        PanelComponent,
+        SnackbarComponent
     ],
     exports: [
         AddComponent,
@@ -37,9 +40,10 @@ import {PanelComponent} from './panel/panel.component';
         SideNavComponent,
         InputFieldComponent,
         RadioComponent,
-        PanelComponent
+        PanelComponent,
+        SnackbarComponent
     ],
-    providers: [HeaderService, SideNavService]
+    providers: [HeaderService, SideNavService, SnackbarService]
 })
 export class ElementModule {
 }

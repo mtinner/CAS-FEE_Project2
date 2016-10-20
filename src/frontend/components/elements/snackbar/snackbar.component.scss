@@ -1,0 +1,37 @@
+@import "../../../styles/utils/variables";
+
+.snackbar {
+  position: fixed;
+  bottom: -40px;
+  display: flex;
+  right: 10px;
+  left: 10px;
+  background: $dark;
+  transition: bottom $slide-duration ease-in, opacity $slide-duration ease-in;
+  z-index: 100;
+  opacity: 0;
+
+  @media (min-width: 720px) {
+    padding: 15px;
+    left: auto;
+    bottom: 75%;
+    width: 420px;
+    right: -450px;
+    transition: right $slide-duration ease-in, opacity $slide-duration ease-in;
+  }
+
+  &__text {
+    color: $snow;
+    padding: 8px 15px;
+  }
+
+  &--show {
+    bottom: 0;
+    opacity: 1;
+    @media (min-width: 720px) {
+      bottom: 75%;
+      right: 0;
+      z-index: 100;
+    }
+  }
+}

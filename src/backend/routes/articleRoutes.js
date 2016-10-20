@@ -10,15 +10,15 @@ router.get('/',
     function (req, res) {
         shoppingListService.getArticles(req.user).then(articles => {
             res.status(200).send(articles);
-        }).catch(() => {
-            res.status(404).send();
+        }).catch((err) => {
+            res.status(404).send(err);
         });
     });
 
 router.post('/',
     authService.protect('user'),
     function (req, res) {
-        shoppingListService.addArticle(req.body,req.user).then(article => {
+        shoppingListService.addArticle(req.body, req.user).then(article => {
             res.status(201).send(article);
         });
     });
