@@ -10,15 +10,15 @@ class ArticleService {
 
     getAll(user) {
         return this.userService.get(user)
-            .then(user=>
                 this.nedbRepo.getAll({groupId: user.activeGroup})
+            .then(user =>
             );
     }
 
     add(newDoc, user) {
         return this.userService.get(user)
-            .then(user=> {
                 Object.assign(newDoc, {groupId: user.activeGroup});
+            .then(user => {
                 return this.nedbRepo.add(newDoc);
             });
     }
