@@ -1,11 +1,11 @@
 module.exports = (function () {
 
-    var heroes = element.all(by.css('[e2e-class|="hero-box"]'));
+   /* var heroes = element.all(by.css('[e2e-class|="hero-box"]'));
     var heroNames = element.all(by.css('[e2e-class="hero-names"]'));
-    var title = element(by.css('[e2e-id="dashboard-title"]'));
+    var title = element(by.css('[e2e-id="dashboard-title"]'));*/
 
     return {
-        heroNames: function () {
+     /*   heroNames: function () {
             return heroNames;
         },
         heroes: function () {
@@ -13,9 +13,9 @@ module.exports = (function () {
         },
         title: function () {
             return title;
-        },
+        },*/
         getUrl: function () {
-            return 'http://localhost:9001/';
+            return 'http://localhost:8080/';
         }
     }
 })();

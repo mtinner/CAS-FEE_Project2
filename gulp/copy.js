@@ -34,9 +34,11 @@ module.exports = function (gulp, data, util, taskName) {
             .pipe(gulp.dest(data.path.dist + 'frontend/scripts/vendor'));
 
         var backend = gulp.src([
-            data.path.backend + '**'
+            data.path.backend + '**',
+            '!./**/*mocha.js',
         ], {base: data.path.backend})
             .pipe(gulp.dest(data.path.dist));
+
 
         return stream.merge([app, scripts, backend]);
     });
@@ -48,17 +50,27 @@ module.exports = function (gulp, data, util, taskName) {
             '!./**/*.scss',
             data.path.frontend + 'images/**',
             data.path.frontend + 'scripts/**',
-            './src/index.html'
+            data.path.frontend + 'fonts/**',
+            './src/index.html',
+            './src/manifest.json',
+            './src/favicon.ico'
         ], {base: './src'})
             .pipe(gulp.dest(data.path.tmpE2e));
 
         var scripts = gulp.src([
             'node_modules/core-js/client/shim.min.js',
+            'node_modules/core-js/client/shim.min.js.map',
             'node_modules/systemjs/dist/system.src.js',
             'node_modules/zone.js/dist/zone.js'
         ])
             .pipe(gulp.dest(data.path.tmpE2e + 'frontend/scripts/vendor'));
 
-        return stream.merge([app, scripts]);
+        var backend = gulp.src([
+            data.path.backend + '**',
+            '!./**/*mocha.js',
+        ], {base: data.path.backend})
+            .pipe(gulp.dest(data.path.tmpE2e));
+
+        return stream.merge([app, scripts,backend]);
     });
 };
