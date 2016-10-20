@@ -1,0 +1,27 @@
+var loginPage = require('../pageobjects/login');
+var cleanup = require('../cleanup');
+
+
+describe('login', function () {
+
+    afterEach(() => {
+        cleanup.removeDB();
+    });
+
+    it('should login', function () {
+        browser.get(loginPage.getUrl());
+        var inputEmail = loginPage.inputEmail().click()
+            .then(()=> loginPage.inputEmail().sendKeys('appUser'));
+        var inputPassword = loginPage.inputPassword().click()
+            .then(()=> loginPage.inputPassword().sendKeys('pwd'));
+
+        Promise.all([inputEmail, inputPassword])
+            .then(() => {
+                loginPage.loginButton().click()
+                    .then(() => {
+                        browser.getCurrentUrl()
+                            .then(url => expect(url).not.toEqual(loginPage.getUrl()));
+                    })
+            });
+    });
+});
