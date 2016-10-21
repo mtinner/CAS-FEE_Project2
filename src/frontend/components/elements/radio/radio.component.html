@@ -1,5 +1,5 @@
 <div>
-  <input type="radio" id="{{id}}" [(ngModel)]="model" (ngModelChange)="change" class="radio" attr.name="{{name}}" value="{{value}}">
+  <input type="radio" id="{{id}}" [checked]="checked" (ngModelChange)="change" class="radio" attr.name="{{name}}">
   <label attr.for="{{id}}" class="label">
     <span class="label__button"></span>
     <span class="label__button--dot"></span>
