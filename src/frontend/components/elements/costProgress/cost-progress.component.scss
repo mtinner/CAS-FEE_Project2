@@ -17,20 +17,14 @@ $avatar_radius: 50px;
 
 .avatar {
     border: 2px dotted blue;
-    flex: 1 $avatar-radius;
+    flex-basis: 0;
     order: 2;
 
     &__pic {
-        margin: 0 auto;
         width: $avatar-radius;
         height: $avatar-radius;
         border-radius: 100%;
         background-color: #999;
-    }
-
-    &__label {
-        text-align: center;
-        border: 2px dotted darkcyan;
     }
 }
 
@@ -46,4 +40,11 @@ $avatar_radius: 50px;
         width: 70%;
         height: 100%;
     }
+}
+
+.label {
+    text-align: center;
+    position: relative;
+    top: -8px;
+    border: 2px dotted darkcyan;
 }
