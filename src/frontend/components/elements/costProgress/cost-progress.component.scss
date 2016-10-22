@@ -1,32 +1,45 @@
 @import "../../../styles/utils/variables";
 
+$avatar_radius: 50px;
+
 .progress {
     border: 2px dotted red;
+    display: flex;
+    flex-flow: row wrap;
 }
 
 .amount {
-    display: inline-block;
+    border: 2px dotted yellow;
+    text-align: right;
+    flex: 1 2;
+    order: 1;
 }
 
 .avatar {
+    border: 2px dotted blue;
+    flex: 1 $avatar-radius;
+    order: 2;
+
     &__pic {
-        display: inline-block;
-        width: 50px;
-        height: 50px;
+        margin: 0 auto;
+        width: $avatar-radius;
+        height: $avatar-radius;
         border-radius: 100%;
         background-color: #999;
     }
 
     &__label {
-        
+        text-align: center;
+        border: 2px dotted darkcyan;
     }
-
 }
 
 .bar {
+    flex: 1 2;
+    order: 3;
     width: 100px;
     height: 20px;
-    border: 1px solid black;
+    border: 2px dotted purple;
 
     &__progress {
         background-color: green;
