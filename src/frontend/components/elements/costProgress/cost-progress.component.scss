@@ -1,50 +1,57 @@
 @import "../../../styles/utils/variables";
 
 $avatar_radius: 50px;
+$bar-height: 28px;
+
+.container {
+    padding: 1em 0;
+}
 
 .progress {
-    border: 2px dotted red;
     display: flex;
     flex-flow: row wrap;
 }
 
 .amount {
-    border: 2px dotted yellow;
     text-align: right;
-    flex: 1 2;
+    position: relative;
+    left: -1em;
+    line-height: $avatar_radius;
+    flex: 1 1;
     order: 1;
 }
 
 .avatar {
-    border: 2px dotted blue;
     flex-basis: 0;
     order: 2;
+    z-index: 10;
 
     &__pic {
         width: $avatar-radius;
         height: $avatar-radius;
         border-radius: 100%;
-        background-color: #999;
+        background-color: #ccc;
     }
 }
 
 .bar {
-    flex: 1 2;
+    flex: 1 1;
     order: 3;
+    position: relative;
+    left: -10px;
     width: 100px;
-    height: 20px;
-    border: 2px dotted purple;
+    height: $avatar_radius;
 
     &__progress {
-        background-color: green;
+        background-color: #4CAF50;
         width: 70%;
-        height: 100%;
+        height: $bar-height;
+        margin-top: $avatar_radius/2 - $bar-height/2;
     }
 }
 
 .label {
     text-align: center;
-    position: relative;
-    top: -8px;
-    border: 2px dotted darkcyan;
+    font-size: .8em;
+    color: #444
 }
