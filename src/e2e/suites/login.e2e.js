@@ -1,5 +1,6 @@
 var loginPage = require('../pageobjects/login');
 var cleanup = require('../cleanup');
+var Promise = require('promise');
 
 
 describe('login', function () {
@@ -15,13 +16,13 @@ describe('login', function () {
         var inputPassword = loginPage.inputPassword().click()
             .then(()=> loginPage.inputPassword().sendKeys('pwd'));
 
-        Promise.all([inputEmail, inputPassword])
-            .then(() => {
+        return Promise.all([inputEmail, inputPassword])
+            .then(() =>
                 loginPage.loginButton().click()
-                    .then(() => {
+                    .then(() =>
                         browser.getCurrentUrl()
-                            .then(url => expect(url).not.toEqual(loginPage.getUrl()));
-                    })
-            });
+                            .then(url => expect(url).not.toEqual(loginPage.getUrl()))
+                    )
+            );
     });
 });
