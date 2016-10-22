@@ -1,3 +1,13 @@
 <div class="container__page">
-    <h1>Cost Management</h1>
+	<card [title]="overviewTitle">
+
+	</card>
+
+	<card [title]="currentMonthTitle">
+
+	</card>
+
+	<card *ngFor="let month of months" [title]="month.title">
+
+	</card>
 </div>

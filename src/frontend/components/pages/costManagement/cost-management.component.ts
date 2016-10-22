@@ -9,16 +9,17 @@ import {HeaderConfig} from '../../../models/HeaderConfig';
 })
 export class CostManagementComponent implements OnInit, OnDestroy {
 
+    overviewTitle = 'Übersicht';
+    currentMonthTitle = 'Aktueller Monat';
+
+    months = [
+        {title: 'September 2016'},
+        {title: 'Oktober 2016'},
+        {title: 'November 2016'},
+    ];
+
     constructor(private headerService: HeaderService) {
     }
-
-    leftIconClick = () => {
-        console.log('left Icon');
-    };
-
-    rightIconClick = () => {
-        console.log('right Icon');
-    };
 
     ngOnInit(): void {
         this.headerService.headerConfig = new HeaderConfig('Cost Management', HeaderStyle.CostManagement);
