@@ -9,7 +9,7 @@ let express = require('express'),
 router.get('/',
     authService.protect('user'),
     function (req, res) {
-        groupManager.get(req.user)
+        groupManager.getAll(req.user)
             .then(groups => res.status(200).send(groups))
             .catch(() => res.status(404).send());
     });

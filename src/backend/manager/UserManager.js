@@ -5,8 +5,8 @@ let Group = require('../models/Group'),
 
 class UserManager {
     constructor() {
-        this.userService = new UserService();
-        this.groupService = new GroupService();
+        this.userService = UserService.instance;
+        this.groupService = GroupService.instance;
     }
 
     add(newDoc) {

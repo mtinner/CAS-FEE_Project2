@@ -1,13 +1,10 @@
 'use strict';
-let NedbRepo = require('./NedbRepo'),
-    GroupService = require('./GroupService'),
-    Group = require('../models/Group');
+let NedbRepo = require('./NedbRepo');
 
 let singleton;
 
 class UserService {
     constructor() {
-        this.groupService = GroupService.instance;
         this.nedbRepo = new NedbRepo('user');
     }
 
