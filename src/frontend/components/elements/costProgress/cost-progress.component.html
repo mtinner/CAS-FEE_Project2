@@ -5,7 +5,18 @@
 			<div class="avatar__pic"></div>
 		</div>
 		<div class="bar">
-			<div class="bar__progress"></div>
+			<div class="bar__progress" [style.width]="percentage + '%'"></div>
+		</div>
+	</div>
+	<div class="label">{{label}}</div>
+
+	<div class="progress--reversed">
+		<div class="amount">Fr. {{amount}}.-</div>
+		<div class="avatar">
+			<div class="avatar__pic"></div>
+		</div>
+		<div class="bar">
+			<div class="bar__progress" [style.width]="percentage + '%'"></div>
 		</div>
 	</div>
 	<div class="label">{{label}}</div>

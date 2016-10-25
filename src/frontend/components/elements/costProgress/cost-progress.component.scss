@@ -44,7 +44,6 @@ $bar-height: 28px;
 
     &__progress {
         background-color: #4CAF50;
-        width: 70%;
         transition: width 0.5s ease-out; 
         height: $bar-height;
         margin-top: $avatar_radius/2 - $bar-height/2;
@@ -55,4 +54,23 @@ $bar-height: 28px;
     text-align: center;
     font-size: .8em;
     color: #444
+}
+
+.progress--reversed {
+    @extend .progress;
+
+    .bar {
+        order: 1;
+        left: 10px;
+            &__progress {
+                float: right;
+                background-color: #d9534f;
+            }
+    }
+    
+    .amount {
+        order: 3;
+        text-align: left;
+        left: 1em;
+    }
 }
