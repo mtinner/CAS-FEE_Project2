@@ -1,24 +1,26 @@
 'use strict';
-let NedbRepo = require('./NedbRepo'),
-    UserService = require('./UserService');
+let NedbRepo = require('./NedbRepo');
+
+let singleton;
 
 class ArticleService {
     constructor() {
         this.nedbRepo = new NedbRepo('article');
-        this.userService = UserService.instance;
     }
 
-    getAll(user) {
-        return this.userService.get(user)
-            .then(user => this.nedbRepo.getAll({groupId: user.activeGroup}));
+    static get instance() {
+        if (!this[singleton]) {
+            this[singleton] = new ArticleService();
+        }
+        return this[singleton];
     }
 
-    add(newDoc, user) {
-        return this.userService.get(user)
-            .then(user => {
-                Object.assign(newDoc, {groupId: user.activeGroup});
-                return this.nedbRepo.add(newDoc);
-            });
+    getAll(article) {
+        return this.nedbRepo.getAll(article);
+    }
+
+    add(newDoc) {
+        return this.nedbRepo.add(newDoc);
     }
 
     remove(id) {

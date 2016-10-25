@@ -7,7 +7,7 @@ import {ArticleGroup, ArticleGroupObj} from '../../../../models/ArticleGroup';
 
 @Injectable()
 export class ShoppingListService extends AppService {
-    private shoppingListUrl = `${this.baseUrl}shoppinglist`;
+    private shoppingListUrl = `${this.baseUrl}articles`;
 
     public articleGroups: ArticleGroup[] = [];
     public articles: Article[] = [];
@@ -17,7 +17,7 @@ export class ShoppingListService extends AppService {
     }
 
     deleteArticle(id): Observable<any> {
-        let response = this.http.delete(`${this.shoppingListUrl}/article/${id}`)
+        let response = this.http.delete(`${this.shoppingListUrl}/${id}`)
             .map(this.extractData)
             .catch(this.handleError);
         response.subscribe((deletedArticle: Article) => {
@@ -30,7 +30,7 @@ export class ShoppingListService extends AppService {
     }
 
     fetchArticleGroups(): Observable<any> {
-        let response = this.http.get(`${this.shoppingListUrl}/article/groups`)
+        let response = this.http.get(`${this.shoppingListUrl}/groups`)
             .map(this.extractData)
             .catch(this.handleError);
         response.subscribe((articleGroupObj: ArticleGroupObj) => {
@@ -41,7 +41,7 @@ export class ShoppingListService extends AppService {
     }
 
     fetchArticles(): Observable<any> {
-        let response = this.http.get(`${this.shoppingListUrl}/article`)
+        let response = this.http.get(`${this.shoppingListUrl}`)
             .map(this.extractData)
             .catch(this.handleError);
         response.subscribe((articleObj: ArticleObj) => {
@@ -51,7 +51,7 @@ export class ShoppingListService extends AppService {
     }
 
     addArticle(body): Observable<any> {
-        let response = this.http.post(`${this.shoppingListUrl}/article`, body, this.jsonOptions)
+        let response = this.http.post(`${this.shoppingListUrl}`, body, this.jsonOptions)
             .map(this.extractData)
             .catch(this.handleError);
         response.subscribe((article: Article) => {
