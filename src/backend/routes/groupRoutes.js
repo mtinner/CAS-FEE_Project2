@@ -11,7 +11,7 @@ router.get('/',
     function (req, res) {
         groupManager.getAll(req.user)
             .then(groups => res.status(200).send(groups))
-            .catch(() => res.status(404).send());
+            .catch(() => res.status(400).send());
     });
 
 router.post('/',
@@ -19,7 +19,7 @@ router.post('/',
     function (req, res) {
         groupManager.add(req.body, req.user)
             .then(group => res.status(201).send(group))
-            .catch(() => res.status(404).send());
+            .catch(() => res.status(400).send());
     });
 
 router.put('/:id/join',

@@ -11,7 +11,7 @@ router.get('/',
     function (req, res) {
         articleManager.getAll(req.user)
             .then(articles => res.status(200).send(articles))
-            .catch(() => res.status(404).send());
+            .catch(() => res.status(400).send());
     });
 
 router.post('/',
@@ -26,7 +26,7 @@ router.delete('/:id',
     function (req, res) {
         articleManager.remove(req.params.id)
             .then(article => res.status(200).send(article))
-            .catch(() => res.status(404).send());
+            .catch(() => res.status(400).send());
     });
 
 router.get('/groups', function (req, res) {

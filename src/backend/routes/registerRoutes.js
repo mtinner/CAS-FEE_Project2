@@ -2,12 +2,13 @@
 
 let express = require('express'),
     router = express.Router(),
-    UserService = require('../services/UserService');
+    UserManager = require('../manager/UserManager'),
+    userManager = new UserManager();
 
 router.post('/', function (req, res) {
-    UserService.instance.add(req.body)
+    userManager.add(req.body)
         .then(user => res.status(201).send(user))
-        .catch(() => res.status(404).send());
+        .catch(() => res.status(400).send());
 });
 
 module.exports = router;
