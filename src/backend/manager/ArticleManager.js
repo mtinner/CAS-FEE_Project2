@@ -24,7 +24,7 @@ class ArticleManager {
     getAll(user) {
         return this.userService.get(user)
             .then(user => this.articleService.getAll({groupId: user.activeGroup})
-                .then(articles=> ({articles: articles})));
+                .then(articles => ({articles: articles})));
     }
 
     add(newDoc, user) {
