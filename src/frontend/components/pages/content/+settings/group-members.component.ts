@@ -63,6 +63,10 @@ export class GroupMembersComponent implements OnInit, OnDestroy {
         }
     }
 
+    leaveGroup(event) {
+        this.groupService.leaveGroup(this.groupId, event.description);
+    }
+
     ngOnInit(): void {
         this.route.params.forEach((params: Params) => {
             this.groupId = params['id'];
