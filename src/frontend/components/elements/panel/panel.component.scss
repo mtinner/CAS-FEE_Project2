@@ -2,12 +2,25 @@
 
 .panel {
   height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
   &__item {
 
     &__description {
       font-size: 0.8em;
       color: $default;
+    }
+
+    &__icon {
+      font-size: 20px;
+      border-radius: 20px;
+      padding: 10px;
+
+      &:active {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
     }
   }
 }

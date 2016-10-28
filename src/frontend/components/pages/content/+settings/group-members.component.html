@@ -1,7 +1,7 @@
 <div class="container__page">
     <ul class="list">
         <panel class="list__item" *ngFor="let member of groupService.members" [title]="member.username"
-               [description]="member.email"></panel>
+               [description]="member.email" [rightIconName]="'cross'"></panel>
     </ul>
     <button class="btn btn--round btn--bottom-right icon icon--plus" (click)="setModalVisibility(true)"></button>
     <div *ngIf="showModal" class="modal" (click)="setModalVisibility(false)">

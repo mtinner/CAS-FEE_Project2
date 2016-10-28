@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, EventEmitter, Output} from '@angular/core';
 
 
 @Component({
@@ -12,4 +12,12 @@ export class PanelComponent {
     title: string;
     @Input()
     description: string;
+    @Input()
+    rightIconName: string;
+    @Output()
+    clickIconRight = new EventEmitter();
+
+    iconRightClicked() {
+        this.clickIconRight.emit(this);
+    }
 }
