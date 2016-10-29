@@ -9,7 +9,13 @@ let express = require('express'),
 router.get('/',
     authService.protect('user'),
     function (req, res) {
-        expenseManager.getAll(req.user, req.params.year)
+        const year = +req.query.year;
+        const month = +req.query.month;
+        if (!year || !month) {
+            res.status(400).send();
+            return;
+        }
+        expenseManager.getAll(req.user, year, month)
             .then(expenses => res.status(200).send(expenses))
             .catch(() => res.status(400).send());
     });
