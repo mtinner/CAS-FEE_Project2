@@ -10,8 +10,25 @@ import { CostManagementService } from './cost-management.service';
 })
 export class AddExpenseComponent implements OnInit, OnDestroy {
 
-    constructor(private headerService: HeaderService, private costManagementService: CostManagementService) {
+    private inputField: Object = {
+        description: {placeholder: 'Description', type: 'text'},
+        amount: {placeholder: 'Amount', type: 'text'}
+    };
+    private description: string;
+    private amount: number;
+
+    constructor(
+        private headerService: HeaderService,
+        private costManagementService: CostManagementService) {
     }
+
+    setDescription(value) {
+        this.description = value;
+    };
+
+    setAmount(value) {
+        this.amount = +value;
+    };
 
     ngOnInit(): void {
         this.headerService.headerConfig = new HeaderConfig('Add Expense', HeaderStyle.CostManagement, HeaderIcon.ArrowLeft, this.costManagementService.goToCostManagement);

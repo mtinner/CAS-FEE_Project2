@@ -8,11 +8,11 @@ import {LoginHttpService} from './login-http.service';
 })
 export class LoginComponent {
 
+    private email = 'appUser@admin.ch';
+    private password = 'pwd';
+
     constructor(private loginService: LoginHttpService) {
     }
-
-    email = 'appUser@admin.ch';
-    password = 'pwd';
 
     setEmail(value) {
         this.email = value;
