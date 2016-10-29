@@ -6,6 +6,7 @@ import {ElementModule} from '../../elements/element.module';
 import {CostManagementChildComponent} from './cost-management-child.component';
 import {AddExpenseComponent} from './add-expense.component';
 import {RouterModule} from '@angular/router';
+import { CostManagementService } from './cost-management.service';
 
 @NgModule({
     imports: [
@@ -18,6 +19,9 @@ import {RouterModule} from '@angular/router';
         CostManagementComponent,
         CostManagementChildComponent,
         AddExpenseComponent
+    ],
+    providers: [
+        CostManagementService
     ]
 })
 export class CostManagementModule {

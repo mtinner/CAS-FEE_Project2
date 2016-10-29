@@ -11,11 +11,12 @@ export class CostManagementComponent implements OnInit, OnDestroy {
 
     overviewTitle: string = 'Übersicht';
     currentMonthTitle: string = 'Aktueller Monat';
+    addExpenseRoute: string = 'add';
 
     months = [
-        {title: 'September 2016'},
-        {title: 'Oktober 2016'},
-        {title: 'November 2016'},
+        { title: 'September 2016' },
+        { title: 'Oktober 2016' },
+        { title: 'November 2016' },
     ];
 
     constructor(private headerService: HeaderService) {
