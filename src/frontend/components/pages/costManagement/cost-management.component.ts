@@ -5,8 +5,7 @@ import {HeaderConfig} from '../../../models/HeaderConfig';
 
 @Component({
     moduleId: module.id,
-    templateUrl: 'cost-management.component.html',
-    styleUrls: ['cost-management.component.css']
+    templateUrl: 'cost-management.component.html'
 })
 export class CostManagementComponent implements OnInit, OnDestroy {
 
