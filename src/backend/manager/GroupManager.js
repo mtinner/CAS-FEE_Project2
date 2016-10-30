@@ -110,21 +110,29 @@ class GroupManager {
         return {email: user.email, username: user.username};
     }
 
-    leave(groupId, user) {
-        return this.userService.get(user)
-            .then((dbUser)=> this.hasGroup(dbUser, groupId)
-                .then((hasGroup)=> {
-                    if (!hasGroup) {
-                        return;
-                    }
-                    let remainingGroups = dbUser.groups.filter((group) => group.id !== groupId);
-                    // TODO delete Group if no members?
+    leave(groupId, triggeredUser, affecteUser) {
+        let dbAffectedUser;
+        let triggeredUserHasGroup = this.userService.get(triggeredUser)
+            .then(dbUser=> this.hasGroup(dbUser, groupId));
+        let affectedUserHasGroup = this.userService.get(affecteUser)
+            .then(dbUser=> {
+                dbAffectedUser = dbUser;
+                return this.hasGroup(dbUser, groupId);
+            });
 
-                    return this.userService.update(dbUser.id, dbUser, {
-                        activeGroup: this.evaluateActiveGroup(dbUser, groupId, remainingGroups),
-                        groups: remainingGroups
-                    });
-                }));
+        return Promise.all([triggeredUserHasGroup, affectedUserHasGroup])
+            .then((hasGroup)=> {
+                if (!hasGroup[0] || !hasGroup[1]) {
+                    return;
+                }
+                let remainingGroups = dbAffectedUser.groups.filter((group) => group.id !== groupId);
+                // TODO delete Group if no members?
+
+                return this.userService.update(dbAffectedUser.id, dbAffectedUser, {
+                    activeGroup: this.evaluateActiveGroup(dbAffectedUser, groupId, remainingGroups),
+                    groups: remainingGroups
+                });
+            });
 
     }
 

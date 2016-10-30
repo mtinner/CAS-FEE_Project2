@@ -49,7 +49,7 @@ router.post('/:id/active',
 router.put('/:id/leave',
     authService.protect('user'),
     function (req, res) {
-        groupManager.leave(req.params.id, req.user)
+        groupManager.leave(req.params.id, req.user, req.body)
             .then(() => res.status(200).send({}))
             .catch(() => res.status(400).send());
     });
