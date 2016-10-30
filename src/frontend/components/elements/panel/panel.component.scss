@@ -17,9 +17,13 @@
       font-size: 20px;
       border-radius: 20px;
       padding: 10px;
+      opacity: 0.5;
 
       &:active {
         background-color: rgba(0, 0, 0, 0.1);
+      }
+      &:hover {
+        opacity: 1;
       }
     }
   }
