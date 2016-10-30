@@ -1,10 +1,11 @@
 <div class="container__page">
     <ul class="list">
         <panel class="list__item" *ngFor="let member of groupService.members" [title]="member.username"
-               [description]="member.email" [rightIconName]="'cross'" (clickIconRight)="leaveGroup($event)"></panel>
+               [description]="member.email" [rightIconName]="'cross'"
+               (clickIconRight)="leaveMember=$event;setLeaveModalVisibility(true)"></panel>
     </ul>
-    <button class="btn btn--round btn--bottom-right icon icon--plus" (click)="setModalVisibility(true)"></button>
-    <div *ngIf="showModal" class="modal" (click)="setModalVisibility(false)">
+    <button class="btn btn--round btn--bottom-right icon icon--plus" (click)="setMemberModalVisibility(true)"></button>
+    <div *ngIf="showMemberModal" class="modal" (click)="setMemberModalVisibility(false)">
         <div class="modal__content" (click)="$event.stopPropagation()">
             <input-field [placeholder]="inputField.invitedEmail.placeholder"
                          [type]="inputField.invitedEmail.type" [errorMessage]="inputField.invitedEmail.errorMessage"
@@ -12,7 +13,16 @@
                          (keyup.enter)="addMember()"></input-field>
 
             <button class="btn btn--bare" (click)="addMember()">Add</button>
-            <button class="btn btn--bare btn--bare--right" (click)="setModalVisibility(false)">Cancel</button>
+            <button class="btn btn--bare btn--bare--right" (click)="setMemberModalVisibility(false)">Cancel</button>
+        </div>
+    </div>
+
+    <div *ngIf="showLeaveModal" class="modal" (click)="setLeaveModalVisibility(false)">
+        <div class="modal__content" (click)="$event.stopPropagation()">
+            <div>Remove '{{leaveMember.description}}' from this group?</div>
+
+            <button class="btn btn--bare" (click)="leaveGroup(leaveMember)">Delete</button>
+            <button class="btn btn--bare btn--bare--right" (click)="setLeaveModalVisibility(false)">Cancel</button>
         </div>
     </div>
 </div>
