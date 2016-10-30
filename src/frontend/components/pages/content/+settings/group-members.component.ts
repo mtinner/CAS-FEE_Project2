@@ -64,7 +64,8 @@ export class GroupMembersComponent implements OnInit, OnDestroy {
     }
 
     leaveGroup(event) {
-        this.groupService.leaveGroup(this.groupId, event.description);
+        this.groupService.leaveGroup(this.groupId, event.description)
+            .subscribe(() => this.groupService.goToGroups());
     }
 
     ngOnInit(): void {

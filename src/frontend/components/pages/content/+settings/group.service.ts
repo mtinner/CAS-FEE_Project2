@@ -77,7 +77,6 @@ export class GroupService extends AppService {
     }
 
     leaveGroup(groupId: string, email: string) {
-        console.log(email);
         let response = this.http.put(`${this.groupUrl}/${groupId}/leave`, {email: email})
             .share()
             .map(this.extractData)
