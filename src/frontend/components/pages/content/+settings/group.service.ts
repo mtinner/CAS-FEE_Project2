@@ -76,6 +76,18 @@ export class GroupService extends AppService {
         return response;
     }
 
+    leaveGroup(groupId: string, email: string) {
+        let response = this.http.put(`${this.groupUrl}/${groupId}/leave`, {email: email})
+            .share()
+            .map(this.extractData)
+            .catch(this.handleError);
+        response.subscribe(() => {
+            this.members = this.members.filter((member: Member) => member.email !== email);
+        }, () => {
+        });
+        return response;
+    }
+
     setActiveGroup(id: number): Observable<any> {
         let response = this.http.post(`${this.groupUrl}/${id}/active`, null)
             .share()
