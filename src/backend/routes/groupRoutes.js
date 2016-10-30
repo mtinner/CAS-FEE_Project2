@@ -22,6 +22,14 @@ router.post('/',
             .catch(() => res.status(400).send());
     });
 
+router.get('/:id',
+    authService.protect('user'),
+    function (req, res) {
+        groupManager.get(req.params.id, req.user)
+            .then(group => res.status(200).send(group))
+            .catch(() => res.status(400).send());
+    });
+
 router.put('/:id/join',
     authService.protect('user'),
     function (req, res) {

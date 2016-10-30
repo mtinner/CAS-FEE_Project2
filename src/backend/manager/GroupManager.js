@@ -10,6 +10,19 @@ class GroupManager {
         this.userService = UserService.instance;
     }
 
+    get(groupId, user) {
+        return this.userService.get(user)
+            .then(dbUser=> this.hasGroup(dbUser, groupId))
+            .then(hasGroup => {
+                if (!hasGroup) {
+                    return Promise.reject('Invalid Parameter');
+                }
+                else {
+                    return this.groupService.get({id: groupId});
+                }
+            });
+    }
+
     getAll(user) {
         return this.userService.get(user)
             .then((user)=> {

@@ -10,6 +10,7 @@ import {SettingsChildComponent} from './settings-child.component';
 import {GroupService} from './group.service';
 import {CommonModule} from '@angular/common';
 import {GroupMembersComponent} from './group-members.component';
+import {GroupMemberService} from './group-member.service';
 
 @NgModule({
     imports: [
@@ -25,7 +26,7 @@ import {GroupMembersComponent} from './group-members.component';
         GroupSettingsComponent,
         GroupMembersComponent
     ],
-    providers: [authServiceProvider, GroupService]
+    providers: [authServiceProvider, GroupService, GroupMemberService]
 })
 export class SettingsModule {
 }
