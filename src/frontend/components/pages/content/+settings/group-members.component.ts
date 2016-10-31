@@ -13,7 +13,7 @@ import {GroupMemberService} from './group-member.service';
 })
 export class GroupMembersComponent implements OnInit, OnDestroy {
     private inputField: Object = {
-        invitedEmail: {placeholder: 'Email', type: 'mail', errorMessage: ''}
+        invitedEmail: {placeholder: 'Email', type: 'email', errorMessage: ''}
     };
 
 

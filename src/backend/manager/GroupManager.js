@@ -65,8 +65,8 @@ class GroupManager {
             return Promise.reject('Invalid Parameter');
         }
         return this.userService.get(memberUser)
-            .then((user)=> {
-                return this.hasGroup(user, invitedGroupId)
+            .then((user)=>
+                this.hasGroup(user, invitedGroupId)
                     .then(group=> {
                         if (group) {
                             return this.userService.get(invitedUser)
@@ -78,14 +78,14 @@ class GroupManager {
                         } else {
                             return Promise.reject('Not allowed to join');
                         }
-                    });
-            });
+                    })
+            );
     }
 
     setActive(groupId, user) {
         return this.userService.get(user)
-            .then((user)=> {
-                return this.hasGroup(user, groupId)
+            .then((user)=>
+                this.hasGroup(user, groupId)
                     .then((group)=> {
                         if (group) {
                             return this.userService.update(user.id, user, {activeGroup: groupId})
@@ -93,14 +93,14 @@ class GroupManager {
                         } else {
                             return Promise.reject('Not allowed to change to this group');
                         }
-                    });
-            });
+                    })
+            );
     }
 
     getMembers(groupId, user) {
         return this.userService.get(user)
-            .then((user) => {
-                return this.hasGroup(user, groupId)
+            .then((user) =>
+                this.hasGroup(user, groupId)
                     .then((group) => {
                         if (group) {
                             return this.userService.getAll({'groups.id': groupId})
@@ -111,8 +111,8 @@ class GroupManager {
                         } else {
                             return Promise.reject('Not allowed to get group members');
                         }
-                    });
-            });
+                    })
+            );
     }
 
     rename(groupId, user, group) {

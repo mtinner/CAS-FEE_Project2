@@ -10,7 +10,7 @@ import {LoginHttpService} from './login-http.service';
 })
 export class LoginComponent {
     private inputField: Object = {
-        email: {placeholder: 'Email', type: 'text'},
+        email: {placeholder: 'Email', type: 'email'},
         password: {placeholder: 'Password', type: 'password'}
     };
 
