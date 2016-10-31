@@ -4,6 +4,7 @@ import {HeaderStyle, HeaderIcon} from '../../../elements/header/header.enum';
 import {HeaderConfig} from '../../../../models/HeaderConfig';
 import {GroupService} from './group.service';
 import {Params, ActivatedRoute} from '@angular/router';
+import {GroupMemberService} from './group-member.service';
 
 @Component({
     moduleId: module.id,
@@ -21,7 +22,7 @@ export class GroupMembersComponent implements OnInit, OnDestroy {
     private showMemberModal: boolean = false;
     private showLeaveModal: boolean = false;
 
-    constructor(private headerService: HeaderService, private groupService: GroupService, private route: ActivatedRoute) {
+    constructor(private headerService: HeaderService, private groupService: GroupService,private groupMemberService: GroupMemberService, private route: ActivatedRoute) {
         this.headerService.headerConfig = new HeaderConfig('Group Members', HeaderStyle.Settings, HeaderIcon.ArrowLeft, this.groupService.goToGroups);
     }
 
@@ -74,6 +75,8 @@ export class GroupMembersComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
+        this.headerService.headerConfig = new HeaderConfig(`Group ${this.groupMemberService.group.name}`, HeaderStyle.Settings, HeaderIcon.ArrowLeft, this.groupService.goToGroups, HeaderIcon.Edit);
+
         this.route.params.forEach((params: Params) => {
             this.groupId = params['id'];
             this.groupService.getMembers(this.groupId);
