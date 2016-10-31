@@ -22,6 +22,10 @@ class GroupService {
     add(newDoc) {
         return this.nedbRepo.add(newDoc);
     }
+
+    update(id, oldDoc, newDoc) {
+        return this.nedbRepo.update(id, oldDoc, newDoc);
+    }
 }
 
 module.exports = GroupService;

@@ -115,6 +115,20 @@ class GroupManager {
             });
     }
 
+    rename(groupId, user, group) {
+        return this.userService.get(user)
+            .then((user) =>
+                this.hasGroup(user, groupId)
+                    .then((dbGroup) => {
+                        if (dbGroup && group.name) {
+                            return this.groupService.update(groupId, {id: groupId}, {name: group.name});
+                        } else {
+                            return Promise.reject('Not allowed to rename this group');
+                        }
+                    })
+            );
+    }
+
     hasGroup(user, groupId) {
         return Promise.resolve(user.groups.find(group=> group.id === groupId));
     }

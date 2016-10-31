@@ -54,6 +54,14 @@ router.post('/:id/active',
             .catch(() => res.status(400).send());
     });
 
+router.put('/:id',
+    authService.protect('user'),
+    function (req, res) {
+        groupManager.rename(req.params.id, req.user, req.body)
+            .then((group) => res.status(200).send(group))
+            .catch(() => res.status(400).send());
+    });
+
 router.put('/:id/leave',
     authService.protect('user'),
     function (req, res) {
