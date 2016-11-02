@@ -46,4 +46,12 @@ router.post('/:id/active',
             .catch(() => res.status(400).send());
     });
 
+router.put('/:id/leave',
+    authService.protect('user'),
+    function (req, res) {
+        groupManager.leave(req.params.id, req.user, req.body)
+            .then(() => res.status(200).send({}))
+            .catch(() => res.status(400).send());
+    });
+
 module.exports = router;

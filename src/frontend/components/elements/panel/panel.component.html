@@ -1,6 +1,9 @@
 <div class="panel">
-    {{title}}
-    <div class="panel__item__description">
-        {{description}}
-    </div>
+    <aside>
+        {{title}}
+        <div class="panel__item__description">
+            {{description}}
+        </div>
+    </aside>
+    <div *ngIf="rightIconName" class="panel__item__icon icon icon--{{rightIconName}}" (click)="iconRightClicked()"></div>
 </div>

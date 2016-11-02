@@ -109,6 +109,48 @@ class GroupManager {
     secureUser(user) {
         return {email: user.email, username: user.username};
     }
+
+    leave(groupId, triggeredUser, affecteUser) {
+        let dbAffectedUser;
+        let triggeredUserHasGroup = this.userService.get(triggeredUser)
+            .then(dbUser=> this.hasGroup(dbUser, groupId));
+        let affectedUserHasGroup = this.userService.get(affecteUser)
+            .then(dbUser=> {
+                dbAffectedUser = dbUser;
+                return this.hasGroup(dbUser, groupId);
+            });
+
+        return Promise.all([triggeredUserHasGroup, affectedUserHasGroup])
+            .then((hasGroup)=> {
+                if (!hasGroup[0] || !hasGroup[1]) {
+                    return;
+                }
+                let remainingGroups = dbAffectedUser.groups.filter((group) => group.id !== groupId);
+                // TODO delete Group if no members?
+
+                return this.userService.update(dbAffectedUser.id, dbAffectedUser, {
+                    activeGroup: this.evaluateActiveGroup(dbAffectedUser, groupId, remainingGroups),
+                    groups: remainingGroups
+                });
+            });
+
+    }
+
+    evaluateActiveGroup(dbUser, groupId, remainingGroups) {
+        let newActiveGroup;
+        if (dbUser.activeGroup !== groupId) {
+            newActiveGroup = dbUser.activeGroup;
+        }
+        else {
+            if (remainingGroups.length) {
+                newActiveGroup = remainingGroups[0].id;
+            }
+            else {
+                newActiveGroup = '';
+            }
+        }
+        return newActiveGroup;
+    }
 }
 
 module.exports = GroupManager;

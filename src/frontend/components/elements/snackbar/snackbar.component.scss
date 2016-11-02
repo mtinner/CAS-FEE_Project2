@@ -14,7 +14,8 @@
   @media (min-width: 720px) {
     padding: 15px;
     left: auto;
-    bottom: 75%;
+    top: 25%;
+    bottom: auto;
     width: 420px;
     right: -450px;
     transition: right $slide-duration ease-in, opacity $slide-duration ease-in;
@@ -29,7 +30,8 @@
     bottom: 0;
     opacity: 1;
     @media (min-width: 720px) {
-      bottom: 75%;
+      top: 25%;
+      bottom: auto;
       right: 0;
       z-index: 100;
     }

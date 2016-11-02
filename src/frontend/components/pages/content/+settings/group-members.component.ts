@@ -18,10 +18,11 @@ export class GroupMembersComponent implements OnInit, OnDestroy {
 
     private invitedEmail: string = '';
     private groupId: string = '';
-    private showModal: boolean = false;
+    private showMemberModal: boolean = false;
+    private showLeaveModal: boolean = false;
 
     constructor(private headerService: HeaderService, private groupService: GroupService, private route: ActivatedRoute) {
-        this.headerService.headerConfig = new HeaderConfig('Group Members', HeaderStyle.Settings, HeaderIcon.ArrowLeft, this.groupService.goToGroups, HeaderIcon.Leave);
+        this.headerService.headerConfig = new HeaderConfig('Group Members', HeaderStyle.Settings, HeaderIcon.ArrowLeft, this.groupService.goToGroups);
     }
 
     setInvitedEmail(value: string) {
@@ -31,11 +32,15 @@ export class GroupMembersComponent implements OnInit, OnDestroy {
         }
     }
 
-    setModalVisibility(value: boolean) {
-        this.showModal = value;
+    setMemberModalVisibility(value: boolean) {
+        this.showMemberModal = value;
         if (!value) {
             this.clearErrorMessage();
         }
+    }
+
+    setLeaveModalVisibility(value: boolean) {
+        this.showLeaveModal = value;
     }
 
     isEmailValid() {
@@ -55,12 +60,17 @@ export class GroupMembersComponent implements OnInit, OnDestroy {
             this.groupService.addMember(this.groupId, {email: this.invitedEmail})
                 .subscribe(() => {
                         this.invitedEmail = '';
-                        this.showModal = false;
+                        this.showMemberModal = false;
                     },
                     () => {
                         this.inputField['invitedEmail'].errorMessage = 'Email address not found';
                     });
         }
+    }
+
+    leaveGroup(event) {
+        this.groupService.leaveGroup(this.groupId, event.description)
+            .subscribe(() => this.groupService.goToGroups());
     }
 
     ngOnInit(): void {
