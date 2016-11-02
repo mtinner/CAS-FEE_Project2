@@ -14,7 +14,7 @@ class ExpenseManager {
     }
 
     add(newDoc) {
-        return this.articleService.add(newDoc);
+        return this.expenseService.add(newDoc);
     }
 
     remove(id) {

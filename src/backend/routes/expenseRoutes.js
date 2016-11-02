@@ -20,12 +20,12 @@ router.get('/',
             .catch(() => res.status(400).send());
     });
 
-// router.post('/',
-//     authService.protect('user'),
-//     function (req, res) {
-//         expenseManager.add(req.body, req.user)
-//             .then(article => res.status(201).send(article));
-//     });
+router.post('/',
+    authService.protect('user'),
+    function (req, res) {
+        expenseManager.add(req.body, req.user.id)
+            .then(article => res.status(201).send(article));
+    });
 
 // router.delete('/:id',
 //     authService.protect('user'),
