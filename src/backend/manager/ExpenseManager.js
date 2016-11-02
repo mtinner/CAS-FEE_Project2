@@ -13,8 +13,8 @@ class ExpenseManager {
             .then(expenses => ({ expenses: expenses }));
     }
 
-    add(newDoc) {
-        return this.expenseService.add(newDoc);
+    add(newDoc, userId) {
+        return this.expenseService.add(Object.assign(newDoc, {userId: userId}));
     }
 
     remove(id) {

@@ -19,8 +19,8 @@ class ExpenseService {
         return this.nedbRepo.getAll(expense);
     }
 
-    add(newDoc, userId) {
-        return this.nedbRepo.add(Object.assign(newDoc, {userId: userId}));
+    add(newDoc) {
+        return this.nedbRepo.add(newDoc);
     }
 
     remove(id) {
