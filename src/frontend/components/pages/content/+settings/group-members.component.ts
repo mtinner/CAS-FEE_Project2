@@ -13,17 +13,24 @@ import {GroupMemberService} from './group-member.service';
 })
 export class GroupMembersComponent implements OnInit, OnDestroy {
     private inputField: Object = {
-        invitedEmail: {placeholder: 'Email', type: 'email', errorMessage: ''}
+        invitedEmail: {placeholder: 'Email', type: 'email', errorMessage: ''},
+        groupname: {placeholder: 'Groupname', type: 'text', text: this.groupMemberService.group.name}
     };
-
 
     private invitedEmail: string = '';
     private groupId: string = '';
     private showMemberModal: boolean = false;
     private showLeaveModal: boolean = false;
+    private showRenameModal: boolean = false;
+    private newGroupname: string = '';
 
-    constructor(private headerService: HeaderService, private groupService: GroupService,private groupMemberService: GroupMemberService, private route: ActivatedRoute) {
-        this.headerService.headerConfig = new HeaderConfig('Group Members', HeaderStyle.Settings, HeaderIcon.ArrowLeft, this.groupService.goToGroups);
+
+    constructor(private headerService: HeaderService, private groupService: GroupService, private groupMemberService: GroupMemberService, private route: ActivatedRoute) {
+        this.newGroupname = groupMemberService.group.name;
+    }
+
+    setGroupname(value: string) {
+        this.newGroupname = value.trim();
     }
 
     setInvitedEmail(value: string) {
@@ -35,10 +42,11 @@ export class GroupMembersComponent implements OnInit, OnDestroy {
 
     setMemberModalVisibility(value: boolean) {
         this.showMemberModal = value;
-        if (!value) {
-            this.clearErrorMessage();
-        }
     }
+
+    setRenameModalVisibility = (value: boolean = true) => {
+        this.showRenameModal = value;
+    };
 
     setLeaveModalVisibility(value: boolean) {
         this.showLeaveModal = value;
@@ -69,13 +77,17 @@ export class GroupMembersComponent implements OnInit, OnDestroy {
         }
     }
 
+    renameGroup() {
+        console.log('rename');
+    }
+
     leaveGroup(event) {
         this.groupService.leaveGroup(this.groupId, event.description)
             .subscribe(() => this.groupService.goToGroups());
     }
 
     ngOnInit(): void {
-        this.headerService.headerConfig = new HeaderConfig(`Group ${this.groupMemberService.group.name}`, HeaderStyle.Settings, HeaderIcon.ArrowLeft, this.groupService.goToGroups, HeaderIcon.Edit);
+        this.headerService.headerConfig = new HeaderConfig(`Group ${this.groupMemberService.group.name}`, HeaderStyle.Settings, HeaderIcon.ArrowLeft, this.groupService.goToGroups, HeaderIcon.Edit, this.setRenameModalVisibility);
 
         this.route.params.forEach((params: Params) => {
             this.groupId = params['id'];

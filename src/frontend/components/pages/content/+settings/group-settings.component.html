@@ -12,7 +12,8 @@
     <div *ngIf="showModal" class="modal" (click)="setModalVisibility(false)">
         <div class="modal__content" (click)="$event.stopPropagation()">
             <input-field [placeholder]="inputField.groupname.placeholder"
-                         [type]="inputField.groupname.type" (enteredText)="setGroupname($event)"
+                         [type]="inputField.groupname.type"
+                         (enteredText)="setGroupname($event)"
                          (keyup.enter)="!groupname || addGroup()"></input-field>
 
             <button class="btn btn--bare" [disabled]="!groupname" (click)="addGroup()">Create</button>

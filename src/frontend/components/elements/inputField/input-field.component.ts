@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
 
 @Component({
     moduleId: module.id,
@@ -6,7 +6,8 @@ import {Component, Input, Output, EventEmitter} from '@angular/core';
     templateUrl: 'input-field.component.html',
     styleUrls: ['input-field.component.css'],
 })
-export class InputFieldComponent {
+export class InputFieldComponent implements OnInit {
+
     @Input()
     placeholder: string;
 
@@ -14,16 +15,23 @@ export class InputFieldComponent {
     type: string;
 
     @Input()
+    text: string;
+
+    @Input()
     errorMessage: string;
 
     @Output()
     enteredText = new EventEmitter();
 
+    private isFocused: boolean = false;
+
     textEntered(text: string) {
         this.enteredText.emit(text);
     }
 
-    private isFocused: boolean = false;
+    ngOnInit(): void {
+        this.setFocus(!!this.text);
+    }
 
     setFocus<T>(...val: Array<T>) {
         this.isFocused = [...val].some(entry => {

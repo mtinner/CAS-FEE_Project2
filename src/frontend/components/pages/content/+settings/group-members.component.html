@@ -8,7 +8,8 @@
     <div *ngIf="showMemberModal" class="modal" (click)="setMemberModalVisibility(false)">
         <div class="modal__content" (click)="$event.stopPropagation()">
             <input-field [placeholder]="inputField.invitedEmail.placeholder"
-                         [type]="inputField.invitedEmail.type" [errorMessage]="inputField.invitedEmail.errorMessage"
+                         [type]="inputField.invitedEmail.type"
+                         [errorMessage]="inputField.invitedEmail.errorMessage"
                          (enteredText)="setInvitedEmail($event)"
                          (keyup.enter)="addMember()"></input-field>
 
@@ -23,6 +24,19 @@
 
             <button class="btn btn--bare" (click)="leaveGroup(leaveMember)">Delete</button>
             <button class="btn btn--bare btn--bare--right" (click)="setLeaveModalVisibility(false)">Cancel</button>
+        </div>
+    </div>
+
+    <div *ngIf="showRenameModal" class="modal" (click)="setRenameModalVisibility(false)">
+        <div class="modal__content" (click)="$event.stopPropagation()">
+            <input-field [placeholder]="inputField.groupname.placeholder"
+                         [type]="inputField.groupname.type"
+                         [text]="inputField.groupname.text"
+                         (enteredText)="setGroupname($event)"
+                         (keyup.enter)="!newGroupname || renameGroup()"></input-field>
+
+            <button class="btn btn--bare" [disabled]="!newGroupname" (click)="renameGroup(leaveMember)">Rename</button>
+            <button class="btn btn--bare btn--bare--right" (click)="setRenameModalVisibility(false)">Cancel</button>
         </div>
     </div>
 </div>
