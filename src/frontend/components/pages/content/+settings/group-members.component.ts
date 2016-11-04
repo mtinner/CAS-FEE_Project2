@@ -5,6 +5,7 @@ import {HeaderConfig} from '../../../../models/HeaderConfig';
 import {GroupService} from './group.service';
 import {Params, ActivatedRoute} from '@angular/router';
 import {GroupMemberService} from './group-member.service';
+import {InputField} from '../../../elements/inputField/InputField';
 
 @Component({
     moduleId: module.id,
@@ -12,9 +13,9 @@ import {GroupMemberService} from './group-member.service';
     styleUrls: ['group-members.component.css']
 })
 export class GroupMembersComponent implements OnInit, OnDestroy {
-    private inputField: Object = {
-        invitedEmail: {placeholder: 'Email', type: 'email', errorMessage: ''},
-        groupname: {placeholder: 'Groupname', type: 'text', text: this.groupMemberService.group.name}
+    private inputField = {
+        invitedEmail: new InputField('Email', 'email'),
+        groupname: new InputField('Groupname', 'text', this.groupMemberService.group.name)
     };
 
     private invitedEmail: string = '';
@@ -71,7 +72,17 @@ export class GroupMembersComponent implements OnInit, OnDestroy {
     }
 
     renameGroup(groupname) {
-        console.log(groupname);
+        if (this.groupMemberService.group.name !== groupname) {
+            this.groupMemberService.renameGroup(this.groupId, groupname)
+                .subscribe(() => {
+                    this.setRenameModalVisibility(false);
+                    this.headerService.headerConfig = new HeaderConfig(`Group ${this.groupMemberService.group.name}`, HeaderStyle.Settings, HeaderIcon.ArrowLeft, this.groupService.goToGroups, HeaderIcon.Edit, this.setRenameModalVisibility);
+                    this.inputField.groupname.text = this.groupMemberService.group.name;
+                });
+        }
+        else {
+            this.setRenameModalVisibility(false);
+        }
     }
 
     leaveGroup(event) {

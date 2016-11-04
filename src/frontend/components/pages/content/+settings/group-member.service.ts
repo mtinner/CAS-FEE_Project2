@@ -36,6 +36,16 @@ export class GroupMemberService extends AppService implements CanActivate {
         return response;
     }
 
+    renameGroup(groupId: string, groupname: any) {
+        let response = this.http.put(`${this.groupUrl}/${groupId}`, {name: groupname})
+            .share()
+            .map(this.extractData)
+            .catch(this.handleError);
+        response.subscribe((group: Group) => {
+            this.group = group;
+        });
+        return response;
+    }
 
     /*    getMembers(id: string): Observable<any> {
      let response = this.http.get(`${this.groupUrl}/${id}/members`)
