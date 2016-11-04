@@ -1,6 +1,6 @@
 <div class="container__page">
     <ul class="list">
-        <panel class="list__item" *ngFor="let member of groupService.members" [title]="member.username"
+        <panel class="list__item" *ngFor="let member of groupMemberService.members" [title]="member.username"
                [description]="member.email" [rightIconName]="'cross'"
                (clickIconRight)="leaveMember=$event;setLeaveModalVisibility(true)"></panel>
     </ul>
