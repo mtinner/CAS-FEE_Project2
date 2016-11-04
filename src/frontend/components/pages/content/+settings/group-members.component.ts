@@ -22,15 +22,8 @@ export class GroupMembersComponent implements OnInit, OnDestroy {
     private showMemberModal: boolean = false;
     private showLeaveModal: boolean = false;
     private showRenameModal: boolean = false;
-    private newGroupname: string = '';
-
 
     constructor(private headerService: HeaderService, private groupService: GroupService, private groupMemberService: GroupMemberService, private route: ActivatedRoute) {
-        this.newGroupname = groupMemberService.group.name;
-    }
-
-    setGroupname(value: string) {
-        this.newGroupname = value.trim();
     }
 
     setInvitedEmail(value: string) {
@@ -77,8 +70,8 @@ export class GroupMembersComponent implements OnInit, OnDestroy {
         }
     }
 
-    renameGroup() {
-        console.log('rename');
+    renameGroup(groupname) {
+        console.log(groupname);
     }
 
     leaveGroup(event) {
