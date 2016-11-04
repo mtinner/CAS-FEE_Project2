@@ -1,10 +1,9 @@
 <div class="login-container">
     <input-field class="input--login" [placeholder]="inputField.email.placeholder"
-                 [type]="inputField.email.type" (enteredText)="setEmail($event)"></input-field>
+                 [type]="inputField.email.type" (enteredText)="setEmail($event)" e2e-id="email"></input-field>
 
     <input-field class="input--login" [placeholder]="inputField.password.placeholder"
-                 [type]="inputField.password.type" (enteredText)="setPassword($event)"></input-field>
+                 [type]="inputField.password.type" (enteredText)="setPassword($event)" e2e-id="password"></input-field>
 
-    <button class="btn btn--login" (click)="login()">Login</button>
-
+    <button class="btn btn--login" (click)="login()" e2e-id="loginBtn">Login</button>
 </div>
