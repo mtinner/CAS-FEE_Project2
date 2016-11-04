@@ -11,6 +11,7 @@ import {GroupService} from './group.service';
 import {CommonModule} from '@angular/common';
 import {GroupMembersComponent} from './group-members.component';
 import {GroupMemberService} from './group-member.service';
+import {settingsChildRouting} from './settings-child.routing';
 
 @NgModule({
     imports: [
@@ -19,6 +20,7 @@ import {GroupMemberService} from './group-member.service';
         CommonModule,
         BrowserModule,
         ElementModule,
+        settingsChildRouting
     ],
     declarations: [
         SettingsComponent,
