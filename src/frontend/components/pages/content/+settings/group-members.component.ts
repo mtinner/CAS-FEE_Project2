@@ -13,10 +13,8 @@ import {InputField} from '../../../elements/inputField/InputField';
     styleUrls: ['group-members.component.css']
 })
 export class GroupMembersComponent implements OnInit, OnDestroy {
-    private inputField = {
-        invitedEmail: new InputField('Email', 'email'),
-        groupname: new InputField('Groupname', 'text', this.groupMemberService.group.name)
-    };
+    private groupnameInputField: InputField = new InputField('Groupname', 'text', this.groupMemberService.group.name);
+    private invitedEmailInputField: InputField = new InputField('Email', 'email');
 
     private invitedEmail: string = '';
     private groupId: string = '';
@@ -30,12 +28,15 @@ export class GroupMembersComponent implements OnInit, OnDestroy {
     setInvitedEmail(value: string) {
         this.invitedEmail = value.trim();
         if (this.isEmailValid()) {
-            this.clearErrorMessage();
+            this.clearInvitedEmailErrorMessage();
         }
     }
 
     setMemberModalVisibility(value: boolean) {
         this.showMemberModal = value;
+        if (!value) {
+            this.clearInvitedEmailErrorMessage();
+        }
     }
 
     setRenameModalVisibility = (value: boolean = true) => {
@@ -51,13 +52,13 @@ export class GroupMembersComponent implements OnInit, OnDestroy {
         return this.invitedEmail.match(regex);
     }
 
-    clearErrorMessage() {
-        this.inputField['invitedEmail'].errorMessage = '';
+    clearInvitedEmailErrorMessage() {
+        this.invitedEmailInputField.errorMessage = '';
     }
 
     addMember() {
         if (!this.isEmailValid()) {
-            this.inputField['invitedEmail'].errorMessage = 'Emailaddress not valid';
+            this.invitedEmailInputField.errorMessage = 'Emailaddress not valid';
         }
         else {
             this.groupService.addMember(this.groupId, {email: this.invitedEmail})
@@ -66,7 +67,7 @@ export class GroupMembersComponent implements OnInit, OnDestroy {
                         this.showMemberModal = false;
                     },
                     () => {
-                        this.inputField['invitedEmail'].errorMessage = 'Email address not found';
+                        this.invitedEmailInputField.errorMessage = 'Email address not found';
                     });
         }
     }
@@ -77,7 +78,7 @@ export class GroupMembersComponent implements OnInit, OnDestroy {
                 .subscribe(() => {
                     this.setRenameModalVisibility(false);
                     this.headerService.headerConfig = new HeaderConfig(`Group ${this.groupMemberService.group.name}`, HeaderStyle.Settings, HeaderIcon.ArrowLeft, this.groupService.goToGroups, HeaderIcon.Edit, this.setRenameModalVisibility);
-                    this.inputField.groupname.text = this.groupMemberService.group.name;
+                    this.groupnameInputField.text = this.groupMemberService.group.name;
                 });
         }
         else {

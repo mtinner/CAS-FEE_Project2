@@ -4,6 +4,7 @@ import {HeaderStyle, HeaderIcon} from '../../../elements/header/header.enum';
 import {HeaderConfig} from '../../../../models/HeaderConfig';
 import {GroupService} from './group.service';
 import {Group} from '../../../../models/Group';
+import {InputField} from '../../../elements/inputField/InputField';
 
 @Component({
     moduleId: module.id,
@@ -12,9 +13,7 @@ import {Group} from '../../../../models/Group';
 })
 export class GroupSettingsComponent implements OnInit, OnDestroy {
 
-    private inputField: Object = {
-        groupname: {placeholder: 'Groupname', type: 'text'}
-    };
+    private groupnameInputField: InputField = new InputField('Groupname', 'text');
 
     private groupname: string = '';
     private showModal: boolean = false;
