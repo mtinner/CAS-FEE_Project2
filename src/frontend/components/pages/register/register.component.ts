@@ -2,6 +2,7 @@ import {Component, Injectable} from '@angular/core';
 import {RegisterService} from './register.service';
 import {User} from '../../../models/User';
 import {LoginHttpService} from '../login/login-http.service';
+import {InputField} from '../../elements/inputField/InputField';
 
 
 @Injectable()
@@ -11,11 +12,11 @@ import {LoginHttpService} from '../login/login-http.service';
     styleUrls: ['register.component.css']
 })
 export class RegisterComponent {
-    private inputField: Object = {
-        username: {placeholder: 'Username', type: 'text'},
-        email: {placeholder: 'Email', type: 'email'},
-        password: {placeholder: 'Password', type: 'password'}
-    };
+    public usernameInputField: InputField = new InputField('Username', 'text');
+    public emailInputField: InputField = new InputField('Email', 'email');
+    public passwordInputField: InputField = new InputField('Password', 'password');
+
+
     private username: String;
     private email: String;
     private password: String;
