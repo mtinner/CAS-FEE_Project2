@@ -52,6 +52,21 @@ module.exports = function (gulp, data, util, taskName) {
         return stream.merge([app, scripts, backend]);
     });
 
+
+    gulp.task(taskName + ':tmpProd', function () {
+        var app = gulp.src([
+            data.path.frontend + '**/*.ts',
+            data.path.frontend + '**/*.html',
+            '!./**/*.scss',
+            data.path.frontend + 'scripts/**',
+            '!./src/manifest.json',
+            '!./src/favicon.ico'
+        ], {base: './src/frontend'})
+            .pipe(gulp.dest(data.path.tmpProd));
+
+        return stream.merge([app]);
+    });
+
     gulp.task(taskName + ':E2eApp', function () {
         var app = gulp.src([
             data.path.frontend + 'components/**',

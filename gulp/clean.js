@@ -6,6 +6,11 @@ module.exports = function (gulp, data, util, taskName) {
             .pipe(clean({force: true}));
     });
 
+    gulp.task(taskName + ':Prod', function () {
+        return gulp.src(data.path.tmpProd, {read: false})
+            .pipe(clean({force: true}));
+    });
+
     gulp.task(taskName + ':E2e', function () {
         return gulp.src(data.path.tmpE2e, {read: false})
             .pipe(clean({force: true}));

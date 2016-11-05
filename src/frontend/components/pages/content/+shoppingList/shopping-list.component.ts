@@ -9,7 +9,6 @@ import {HeaderConfig} from '../../../../models/HeaderConfig';
 @Component({
     moduleId: module.id,
     templateUrl: 'shopping-list.component.html',
-    styleUrls: ['shopping-list.component.css'],
     providers: [ShoppingListService]
 })
 export class ShoppingListComponent implements OnInit, OnDestroy {

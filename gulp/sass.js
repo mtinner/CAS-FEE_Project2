@@ -10,6 +10,13 @@ module.exports = function (gulp, data, util, taskName) {
             .pipe(livereload());
     });
 
+    gulp.task(taskName + ':Prod', function () {
+        return gulp.src(data.path.frontend + '**/*.scss')
+            .pipe(sass().on('error', sass.logError))
+            .pipe(gulp.dest(data.path.tmpProd))
+            .pipe(livereload());
+    });
+
     gulp.task(taskName + ':E2e', function () {
         return gulp.src(data.path.frontend + '**/*.scss')
             .pipe(sass().on('error', sass.logError))
