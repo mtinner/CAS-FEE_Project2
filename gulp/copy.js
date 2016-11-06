@@ -21,9 +21,14 @@ module.exports = function (gulp, data, util, taskName) {
             data.path.frontend + 'images/**',
             data.path.frontend + 'scripts/**',
             data.path.frontend + 'fonts/**',
-            './src/index.html',
             './src/manifest.json',
             './src/favicon.ico'
+        ], {base: './src'})
+            .pipe(gulp.dest(data.path.dist));
+
+        // icons will not be displayed if index.html in app task (problem removeCode task)
+        var index = gulp.src([
+            './src/index.html',
         ], {base: './src'})
             .pipe(removeCode({development: true}))
             .pipe(gulp.dest(data.path.dist));
@@ -50,8 +55,7 @@ module.exports = function (gulp, data, util, taskName) {
             }))
             .pipe(gulp.dest(data.path.dist));
 
-
-        return stream.merge([app, scripts, backend]);
+        return stream.merge([app, index, scripts, backend]);
     });
 
 
