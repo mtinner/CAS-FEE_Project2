@@ -56,6 +56,7 @@
     "gulp-replace-task": "^0.11.0",
     "gulp-sass": "~2.3.2",
     "gulp-sourcemaps": "~1.6.0",
+    "gulp-strip-comments": "^2.4.3",
     "gulp-tslint": "~6.1.1",
     "gulp-typescript": "~3.0.2",
     "gulp-watch": "~4.3.9",

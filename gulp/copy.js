@@ -4,7 +4,8 @@ module.exports = function (gulp, data, util, taskName) {
 
     let stream = require('event-stream'),
         removeCode = require('gulp-remove-code'),
-        replace = require('gulp-replace-task');
+        replace = require('gulp-replace-task'),
+        strip = require('gulp-strip-comments');
 
     gulp.task(taskName + ':StyleguideIcon', function () {
         return gulp.src([
@@ -21,7 +22,6 @@ module.exports = function (gulp, data, util, taskName) {
             data.path.frontend + 'images/**',
             data.path.frontend + 'scripts/**',
             data.path.frontend + 'fonts/**',
-            './src/manifest.json',
             './src/favicon.ico'
         ], {base: './src'})
             .pipe(gulp.dest(data.path.dist));
@@ -29,8 +29,10 @@ module.exports = function (gulp, data, util, taskName) {
         // icons will not be displayed if index.html in app task (problem removeCode task)
         var index = gulp.src([
             './src/index.html',
+            './src/manifest.json',
         ], {base: './src'})
             .pipe(removeCode({development: true}))
+            .pipe(strip())
             .pipe(gulp.dest(data.path.dist));
 
         var scripts = gulp.src([
@@ -97,9 +99,15 @@ module.exports = function (gulp, data, util, taskName) {
             './src/**/manifest.json'
         ], {base: './src'})
             .pipe(removeCode({production: true}))
+            .pipe(strip())
             .pipe(gulp.dest(data.path.prod));
 
-        var manifest = gulp.src([
+        var favicon = gulp.src([
+            './src/favicon.ico',
+        ], {base: './src'})
+            .pipe(gulp.dest(data.path.prod));
+
+        var imagFonts = gulp.src([
             './src/**/images/**/*',
             data.path.frontend + 'fonts/**'
         ], {base: './src/frontend'})
@@ -116,7 +124,7 @@ module.exports = function (gulp, data, util, taskName) {
             .pipe(removeCode({production: true}))
             .pipe(gulp.dest(data.path.prod));
 
-        return stream.merge([index, manifest, zone, backend]);
+        return stream.merge([index, favicon, imagFonts, zone, backend]);
     });
 
     gulp.task(taskName + ':E2eApp', function () {
