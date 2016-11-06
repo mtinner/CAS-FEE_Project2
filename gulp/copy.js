@@ -69,7 +69,7 @@ module.exports = function (gulp, data, util, taskName) {
         return stream.merge([app]);
     });
 
-    gulp.task(taskName + ':prodMain', function () {
+    gulp.task(taskName + ':ProdMain', function () {
         var app = gulp.src([
             data.path.frontend + '**/main.ts'
         ], {base: './src/frontend'})
@@ -77,6 +77,33 @@ module.exports = function (gulp, data, util, taskName) {
             .pipe(gulp.dest(data.path.tmpProd));
 
         return stream.merge([app]);
+    });
+
+    gulp.task(taskName + ':Prod', function () {
+        var index = gulp.src([
+            './src/index.html',
+            './src/**/manifest.json'
+        ], {base: './src'})
+            .pipe(removeCode({production: true}))
+            .pipe(gulp.dest(data.path.prod));
+
+        var manifest = gulp.src([
+            './src/**/images/**/*'
+        ], {base: './src/frontend'})
+            .pipe(gulp.dest(data.path.prod));
+
+        var zone = gulp.src([
+            './node_modules/zone.js/dist/zone.min.js'
+        ], {base: './node_modules/zone.js/dist/'})
+            .pipe(gulp.dest(data.path.prod + 'scripts'));
+
+        var backend = gulp.src([
+            data.path.backend + '**'
+        ], {base: data.path.backend})
+            .pipe(removeCode({production: true}))
+            .pipe(gulp.dest(data.path.prod));
+
+        return stream.merge([index, manifest, zone, backend]);
     });
 
     gulp.task(taskName + ':E2eApp', function () {

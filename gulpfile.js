@@ -16,6 +16,7 @@ config(gulp, {
             path: {
                 frontend: './src/frontend/',
                 backend: './src/backend/',
+                prod: './prod/',
                 tmpE2e: './src/.tmpE2e/',
                 tmpProd: './src/.tmpProd/',
                 aot: './src/.aot/',
@@ -57,8 +58,10 @@ gulp.task('Prod', function (callback) {
         ['clean:Prod'],
         ['sass:Prod', 'copy:tmpProd'],
         ['transpiling:Prod'],
-        ['copy:prodMain'],
+        ['copy:ProdMain'],
         ['transpiling:Prod'],
+        ['copy:Prod', 'rollup:Prod'],
+        'serve:Prod',
         callback
     );
 });

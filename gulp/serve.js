@@ -9,4 +9,8 @@ module.exports = function (gulp, data, util, taskName) {
     gulp.task(taskName + ':E2e', function () {
         return server.run([data.path.tmpE2e + 'server.js'], {}, false);
     });
+
+    gulp.task(taskName + ':Prod', function () {
+        return server.run([data.path.prod + 'server.js'], {}, false);
+    });
 };

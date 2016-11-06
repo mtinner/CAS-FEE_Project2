@@ -1,7 +1,8 @@
 module.exports = function (gulp, data, util, taskName) {
 
     var sass = require('gulp-sass'),
-        livereload = require('gulp-livereload');
+        livereload = require('gulp-livereload'),
+        stream = require('event-stream');
 
     gulp.task(taskName + ':Dist', function () {
         return gulp.src(data.path.frontend + '**/*.scss')
@@ -11,10 +12,16 @@ module.exports = function (gulp, data, util, taskName) {
     });
 
     gulp.task(taskName + ':Prod', function () {
-        return gulp.src(data.path.frontend + '**/*.scss')
+        var inStyle = gulp.src(data.path.frontend + '**/*.scss')
             .pipe(sass().on('error', sass.logError))
-            .pipe(gulp.dest(data.path.tmpProd))
-            .pipe(livereload());
+            .pipe(gulp.dest(data.path.tmpProd));
+
+        var globalStyle = gulp.src(data.path.frontend + '**/all.scss')
+            .pipe(sass().on('error', sass.logError))
+            .pipe(gulp.dest(data.path.prod));
+
+        return stream.merge([inStyle, globalStyle]);
+
     });
 
     gulp.task(taskName + ':E2e', function () {

@@ -17,9 +17,17 @@ app.get('/manifest.json', function (req, res) {
 
 app.use('/api', apiRouting);
 
+//removeIf(production)
 app.use('/frontend', express.static('./src/.dist/frontend'));
 app.use('/@angular', express.static('node_modules/@angular'));
 app.use('/rxjs', express.static('node_modules/rxjs'));
+//endRemoveIf(production)
+
+//removeIf(development)
+app.use('/styles', express.static('./prod/styles'));
+app.use('/scripts', express.static('./prod/scripts'));
+//endRemoveIf(development)
+
 app.get('*', function (req, res) {
     res.sendFile(__dirname + '/index.html');
 });
