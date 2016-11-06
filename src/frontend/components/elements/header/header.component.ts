@@ -10,7 +10,7 @@ export class HeaderComponent {
 
     private headerConfig;
 
-    constructor(private headerService: HeaderService) {
+    constructor(public headerService: HeaderService) {
         this.headerConfig = headerService.headerConfig;
     }
 

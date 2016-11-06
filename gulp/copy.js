@@ -3,6 +3,7 @@
 module.exports = function (gulp, data, util, taskName) {
 
     let stream = require('event-stream'),
+        removeCode = require('gulp-remove-code'),
         replace = require('gulp-replace-task');
 
     gulp.task(taskName + ':StyleguideIcon', function () {
@@ -62,6 +63,17 @@ module.exports = function (gulp, data, util, taskName) {
             '!./src/manifest.json',
             '!./src/favicon.ico'
         ], {base: './src/frontend'})
+            .pipe(removeCode({development: true}))
+            .pipe(gulp.dest(data.path.tmpProd));
+
+        return stream.merge([app]);
+    });
+
+    gulp.task(taskName + ':prodMain', function () {
+        var app = gulp.src([
+            data.path.frontend + '**/main.ts'
+        ], {base: './src/frontend'})
+            .pipe(removeCode({production: true}))
             .pipe(gulp.dest(data.path.tmpProd));
 
         return stream.merge([app]);

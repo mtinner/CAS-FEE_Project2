@@ -18,6 +18,7 @@ config(gulp, {
                 backend: './src/backend/',
                 tmpE2e: './src/.tmpE2e/',
                 tmpProd: './src/.tmpProd/',
+                aot: './src/.aot/',
                 e2e: './src/e2e/',
                 spec: './src/spec/',
                 dist: './src/.dist/',
@@ -55,6 +56,8 @@ gulp.task('Prod', function (callback) {
     runSequence(
         ['clean:Prod'],
         ['sass:Prod', 'copy:tmpProd'],
+        ['transpiling:Prod'],
+        ['copy:prodMain'],
         ['transpiling:Prod'],
         callback
     );

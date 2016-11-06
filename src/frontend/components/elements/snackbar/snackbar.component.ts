@@ -8,6 +8,6 @@ import {SnackbarService} from './snackbar.service';
     styleUrls: ['snackbar.component.css']
 })
 export class SnackbarComponent {
-    constructor(private snackbarService: SnackbarService) {
+    constructor(public snackbarService: SnackbarService) {
     }
 }

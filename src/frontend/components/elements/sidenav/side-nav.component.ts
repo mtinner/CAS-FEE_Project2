@@ -12,10 +12,10 @@ import {SideNavService} from './side-nav.service';
 })
 export class SideNavComponent implements OnInit {
 
-    private menuItems: Array<any> = [];
+    public menuItems: Array<any> = [];
     private selectedIndex: number = 0;
 
-    constructor(private router: Router, private sideNavService: SideNavService, private loginManagingService: LoginManagingService) {
+    constructor(private router: Router, public sideNavService: SideNavService, private loginManagingService: LoginManagingService) {
         this.menuItems = sideNavService.getMenuItems();
     }
 

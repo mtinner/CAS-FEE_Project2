@@ -14,7 +14,7 @@ import {HeaderConfig} from '../../../../models/HeaderConfig';
 export class ShoppingListComponent implements OnInit, OnDestroy {
     private addText: string = 'Add article';
 
-    constructor(private shoppingListService: ShoppingListService, private headerService: HeaderService) {
+    constructor(public shoppingListService: ShoppingListService, private headerService: HeaderService) {
     }
 
     deleteArticle(article: Article) {

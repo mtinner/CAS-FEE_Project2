@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, EventEmitter} from '@angular/core';
 
 @Component({
     moduleId: module.id,
@@ -16,6 +16,8 @@ export class RadioComponent {
     label: string;
     @Input()
     checked: boolean;
+
+    public change: any;
 
     constructor() {
     }
