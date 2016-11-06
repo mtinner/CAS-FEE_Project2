@@ -53,6 +53,7 @@ module.exports = function (gulp, data, util, taskName) {
                     }
                 ]
             }))
+            .pipe(removeCode({development: true}))
             .pipe(gulp.dest(data.path.dist));
 
         return stream.merge([app, index, scripts, backend]);
@@ -64,14 +65,20 @@ module.exports = function (gulp, data, util, taskName) {
             data.path.frontend + '**/*.ts',
             data.path.frontend + '**/*.html',
             '!./**/*.scss',
+            '!./**/main.ts',
             data.path.frontend + 'scripts/**',
             '!./src/manifest.json',
             '!./src/favicon.ico'
         ], {base: './src/frontend'})
+            .pipe(gulp.dest(data.path.tmpProd));
+
+        var mainTs = gulp.src([
+            data.path.frontend + '**/main.ts',
+        ], {base: './src/frontend'})
             .pipe(removeCode({development: true}))
             .pipe(gulp.dest(data.path.tmpProd));
 
-        return stream.merge([app]);
+        return stream.merge([app, mainTs]);
     });
 
     gulp.task(taskName + ':ProdMain', function () {
@@ -93,7 +100,8 @@ module.exports = function (gulp, data, util, taskName) {
             .pipe(gulp.dest(data.path.prod));
 
         var manifest = gulp.src([
-            './src/**/images/**/*'
+            './src/**/images/**/*',
+            data.path.frontend + 'fonts/**'
         ], {base: './src/frontend'})
             .pipe(gulp.dest(data.path.prod));
 

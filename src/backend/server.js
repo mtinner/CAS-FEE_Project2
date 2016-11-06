@@ -26,6 +26,8 @@ app.use('/rxjs', express.static('node_modules/rxjs'));
 //removeIf(development)
 app.use('/styles', express.static('./prod/styles'));
 app.use('/scripts', express.static('./prod/scripts'));
+app.use('/fonts', express.static('./prod/fonts'));
+
 //endRemoveIf(development)
 
 app.get('*', function (req, res) {
