@@ -1,14 +1,14 @@
-//removeIf(development)
+// removeIf(development)
 import {AppModuleNgFactory} from '../.aot/src/.tmpProd/components/app.module.ngfactory';
 import {platformBrowser} from '@angular/platform-browser';
 
 platformBrowser().bootstrapModuleFactory(AppModuleNgFactory);
-//endRemoveIf(development)
+// endRemoveIf(development)
 
 
-//removeIf(production)
+// removeIf(production)
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {AppModule} from './components/app.module';
 
 platformBrowserDynamic().bootstrapModule(AppModule);
-//endRemoveIf(production)
+// endRemoveIf(production)

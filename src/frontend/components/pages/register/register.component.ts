@@ -4,8 +4,6 @@ import {User} from '../../../models/User';
 import {LoginHttpService} from '../login/login-http.service';
 import {InputField} from '../../elements/inputField/InputField';
 
-
-@Injectable()
 @Component({
     moduleId: module.id,
     templateUrl: 'register.component.html',

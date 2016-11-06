@@ -32,7 +32,6 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
         this.shoppingListService.fetchArticles();
     }
 
-
     ngOnDestroy(): void {
         this.headerService.resetHeader();
     }

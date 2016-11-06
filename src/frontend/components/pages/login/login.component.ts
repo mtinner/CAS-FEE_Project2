@@ -1,9 +1,7 @@
-import {Component, Injectable} from '@angular/core';
+import {Component} from '@angular/core';
 import {LoginHttpService} from './login-http.service';
 import {InputField} from '../../elements/inputField/InputField';
 
-
-@Injectable()
 @Component({
     moduleId: module.id,
     templateUrl: 'login.component.html',
