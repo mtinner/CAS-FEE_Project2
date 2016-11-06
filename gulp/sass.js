@@ -12,7 +12,7 @@ module.exports = function (gulp, data, util, taskName) {
     });
 
     gulp.task(taskName + ':Prod', function () {
-        var inStyle = gulp.src(data.path.frontend + '**/*.scss')
+        var inStyle = gulp.src([data.path.frontend + '**/*.scss', '!all.scss'])
             .pipe(sass().on('error', sass.logError))
             .pipe(gulp.dest(data.path.tmpProd));
 

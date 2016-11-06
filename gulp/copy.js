@@ -25,6 +25,7 @@ module.exports = function (gulp, data, util, taskName) {
             './src/manifest.json',
             './src/favicon.ico'
         ], {base: './src'})
+            .pipe(removeCode({development: true}))
             .pipe(gulp.dest(data.path.dist));
 
         var scripts = gulp.src([

@@ -4,7 +4,8 @@ module.exports = function (gulp, data, util, taskName) {
         tsProject = ts.createProject("tsconfig.json"),
         sourcemaps = require('gulp-sourcemaps'),
         livereload = require('gulp-livereload'),
-        exec = require('child_process').exec;
+        exec = require('child_process').exec,
+        removeCode = require('gulp-remove-code');
 
     gulp.task(taskName + ':Prod', function (cb) {
         exec('"node_modules/.bin/ngc" -p "tsconfig-aot.json"', function (err, stdout, stderr) {
@@ -16,6 +17,7 @@ module.exports = function (gulp, data, util, taskName) {
 
     gulp.task(taskName + ':Dist', function () {
         var tsResult = tsProject.src()
+            .pipe(removeCode({development: true}))
             .pipe(sourcemaps.init())
             .pipe(tsProject());
 
