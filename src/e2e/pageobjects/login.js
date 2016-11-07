@@ -1,8 +1,8 @@
 module.exports = (function () {
 
-    var inputEmail = element(by.css('[e2e-id="email"] input'));
-    var inputPassword = element(by.css('[e2e-id="password"] input'));
-    var loginButton = element(by.css('[e2e-id="loginBtn"]'));
+    var inputEmail = element.all(by.className('input--login')).get(0).element(by.tagName('input'));
+    var inputPassword = element.all(by.className('input--login')).get(1).element(by.tagName('input'));
+    var loginButton = element(by.className('btn--login'));
 
     return {
         loginButton: () => loginButton,
