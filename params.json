@@ -1,0 +1,6 @@
+{
+  "name": "Cas-fee project2",
+  "tagline": "angular2",
+  "body": "# CAS-FEE_Project2\r\n\r\n## Usage\r\n\r\n* Install packages: `npm i`\r\n* Install typings: `npm run typings`\r\n* Build, Run & Watch: `npm start`\r\n\r\n## Main Gulp Tasks\r\n * Default (Start App http://:localhost:8080/)\r\n * ServeStyleGuide (Make Styleguide http://localhost:8000/)\r\n * Spec (run Jasmine http://localhost:9002/)\r\n * E2e (run Protractor tests http://localhost:9001/)\r\n\r\n## WebDriver for Protractor\r\n### Installation\r\n`node node_modules/protractor/bin/webdriver-manager update`\r\n`node node_modules/gulp-angular-protractor/node_modules/gulp-protractor/node_modules/protractor/bin/webdriver-manager update`\r\n\r\n### Start\r\n`node node_modules/protractor/bin/webdriver-manager start`\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
