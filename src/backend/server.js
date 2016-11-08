@@ -1,12 +1,14 @@
 'use strict';
 let express = require('express'),
     bodyParser = require('body-parser'),
-    app = module.exports.app = exports.app = express();
+    app = module.exports.app = exports.app = express(),
+    compression = require('compression');
 
 let apiRouting = require('./routes/apiRoutes');
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+app.use(compression());
 
 app.get('/favicon.ico', function (req, res) {
     res.sendFile(__dirname + '/favicon.ico');

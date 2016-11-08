@@ -18,7 +18,7 @@ export class GroupMembersComponent implements OnInit, OnDestroy {
     private invitedEmail: string = '';
     private groupId: string = '';
     public showMemberModal: boolean = false;
-	public showLeaveModal: boolean = false;
+    public showLeaveModal: boolean = false;
 	public showRenameModal: boolean = false;
 
     constructor(private headerService: HeaderService, public groupMemberService: GroupMemberService, private route: ActivatedRoute) {
