@@ -7,6 +7,6 @@ export enum HeaderStyle {
 
 export enum HeaderIcon {
     Burger,
-    Leave,
+    Edit,
     ArrowLeft
 }

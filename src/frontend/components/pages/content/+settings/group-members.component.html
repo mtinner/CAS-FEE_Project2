@@ -1,14 +1,15 @@
 <div class="container__page">
     <ul class="list">
-        <panel class="list__item" *ngFor="let member of groupService.members" [title]="member.username"
+        <panel class="list__item" *ngFor="let member of groupMemberService.members" [title]="member.username"
                [description]="member.email" [rightIconName]="'cross'"
                (clickIconRight)="leaveMember=$event;setLeaveModalVisibility(true)"></panel>
     </ul>
     <button class="btn btn--round btn--bottom-right icon icon--plus" (click)="setMemberModalVisibility(true)"></button>
     <div *ngIf="showMemberModal" class="modal" (click)="setMemberModalVisibility(false)">
         <div class="modal__content" (click)="$event.stopPropagation()">
-            <input-field [placeholder]="inputField.invitedEmail.placeholder"
-                         [type]="inputField.invitedEmail.type" [errorMessage]="inputField.invitedEmail.errorMessage"
+            <input-field [placeholder]="invitedEmailInputField.placeholder"
+                         [type]="invitedEmailInputField.type"
+                         [errorMessage]="invitedEmailInputField.errorMessage"
                          (enteredText)="setInvitedEmail($event)"
                          (keyup.enter)="addMember()"></input-field>
 
@@ -23,6 +24,20 @@
 
             <button class="btn btn--bare" (click)="leaveGroup(leaveMember)">Delete</button>
             <button class="btn btn--bare btn--bare--right" (click)="setLeaveModalVisibility(false)">Cancel</button>
+        </div>
+    </div>
+
+    <div *ngIf="showRenameModal" class="modal" (click)="setRenameModalVisibility(false)">
+        <div class="modal__content" (click)="$event.stopPropagation()">
+            <input-field [placeholder]="groupnameInputField.placeholder"
+                         [type]="groupnameInputField.type"
+                         [text]="groupnameInputField.text"
+                         (enteredText)="groupname=$event.trim();"></input-field>
+            <button class="btn btn--bare"
+                    [disabled]="(groupname === undefined && groupMemberService.group.name)  || (groupname === '')"
+                    (click)="renameGroup(groupname || groupMemberService.group.name)">Rename
+            </button>
+            <button class="btn btn--bare btn--bare--right" (click)="setRenameModalVisibility(false)">Cancel</button>
         </div>
     </div>
 </div>

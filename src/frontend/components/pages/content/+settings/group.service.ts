@@ -4,7 +4,6 @@ import {Http} from '@angular/http';
 import {AppService} from '../../../app.service';
 import {Group, GroupObj} from '../../../../models/Group';
 import {Router} from '@angular/router';
-import {Member, MemberObj} from '../../../../models/Member';
 import 'rxjs/add/operator/share';
 import 'rxjs/add/observable/of';
 
@@ -13,7 +12,6 @@ export class GroupService extends AppService {
     private groupUrl = `${this.baseUrl}groups`;
 
     public groups: Group[] = [];
-    public members: Member[] = [];
 
     constructor(private http: Http, private router: Router) {
         super();
@@ -32,18 +30,6 @@ export class GroupService extends AppService {
     }
 
 
-    getMembers(id: string): Observable<any> {
-        let response = this.http.get(`${this.groupUrl}/${id}/members`)
-            .share()
-            .map(this.extractData)
-            .catch(this.handleError);
-        response.subscribe((memberObj: MemberObj) => {
-            this.members = memberObj.members;
-        });
-
-        return response;
-    }
-
     addGroup(body): Observable<any> {
         let response = this.http.post(`${this.groupUrl}`, body, this.jsonOptions)
             .share()
@@ -55,35 +41,6 @@ export class GroupService extends AppService {
             });
             group.isActiveGroup = true;
             this.groups.push(group);
-        });
-        return response;
-    }
-
-
-    addMember(groupId: string, invitedUser: any): Observable<any> {
-        let member = this.members.find((member: Member) => member.email === invitedUser.email);
-        if (member) {
-            return Observable.of(member);
-        }
-        let response = this.http.put(`${this.groupUrl}/${groupId}/join`, invitedUser)
-            .share()
-            .map(this.extractData)
-            .catch(this.handleError);
-        response.subscribe((member: Member) => {
-            this.members.push(member);
-        }, () => {
-        });
-        return response;
-    }
-
-    leaveGroup(groupId: string, email: string) {
-        let response = this.http.put(`${this.groupUrl}/${groupId}/leave`, {email: email})
-            .share()
-            .map(this.extractData)
-            .catch(this.handleError);
-        response.subscribe(() => {
-            this.members = this.members.filter((member: Member) => member.email !== email);
-        }, () => {
         });
         return response;
     }
@@ -108,10 +65,6 @@ export class GroupService extends AppService {
 
     goToSettings = () => {
         this.router.navigate(['settings']);
-    };
-
-    goToGroups = () => {
-        this.router.navigate(['settings', 'groups']);
     };
 
     goToGroupMembers = (id) => {

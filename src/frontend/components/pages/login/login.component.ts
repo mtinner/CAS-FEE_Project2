@@ -1,5 +1,6 @@
 import {Component, Injectable} from '@angular/core';
 import {LoginHttpService} from './login-http.service';
+import {InputField} from '../../elements/inputField/InputField';
 
 
 @Injectable()
@@ -9,10 +10,9 @@ import {LoginHttpService} from './login-http.service';
     styleUrls: ['login.component.css']
 })
 export class LoginComponent {
-    private inputField: Object = {
-        email: {placeholder: 'Email', type: 'text'},
-        password: {placeholder: 'Password', type: 'password'}
-    };
+    public emailInputField: InputField = new InputField('Email', 'email');
+    public passwordInputField: InputField = new InputField('Password', 'password');
+
 
     constructor(private loginService: LoginHttpService) {
     }

@@ -4,6 +4,8 @@ import {HeaderStyle, HeaderIcon} from '../../../elements/header/header.enum';
 import {HeaderConfig} from '../../../../models/HeaderConfig';
 import {GroupService} from './group.service';
 import {Params, ActivatedRoute} from '@angular/router';
+import {GroupMemberService} from './group-member.service';
+import {InputField} from '../../../elements/inputField/InputField';
 
 @Component({
     moduleId: module.id,
@@ -11,33 +13,35 @@ import {Params, ActivatedRoute} from '@angular/router';
     styleUrls: ['group-members.component.css']
 })
 export class GroupMembersComponent implements OnInit, OnDestroy {
-    private inputField: Object = {
-        invitedEmail: {placeholder: 'Email', type: 'mail', errorMessage: ''}
-    };
-
+    private groupnameInputField: InputField = new InputField('Groupname', 'text', this.groupMemberService.group.name);
+    private invitedEmailInputField: InputField = new InputField('Email', 'email');
 
     private invitedEmail: string = '';
     private groupId: string = '';
     private showMemberModal: boolean = false;
     private showLeaveModal: boolean = false;
+    private showRenameModal: boolean = false;
 
-    constructor(private headerService: HeaderService, private groupService: GroupService, private route: ActivatedRoute) {
-        this.headerService.headerConfig = new HeaderConfig('Group Members', HeaderStyle.Settings, HeaderIcon.ArrowLeft, this.groupService.goToGroups);
+    constructor(private headerService: HeaderService, private groupMemberService: GroupMemberService, private route: ActivatedRoute) {
     }
 
     setInvitedEmail(value: string) {
         this.invitedEmail = value.trim();
         if (this.isEmailValid()) {
-            this.clearErrorMessage();
+            this.clearInvitedEmailErrorMessage();
         }
     }
 
     setMemberModalVisibility(value: boolean) {
         this.showMemberModal = value;
         if (!value) {
-            this.clearErrorMessage();
+            this.clearInvitedEmailErrorMessage();
         }
     }
+
+    setRenameModalVisibility = (value: boolean = true) => {
+        this.showRenameModal = value;
+    };
 
     setLeaveModalVisibility(value: boolean) {
         this.showLeaveModal = value;
@@ -48,35 +52,51 @@ export class GroupMembersComponent implements OnInit, OnDestroy {
         return this.invitedEmail.match(regex);
     }
 
-    clearErrorMessage() {
-        this.inputField['invitedEmail'].errorMessage = '';
+    clearInvitedEmailErrorMessage() {
+        this.invitedEmailInputField.errorMessage = '';
     }
 
     addMember() {
         if (!this.isEmailValid()) {
-            this.inputField['invitedEmail'].errorMessage = 'Emailaddress not valid';
+            this.invitedEmailInputField.errorMessage = 'Emailaddress not valid';
         }
         else {
-            this.groupService.addMember(this.groupId, {email: this.invitedEmail})
+            this.groupMemberService.addMember(this.groupId, {email: this.invitedEmail})
                 .subscribe(() => {
                         this.invitedEmail = '';
                         this.showMemberModal = false;
                     },
                     () => {
-                        this.inputField['invitedEmail'].errorMessage = 'Email address not found';
+                        this.invitedEmailInputField.errorMessage = 'Email address not found';
                     });
         }
     }
 
+    renameGroup(groupname) {
+        if (this.groupMemberService.group.name !== groupname) {
+            this.groupMemberService.renameGroup(this.groupId, groupname)
+                .subscribe(() => {
+                    this.setRenameModalVisibility(false);
+                    this.headerService.headerConfig = new HeaderConfig(`Group ${this.groupMemberService.group.name}`, HeaderStyle.Settings, HeaderIcon.ArrowLeft, this.groupMemberService.goToGroups, HeaderIcon.Edit, this.setRenameModalVisibility);
+                    this.groupnameInputField.text = this.groupMemberService.group.name;
+                });
+        }
+        else {
+            this.setRenameModalVisibility(false);
+        }
+    }
+
     leaveGroup(event) {
-        this.groupService.leaveGroup(this.groupId, event.description)
-            .subscribe(() => this.groupService.goToGroups());
+        this.groupMemberService.leaveGroup(this.groupId, event.description)
+            .subscribe(() => this.groupMemberService.goToGroups());
     }
 
     ngOnInit(): void {
+        this.headerService.headerConfig = new HeaderConfig(`Group ${this.groupMemberService.group.name}`, HeaderStyle.Settings, HeaderIcon.ArrowLeft, this.groupMemberService.goToGroups, HeaderIcon.Edit, this.setRenameModalVisibility);
+
         this.route.params.forEach((params: Params) => {
             this.groupId = params['id'];
-            this.groupService.getMembers(this.groupId);
+            this.groupMemberService.getMembers(this.groupId);
         });
     }
 
