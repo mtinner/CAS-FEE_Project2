@@ -76,7 +76,7 @@ gulp.task('E2e', function (callback) {
         'clean:E2e',
         ['transpiling:E2e', 'sass:E2e'],
         ['copy:E2eApp'],
-        'connect:E2e',
+        'serve:E2e',
         'angularProtractor',
         callback
     );

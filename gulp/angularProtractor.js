@@ -1,6 +1,6 @@
 module.exports = function (gulp, data, util, taskName) {
     var angularProtractor = require('gulp-angular-protractor'),
-        connect = require('gulp-connect');
+        server = require('gulp-express');
 
     gulp.task(taskName, function () {
 
@@ -9,10 +9,11 @@ module.exports = function (gulp, data, util, taskName) {
                 'configFile': data.path.e2e + 'protractor.config.js'
             }))
             .on('end', function () {
-                connect.serverClose();
+                server.stop();
             })
             .on('error', function (e) {
-                throw e
+                console.log(e);
+                server.stop();
             })
     });
 };
