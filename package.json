@@ -5,7 +5,8 @@
   "scripts": {
     "start": "gulp Default",
     "build": "gulp Build",
-    "typings": "typings i"
+    "typings": "typings i",
+    "e2e": "gulp E2e"
   },
   "dependencies": {
     "@angular/common": "~2.1.0",
