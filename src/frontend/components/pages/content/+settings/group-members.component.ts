@@ -95,7 +95,7 @@ export class GroupMembersComponent implements OnInit, OnDestroy {
 
         this.route.params.forEach((params: Params) => {
             this.groupId = params['id'];
-            this.groupMemberService.getMembers(this.groupId);
+            this.groupMemberService.getMembers(this.groupId).subscribe();
         });
     }
 
