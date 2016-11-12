@@ -3,6 +3,7 @@ import { HeaderService } from '../../../elements/header/header.service';
 import { HeaderStyle, HeaderIcon } from '../../../elements/header/header.enum';
 import { HeaderConfig } from '../../../../models/HeaderConfig';
 import { ExpenseMember, ExpenseMemberObj } from '../../../../models/ExpenseMember';
+import { Expense } from '../../../../models/Expense';
 import { CostManagementService } from './cost-management.service';
 
 @Component({
@@ -26,6 +27,15 @@ export class AddExpenseComponent implements OnInit, OnDestroy {
     setAmount(value) {
         this.amount = +value;
     };
+
+    onAddClick() {
+        const emails: string[] = this.costManagementService.members.map(member => member.id);
+        this.costManagementService.addExpense(new Expense(
+            this.description,
+            this.amount,
+            emails
+        )).subscribe();
+    }
 
     ngOnInit(): void {
         this.headerService.headerConfig = new HeaderConfig('Add Expense', HeaderStyle.CostManagement, HeaderIcon.ArrowLeft, this.costManagementService.goToCostManagement);

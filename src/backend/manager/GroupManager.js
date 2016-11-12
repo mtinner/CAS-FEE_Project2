@@ -24,12 +24,12 @@ class GroupManager {
 
     getAll(user) {
         return this.userService.get(user)
-            .then((user)=> {
+            .then((user) => {
                 let promises = [];
-                user.groups.forEach((group)=> {
+                user.groups.forEach((group) => {
 
                     promises.push(this.groupService.get(group)
-                        .then((group=> {
+                        .then((group => {
                             if (group.id === user.activeGroup) {
                                 group.isActiveGroup = true;
                             }
@@ -41,8 +41,8 @@ class GroupManager {
 
                 });
                 return Promise.all(promises)
-                    .then(values=> {
-                        return {groups: values};
+                    .then(values => {
+                        return { groups: values };
                     });
             });
     }
@@ -53,9 +53,9 @@ class GroupManager {
 
         return Promise.all([dbUser, dbGroup])
             .then(values => {
-                values[0].groups.push({id: values[1].id});
-                return this.userService.update(values[0].id, values[0], {activeGroup: values[1].id})
-                    .then(()=>values[1]);
+                values[0].groups.push({ id: values[1].id });
+                return this.userService.update(values[0].id, values[0], { activeGroup: values[1].id })
+                    .then(() => values[1]);
             });
     }
 
@@ -94,28 +94,28 @@ class GroupManager {
 
     getMembers(groupId, user) {
         return this.checkGroupPermission(user, groupId)
-            .then((group) => {
+                .then((group) => {
                 if (group) {
                     return this.userService.getAll({'groups.id': groupId})
-                        .then((users) => {
+                            .then((users) => {
                             let members = users.map(this.secureUser);
-                            return {members: members};
-                        });
+                    return {members: members};
+                });
                 } else {
                     return Promise.reject('Not allowed to get group members');
-                }
-            });
+    }
+    });
     }
 
     rename(groupId, user, group) {
         return this.checkGroupPermission(user, groupId)
-            .then((dbGroup) => {
+                .then((dbGroup) => {
                 if (dbGroup && group.name) {
-                    return this.groupService.update(groupId, {id: groupId}, {name: group.name});
-                } else {
-                    return Promise.reject('Not allowed to rename this group');
-                }
-            });
+            return this.groupService.update(groupId, {id: groupId}, {name: group.name});
+        } else {
+            return Promise.reject('Not allowed to rename this group');
+        }
+    });
     }
 
     checkGroupPermission(user, groupId) {
@@ -129,10 +129,10 @@ class GroupManager {
                 return this.hasGroup(user, user.activeGroup)
                     .then((group) => {
                         if (group) {
-                            return this.userService.getAll({'groups.id': user.activeGroup})
+                            return this.userService.getAll({ 'groups.id': user.activeGroup })
                                 .then((users) => {
                                     let members = users.map(this.secureUser);
-                                    return {members: members};
+                                    return { members: members };
                                 });
                         } else {
                             return Promise.reject('Not allowed to get group members');
@@ -142,11 +142,11 @@ class GroupManager {
     }
 
     hasGroup(user, groupId) {
-        return Promise.resolve(user.groups.find(group=> group.id === groupId));
+        return Promise.resolve(user.groups.find(group => group.id === groupId));
     }
 
     secureUser(user) {
-        return {email: user.email, username: user.username};
+        return { id: user.id, email: user.email, username: user.username };
     }
 
     leave(groupId, triggeredUser, affecteUser) {

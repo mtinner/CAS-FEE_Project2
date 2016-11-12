@@ -1,5 +1,9 @@
 export class ExpenseMember {
-    constructor(public email: string, public username: string, public checked: boolean) {
+    constructor(
+        public id: string,
+        public email: string,
+        public username: string,
+        public checked: boolean) {
     }
 }
 
