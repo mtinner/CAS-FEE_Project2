@@ -11,26 +11,37 @@
     <!-- iOS Safari -->
     <meta name="apple-mobile-web-app-status-bar-style" content="#629C38">
 
+    <!--removeIf(production)-->
+    <link rel="stylesheet" href="frontend/styles/all.css">
 
+    <script src="frontend/scripts/vendor/shim.min.js"></script>
+    <script src="frontend/scripts/vendor/zone.js"></script>
+    <script src="frontend/scripts/vendor/system.src.js"></script>
+    <script src="frontend/scripts/systemjs.config.js"></script>
+    <script>
+        System.import('frontend').catch(function (err) {
+            console.error(err);
+        });
+    </script>
+    <link rel="manifest" href="/manifest.json">
 </head>
-<!-- 3. Display the application -->
 <body>
 <my-app>Loading...</my-app>
-
-<link rel="stylesheet" href="frontend/styles/all.css">
-
-<!-- 1. Load libraries -->
-<!-- Polyfill(s) for older browsers -->
-<script src="frontend/scripts/vendor/shim.min.js"></script>
-<script src="frontend/scripts/vendor/zone.js"></script>
-<script src="frontend/scripts/vendor/system.src.js"></script>
-<!-- 2. Configure SystemJS -->
-<script src="frontend/scripts/systemjs.config.js"></script>
-<script>
-    System.import('frontend').catch(function (err) {
-        console.error(err);
-    });
-</script>
-<link rel="manifest" href="/manifest.json">
 </body>
+<!--endRemoveIf(production)-->
+
+
+<!--removeIf(development)-->
+<link rel="stylesheet" href="styles/all.css">
+<script src="scripts/zone.min.js"></script>
+
+<script>window.module = 'aot';</script>
+
+<link rel="manifest" href="/manifest.json">
+</head>
+<body>
+<my-app>Loading...</my-app>
+</body>
+<script src="scripts/build.js"></script>
+<!--endRemoveIf(development)-->
 </html>

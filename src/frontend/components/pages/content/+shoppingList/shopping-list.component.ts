@@ -9,13 +9,12 @@ import {HeaderConfig} from '../../../../models/HeaderConfig';
 @Component({
     moduleId: module.id,
     templateUrl: 'shopping-list.component.html',
-    styleUrls: ['shopping-list.component.css'],
     providers: [ShoppingListService]
 })
 export class ShoppingListComponent implements OnInit, OnDestroy {
     private addText: string = 'Add article';
 
-    constructor(private shoppingListService: ShoppingListService, private headerService: HeaderService) {
+    constructor(public shoppingListService: ShoppingListService, private headerService: HeaderService) {
     }
 
     deleteArticle(article: Article) {
@@ -32,7 +31,6 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
 
         this.shoppingListService.fetchArticles();
     }
-
 
     ngOnDestroy(): void {
         this.headerService.resetHeader();

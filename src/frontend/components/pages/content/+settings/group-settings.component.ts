@@ -16,9 +16,9 @@ export class GroupSettingsComponent implements OnInit, OnDestroy {
     private groupnameInputField: InputField = new InputField('Groupname', 'text');
 
     private groupname: string = '';
-    private showModal: boolean = false;
+    public showModal: boolean = false;
 
-    constructor(private headerService: HeaderService, private groupService: GroupService) {
+    constructor(private headerService: HeaderService, public groupService: GroupService) {
         this.headerService.headerConfig = new HeaderConfig('Group Settings', HeaderStyle.Settings, HeaderIcon.ArrowLeft, this.groupService.goToSettings);
     }
 

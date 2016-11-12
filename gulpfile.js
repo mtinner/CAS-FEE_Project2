@@ -16,7 +16,10 @@ config(gulp, {
             path: {
                 frontend: './src/frontend/',
                 backend: './src/backend/',
+                prod: './prod/',
                 tmpE2e: './src/.tmpE2e/',
+                tmpProd: './src/.tmpProd/',
+                aot: './src/.aot/',
                 e2e: './src/e2e/',
                 spec: './src/spec/',
                 dist: './src/.dist/',
@@ -46,6 +49,19 @@ gulp.task('Build', function (callback) {
         'clean:Dist',
         ['transpiling:Dist', 'sass:Dist'],
         ['copy:App'],
+        callback
+    );
+});
+
+gulp.task('Prod', function (callback) {
+    runSequence(
+        ['clean:Prod'],
+        ['sass:Prod', 'copy:tmpProd'],
+        ['transpiling:Prod'],
+        ['copy:ProdMain'],
+        ['transpiling:Prod'],
+        ['copy:Prod', 'rollup:Prod'],
+        'serve:Prod',
         callback
     );
 });

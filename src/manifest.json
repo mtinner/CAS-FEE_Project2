@@ -3,27 +3,52 @@
   "short_name": "CAS-FEE_Project2",
   "icons": [
     {
+      // removeIf(production)
       "src": "frontend/images/icons/icon-128x128.png",
+      // endRemoveIf(production)
+      // removeIf(development)
+      "src": "images/icons/icon-128x128.png",
+      // endRemoveIf(development)
       "sizes": "128x128",
       "type": "image/png"
     },
     {
+      // removeIf(production)
       "src": "frontend/images/icons/icon-144x144.png",
+      // endRemoveIf(production)
+      // removeIf(development)
+      "src": "images/icons/icon-144x144.png",
+      // endRemoveIf(development)
       "sizes": "144x144",
       "type": "image/png"
     },
     {
+      // removeIf(production)
       "src": "frontend/images/icons/icon-152x152.png",
+      // endRemoveIf(production)
+      // removeIf(development)
+      "src": "images/icons/icon-152x152.png",
+      // endRemoveIf(development)
       "sizes": "152x152",
       "type": "image/png"
     },
     {
+      // removeIf(production)
       "src": "frontend/images/icons/icon-192x192.png",
+      // endRemoveIf(production)
+      // removeIf(development)
+      "src": "images/icons/icon-192x192.png",
+      // endRemoveIf(development)
       "sizes": "192x192",
       "type": "image/png"
     },
     {
+      // removeIf(production)
       "src": "frontend/images/icons/icon-256x256.png",
+      // endRemoveIf(production)
+      // removeIf(development)
+      "src": "images/icons/icon-256x256.png",
+      // endRemoveIf(development)
       "sizes": "256x256",
       "type": "image/png"
     }

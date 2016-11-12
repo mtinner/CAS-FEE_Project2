@@ -2,7 +2,6 @@ import {Component, OnInit, OnDestroy} from '@angular/core';
 import {HeaderService} from '../../../elements/header/header.service';
 import {HeaderStyle, HeaderIcon} from '../../../elements/header/header.enum';
 import {HeaderConfig} from '../../../../models/HeaderConfig';
-import {GroupService} from './group.service';
 import {Params, ActivatedRoute} from '@angular/router';
 import {GroupMemberService} from './group-member.service';
 import {InputField} from '../../../elements/inputField/InputField';
@@ -18,11 +17,11 @@ export class GroupMembersComponent implements OnInit, OnDestroy {
 
     private invitedEmail: string = '';
     private groupId: string = '';
-    private showMemberModal: boolean = false;
-    private showLeaveModal: boolean = false;
-    private showRenameModal: boolean = false;
+    public showMemberModal: boolean = false;
+    public showLeaveModal: boolean = false;
+	public showRenameModal: boolean = false;
 
-    constructor(private headerService: HeaderService, private groupMemberService: GroupMemberService, private route: ActivatedRoute) {
+    constructor(private headerService: HeaderService, public groupMemberService: GroupMemberService, private route: ActivatedRoute) {
     }
 
     setInvitedEmail(value: string) {

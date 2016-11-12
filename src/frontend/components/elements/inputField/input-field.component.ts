@@ -23,7 +23,7 @@ export class InputFieldComponent implements OnInit {
     @Output()
     enteredText = new EventEmitter();
 
-    private isFocused: boolean = false;
+    public isFocused: boolean = false;
 
     textEntered(text: string) {
         this.enteredText.emit(text);
