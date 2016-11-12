@@ -17,7 +17,6 @@ export class AddExpenseComponent implements OnInit, OnDestroy {
     };
     private description: string;
     private amount: number;
-    private members: ExpenseMember[];
 
     constructor(
         private headerService: HeaderService,
@@ -34,10 +33,7 @@ export class AddExpenseComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.headerService.headerConfig = new HeaderConfig('Add Expense', HeaderStyle.CostManagement, HeaderIcon.ArrowLeft, this.costManagementService.goToCostManagement);
-        const memberResponse = this.costManagementService.getCurrentMembers();
-        memberResponse.subscribe((memberObj: ExpenseMemberObj) => {
-            this.members = memberObj.members;
-        });
+        const memberResponse = this.costManagementService.getCurrentMembers().subscribe();
     }
 
     ngOnDestroy(): void {
