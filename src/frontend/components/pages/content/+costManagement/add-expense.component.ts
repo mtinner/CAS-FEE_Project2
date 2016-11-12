@@ -1,7 +1,8 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
-import {HeaderService} from '../../../elements/header/header.service';
-import {HeaderStyle, HeaderIcon} from '../../../elements/header/header.enum';
-import {HeaderConfig} from '../../../../models/HeaderConfig';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { HeaderService } from '../../../elements/header/header.service';
+import { HeaderStyle, HeaderIcon } from '../../../elements/header/header.enum';
+import { HeaderConfig } from '../../../../models/HeaderConfig';
+import { Member } from '../../../../models/Member';
 import { CostManagementService } from './cost-management.service';
 
 @Component({
@@ -11,11 +12,12 @@ import { CostManagementService } from './cost-management.service';
 export class AddExpenseComponent implements OnInit, OnDestroy {
 
     private inputField: Object = {
-        description: {placeholder: 'Description', type: 'text'},
-        amount: {placeholder: 'Amount', type: 'text'}
+        description: { placeholder: 'Description', type: 'text' },
+        amount: { placeholder: 'Amount', type: 'text' }
     };
     private description: string;
     private amount: number;
+    private members: Member[] = [new Member('mail', 'name'), new Member('mail2', 'name2')];
 
     constructor(
         private headerService: HeaderService,
