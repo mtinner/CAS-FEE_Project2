@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HeaderService } from '../../../elements/header/header.service';
 import { HeaderStyle, HeaderIcon } from '../../../elements/header/header.enum';
 import { HeaderConfig } from '../../../../models/HeaderConfig';
-import { Member, MemberObj } from '../../../../models/Member';
+import { ExpenditureMember, ExpenditureMemberObj } from '../../../../models/ExpenditureMember';
 import { CostManagementService } from './cost-management.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class AddExpenseComponent implements OnInit, OnDestroy {
     };
     private description: string;
     private amount: number;
-    private members: Member[];
+    private members: ExpenditureMember[];
 
     constructor(
         private headerService: HeaderService,
@@ -35,7 +35,7 @@ export class AddExpenseComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.headerService.headerConfig = new HeaderConfig('Add Expense', HeaderStyle.CostManagement, HeaderIcon.ArrowLeft, this.costManagementService.goToCostManagement);
         const memberResponse = this.costManagementService.getCurrentMembers();
-        memberResponse.subscribe((memberObj: MemberObj) => {
+        memberResponse.subscribe((memberObj: ExpenditureMemberObj) => {
             this.members = memberObj.members;
         });
     }
