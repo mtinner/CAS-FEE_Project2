@@ -11,11 +11,6 @@ import { CostManagementService } from './cost-management.service';
     styleUrls: ['add-expense.component.css']
 })
 export class AddExpenseComponent implements OnInit, OnDestroy {
-
-    private inputField: Object = {
-        description: { placeholder: 'Description', type: 'text' },
-        amount: { placeholder: 'Amount', type: 'text' }
-    };
     private description: string;
     private amount: number;
 
@@ -31,10 +26,6 @@ export class AddExpenseComponent implements OnInit, OnDestroy {
     setAmount(value) {
         this.amount = +value;
     };
-
-    onCheckboxChange(member: any) {
-        alert('clicked');
-    }
 
     ngOnInit(): void {
         this.headerService.headerConfig = new HeaderConfig('Add Expense', HeaderStyle.CostManagement, HeaderIcon.ArrowLeft, this.costManagementService.goToCostManagement);
