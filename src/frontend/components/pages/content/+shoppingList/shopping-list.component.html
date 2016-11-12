@@ -3,6 +3,6 @@
         <chip (chipClicked)="deleteArticle($event)"
               *ngFor="let article of shoppingListService.articles |articlesByGroup:articleGroup.id"
               [item]="article"></chip>
-        <add (enterText)="addArticle($event,articleGroup)" [text]="addText"></add>
+        <add (enterText)="addArticle($event,articleGroup)" [text]="'Add article'"></add>
     </card>
 </div>

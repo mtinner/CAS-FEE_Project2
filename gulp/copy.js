@@ -121,6 +121,14 @@ module.exports = function (gulp, data, util, taskName) {
         var backend = gulp.src([
             data.path.backend + '**'
         ], {base: data.path.backend})
+            .pipe(replace({
+                patterns: [
+                    {
+                        match: 'location',
+                        replacement: ''
+                    }
+                ]
+            }))
             .pipe(removeCode({production: true}))
             .pipe(gulp.dest(data.path.prod));
 

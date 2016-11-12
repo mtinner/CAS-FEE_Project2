@@ -4,7 +4,6 @@ import {HeaderStyle, HeaderIcon} from '../../../elements/header/header.enum';
 import {HeaderConfig} from '../../../../models/HeaderConfig';
 import {GroupService} from './group.service';
 import {Group} from '../../../../models/Group';
-import {InputField} from '../../../elements/inputField/InputField';
 
 @Component({
     moduleId: module.id,
@@ -12,8 +11,6 @@ import {InputField} from '../../../elements/inputField/InputField';
     styleUrls: ['group-settings.component.css']
 })
 export class GroupSettingsComponent implements OnInit, OnDestroy {
-
-    private groupnameInputField: InputField = new InputField('Groupname', 'text');
 
     private groupname: string = '';
     public showModal: boolean = false;
@@ -39,11 +36,11 @@ export class GroupSettingsComponent implements OnInit, OnDestroy {
     }
 
     onGroupChange(obj: Group) {
-        this.groupService.setActiveGroup(obj.id);
+        this.groupService.setActiveGroup(obj.id).subscribe();
     }
 
     ngOnInit(): void {
-        this.groupService.fetchGroups();
+        this.groupService.fetchGroups().subscribe();
     }
 
     ngOnDestroy(): void {

@@ -82,8 +82,10 @@ class GroupManager {
         return this.checkGroupPermission(user, groupId)
             .then((group)=> {
                 if (group) {
-                    return this.userService.update(user.id, user, {activeGroup: groupId})
-                        .then(this.secureUser(user));
+                    return this.userService.get(user)
+                        .then(user =>
+                            this.userService.update(user.id, user, {activeGroup: groupId})
+                                .then(this.secureUser(user)));
                 } else {
                     return Promise.reject('Not allowed to change to this group');
                 }
@@ -145,7 +147,6 @@ class GroupManager {
                     return;
                 }
                 let remainingGroups = dbAffectedUser.groups.filter((group) => group.id !== groupId);
-                // TODO delete Group if no members?
 
                 return this.userService.update(dbAffectedUser.id, dbAffectedUser, {
                     activeGroup: this.evaluateActiveGroup(dbAffectedUser, groupId, remainingGroups),

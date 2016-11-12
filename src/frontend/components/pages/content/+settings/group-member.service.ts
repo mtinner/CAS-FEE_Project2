@@ -4,7 +4,6 @@ import {Http} from '@angular/http';
 import {AppService} from '../../../app.service';
 import {Group} from '../../../../models/Group';
 import {Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
-import 'rxjs/add/operator/share';
 import 'rxjs/add/observable/of';
 import {Member, MemberObj} from '../../../../models/Member';
 
@@ -26,24 +25,19 @@ export class GroupMemberService extends AppService implements CanActivate {
 
     fetchGroup(id: string): Observable<any> {
         let response = this.http.get(`${this.groupUrl}/${id}`)
-            .share()
             .map(this.extractData)
+            .map((group: Group) => this.group = group)
             .catch(this.handleError);
-        response.subscribe((group: Group) => {
-            this.group = group;
-        });
 
         return response;
     }
 
     renameGroup(groupId: string, groupname: any) {
         let response = this.http.put(`${this.groupUrl}/${groupId}`, {name: groupname})
-            .share()
             .map(this.extractData)
+            .map((group: Group) => this.group = group)
             .catch(this.handleError);
-        response.subscribe((group: Group) => {
-            this.group = group;
-        });
+
         return response;
     }
 
@@ -53,37 +47,28 @@ export class GroupMemberService extends AppService implements CanActivate {
             return Observable.of(member);
         }
         let response = this.http.put(`${this.groupUrl}/${groupId}/join`, invitedUser)
-            .share()
             .map(this.extractData)
+            .map((member: Member) => this.members.push(member))
             .catch(this.handleError);
-        response.subscribe((member: Member) => {
-            this.members.push(member);
-        }, () => {
-        });
+
         return response;
     }
 
     getMembers(id: string): Observable<any> {
         let response = this.http.get(`${this.groupUrl}/${id}/members`)
-            .share()
             .map(this.extractData)
+            .map((memberObj: MemberObj) => this.members = memberObj.members)
             .catch(this.handleError);
-        response.subscribe((memberObj: MemberObj) => {
-            this.members = memberObj.members;
-        });
 
         return response;
     }
 
     leaveGroup(groupId: string, email: string) {
         let response = this.http.put(`${this.groupUrl}/${groupId}/leave`, {email: email})
-            .share()
             .map(this.extractData)
+            .map(() => this.members = this.members.filter((member: Member) => member.email !== email))
             .catch(this.handleError);
-        response.subscribe(() => {
-            this.members = this.members.filter((member: Member) => member.email !== email);
-        }, () => {
-        });
+
         return response;
     }
 

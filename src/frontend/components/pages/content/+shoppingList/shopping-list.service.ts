@@ -19,12 +19,12 @@ export class ShoppingListService extends AppService {
     deleteArticle(id): Observable<any> {
         let response = this.http.delete(`${this.shoppingListUrl}/${id}`)
             .map(this.extractData)
+            .map((deletedArticle: Article) => {
+                this.articles = this.articles.filter(article =>
+                    deletedArticle.id !== article.id
+                );
+            })
             .catch(this.handleError);
-        response.subscribe((deletedArticle: Article) => {
-            this.articles = this.articles.filter(article =>
-                deletedArticle.id !== article.id
-            );
-        });
 
         return response;
     }
@@ -32,10 +32,8 @@ export class ShoppingListService extends AppService {
     fetchArticleGroups(): Observable<any> {
         let response = this.http.get(`${this.shoppingListUrl}/groups`)
             .map(this.extractData)
+            .map((articleGroupObj: ArticleGroupObj) => this.articleGroups = articleGroupObj.articleGroups)
             .catch(this.handleError);
-        response.subscribe((articleGroupObj: ArticleGroupObj) => {
-            this.articleGroups = articleGroupObj.articleGroups;
-        });
 
         return response;
     }
@@ -43,22 +41,22 @@ export class ShoppingListService extends AppService {
     fetchArticles(): Observable<any> {
         let response = this.http.get(`${this.shoppingListUrl}`)
             .map(this.extractData)
+            .map((articleObj: ArticleObj) => this.articles = articleObj.articles)
             .catch(this.handleError);
-        response.subscribe((articleObj: ArticleObj) => {
-            this.articles = articleObj.articles;
-        });
+
         return response;
     }
 
     addArticle(body): Observable<any> {
         let response = this.http.post(`${this.shoppingListUrl}`, body, this.jsonOptions)
             .map(this.extractData)
+            .map((article: Article) => {
+                this.articles.push(article);
+                // create new reference to invoke pipe
+                this.articles = this.articles.map(x => x);
+            })
             .catch(this.handleError);
-        response.subscribe((article: Article) => {
-            this.articles.push(article);
-            // create new reference to invoke pipe
-            this.articles = this.articles.map(x => x);
-        });
+
         return response;
     }
 }

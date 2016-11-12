@@ -12,24 +12,23 @@ import {HeaderConfig} from '../../../../models/HeaderConfig';
     providers: [ShoppingListService]
 })
 export class ShoppingListComponent implements OnInit, OnDestroy {
-    private addText: string = 'Add article';
 
     constructor(public shoppingListService: ShoppingListService, private headerService: HeaderService) {
     }
 
     deleteArticle(article: Article) {
-        this.shoppingListService.deleteArticle(article.id);
+        this.shoppingListService.deleteArticle(article.id).subscribe();
     }
 
     addArticle(item: string, articleGroup: ArticleGroup) {
-        this.shoppingListService.addArticle({name: item, articleGroup: articleGroup.id});
+        this.shoppingListService.addArticle({name: item, articleGroup: articleGroup.id}).subscribe();
     }
 
     ngOnInit(): void {
         this.headerService.headerConfig = new HeaderConfig('Shopping List', HeaderStyle.ShoppingList);
-        this.shoppingListService.fetchArticleGroups();
+        this.shoppingListService.fetchArticleGroups().subscribe();
 
-        this.shoppingListService.fetchArticles();
+        this.shoppingListService.fetchArticles().subscribe();
     }
 
     ngOnDestroy(): void {
