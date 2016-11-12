@@ -123,6 +123,24 @@ class GroupManager {
             .then((user) => this.hasGroup(user, groupId));
     }
 
+    getCurrentMembers(user) {
+        return this.userService.get(user)
+            .then((user) => {
+                return this.hasGroup(user, user.activeGroup)
+                    .then((group) => {
+                        if (group) {
+                            return this.userService.getAll({'groups.id': user.activeGroup})
+                                .then((users) => {
+                                    let members = users.map(this.secureUser);
+                                    return {members: members};
+                                });
+                        } else {
+                            return Promise.reject('Not allowed to get group members');
+                        }
+                    });
+            });
+    }
+
     hasGroup(user, groupId) {
         return Promise.resolve(user.groups.find(group=> group.id === groupId));
     }

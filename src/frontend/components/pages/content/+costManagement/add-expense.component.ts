@@ -34,6 +34,7 @@ export class AddExpenseComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.headerService.headerConfig = new HeaderConfig('Add Expense', HeaderStyle.CostManagement, HeaderIcon.ArrowLeft, this.costManagementService.goToCostManagement);
+        this.costManagementService.getCurrentMembers();
     }
 
     ngOnDestroy(): void {

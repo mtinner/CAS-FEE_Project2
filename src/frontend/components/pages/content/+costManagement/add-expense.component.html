@@ -4,4 +4,9 @@
 		<input-field [placeholder]="inputField.description.placeholder" [type]="inputField.description.type" (enteredText)="setDescription($event)"></input-field>
 		<input-field [placeholder]="inputField.amount.placeholder" [type]="inputField.amount.type" (enteredText)="setAmount($event)"></input-field>
 	</div>
+	<div>
+		<div *ngFor="let member of costManagementService.members">
+			{{member.username}} ({{member.email}})
+		</div>
+	</div>
 </div>

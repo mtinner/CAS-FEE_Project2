@@ -30,6 +30,14 @@ router.get('/:id',
             .catch(() => res.status(400).send());
     });
 
+router.get('/currentMembers',
+    authService.protect('user'),
+    function (req, res) {
+        groupManager.getCurrentMembers(req.user)
+            .then((users) => res.status(200).send(users))
+            .catch(() => res.status(400).send());
+    });
+
 router.put('/:id/join',
     authService.protect('user'),
     function (req, res) {
