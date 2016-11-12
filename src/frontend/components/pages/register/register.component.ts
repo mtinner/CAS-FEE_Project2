@@ -10,10 +10,6 @@ import {InputField} from '../../elements/inputField/InputField';
     styleUrls: ['register.component.css']
 })
 export class RegisterComponent {
-    public usernameInputField: InputField = new InputField('Username', 'text');
-    public emailInputField: InputField = new InputField('Email', 'email');
-    public passwordInputField: InputField = new InputField('Password', 'password');
-
 
     private username: String;
     private email: String;

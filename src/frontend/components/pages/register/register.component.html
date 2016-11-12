@@ -1,12 +1,12 @@
 <div class="register-container">
-    <input-field class="input--register" [placeholder]="usernameInputField.placeholder"
-                 [type]="usernameInputField.type" (enteredText)="setUsername($event)"></input-field>
+    <input-field class="input--register" [placeholder]="'Username'"
+                 [type]="'text'" (enteredText)="setUsername($event)"></input-field>
 
-    <input-field class="input--register" [placeholder]="emailInputField.placeholder"
-                 [type]="emailInputField.type" (enteredText)="setEmail($event)"></input-field>
+    <input-field class="input--register" [placeholder]="'Email'"
+                 [type]="'email'" (enteredText)="setEmail($event)"></input-field>
 
-    <input-field class="input--register" [placeholder]="passwordInputField.placeholder"
-                 [type]="passwordInputField.type" (enteredText)="setPassword($event)"></input-field>
+    <input-field class="input--register" [placeholder]="'Password'"
+                 [type]="'password'" (enteredText)="setPassword($event)"></input-field>
 
     <button class="btn btn--register" (click)="register()">Register</button>
 </div>
