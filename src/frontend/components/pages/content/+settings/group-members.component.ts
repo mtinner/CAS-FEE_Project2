@@ -4,7 +4,6 @@ import {HeaderStyle, HeaderIcon} from '../../../elements/header/header.enum';
 import {HeaderConfig} from '../../../../models/HeaderConfig';
 import {Params, ActivatedRoute} from '@angular/router';
 import {GroupMemberService} from './group-member.service';
-import {InputField} from '../../../elements/inputField/InputField';
 
 @Component({
     moduleId: module.id,
@@ -12,9 +11,8 @@ import {InputField} from '../../../elements/inputField/InputField';
     styleUrls: ['group-members.component.css']
 })
 export class GroupMembersComponent implements OnInit, OnDestroy {
-    private groupnameInputField: InputField = new InputField('Groupname', 'text', this.groupMemberService.group.name);
-    private invitedEmailInputField: InputField = new InputField('Email', 'email');
 
+    public invitedErrorMessage: string = '';
     private invitedEmail: string = '';
     private groupId: string = '';
     public showMemberModal: boolean = false;
@@ -52,12 +50,12 @@ export class GroupMembersComponent implements OnInit, OnDestroy {
     }
 
     clearInvitedEmailErrorMessage() {
-        this.invitedEmailInputField.errorMessage = '';
+        this.invitedErrorMessage = '';
     }
 
     addMember() {
         if (!this.isEmailValid()) {
-            this.invitedEmailInputField.errorMessage = 'Emailaddress not valid';
+            this.invitedErrorMessage = 'Emailaddress not valid';
         }
         else {
             this.groupMemberService.addMember(this.groupId, {email: this.invitedEmail})
@@ -66,7 +64,7 @@ export class GroupMembersComponent implements OnInit, OnDestroy {
                         this.showMemberModal = false;
                     },
                     () => {
-                        this.invitedEmailInputField.errorMessage = 'Email address not found';
+                        this.invitedErrorMessage = 'Email address not found';
                     });
         }
     }
@@ -77,7 +75,6 @@ export class GroupMembersComponent implements OnInit, OnDestroy {
                 .subscribe(() => {
                     this.setRenameModalVisibility(false);
                     this.headerService.headerConfig = new HeaderConfig(`Group ${this.groupMemberService.group.name}`, HeaderStyle.Settings, HeaderIcon.ArrowLeft, this.groupMemberService.goToGroups, HeaderIcon.Edit, this.setRenameModalVisibility);
-                    this.groupnameInputField.text = this.groupMemberService.group.name;
                 });
         }
         else {

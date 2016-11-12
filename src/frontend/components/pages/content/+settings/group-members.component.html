@@ -7,9 +7,9 @@
     <button class="btn btn--round btn--bottom-right icon icon--plus" (click)="setMemberModalVisibility(true)"></button>
     <div *ngIf="showMemberModal" class="modal" (click)="setMemberModalVisibility(false)">
         <div class="modal__content" (click)="$event.stopPropagation()">
-            <input-field [placeholder]="invitedEmailInputField.placeholder"
-                         [type]="invitedEmailInputField.type"
-                         [errorMessage]="invitedEmailInputField.errorMessage"
+            <input-field [placeholder]="'Email'"
+                         [type]="'email'"
+                         [errorMessage]="invitedErrorMessage"
                          (enteredText)="setInvitedEmail($event)"
                          (keyup.enter)="addMember()"></input-field>
 
@@ -29,9 +29,9 @@
 
     <div *ngIf="showRenameModal" class="modal" (click)="setRenameModalVisibility(false)">
         <div class="modal__content" (click)="$event.stopPropagation()">
-            <input-field [placeholder]="groupnameInputField.placeholder"
-                         [type]="groupnameInputField.type"
-                         [text]="groupnameInputField.text"
+            <input-field [placeholder]="'Groupname'"
+                         [type]="'text'"
+                         [text]="this.groupMemberService.group.name"
                          (enteredText)="groupname=$event.trim();"></input-field>
             <button class="btn btn--bare"
                     [disabled]="(groupname === undefined && groupMemberService.group.name)  || (groupname === '')"

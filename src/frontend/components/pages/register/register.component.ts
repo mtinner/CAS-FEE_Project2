@@ -2,7 +2,6 @@ import {Component, Injectable} from '@angular/core';
 import {RegisterService} from './register.service';
 import {User} from '../../../models/User';
 import {LoginHttpService} from '../login/login-http.service';
-import {InputField} from '../../elements/inputField/InputField';
 
 @Component({
     moduleId: module.id,
