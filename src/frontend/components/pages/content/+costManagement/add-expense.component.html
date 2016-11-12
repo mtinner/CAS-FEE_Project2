@@ -1,12 +1,14 @@
 <div class="container__page--vertical">
-	<div>Add expense to group {{groupName}}</div>
+	<h2>Add expense to group {{groupName}}</h2>
 	<div>
 		<input-field [placeholder]="inputField.description.placeholder" [type]="inputField.description.type" (enteredText)="setDescription($event)"></input-field>
 		<input-field [placeholder]="inputField.amount.placeholder" [type]="inputField.amount.type" (enteredText)="setAmount($event)"></input-field>
 	</div>
 	<div>
-		<div *ngFor="let member of costManagementService.members">
-			<checkbox [label]="member.username" [(checked)]="member.checked"></checkbox>
+		<div>These people share the expense with myself:</div>
+		<div class="member-row" *ngFor="let member of costManagementService.members">
+			<checkbox [id]="member.username" [label]="member.username" [(checked)]="member.checked"></checkbox>
 		</div>
 	</div>
+	<button class="btn" (click)="onAddClick">Add</button>
 </div>

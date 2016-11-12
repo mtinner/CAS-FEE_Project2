@@ -24,9 +24,7 @@ export class CostManagementService extends AppService {
     getCurrentMembers(): Observable<any> {
         return this.http.get(`${this.groupUrl}/currentMembers`)
             .map(this.extractData)
-            .map((membersObj: ExpenseMemberObj) => {
-                this.members = membersObj.members;
-            })
+            .map((membersObj: ExpenseMemberObj) => this.members = membersObj.members)
             .catch(this.handleError);
     }
 }

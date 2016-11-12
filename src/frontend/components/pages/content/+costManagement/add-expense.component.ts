@@ -7,7 +7,8 @@ import { CostManagementService } from './cost-management.service';
 
 @Component({
     moduleId: module.id,
-    templateUrl: 'add-expense.component.html'
+    templateUrl: 'add-expense.component.html',
+    styleUrls: ['add-expense.component.css']
 })
 export class AddExpenseComponent implements OnInit, OnDestroy {
 
@@ -30,6 +31,10 @@ export class AddExpenseComponent implements OnInit, OnDestroy {
     setAmount(value) {
         this.amount = +value;
     };
+
+    onCheckboxChange(member: any) {
+        alert('clicked');
+    }
 
     ngOnInit(): void {
         this.headerService.headerConfig = new HeaderConfig('Add Expense', HeaderStyle.CostManagement, HeaderIcon.ArrowLeft, this.costManagementService.goToCostManagement);
