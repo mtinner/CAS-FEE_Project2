@@ -11,7 +11,6 @@ import 'rxjs/add/observable/of';
 @Injectable()
 export class CostManagementService extends AppService {
     private groupUrl = `${this.baseUrl}groups`;
-    public members: Member[] = [];
 
     constructor(private http: Http, private router: Router) {
         super();
@@ -22,15 +21,9 @@ export class CostManagementService extends AppService {
     };
 
     getCurrentMembers(): Observable<any> {
-        let response = this.http.get(`${this.groupUrl}/currentMembers`)
+        return this.http.get(`${this.groupUrl}/currentMembers`)
             .share()
             .map(this.extractData)
             .catch(this.handleError);
-        response.subscribe((memberObj: MemberObj) => {
-            this.members = memberObj.members;
-        });
-
-        return response;
     }
-
 }

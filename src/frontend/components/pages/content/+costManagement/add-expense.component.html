@@ -5,8 +5,8 @@
 		<input-field [placeholder]="inputField.amount.placeholder" [type]="inputField.amount.type" (enteredText)="setAmount($event)"></input-field>
 	</div>
 	<div>
-		<div *ngFor="let member of costManagementService.members">
-			{{member.username}} ({{member.email}})
+		<div *ngFor="let member of members">
+			<checkbox [label]="member.username"></checkbox>
 		</div>
 	</div>
 </div>
