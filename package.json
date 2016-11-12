@@ -6,7 +6,8 @@
     "ngc": "ngc",
     "start": "gulp Default",
     "build": "gulp Build",
-    "typings": "typings i"
+    "typings": "typings i",
+    "prod": "gulp Prod"
   },
   "dependencies": {
     "@angular/common": "~2.1.0",
