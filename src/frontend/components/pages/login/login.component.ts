@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import {LoginHttpService} from './login-http.service';
-import {InputField} from '../../elements/inputField/InputField';
 
 @Component({
     moduleId: module.id,
@@ -8,9 +7,6 @@ import {InputField} from '../../elements/inputField/InputField';
     styleUrls: ['login.component.css']
 })
 export class LoginComponent {
-    public emailInputField: InputField = new InputField('Email', 'email');
-    public passwordInputField: InputField = new InputField('Password', 'password');
-
 
     constructor(private loginService: LoginHttpService) {
     }
