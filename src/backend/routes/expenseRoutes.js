@@ -24,7 +24,7 @@ router.post('/',
     authService.protect('user'),
     function (req, res) {
         expenseManager.add(req.body, req.user.id)
-            .then(article => res.status(201).send(article))
+            .then(expense => res.status(201).send(expense))
             .catch(() => res.status(400).send());
     });
 
