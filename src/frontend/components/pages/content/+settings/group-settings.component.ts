@@ -39,11 +39,11 @@ export class GroupSettingsComponent implements OnInit, OnDestroy {
     }
 
     onGroupChange(obj: Group) {
-        this.groupService.setActiveGroup(obj.id);
+        this.groupService.setActiveGroup(obj.id).subscribe();
     }
 
     ngOnInit(): void {
-        this.groupService.fetchGroups();
+        this.groupService.fetchGroups().subscribe();
     }
 
     ngOnDestroy(): void {

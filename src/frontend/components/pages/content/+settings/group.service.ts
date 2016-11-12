@@ -21,27 +21,25 @@ export class GroupService extends AppService {
         let response = this.http.get(`${this.groupUrl}`)
             .share()
             .map(this.extractData)
+            .map((groupObj: GroupObj) => this.groups = groupObj.groups)
             .catch(this.handleError);
-        response.subscribe((groupObj: GroupObj) => {
-            this.groups = groupObj.groups;
-        });
 
         return response;
     }
-
 
     addGroup(body): Observable<any> {
         let response = this.http.post(`${this.groupUrl}`, body, this.jsonOptions)
             .share()
             .map(this.extractData)
+            .map((group: Group) => {
+                this.groups.forEach((group: Group) => {
+                    group.isActiveGroup = false;
+                });
+                group.isActiveGroup = true;
+                this.groups.push(group);
+            })
             .catch(this.handleError);
-        response.subscribe((group: Group) => {
-            this.groups.forEach((group: Group) => {
-                group.isActiveGroup = false;
-            });
-            group.isActiveGroup = true;
-            this.groups.push(group);
-        });
+
         return response;
     }
 
@@ -49,17 +47,18 @@ export class GroupService extends AppService {
         let response = this.http.post(`${this.groupUrl}/${id}/active`, null)
             .share()
             .map(this.extractData)
+            .map(() => {
+                this.groups.forEach((group: Group) => {
+                    if (group.id !== id) {
+                        group.isActiveGroup = false;
+                    }
+                    else {
+                        group.isActiveGroup = true;
+                    }
+                });
+            })
             .catch(this.handleError);
-        response.subscribe(() => {
-            this.groups.forEach((group: Group) => {
-                if (group.id !== id) {
-                    group.isActiveGroup = false;
-                }
-                else {
-                    group.isActiveGroup = true;
-                }
-            });
-        });
+
         return response;
     }
 

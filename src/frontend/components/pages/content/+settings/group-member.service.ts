@@ -10,67 +10,67 @@ import {Member, MemberObj} from '../../../../models/Member';
 @Injectable()
 export class GroupMemberService extends AppService implements CanActivate {
 
-	private groupUrl = `${this.baseUrl}groups`;
-	public group: Group;
-	public members: Member[] = [];
+    private groupUrl = `${this.baseUrl}groups`;
+    public group: Group;
+    public members: Member[] = [];
 
-	constructor(private http: Http, private router: Router) {
-		super();
-	}
+    constructor(private http: Http, private router: Router) {
+        super();
+    }
 
-	canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean>|Promise<boolean>|boolean {
-		return this.fetchGroup(route.params['id'])
-			.map((group) => !!group);
-	}
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean>|Promise<boolean>|boolean {
+        return this.fetchGroup(route.params['id'])
+            .map((group) => !!group);
+    }
 
-	fetchGroup(id: string): Observable<any> {
-		let response = this.http.get(`${this.groupUrl}/${id}`)
-			.map(this.extractData)
-			.map((group: Group) => this.group = group)
-			.catch(this.handleError);
+    fetchGroup(id: string): Observable<any> {
+        let response = this.http.get(`${this.groupUrl}/${id}`)
+            .map(this.extractData)
+            .map((group: Group) => this.group = group)
+            .catch(this.handleError);
 
-		return response;
-	}
+        return response;
+    }
 
-	renameGroup(groupId: string, groupname: any) {
-		let response = this.http.put(`${this.groupUrl}/${groupId}`, { name: groupname })
-			.map(this.extractData)
-			.map((group: Group) => this.group = group)
-			.catch(this.handleError);
+    renameGroup(groupId: string, groupname: any) {
+        let response = this.http.put(`${this.groupUrl}/${groupId}`, {name: groupname})
+            .map(this.extractData)
+            .map((group: Group) => this.group = group)
+            .catch(this.handleError);
 
-		return response;
-	}
+        return response;
+    }
 
-	addMember(groupId: string, invitedUser: any): Observable<any> {
-		let member = this.members.find((member: Member) => member.email === invitedUser.email);
-		if (member) {
-			return Observable.of(member);
-		}
-		let response = this.http.put(`${this.groupUrl}/${groupId}/join`, invitedUser)
-			.map(this.extractData)
-			.map((member: Member) => this.members.push(member))
-			.catch(this.handleError);
+    addMember(groupId: string, invitedUser: any): Observable<any> {
+        let member = this.members.find((member: Member) => member.email === invitedUser.email);
+        if (member) {
+            return Observable.of(member);
+        }
+        let response = this.http.put(`${this.groupUrl}/${groupId}/join`, invitedUser)
+            .map(this.extractData)
+            .map((member: Member) => this.members.push(member))
+            .catch(this.handleError);
 
-		return response;
-	}
+        return response;
+    }
 
-	getMembers(id: string): Observable<any> {
-		let response = this.http.get(`${this.groupUrl}/${id}/members`)
-			.map(this.extractData)
-			.map((memberObj: MemberObj) => this.members = memberObj.members)
-			.catch(this.handleError);
+    getMembers(id: string): Observable<any> {
+        let response = this.http.get(`${this.groupUrl}/${id}/members`)
+            .map(this.extractData)
+            .map((memberObj: MemberObj) => this.members = memberObj.members)
+            .catch(this.handleError);
 
-		return response;
-	}
+        return response;
+    }
 
-	leaveGroup(groupId: string, email: string) {
-		let response = this.http.put(`${this.groupUrl}/${groupId}/leave`, { email: email })
-			.map(this.extractData)
-			.map(() => this.members = this.members.filter((member: Member) => member.email !== email))
-			.catch(this.handleError);
+    leaveGroup(groupId: string, email: string) {
+        let response = this.http.put(`${this.groupUrl}/${groupId}/leave`, {email: email})
+            .map(this.extractData)
+            .map(() => this.members = this.members.filter((member: Member) => member.email !== email))
+            .catch(this.handleError);
 
-		return response;
-	}
+        return response;
+    }
 
     goToGroups = () => {
         this.router.navigate(['settings', 'groups']);
