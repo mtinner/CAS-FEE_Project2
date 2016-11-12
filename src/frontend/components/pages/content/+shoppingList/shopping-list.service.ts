@@ -17,7 +17,7 @@ export class ShoppingListService extends AppService {
     }
 
     deleteArticle(id): Observable<any> {
-        let response = this.http.delete(`${this.shoppingListUrl}/${id}`)
+        return this.http.delete(`${this.shoppingListUrl}/${id}`)
             .map(this.extractData)
             .map((deletedArticle: Article) => {
                 this.articles = this.articles.filter(article =>
@@ -25,30 +25,24 @@ export class ShoppingListService extends AppService {
                 );
             })
             .catch(this.handleError);
-
-        return response;
     }
 
     fetchArticleGroups(): Observable<any> {
-        let response = this.http.get(`${this.shoppingListUrl}/groups`)
+        return this.http.get(`${this.shoppingListUrl}/groups`)
             .map(this.extractData)
             .map((articleGroupObj: ArticleGroupObj) => this.articleGroups = articleGroupObj.articleGroups)
             .catch(this.handleError);
-
-        return response;
     }
 
     fetchArticles(): Observable<any> {
-        let response = this.http.get(`${this.shoppingListUrl}`)
+        return this.http.get(`${this.shoppingListUrl}`)
             .map(this.extractData)
             .map((articleObj: ArticleObj) => this.articles = articleObj.articles)
             .catch(this.handleError);
-
-        return response;
     }
 
     addArticle(body): Observable<any> {
-        let response = this.http.post(`${this.shoppingListUrl}`, body, this.jsonOptions)
+        return this.http.post(`${this.shoppingListUrl}`, body, this.jsonOptions)
             .map(this.extractData)
             .map((article: Article) => {
                 this.articles.push(article);
@@ -56,7 +50,5 @@ export class ShoppingListService extends AppService {
                 this.articles = this.articles.map(x => x);
             })
             .catch(this.handleError);
-
-        return response;
     }
 }

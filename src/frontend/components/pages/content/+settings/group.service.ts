@@ -18,17 +18,15 @@ export class GroupService extends AppService {
     }
 
     fetchGroups(): Observable<any> {
-        let response = this.http.get(`${this.groupUrl}`)
+        return this.http.get(`${this.groupUrl}`)
             .share()
             .map(this.extractData)
             .map((groupObj: GroupObj) => this.groups = groupObj.groups)
             .catch(this.handleError);
-
-        return response;
     }
 
     addGroup(body): Observable<any> {
-        let response = this.http.post(`${this.groupUrl}`, body, this.jsonOptions)
+       return this.http.post(`${this.groupUrl}`, body, this.jsonOptions)
             .share()
             .map(this.extractData)
             .map((group: Group) => {
@@ -39,12 +37,10 @@ export class GroupService extends AppService {
                 this.groups.push(group);
             })
             .catch(this.handleError);
-
-        return response;
     }
 
     setActiveGroup(id: number): Observable<any> {
-        let response = this.http.post(`${this.groupUrl}/${id}/active`, null)
+        return this.http.post(`${this.groupUrl}/${id}/active`, null)
             .share()
             .map(this.extractData)
             .map(() => {
@@ -58,8 +54,6 @@ export class GroupService extends AppService {
                 });
             })
             .catch(this.handleError);
-
-        return response;
     }
 
     goToSettings = () => {
