@@ -10,3 +10,8 @@ export class Expense {
         public debitors: string[]) {
     }
 }
+
+export class ExpenseObj {
+    constructor(public expenses: Expense[]) {
+    }
+}

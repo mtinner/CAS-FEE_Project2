@@ -14,7 +14,7 @@ class ExpenseManager {
     }
 
     add(newDoc, userId) {
-        return this.expenseService.add(Object.assign(newDoc, {creditor: userId}));
+        return this.expenseService.add(Object.assign(newDoc, { creditor: userId }));
     }
 
     remove(id) {
