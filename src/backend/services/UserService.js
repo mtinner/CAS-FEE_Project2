@@ -19,6 +19,10 @@ class UserService {
         return this.nedbRepo.get({email: user.email});
     }
 
+    getById(id) {
+        return this.nedbRepo.get({id: id});
+    }
+
     getAll(user) {
         return this.nedbRepo.getAll(user);
     }
