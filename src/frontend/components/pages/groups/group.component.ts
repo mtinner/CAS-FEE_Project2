@@ -1,16 +1,16 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
-import {HeaderService} from '../../../elements/header/header.service';
-import {HeaderStyle, HeaderIcon} from '../../../elements/header/header.enum';
-import {HeaderConfig} from '../../../../models/HeaderConfig';
 import {GroupService} from './group.service';
-import {Group} from '../../../../models/Group';
+import {HeaderService} from '../../elements/header/header.service';
+import {HeaderStyle, HeaderIcon} from '../../elements/header/header.enum';
+import {Group} from '../../../models/Group';
+import {HeaderConfig} from '../../../models/HeaderConfig';
 
 @Component({
     moduleId: module.id,
-    templateUrl: 'group-settings.component.html',
-    styleUrls: ['group-settings.component.css']
+    templateUrl: 'group.component.html',
+    styleUrls: ['group.component.css']
 })
-export class GroupSettingsComponent implements OnInit, OnDestroy {
+export class GroupComponent implements OnInit, OnDestroy {
 
     private groupname: string = '';
     public showModal: boolean = false;

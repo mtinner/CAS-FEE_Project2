@@ -1,6 +1,6 @@
 <div class="container__page">
     <ul class="list">
-        <panel class="list__item" *ngFor="let member of groupMemberService.members" [title]="member.username"
+        <panel class="list__item" *ngFor="let member of memberService.members" [title]="member.username"
                [description]="member.email" [rightIconName]="'cross'"
                (clickIconRight)="leaveMember=$event;setLeaveModalVisibility(true)"></panel>
     </ul>
@@ -31,11 +31,11 @@
         <div class="modal__content" (click)="$event.stopPropagation()">
             <input-field [placeholder]="'Groupname'"
                          [type]="'text'"
-                         [text]="this.groupMemberService.group.name"
+                         [text]="this.memberService.group.name"
                          (enteredText)="groupname=$event.trim();"></input-field>
             <button class="btn btn--bare"
-                    [disabled]="(groupname === undefined && groupMemberService.group.name)  || (groupname === '')"
-                    (click)="renameGroup(groupname || groupMemberService.group.name)">Rename
+                    [disabled]="(groupname === undefined && memberService.group.name)  || (groupname === '')"
+                    (click)="renameGroup(groupname || memberService.group.name)">Rename
             </button>
             <button class="btn btn--bare btn--bare--right" (click)="setRenameModalVisibility(false)">Cancel</button>
         </div>

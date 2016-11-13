@@ -1,7 +1,7 @@
 import {SettingsComponent} from './settings.component';
-import {Routes} from '@angular/router';
+import {Route} from '@angular/router';
 
-export const settingsRoutes: Routes = [{
+export const settingsRoute: Route = {
     path: 'settings',
     component: SettingsComponent
-}];
+};

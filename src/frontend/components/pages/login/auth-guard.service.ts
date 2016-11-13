@@ -3,17 +3,12 @@ import {CanActivate, Router, RouterStateSnapshot, ActivatedRouteSnapshot, Route,
 import {LoginManagingService} from './login-managing.service';
 
 @Injectable()
-export class AuthGuard implements CanActivate, CanLoad {
+export class AuthGuard implements CanActivate {
     constructor(private loginManaginService: LoginManagingService, private router: Router) {
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         let url: string = state.url;
-        return this.checkLogin(url);
-    }
-
-    canLoad(route: Route) {
-        let url = `/${route.path}`;
         return this.checkLogin(url);
     }
 
