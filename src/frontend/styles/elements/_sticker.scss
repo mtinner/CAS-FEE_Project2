@@ -1,0 +1,29 @@
+.sticker {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  bottom: 0;
+  top: 3.8rem;
+  position: fixed;
+
+  &__circle {
+    cursor: pointer;
+    height: 200px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 5rem;
+    border-radius: 100px;
+    flex-direction: column;
+    line-height: 4rem;
+    background-color: $shopping-primary-light;
+    color: $default;
+  }
+
+  &__label {
+    font-size: 1.5rem;
+  }
+}

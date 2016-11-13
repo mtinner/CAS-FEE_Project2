@@ -4,6 +4,7 @@
                [description]="member.email" [rightIconName]="'cross'"
                (clickIconRight)="leaveMember=$event;setLeaveModalVisibility(true)"></panel>
     </ul>
+
     <button class="btn btn--round btn--bottom-right icon icon--plus" (click)="setMemberModalVisibility(true)"></button>
     <div *ngIf="showMemberModal" class="modal" (click)="setMemberModalVisibility(false)">
         <div class="modal__content" (click)="$event.stopPropagation()">
