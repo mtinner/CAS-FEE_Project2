@@ -5,6 +5,13 @@
                (clickIconRight)="leaveMember=$event;setLeaveModalVisibility(true)"></panel>
     </ul>
 
+    <div *ngIf="groupMemberService.members.length == 1" class="sticker sticker--margin-top">
+        <div class="sticker__circle" (click)="setMemberModalVisibility(true)">
+            <span class="icon icon--add-person"></span>
+            <span class="sticker__label">Seems to be lonely</span>
+        </div>
+    </div>
+
     <button class="btn btn--round btn--bottom-right icon icon--plus" (click)="setMemberModalVisibility(true)"></button>
     <div *ngIf="showMemberModal" class="modal" (click)="setMemberModalVisibility(false)">
         <div class="modal__content" (click)="$event.stopPropagation()">

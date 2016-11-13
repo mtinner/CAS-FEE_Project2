@@ -8,6 +8,10 @@
   top: 3.8rem;
   position: fixed;
 
+  &--margin-top {
+    top: 150px;
+  }
+
   &__circle {
     cursor: pointer;
     height: 200px;
@@ -25,5 +29,7 @@
 
   &__label {
     font-size: 1.5rem;
+    text-align: center;
+    line-height: 2rem;
   }
 }
