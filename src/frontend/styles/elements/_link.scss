@@ -1,6 +1,11 @@
 .link {
   text-decoration: none;
   color: $default;
+
+  &__navigation-drawer {
+    display: flex;
+  }
+
   &:visited {
     color: $default;
   }

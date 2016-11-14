@@ -2,7 +2,7 @@
     <ul class="navigation-drawer" [ngClass]="{'navigation-drawer--hide': !sideNavService.showNavigation}">
         <li *ngFor="let item of menuItems" (click)="itemClicked(item)" routerLink="{{item.route}}"
             routerLinkActive="navigation-drawer__item--selected" class="navigation-drawer__item">
-            <a class="link">
+            <a class="link link__navigation-drawer">
                 <span class="navigation-drawer__item__icon icon icon--{{item.icon}}"></span>
                 <span class="navigation-drawer__item__text">{{item.name}}</span>
             </a>

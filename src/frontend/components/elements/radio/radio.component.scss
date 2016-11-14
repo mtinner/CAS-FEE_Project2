@@ -1,28 +1,28 @@
 @import "../../../styles/utils/variables";
+@import "../../../styles/elements/icons";
 
 .radio {
   display: none;
+
+  &__container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
 }
 
 .label {
   cursor: pointer;
-
-  &__button {
-    display: inline-block;
-    width: 1em;
-    height: 1em;
-    margin-bottom: -.25em;
-    border: 2px solid $blue;
-    border-radius: 100%;
-  }
 }
 
-.radio:checked + .label > .label__button--dot {
-  display: inline-block;
-  width: .75em;
-  height: .75em;
-  margin-left: -1.3em;
-  margin-right: 0.25em;
-  background: $blue;
-  border-radius: 100%;
+.check {
+  margin-right: 5px;
+  color: $blue;
+  font-size: 1.5rem;
+
+  .radio:checked + .radio__container > & {
+    @extend .icon;
+    @extend .icon--radio-checked
+  }
+
 }

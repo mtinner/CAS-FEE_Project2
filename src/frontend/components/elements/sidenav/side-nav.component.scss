@@ -35,7 +35,7 @@
     cursor: pointer;
     padding: 15px 5%;
     &:hover {
-      background-color: $dark-snow;
+      background-color: rgba($dark-snow, 0.5);
       border-radius: 5px;
     }
     &--selected {
@@ -51,6 +51,7 @@
       width: 16px;
       height: 16px;
       display: inline-block;
+      font-size: 1.5rem;
     }
   }
 

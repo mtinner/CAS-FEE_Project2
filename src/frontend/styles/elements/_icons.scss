@@ -74,5 +74,21 @@
   &--logout:before {
     content: "\e906";
   }
+
+  &--add-group:before {
+    content: "\e909";
+  }
+
+  &--add-person:before {
+    content: "\e90a";
+  }
+
+  &--radio-unchecked:before {
+    content: "\e90b";
+  }
+
+  &--radio-checked:before {
+    content: "\e90c";
+  }
 }
 

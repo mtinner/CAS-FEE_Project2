@@ -8,7 +8,6 @@ export class SideNavService {
     private menuItems: MenuItem[] = [
         new MenuItem('Shopping List', 'shopping-list', '/shopping-list'),
         new MenuItem('Cost Management', 'cost-management', '/cost-management'),
-        new MenuItem('Auth', '', '/login'),
         new MenuItem('Settings', 'settings', '/settings'),
         new MenuItem('Logout', 'logout', '/login')
     ];
