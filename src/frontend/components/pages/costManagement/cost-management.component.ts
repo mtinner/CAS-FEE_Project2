@@ -9,11 +9,6 @@ import { CostManagementService } from './cost-management.service';
     templateUrl: 'cost-management.component.html'
 })
 export class CostManagementComponent implements OnInit, OnDestroy {
-
-    overviewTitle: string = 'Übersicht';
-    currentMonthTitle: string = 'Aktueller Monat';
-    addExpenseRoute: string = 'add';
-
     expenses = [
         { title: 'September 2016' },
         { title: 'Oktober 2016' },
