@@ -1,10 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HeaderService } from '../../../elements/header/header.service';
-import { HeaderStyle, HeaderIcon } from '../../../elements/header/header.enum';
-import { HeaderConfig } from '../../../../models/HeaderConfig';
-import { ExpenseMember, ExpenseMemberObj } from '../../../../models/ExpenseMember';
-import { Expense } from '../../../../models/Expense';
-import { CostManagementService } from './cost-management.service';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {HeaderService} from '../../elements/header/header.service';
+import {HeaderStyle, HeaderIcon} from '../../elements/header/header.enum';
+import {HeaderConfig} from '../../../models/HeaderConfig';
+import {ExpenseInsert} from '../../../models/ExpenseInsert';
+import {CostManagementService} from '../costManagement/cost-management.service';
 
 @Component({
     moduleId: module.id,
@@ -15,9 +14,8 @@ export class AddExpenseComponent implements OnInit, OnDestroy {
     private description: string;
     private amount: number;
 
-    constructor(
-        private headerService: HeaderService,
-        private costManagementService: CostManagementService) {
+    constructor(private headerService: HeaderService,
+                private costManagementService: CostManagementService) {
     }
 
     setDescription(value) {
@@ -30,8 +28,8 @@ export class AddExpenseComponent implements OnInit, OnDestroy {
 
     onAddClick() {
         const today = new Date();
-        const emails = this.costManagementService.members.map(member => member.id);
-        this.costManagementService.addExpense(new Expense(
+        const emails = this.costManagementService.members.filter(member => member.checked).map(member => member.id);
+        this.costManagementService.addExpense(new ExpenseInsert(
             this.description,
             this.amount,
             today.getFullYear(),

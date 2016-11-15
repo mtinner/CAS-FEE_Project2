@@ -4,7 +4,7 @@
 	<card [title]="'Overview'">
 		<cost-progress 
 			*ngFor="let entry of costManagementService.expenseOverview" 
-			[label]="entry.creditor.username" 
+			[label]="entry.user.username" 
 			[amount]="entry.amount" 
 			percentage="10"></cost-progress>
 	</card>

@@ -4,6 +4,7 @@ import {ContentComponent} from './content.component';
 import {AuthGuard} from '../../login/auth-guard.service';
 import {memberRoute} from '../../members/member.route';
 import {groupRoute} from '../../groups/group.route';
+import {addExpenseRoute} from '../../addExpense/add-expense.route';
 
 const contentRoutes: Routes = [
     {
@@ -12,7 +13,8 @@ const contentRoutes: Routes = [
         canActivate: [AuthGuard],
         children: [
             memberRoute,
-            groupRoute
+            groupRoute,
+            addExpenseRoute
         ]
     }
 

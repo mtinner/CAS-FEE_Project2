@@ -1,12 +1,13 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { Http } from '@angular/http';
-import { AppService } from '../../../app.service';
-import { Group, GroupObj } from '../../../../models/Group';
-import { Router } from '@angular/router';
-import { ExpenseMember, ExpenseMemberObj } from '../../../../models/ExpenseMember';
-import { Expense, ExpenseObj } from '../../../../models/Expense';
-import { ExpenseOverviewEntry } from '../../../../models/ExpenseOverviewEntry';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
+import {Http} from '@angular/http';
+import {AppService} from '../../app.service';
+import {Group, GroupObj} from '../../../models/Group';
+import {Router} from '@angular/router';
+import {ExpenseMember, ExpenseMemberObj} from '../../../models/ExpenseMember';
+import {Expense, ExpenseObj} from '../../../models/Expense';
+import {ExpenseInsert} from '../../../models/ExpenseInsert';
+import {ExpenseOverviewEntry} from '../../../models/ExpenseOverviewEntry';
 import 'rxjs/add/operator/share';
 import 'rxjs/add/observable/of';
 
@@ -33,7 +34,7 @@ export class CostManagementService extends AppService {
             .catch(this.handleError);
     }
 
-    addExpense(expense: Expense): Observable<any> {
+    addExpense(expense: ExpenseInsert): Observable<any> {
         return this.http.post(`${this.expenseUrl}`, expense, this.jsonOptions)
             .map(this.extractData)
             .catch(this.handleError);
@@ -54,16 +55,32 @@ export class CostManagementService extends AppService {
         this.expenses[month] = expensesObj.expenses;
         if (month === 0) {
             this.expenses[0].forEach(expense => {
-                const existingUserEntries = this.expenseOverview
-                    .filter(entry => entry.creditor.email === expense.creditor.email);
-                if (existingUserEntries.length > 0) {
-                    existingUserEntries[0].amount += expense.amount;
+                // creditors
+                const creditorEntries = this.expenseOverview
+                    .filter(entry => entry.user.email === expense.creditor.email);
+                if (creditorEntries.length > 0) {
+                    creditorEntries[0].amount += expense.amount;
                 } else {
                     this.expenseOverview.push(new ExpenseOverviewEntry(
                         expense.creditor,
                         expense.amount
                     ));
                 }
+                // debitors
+                const debitors = this.expenseOverview
+                    .filter(entry => expense.debitors.some(debitor => debitor.email === entry.user.email));
+                debitors.forEach(debitor => {
+                    const debitorEntries = this.expenseOverview
+                        .filter(entry => entry.user.email === debitor.user.email);
+                    if (debitorEntries.length > 0) {
+                        debitorEntries[0].amount -= expense.amount;
+                    } else {
+                        this.expenseOverview.push(new ExpenseOverviewEntry(
+                            debitor.user,
+                            expense.amount * -1
+                        ));
+                    }
+                });
             });
         }
     }

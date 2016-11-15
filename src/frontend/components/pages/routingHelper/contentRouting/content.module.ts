@@ -6,6 +6,7 @@ import {ElementModule} from '../../../elements/element.module';
 import {contentRouting} from './content.routing';
 import {MemberModule} from '../../members/member.module';
 import {GroupModule} from '../../groups/group.module';
+import {AddExpenseModule} from '../../addExpense/add-expense.module';
 
 @NgModule({
     imports: [
@@ -14,7 +15,8 @@ import {GroupModule} from '../../groups/group.module';
         ElementModule,
         contentRouting,
         MemberModule,
-        GroupModule
+        GroupModule,
+        AddExpenseModule
     ],
     declarations: [
         ContentComponent,

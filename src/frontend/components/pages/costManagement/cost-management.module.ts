@@ -3,10 +3,8 @@ import {BrowserModule} from '@angular/platform-browser';
 import {HttpModule} from '@angular/http';
 import {CostManagementComponent} from './cost-management.component';
 import {ElementModule} from '../../elements/element.module';
-import {CostManagementChildComponent} from './cost-management-child.component';
-import {AddExpenseComponent} from './add-expense.component';
 import {RouterModule} from '@angular/router';
-import { CostManagementService } from './cost-management.service';
+import {CostManagementService} from './cost-management.service';
 
 @NgModule({
     imports: [
@@ -17,8 +15,6 @@ import { CostManagementService } from './cost-management.service';
     ],
     declarations: [
         CostManagementComponent,
-        CostManagementChildComponent,
-        AddExpenseComponent
     ],
     providers: [
         CostManagementService
