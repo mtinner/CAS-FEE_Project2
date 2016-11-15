@@ -20,6 +20,10 @@ class ExpenseManager {
                                 expenses[expenseIndex].debitors[debitorIndex] = this.secureUser(user);
                             }));
                     }
+                    promises.push(this.userService.getById(expenses[expenseIndex].creditor)
+                            .then(user => {
+                                expenses[expenseIndex].creditor = this.secureUser(user);
+                            }));
                 }
                 return Promise.all(promises).then(() => ({expenses: expenses}) );
             });

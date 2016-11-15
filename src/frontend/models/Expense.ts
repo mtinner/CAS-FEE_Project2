@@ -7,7 +7,8 @@ export class Expense {
         public year: number,
         public month: number,
         public day: number,
-        public debitors: string[]) {
+        public creditor: User,
+        public debitors: User[]) {
     }
 }
 

@@ -9,7 +9,7 @@
 
 	<card *ngFor="let month of costManagementService.expenses" [title]="'Month'">
 		<div *ngFor="let expense of month" class="entry">
-			<div class="entry__column">{{expense.creditor}}</div>
+			<div class="entry__column">{{expense.creditor.username}}</div>
 			<div class="entry__column">{{expense.description}}</div>
 			<div class="entry__column">CHF {{expense.amount}}</div>
 		</div>
