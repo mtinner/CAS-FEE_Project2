@@ -2,9 +2,11 @@
 	<button class="btn btn--round btn--bottom-right icon icon--plus" routerLink="add"></button>
 
 	<card [title]="'Overview'">
-		<cost-progress label="Shopping Queen" amount="160" percentage="80"></cost-progress>
-		<cost-progress label="Lettuce Lover" amount="90" percentage="-45"></cost-progress>
-		<cost-progress label="Meat Eater" amount="70" percentage="-35"></cost-progress>
+		<cost-progress 
+			*ngFor="let entry of costManagementService.expenseOverview" 
+			[label]="entry.creditor.username" 
+			[amount]="entry.amount" 
+			percentage="10"></cost-progress>
 	</card>
 
 	<card *ngFor="let month of costManagementService.expenses" [title]="'Month'">
