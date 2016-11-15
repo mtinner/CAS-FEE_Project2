@@ -1,0 +1,11 @@
+@import "../../../../styles/utils/variables";
+
+.entry{
+  display: flex;
+  align-items: stretch;
+
+  &__column {
+    margin: auto;
+    padding: 0 5px;
+  } 
+}

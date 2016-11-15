@@ -14,7 +14,7 @@ export class CostManagementService extends AppService {
     private groupUrl = `${this.baseUrl}groups`;
     private expenseUrl = `${this.baseUrl}expenses`;
     public members: ExpenseMember[] = [];
-    public expenses: Expense[] = [];
+    public expenses: Expense[][] = [[]];
 
     constructor(private http: Http, private router: Router) {
         super();
@@ -37,10 +37,14 @@ export class CostManagementService extends AppService {
             .catch(this.handleError);
     }
 
-    getExpenses(year: number, month: number) {
-        return this.http.get(`${this.expenseUrl}?year=${year}&month=${month}`)
-            .map(this.extractData)
-            .map((expensesObj: ExpenseObj) => this.expenses = expensesObj.expenses)
-            .catch(this.handleError);
+    getExpenses(monthCount: number) {
+        const date = new Date();
+        for (let i = 0; i < monthCount; i++) {
+            this.http.get(`${this.expenseUrl}?year=${date.getFullYear()}&month=${date.getMonth() + 1}`)
+                .map(this.extractData)
+                .map((expensesObj: ExpenseObj) => this.expenses[i] = expensesObj.expenses)
+                .catch(this.handleError).subscribe();
+            date.setMonth(date.getMonth() - 1);
+        }
     }
 }

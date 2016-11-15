@@ -6,7 +6,8 @@ import { CostManagementService } from './cost-management.service';
 
 @Component({
     moduleId: module.id,
-    templateUrl: 'cost-management.component.html'
+    templateUrl: 'cost-management.component.html',
+    styleUrls: ['cost-management.component.css']
 })
 export class CostManagementComponent implements OnInit, OnDestroy {
     expenses = [
@@ -23,7 +24,7 @@ export class CostManagementComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.headerService.headerConfig = new HeaderConfig('Cost Management', HeaderStyle.CostManagement);
         const now = new Date();
-        this.costManagementService.getExpenses(now.getFullYear(), now.getMonth() + 1).subscribe();
+        this.costManagementService.getExpenses(5);
     }
 
     ngOnDestroy(): void {
