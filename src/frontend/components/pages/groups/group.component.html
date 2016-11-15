@@ -9,12 +9,12 @@
         </div>
     </ul>
 
-    <div *ngIf="groupService.groups == 0" class="sticker">
-        <div class="sticker__circle" (click)="setModalVisibility(true)">
-            <span class="icon icon--add-group"></span>
-            <span class="sticker__label">No Groups</span>
-        </div>
-    </div>
+    <div *ngIf="groupService.groups == 0" class="sticker"> 
+        <div class="sticker__circle" (click)="setModalVisibility(true)"> 
+            <span class="icon icon--add-group"></span> 
+            <span class="sticker__label">No Groups</span> 
+        </div> 
+    </div> 
 
     <button class="btn btn--round btn--bottom-right icon icon--plus" (click)="setModalVisibility(true)"></button>
     <div *ngIf="showModal" class="modal" (click)="setModalVisibility(false)">

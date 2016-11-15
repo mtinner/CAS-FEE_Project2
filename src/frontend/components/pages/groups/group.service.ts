@@ -1,11 +1,10 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {Http} from '@angular/http';
-import {AppService} from '../../../app.service';
-import {Group, GroupObj} from '../../../../models/Group';
 import {Router} from '@angular/router';
-import 'rxjs/add/operator/share';
 import 'rxjs/add/observable/of';
+import {AppService} from '../../app.service';
+import {Group, GroupObj} from '../../../models/Group';
 
 @Injectable()
 export class GroupService extends AppService {
@@ -19,15 +18,13 @@ export class GroupService extends AppService {
 
     fetchGroups(): Observable<any> {
         return this.http.get(`${this.groupUrl}`)
-            .share()
             .map(this.extractData)
             .map((groupObj: GroupObj) => this.groups = groupObj.groups)
             .catch(this.handleError);
     }
 
     addGroup(body): Observable<any> {
-       return this.http.post(`${this.groupUrl}`, body, this.jsonOptions)
-            .share()
+        return this.http.post(`${this.groupUrl}`, body, this.jsonOptions)
             .map(this.extractData)
             .map((group: Group) => {
                 this.groups.forEach((group: Group) => {
@@ -41,7 +38,6 @@ export class GroupService extends AppService {
 
     setActiveGroup(id: number): Observable<any> {
         return this.http.post(`${this.groupUrl}/${id}/active`, null)
-            .share()
             .map(this.extractData)
             .map(() => {
                 this.groups.forEach((group: Group) => {
@@ -61,6 +57,6 @@ export class GroupService extends AppService {
     };
 
     goToGroupMembers = (id) => {
-        this.router.navigate(['settings', 'groups', id]);
+        this.router.navigate(['groups', id]);
     };
 }

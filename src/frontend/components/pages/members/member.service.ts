@@ -1,14 +1,14 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {Http} from '@angular/http';
-import {AppService} from '../../../app.service';
-import {Group} from '../../../../models/Group';
 import {Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
 import 'rxjs/add/observable/of';
-import {Member, MemberObj} from '../../../../models/Member';
+import {AppService} from '../../app.service';
+import {Group} from '../../../models/Group';
+import {Member, MemberObj} from '../../../models/Member';
 
 @Injectable()
-export class GroupMemberService extends AppService implements CanActivate {
+export class MemberService extends AppService implements CanActivate {
 
     private groupUrl = `${this.baseUrl}groups`;
     public group: Group;
@@ -24,7 +24,7 @@ export class GroupMemberService extends AppService implements CanActivate {
     }
 
     fetchGroup(id: string): Observable<any> {
-       return this.http.get(`${this.groupUrl}/${id}`)
+        return this.http.get(`${this.groupUrl}/${id}`)
             .map(this.extractData)
             .map((group: Group) => this.group = group)
             .catch(this.handleError);
@@ -63,6 +63,6 @@ export class GroupMemberService extends AppService implements CanActivate {
     }
 
     goToGroups = () => {
-        this.router.navigate(['settings', 'groups']);
+        this.router.navigate(['groups']);
     };
 }

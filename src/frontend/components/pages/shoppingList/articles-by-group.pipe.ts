@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {Article} from '../../../../models/Article';
+import {Article} from '../../../models/Article';
 
 @Pipe({name: 'articlesByGroup'})
 export class ArticlesByGroupPipe implements PipeTransform {

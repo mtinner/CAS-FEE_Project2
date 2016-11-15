@@ -1,10 +1,10 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {ShoppingListService} from './shopping-list.service';
-import {ArticleGroup} from '../../../../models/ArticleGroup';
-import {Article} from '../../../../models/Article';
-import {HeaderService} from '../../../elements/header/header.service';
-import {HeaderStyle} from '../../../elements/header/header.enum';
-import {HeaderConfig} from '../../../../models/HeaderConfig';
+import {Article} from '../../../models/Article';
+import {HeaderService} from '../../elements/header/header.service';
+import {ArticleGroup} from '../../../models/ArticleGroup';
+import {HeaderStyle} from '../../elements/header/header.enum';
+import {HeaderConfig} from '../../../models/HeaderConfig';
 
 @Component({
     moduleId: module.id,

@@ -1,8 +1,8 @@
 import {Component, OnDestroy} from '@angular/core';
-import {HeaderService} from '../../../elements/header/header.service';
-import {HeaderStyle, HeaderIcon} from '../../../elements/header/header.enum';
-import {HeaderConfig} from '../../../../models/HeaderConfig';
-import {Setting} from '../../../../models/Setting';
+import {Setting} from '../../../models/Setting';
+import {HeaderService} from '../../elements/header/header.service';
+import {HeaderStyle, HeaderIcon} from '../../elements/header/header.enum';
+import {HeaderConfig} from '../../../models/HeaderConfig';
 
 
 @Component({
@@ -11,7 +11,7 @@ import {Setting} from '../../../../models/Setting';
 })
 export class SettingsComponent implements OnDestroy {
     public settings: Setting[] = [
-        new Setting('groups', 'Group Membership', `Manage with whom you're sharing shopping list & expenditures`),
+        new Setting('/groups', 'Group Membership', `Manage with whom you're sharing shopping list & expenditures`),
         new Setting('.', 'Article Groups', 'Set how individual articles should be grouped'),
         new Setting('.', 'History')
     ];

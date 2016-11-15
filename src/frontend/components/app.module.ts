@@ -3,19 +3,23 @@ import {appRoutingProviders, routing} from './app.routing';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {LoginComponent} from './pages/login/login.component';
-import {ContentModule} from './pages/content/content.module';
 import {ElementModule} from './elements/element.module';
 import {RegisterService} from './pages/register/register.service';
 import {RegisterComponent} from './pages/register/register.component';
 import {LoginManagingService} from './pages/login/login-managing.service';
 import {LoginHttpService} from './pages/login/login-http.service';
+import {authServiceProvider} from './common/authentication/auth-http.provider';
+import {ContentModule} from './pages/routingHelper/contentRouting/content.module';
+import {ContentSidebarModule} from './pages/routingHelper/contentSidebarRouting/content-sidebar.module';
+
 
 @NgModule({
     imports: [
         BrowserModule,
-        ContentModule,
         ElementModule,
-        routing
+        routing,
+        ContentSidebarModule,
+        ContentModule
     ],
     declarations: [
         AppComponent,
@@ -26,7 +30,8 @@ import {LoginHttpService} from './pages/login/login-http.service';
         appRoutingProviders,
         LoginHttpService,
         LoginManagingService,
-        RegisterService
+        RegisterService,
+        authServiceProvider
     ],
     bootstrap: [AppComponent]
 })
