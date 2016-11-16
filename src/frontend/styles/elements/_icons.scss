@@ -90,5 +90,17 @@
   &--radio-checked:before {
     content: "\e90c";
   }
+
+  &--checkbox-checked:before {
+    content: "\e90e";
+  }
+
+  &--checkbox-unchecked:before {
+    content: "\e90d";
+  }
+
+  &--avatar:before {
+    content: "\e90f";
+  }
 }
 
