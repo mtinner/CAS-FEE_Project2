@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
     moduleId: module.id,
@@ -7,7 +7,6 @@ import {Component, Input, Output, EventEmitter} from '@angular/core';
     styleUrls: ['cost-progress.component.css'],
 })
 export class CostProgress {
-    public progressClass: 'progress' | 'progress--reversed' = 'progress';
     @Input()
     amount: number;
     @Input()
@@ -15,13 +14,12 @@ export class CostProgress {
     @Input()
     label: string;
 
+    private percentageAbs: number;
+
     constructor() {
     }
 
     ngOnInit(): void {
-        if (this.percentage < 0) {
-            this.percentage = Math.abs(this.percentage);
-            this.progressClass = 'progress--reversed';
-        }
+        this.percentageAbs = Math.abs(this.percentage);
     }
 }
