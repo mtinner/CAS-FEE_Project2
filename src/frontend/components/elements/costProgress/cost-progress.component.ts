@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
 
 @Component({
     moduleId: module.id,
@@ -7,7 +7,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
     styleUrls: ['cost-progress.component.css'],
 })
 export class CostProgress {
-    private progressClass: 'progress' | 'progress--reversed' = 'progress';
+    public progressClass: 'progress' | 'progress--reversed' = 'progress';
     @Input()
     amount: number;
     @Input()

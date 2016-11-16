@@ -16,6 +16,8 @@ export class CheckboxComponent {
     label: string;
     @Input()
     checked: boolean;
+    //AOT
+    public change;
 
     constructor() {
     }
