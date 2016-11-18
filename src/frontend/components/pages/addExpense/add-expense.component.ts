@@ -28,14 +28,14 @@ export class AddExpenseComponent implements OnInit, OnDestroy {
 
     onAddClick() {
         const today = new Date();
-        const emails = this.costManagementService.members.filter(member => member.checked).map(member => member.id);
+        const debitorsEmails = this.costManagementService.members.filter(member => member.checked).map(member => member.email);
         this.costManagementService.addExpense(new ExpenseInsert(
             this.description,
             this.amount,
             today.getFullYear(),
             today.getMonth() + 1,
             today.getDate(),
-            emails
+            debitorsEmails
         )).subscribe();
     }
 
