@@ -11,7 +11,7 @@ router.get('/',
     function (req, res) {
         groupManager.getAll(req.user)
             .then(groups => res.status(200).send(groups))
-            .catch(() => res.status(400).send());
+            .catch((err) => res.status(err.status || 400).send(err));
     });
 
 router.post('/',
@@ -19,7 +19,7 @@ router.post('/',
     function (req, res) {
         groupManager.add(req.body, req.user)
             .then(group => res.status(201).send(group))
-            .catch(() => res.status(400).send());
+            .catch((err) => res.status(err.status || 400).send(err));
     });
 
 router.get('/:id',
@@ -27,7 +27,7 @@ router.get('/:id',
     function (req, res) {
         groupManager.get(req.params.id, req.user)
             .then(group => res.status(200).send(group))
-            .catch(() => res.status(400).send());
+            .catch((err) => res.status(err.status || 400).send(err));
     });
 
 router.put('/:id/join',
@@ -35,7 +35,7 @@ router.put('/:id/join',
     function (req, res) {
         groupManager.join(req.params.id, req.user, req.body)
             .then((user) => res.status(200).send(user))
-            .catch(() => res.status(400).send());
+            .catch((err) => res.status(err.status || 400).send(err));
     });
 
 router.get('/:id/members',
@@ -43,7 +43,7 @@ router.get('/:id/members',
     function (req, res) {
         groupManager.getMembers(req.params.id, req.user)
             .then((users) => res.status(200).send(users))
-            .catch(() => res.status(400).send());
+            .catch((err) => res.status(err.status || 400).send(err));
     });
 
 router.post('/:id/active',
@@ -51,7 +51,7 @@ router.post('/:id/active',
     function (req, res) {
         groupManager.setActive(req.params.id, req.user, req.body)
             .then(() => res.status(200).send({}))
-            .catch(() => res.status(400).send());
+            .catch((err) => res.status(err.status || 400).send(err));
     });
 
 router.put('/:id',
@@ -59,7 +59,7 @@ router.put('/:id',
     function (req, res) {
         groupManager.rename(req.params.id, req.user, req.body)
             .then((group) => res.status(200).send(group))
-            .catch(() => res.status(400).send());
+            .catch((err) => res.status(err.status || 400).send(err));
     });
 
 router.put('/:id/leave',
@@ -67,7 +67,7 @@ router.put('/:id/leave',
     function (req, res) {
         groupManager.leave(req.params.id, req.user, req.body)
             .then(() => res.status(200).send({}))
-            .catch(() => res.status(400).send());
+            .catch((err) => res.status(err.status || 400).send(err));
     });
 
 module.exports = router;
