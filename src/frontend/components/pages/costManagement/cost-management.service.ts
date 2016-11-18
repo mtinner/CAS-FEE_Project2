@@ -35,7 +35,7 @@ export class CostManagementService extends AppService {
     }
 
     addExpense(expense: ExpenseInsert): Observable<any> {
-        return this.http.post(`${this.expenseUrl}`, expense, this.jsonOptions)
+        return this.http.post(`${this.expenseUrl}/`, expense, this.jsonOptions)
             .map(this.extractData)
             .catch(this.handleError);
     }
@@ -55,7 +55,7 @@ export class CostManagementService extends AppService {
         this.expenses[month] = expensesObj.expenses;
         if (month === 0) {
             this.expenses[0].forEach(expense => {
-                // creditors
+                // creditor
                 const creditorEntries = this.expenseOverview
                     .filter(entry => entry.user.email === expense.creditor.email);
                 if (creditorEntries.length > 0) {
@@ -67,17 +67,15 @@ export class CostManagementService extends AppService {
                     ));
                 }
                 // debitors
-                const debitors = this.expenseOverview
-                    .filter(entry => expense.debitors.some(debitor => debitor.email === entry.user.email));
-                debitors.forEach(debitor => {
+                expense.debitors.forEach(debitor => {
                     const debitorEntries = this.expenseOverview
-                        .filter(entry => entry.user.email === debitor.user.email);
+                        .filter(entry => entry.user.email === debitor.email);
                     if (debitorEntries.length > 0) {
                         debitorEntries[0].amount -= expense.amount;
                     } else {
                         this.expenseOverview.push(new ExpenseOverviewEntry(
-                            debitor.user,
-                            expense.amount * -1
+                            debitor,
+                            -expense.amount
                         ));
                     }
                 });
