@@ -58,12 +58,13 @@ export class CostManagementService extends AppService {
                 // creditor
                 const creditorEntries = this.expenseOverview
                     .filter(entry => entry.user.email === expense.creditor.email);
+                const amount = expense.amount / (expense.debitors.length + 1);
                 if (creditorEntries.length > 0) {
-                    creditorEntries[0].amount += expense.amount;
+                    creditorEntries[0].amount += amount;
                 } else {
                     this.expenseOverview.push(new ExpenseOverviewEntry(
                         expense.creditor,
-                        expense.amount,
+                        amount,
                         0
                     ));
                 }
@@ -71,12 +72,13 @@ export class CostManagementService extends AppService {
                 expense.debitors.forEach(debitor => {
                     const debitorEntries = this.expenseOverview
                         .filter(entry => entry.user.email === debitor.email);
+                    const amount = expense.amount / (expense.debitors.length + 1);
                     if (debitorEntries.length > 0) {
-                        debitorEntries[0].amount -= expense.amount;
+                        debitorEntries[0].amount -= amount;
                     } else {
                         this.expenseOverview.push(new ExpenseOverviewEntry(
                             debitor,
-                            -expense.amount,
+                            -amount,
                             0
                         ));
                     }
@@ -85,6 +87,7 @@ export class CostManagementService extends AppService {
             const totalAmount = this.expenses[0].map(e => e.amount).reduce((a1, a2) => a1 + a2);
             this.expenseOverview.forEach(entry => {
                 entry.percentage = 100 / totalAmount * entry.amount;
+                entry.amount = Math.round(entry.amount);
             });
         }
     }
