@@ -1,13 +1,13 @@
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
-import {Http} from '@angular/http';
-import {AppService} from '../../app.service';
-import {Group, GroupObj} from '../../../models/Group';
-import {Router} from '@angular/router';
-import {ExpenseMember, ExpenseMemberObj} from '../../../models/ExpenseMember';
-import {Expense, ExpenseObj} from '../../../models/Expense';
-import {ExpenseInsert} from '../../../models/ExpenseInsert';
-import {ExpenseOverviewEntry} from '../../../models/ExpenseOverviewEntry';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { Http } from '@angular/http';
+import { AppService } from '../../app.service';
+import { Group, GroupObj } from '../../../models/Group';
+import { Router } from '@angular/router';
+import { ExpenseMember, ExpenseMemberObj } from '../../../models/ExpenseMember';
+import { Expense, ExpenseObj } from '../../../models/Expense';
+import { ExpenseInsert } from '../../../models/ExpenseInsert';
+import { ExpenseOverviewEntry } from '../../../models/ExpenseOverviewEntry';
 import 'rxjs/add/operator/share';
 import 'rxjs/add/observable/of';
 
@@ -63,7 +63,8 @@ export class CostManagementService extends AppService {
                 } else {
                     this.expenseOverview.push(new ExpenseOverviewEntry(
                         expense.creditor,
-                        expense.amount
+                        expense.amount,
+                        0
                     ));
                 }
                 // debitors
@@ -75,10 +76,15 @@ export class CostManagementService extends AppService {
                     } else {
                         this.expenseOverview.push(new ExpenseOverviewEntry(
                             debitor,
-                            -expense.amount
+                            -expense.amount,
+                            0
                         ));
                     }
                 });
+            });
+            const totalAmount = this.expenses[0].map(e => e.amount).reduce((a1, a2) => a1 + a2);
+            this.expenseOverview.forEach(entry => {
+                entry.percentage = 100 / totalAmount * entry.amount;
             });
         }
     }

@@ -6,7 +6,7 @@
 			*ngFor="let entry of costManagementService.expenseOverview" 
 			[label]="entry.user.username" 
 			[amount]="entry.amount" 
-			percentage="10"></cost-progress>
+			[percentage]="entry.percentage"></cost-progress>
 	</card>
 
 	<card *ngFor="let month of costManagementService.expenses" [title]="'Month'">
