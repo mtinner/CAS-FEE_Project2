@@ -63,11 +63,12 @@ export class AuthHttp extends Http {
             if (err.status === 401) {
                 this.loginManaginService.performNotAuthorized();
                 return new EmptyObservable();
-            } else {
-                let message = err._body || 'Something went wrong';
-                this.snackbarService.showSnackbar(message);
-                return Observable.throw(err);
             }
+            else if (err.status !== 422 && err.status !== 403) {
+                let message = 'Something went wrong';
+                this.snackbarService.showSnackbar(message);
+            }
+            return Observable.throw(err);
         });
     }
 }

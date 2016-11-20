@@ -15,7 +15,7 @@ class GroupManager {
         return this.checkGroupPermission(user, groupId)
             .then(hasGroup => {
                 if (!hasGroup) {
-                    throw new ResponseException(404, 'User is not in group');
+                    throw new ResponseException(403, 'No permission to get this group');
                 }
                 else {
                     return this.groupService.get({ id: groupId });
