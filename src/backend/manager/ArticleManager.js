@@ -1,7 +1,7 @@
 'use strict';
 let ArticleService = require('../services/ArticleService'),
     UserService = require('../services/UserService'),
-    ResponseException = require('../models/CustomException');
+    ResponseException = require('../models/ResponseException');
 
 class ArticleManager {
     constructor() {

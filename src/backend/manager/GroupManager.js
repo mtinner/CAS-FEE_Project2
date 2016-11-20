@@ -3,7 +3,7 @@ let Promise = require('promise'),
     Group = require('../models/Group'),
     GroupService = require('../services/GroupService'),
     UserService = require('../services/UserService'),
-    CustomException = require('../models/CustomException');
+    ResponseException = require('../models/ResponseException');
 
 class GroupManager {
     constructor() {
@@ -15,7 +15,7 @@ class GroupManager {
         return this.checkGroupPermission(user, groupId)
             .then(hasGroup => {
                 if (!hasGroup) {
-                    throw new CustomException(404, 'User is not in group');
+                    throw new ResponseException(404, 'User is not in group');
                 }
                 else {
                     return this.groupService.get({ id: groupId });
@@ -62,7 +62,7 @@ class GroupManager {
 
     join(groupId, memberUser, invitedUser) {
         if (!groupId || !memberUser || !invitedUser) {
-            throw new CustomException(400, 'missing parameter');
+            throw new ResponseException(400, 'missing parameter');
         }
         return this.checkGroupPermission(memberUser, groupId)
             .then(group => {
@@ -70,14 +70,14 @@ class GroupManager {
                     return this.userService.get(invitedUser)
                         .then(user => {
                             if (!user) {
-                                throw new CustomException(422, 'Email does not exist');
+                                throw new ResponseException(422, 'Email does not exist');
                             }
                             user.groups.push({ id: groupId });
                             return this.userService.update(user.id, user, {})
                                 .then(this.secureUser);
                         });
                 } else {
-                    throw new CustomException(404, 'User is not in group');
+                    throw new ResponseException(404, 'User is not in group');
                 }
             });
     }
@@ -91,7 +91,7 @@ class GroupManager {
                             this.userService.update(user.id, user, { activeGroup: groupId })
                                 .then(this.secureUser(user)));
                 } else {
-                    throw new CustomException(404, 'User is not in group');
+                    throw new ResponseException(404, 'User is not in group');
                 }
             });
     }
@@ -106,7 +106,7 @@ class GroupManager {
                             return { members: members };
                         });
                 } else {
-                    throw new CustomException(404, 'User is not in group');
+                    throw new ResponseException(404, 'User is not in group');
                 }
             });
     }
@@ -117,7 +117,7 @@ class GroupManager {
                 if (dbGroup && group.name) {
                     return this.groupService.update(groupId, { id: groupId }, { name: group.name });
                 } else {
-                    throw new CustomException(404, 'User is not in group');
+                    throw new ResponseException(404, 'User is not in group');
                 }
             });
     }
@@ -152,7 +152,7 @@ class GroupManager {
         return Promise.all([triggeredUserHasGroup, affectedUserHasGroup])
             .then((hasGroup) => {
                 if (!hasGroup[0] || !hasGroup[1]) {
-                    throw new CustomException(404, 'User is not in group');
+                    throw new ResponseException(404, 'User is not in group');
                 }
                 let remainingGroups = dbAffectedUser.groups.filter((group) => group.id !== groupId);
 
