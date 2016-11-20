@@ -15,7 +15,7 @@ class GroupManager {
         return this.checkGroupPermission(user, groupId)
             .then(hasGroup => {
                 if (!hasGroup) {
-                    throw new ResponseException(403, 'No permission to get this group');
+                    throw new ResponseException(403, 'No permission to get this group if you are not member of');
                 }
                 else {
                     return this.groupService.get({ id: groupId });
@@ -77,7 +77,7 @@ class GroupManager {
                                 .then(this.secureUser);
                         });
                 } else {
-                    throw new ResponseException(404, 'User is not in group');
+                    throw new ResponseException(403, 'No group invitation possible in a group in which you are not a member');
                 }
             });
     }
@@ -91,7 +91,7 @@ class GroupManager {
                             this.userService.update(user.id, user, { activeGroup: groupId })
                                 .then(this.secureUser(user)));
                 } else {
-                    throw new ResponseException(404, 'User is not in group');
+                    throw new ResponseException(403, 'Can not set a group active you are not member of');
                 }
             });
     }
@@ -106,7 +106,7 @@ class GroupManager {
                             return { members: members };
                         });
                 } else {
-                    throw new ResponseException(404, 'User is not in group');
+                    throw new ResponseException(403, 'Cannot request member of group you are not member of');
                 }
             });
     }
@@ -117,7 +117,7 @@ class GroupManager {
                 if (dbGroup && group.name) {
                     return this.groupService.update(groupId, { id: groupId }, { name: group.name });
                 } else {
-                    throw new ResponseException(404, 'User is not in group');
+                    throw new ResponseException(403, 'Cannot rename a group you are not member of');
                 }
             });
     }
@@ -152,7 +152,7 @@ class GroupManager {
         return Promise.all([triggeredUserHasGroup, affectedUserHasGroup])
             .then((hasGroup) => {
                 if (!hasGroup[0] || !hasGroup[1]) {
-                    throw new ResponseException(404, 'User is not in group');
+                    throw new ResponseException(403, 'You cannot leave a group or kick a member you are not member of');
                 }
                 let remainingGroups = dbAffectedUser.groups.filter((group) => group.id !== groupId);
 

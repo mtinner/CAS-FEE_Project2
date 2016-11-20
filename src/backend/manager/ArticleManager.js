@@ -44,7 +44,7 @@ class ArticleManager {
                             return this.articleService.remove(id);
                         }
                         else {
-                            throw new ResponseException(404, 'User is not in group');
+                            throw new ResponseException(403, 'You can not remove a group member in witch you are not member');
                         }
                     }
                 )
