@@ -1,5 +1,6 @@
 
 # CAS-FEE_Project2
+https://mtinner.github.io/CAS-FEE_Project2/
 
 ## Usage
 
@@ -9,6 +10,5 @@
 
 ## Main Gulp Tasks
  * Default (Start App http://:localhost:8080/)
- * ServeStyleGuide (Make Styleguide http://localhost:8000/)
  * Spec (run Jasmine http://localhost:9002/)
  * E2e (Run Protractor http://:localhost:8080/)
