@@ -10,15 +10,9 @@ import { CostManagementService } from './cost-management.service';
     styleUrls: ['cost-management.component.css']
 })
 export class CostManagementComponent implements OnInit, OnDestroy {
-    expenses = [
-        { title: 'September 2016' },
-        { title: 'Oktober 2016' },
-        { title: 'November 2016' },
-    ];
-
     constructor(
         private headerService: HeaderService,
-        public costManagementService: CostManagementService) {
+        private costManagementService: CostManagementService) {
     }
 
     ngOnInit(): void {

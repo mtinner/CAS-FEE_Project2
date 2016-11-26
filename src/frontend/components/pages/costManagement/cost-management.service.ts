@@ -27,7 +27,7 @@ export class CostManagementService extends AppService {
         this.router.navigate(['cost-management']);
     };
 
-    getCurrentMembers(): Observable<any> {
+    getCurrentMembers(): Observable<ExpenseMember[]> {
         return this.http.get(`${this.groupUrl}/currentMembers`)
             .map(this.extractData)
             .map((membersObj: ExpenseMemberObj) => this.members = membersObj.members)

@@ -15,7 +15,7 @@ export class AddExpenseComponent implements OnInit, OnDestroy {
     private amount: number;
 
     constructor(private headerService: HeaderService,
-                public costManagementService: CostManagementService) {
+        private costManagementService: CostManagementService) {
     }
 
     setDescription(value) {

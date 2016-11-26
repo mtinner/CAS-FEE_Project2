@@ -5,6 +5,7 @@ import {ElementModule} from '../../elements/element.module';
 import {RouterModule} from '@angular/router';
 import {AddExpenseComponent} from './add-expense.component';
 import {CostManagementModule} from '../costManagement/cost-management.module';
+import {CostManagementService} from '../costManagement/cost-management.service';
 
 @NgModule({
     imports: [
@@ -16,6 +17,9 @@ import {CostManagementModule} from '../costManagement/cost-management.module';
     ],
     declarations: [
         AddExpenseComponent
+    ],
+    providers: [
+        CostManagementService
     ]
 })
 export class AddExpenseModule {
