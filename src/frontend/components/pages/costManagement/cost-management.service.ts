@@ -35,7 +35,7 @@ export class CostManagementService extends AppService {
     }
 
     addExpense(expense: ExpenseInsert): Observable<any> {
-        return this.http.post(`${this.expenseUrl}/`, expense, this.jsonOptions)
+        return this.http.post(this.expenseUrl, expense, this.jsonOptions)
             .map(this.extractData)
             .catch(this.handleError);
     }
