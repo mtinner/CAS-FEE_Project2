@@ -14,7 +14,7 @@ export class CostProgress {
     @Input()
     label: string;
 
-    private percentageAbs: number;
+    percentageAbs: number;
 
     constructor() {
     }

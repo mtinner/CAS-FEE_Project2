@@ -12,7 +12,7 @@ import { CostManagementService } from './cost-management.service';
 export class CostManagementComponent implements OnInit, OnDestroy {
     constructor(
         private headerService: HeaderService,
-        private costManagementService: CostManagementService) {
+        public costManagementService: CostManagementService) {
     }
 
     ngOnInit(): void {

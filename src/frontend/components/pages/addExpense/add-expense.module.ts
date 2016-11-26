@@ -17,9 +17,6 @@ import {CostManagementService} from '../costManagement/cost-management.service';
     ],
     declarations: [
         AddExpenseComponent
-    ],
-    providers: [
-        CostManagementService
     ]
 })
 export class AddExpenseModule {
