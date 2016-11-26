@@ -84,7 +84,9 @@ export class CostManagementService extends AppService {
                     }
                 });
             });
-            const totalAmount = this.expenses[0].map(e => e.amount).reduce((a1, a2) => a1 + a2);
+            const totalAmount = this.expenses[0].length > 0
+                ? this.expenses[0].map(e => e.amount).reduce((a1, a2) => a1 + a2)
+                : 0;
             this.expenseOverview.forEach(entry => {
                 entry.percentage = 100 / totalAmount * entry.amount;
                 entry.amount = Math.round(entry.amount);
