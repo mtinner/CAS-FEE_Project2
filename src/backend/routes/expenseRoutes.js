@@ -15,7 +15,7 @@ router.get('/',
             res.status(400).send();
             return;
         }
-        expenseManager.getAll(req.user.activeGroup, year, month)
+        expenseManager.getAll(req.user, year, month)
             .then(expenses => res.status(200).send(expenses))
             .catch(() => res.status(400).send());
     });
@@ -23,7 +23,7 @@ router.get('/',
 router.post('/',
     authService.protect('user'),
     function (req, res) {
-        expenseManager.add(req.body, req.user.email, req.user.activeGroup)
+        expenseManager.add(req.body, req.user)
             .then(expense => res.status(201).send(expense))
             .catch(() => res.status(400).send());
     });
