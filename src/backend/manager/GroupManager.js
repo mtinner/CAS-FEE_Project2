@@ -17,19 +17,19 @@ class GroupManager {
                     return Promise.reject('Invalid Parameter');
                 }
                 else {
-                    return this.groupService.get({id: groupId});
+                    return this.groupService.get({ id: groupId });
                 }
             });
     }
 
     getAll(user) {
         return this.userService.get(user)
-            .then((user)=> {
+            .then((user) => {
                 let promises = [];
-                user.groups.forEach((group)=> {
+                user.groups.forEach((group) => {
 
                     promises.push(this.groupService.get(group)
-                        .then((group=> {
+                        .then((group => {
                             if (group.id === user.activeGroup) {
                                 group.isActiveGroup = true;
                             }
@@ -41,8 +41,8 @@ class GroupManager {
 
                 });
                 return Promise.all(promises)
-                    .then(values=> {
-                        return {groups: values};
+                    .then(values => {
+                        return { groups: values };
                     });
             });
     }
@@ -53,9 +53,9 @@ class GroupManager {
 
         return Promise.all([dbUser, dbGroup])
             .then(values => {
-                values[0].groups.push({id: values[1].id});
-                return this.userService.update(values[0].id, values[0], {activeGroup: values[1].id})
-                    .then(()=>values[1]);
+                values[0].groups.push({ id: values[1].id });
+                return this.userService.update(values[0].id, values[0], { activeGroup: values[1].id })
+                    .then(() => values[1]);
             });
     }
 
@@ -64,11 +64,11 @@ class GroupManager {
             return Promise.reject('Invalid Parameter');
         }
         return this.checkGroupPermission(memberUser, groupId)
-            .then(group=> {
+            .then(group => {
                 if (group) {
                     return this.userService.get(invitedUser)
-                        .then(user=> {
-                            user.groups.push({id: groupId});
+                        .then(user => {
+                            user.groups.push({ id: groupId });
                             return this.userService.update(user.id, user, {})
                                 .then(this.secureUser);
                         });
@@ -80,11 +80,11 @@ class GroupManager {
 
     setActive(groupId, user) {
         return this.checkGroupPermission(user, groupId)
-            .then((group)=> {
+            .then((group) => {
                 if (group) {
                     return this.userService.get(user)
                         .then(user =>
-                            this.userService.update(user.id, user, {activeGroup: groupId})
+                            this.userService.update(user.id, user, { activeGroup: groupId })
                                 .then(this.secureUser(user)));
                 } else {
                     return Promise.reject('Not allowed to change to this group');
@@ -96,10 +96,10 @@ class GroupManager {
         return this.checkGroupPermission(user, groupId)
             .then((group) => {
                 if (group) {
-                    return this.userService.getAll({'groups.id': groupId})
+                    return this.userService.getAll({ 'groups.id': groupId })
                         .then((users) => {
                             let members = users.map(this.secureUser);
-                            return {members: members};
+                            return { members: members };
                         });
                 } else {
                     return Promise.reject('Not allowed to get group members');
@@ -111,7 +111,7 @@ class GroupManager {
         return this.checkGroupPermission(user, groupId)
             .then((dbGroup) => {
                 if (dbGroup && group.name) {
-                    return this.groupService.update(groupId, {id: groupId}, {name: group.name});
+                    return this.groupService.update(groupId, { id: groupId }, { name: group.name });
                 } else {
                     return Promise.reject('Not allowed to rename this group');
                 }
@@ -123,26 +123,30 @@ class GroupManager {
             .then((user) => this.hasGroup(user, groupId));
     }
 
+    getCurrentMembers(user) {
+        return this.getMembers(user.activeGroup, user);
+    }
+
     hasGroup(user, groupId) {
-        return Promise.resolve(user.groups.find(group=> group.id === groupId));
+        return Promise.resolve(user.groups.find(group => group.id === groupId));
     }
 
     secureUser(user) {
-        return {email: user.email, username: user.username};
+        return { id: user.id, email: user.email, username: user.username };
     }
 
     leave(groupId, triggeredUser, affecteUser) {
         let dbAffectedUser;
         let triggeredUserHasGroup = this.userService.get(triggeredUser)
-            .then(dbUser=> this.hasGroup(dbUser, groupId));
+            .then(dbUser => this.hasGroup(dbUser, groupId));
         let affectedUserHasGroup = this.userService.get(affecteUser)
-            .then(dbUser=> {
+            .then(dbUser => {
                 dbAffectedUser = dbUser;
                 return this.hasGroup(dbUser, groupId);
             });
 
         return Promise.all([triggeredUserHasGroup, affectedUserHasGroup])
-            .then((hasGroup)=> {
+            .then((hasGroup) => {
                 if (!hasGroup[0] || !hasGroup[1]) {
                     return;
                 }

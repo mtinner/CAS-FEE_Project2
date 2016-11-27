@@ -1,5 +1,5 @@
+import { CostManagementComponent } from './cost-management.component';
 import {Route} from '@angular/router';
-import {CostManagementComponent} from './cost-management.component';
 
 export const costManagementRoute: Route = {
     path: 'cost-management',

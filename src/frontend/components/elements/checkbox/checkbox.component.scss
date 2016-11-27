@@ -1,0 +1,26 @@
+@import "../../../styles/utils/variables";
+
+.checkbox {
+  display: none;
+}
+
+.label {
+  cursor: pointer;
+
+  &__button {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    margin-bottom: -.25em;
+    border: 2px solid $blue;
+  }
+}
+
+.checkbox:checked + .label > .label__button--dot {
+  display: inline-block;
+  width: .75em;
+  height: .75em;
+  margin-left: -1.3em;
+  margin-right: 0.25em;
+  background: $blue;
+}

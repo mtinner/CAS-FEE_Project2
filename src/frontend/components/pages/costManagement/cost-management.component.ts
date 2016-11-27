@@ -2,26 +2,23 @@ import {Component, OnInit, OnDestroy} from '@angular/core';
 import {HeaderService} from '../../elements/header/header.service';
 import {HeaderIcon, HeaderStyle} from '../../elements/header/header.enum';
 import {HeaderConfig} from '../../../models/HeaderConfig';
+import { CostManagementService } from './cost-management.service';
 
 @Component({
     moduleId: module.id,
-    templateUrl: 'cost-management.component.html'
+    templateUrl: 'cost-management.component.html',
+    styleUrls: ['cost-management.component.css']
 })
 export class CostManagementComponent implements OnInit, OnDestroy {
-
-    constructor(private headerService: HeaderService) {
+    constructor(
+        private headerService: HeaderService,
+        public costManagementService: CostManagementService) {
     }
 
-    leftIconClick = () => {
-        console.log('left Icon');
-    };
-
-    rightIconClick = () => {
-        console.log('right Icon');
-    };
-
     ngOnInit(): void {
-        this.headerService.headerConfig = new HeaderConfig('Cost Management', HeaderStyle.CostManagement, HeaderIcon.ArrowLeft, this.leftIconClick, HeaderIcon.Edit, this.rightIconClick);
+        this.headerService.headerConfig = new HeaderConfig('Cost Management', HeaderStyle.CostManagement);
+        const now = new Date();
+        this.costManagementService.getExpenses(5);
     }
 
     ngOnDestroy(): void {
