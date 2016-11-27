@@ -18,7 +18,7 @@ class GroupManager {
                     throw new ResponseException(403, 'No permission to get this group if you are not member of');
                 }
                 else {
-                    return this.groupService.get({ id: groupId });
+                    return this.groupService.get({id: groupId});
                 }
             });
     }
@@ -43,7 +43,7 @@ class GroupManager {
                 });
                 return Promise.all(promises)
                     .then(values => {
-                        return { groups: values };
+                        return {groups: values};
                     });
             });
     }
@@ -54,8 +54,8 @@ class GroupManager {
 
         return Promise.all([dbUser, dbGroup])
             .then(values => {
-                values[0].groups.push({ id: values[1].id });
-                return this.userService.update(values[0].id, values[0], { activeGroup: values[1].id })
+                values[0].groups.push({id: values[1].id});
+                return this.userService.update(values[0].id, values[0], {activeGroup: values[1].id})
                     .then(() => values[1]);
             });
     }
@@ -72,7 +72,7 @@ class GroupManager {
                             if (!user) {
                                 throw new ResponseException(422, 'Email does not exist');
                             }
-                            user.groups.push({ id: groupId });
+                            user.groups.push({id: groupId});
                             return this.userService.update(user.id, user, {})
                                 .then(this.secureUser);
                         });
@@ -88,7 +88,7 @@ class GroupManager {
                 if (group) {
                     return this.userService.get(user)
                         .then(user =>
-                            this.userService.update(user.id, user, { activeGroup: groupId })
+                            this.userService.update(user.id, user, {activeGroup: groupId})
                                 .then(this.secureUser(user)));
                 } else {
                     throw new ResponseException(403, 'Can not set a group active you are not member of');
@@ -100,10 +100,10 @@ class GroupManager {
         return this.checkGroupPermission(user, groupId)
             .then((group) => {
                 if (group) {
-                    return this.userService.getAll({ 'groups.id': groupId })
+                    return this.userService.getAll({'groups.id': groupId})
                         .then((users) => {
                             let members = users.map(this.secureUser);
-                            return { members: members };
+                            return {members: members};
                         });
                 } else {
                     throw new ResponseException(403, 'Cannot request member of group you are not member of');
@@ -115,7 +115,7 @@ class GroupManager {
         return this.checkGroupPermission(user, groupId)
             .then((dbGroup) => {
                 if (dbGroup && group.name) {
-                    return this.groupService.update(groupId, { id: groupId }, { name: group.name });
+                    return this.groupService.update(groupId, {id: groupId}, {name: group.name});
                 } else {
                     throw new ResponseException(403, 'Cannot rename a group you are not member of');
                 }
@@ -128,7 +128,8 @@ class GroupManager {
     }
 
     getCurrentMembers(user) {
-        return this.getMembers(user.activeGroup, user);
+        return this.userService.get(user)
+            .then((user) => this.getMembers(user.activeGroup, user));
     }
 
     hasGroup(user, groupId) {
@@ -136,7 +137,7 @@ class GroupManager {
     }
 
     secureUser(user) {
-        return { id: user.id, email: user.email, username: user.username };
+        return {id: user.id, email: user.email, username: user.username};
     }
 
     leave(groupId, triggeredUser, affecteUser) {
