@@ -1,26 +1,23 @@
 @import "../../../styles/utils/variables";
+@import "../../../styles/elements/icons";
 
 .checkbox {
   display: none;
-}
 
-.label {
-  cursor: pointer;
-
-  &__button {
-    display: inline-block;
-    width: 1em;
-    height: 1em;
-    margin-bottom: -.25em;
-    border: 2px solid $blue;
+  &__container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
   }
 }
 
-.checkbox:checked + .label > .label__button--dot {
-  display: inline-block;
-  width: .75em;
-  height: .75em;
-  margin-left: -1.3em;
-  margin-right: 0.25em;
-  background: $blue;
+.check {
+  margin-right: 5px;
+  color: $blue;
+  font-size: 1.5rem;
+
+  .checkbox:checked + .checkbox__container > & {
+    @extend .icon;
+    @extend .icon--checkbox-checked
+  }
 }

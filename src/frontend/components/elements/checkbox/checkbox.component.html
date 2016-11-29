@@ -1,9 +1,8 @@
 <div>
-    <input type="checkbox" id="{{id}}" class="checkbox"
-           attr.name="{{name}}" [(ngModel)]="value">
-    <label attr.for="{{id}}" class="label">
-        <span class="label__button"></span>
-        <span class="label__button--dot"></span>
-        {{label}}
-    </label>
+  <input type="checkbox" id="{{id}}" class="checkbox"
+         attr.name="{{name}}" [(ngModel)]="value">
+  <label attr.for="{{id}}" class="checkbox__container">
+    <span class="check icon icon--checkbox-unchecked"></span>
+    <span>{{label}}</span>
+  </label>
 </div>

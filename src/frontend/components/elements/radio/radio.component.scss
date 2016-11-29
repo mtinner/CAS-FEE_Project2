@@ -11,10 +11,6 @@
   }
 }
 
-.label {
-  cursor: pointer;
-}
-
 .check {
   margin-right: 5px;
   color: $blue;
@@ -24,5 +20,4 @@
     @extend .icon;
     @extend .icon--radio-checked
   }
-
 }
