@@ -6,6 +6,7 @@ import 'rxjs/add/observable/of';
 import {AppService} from '../../app.service';
 import {Group} from '../../../models/Group';
 import {Member, MemberObj} from '../../../models/Member';
+import {SnackbarService} from '../../elements/snackbar/snackbar.service';
 
 @Injectable()
 export class MemberService extends AppService implements CanActivate {
@@ -14,13 +15,18 @@ export class MemberService extends AppService implements CanActivate {
     public group: Group;
     public members: Member[] = [];
 
-    constructor(private http: Http, private router: Router) {
+    constructor(private http: Http, private router: Router, private snackbarService: SnackbarService) {
         super();
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean>|Promise<boolean>|boolean {
         return this.fetchGroup(route.params['id'])
-            .map((group) => !!group);
+            .map((group) => !!group)
+            .catch((error: any) => {
+                this.router.navigate(['/groups']);
+                this.snackbarService.showSnackbar('You are not permitted to view this Group');
+                return this.handleError(error);
+            });
     }
 
     fetchGroup(id: string): Observable<any> {

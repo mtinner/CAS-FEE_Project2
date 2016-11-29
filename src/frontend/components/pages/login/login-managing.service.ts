@@ -1,8 +1,6 @@
 import {Injectable} from '@angular/core';
-import {Http, Headers, Response} from '@angular/http';
-// Statics
+import {Headers} from '@angular/http';
 import 'rxjs/add/observable/throw';
-// Operators
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -11,6 +9,7 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/toPromise';
 import {Router} from '@angular/router';
 import {JWT_RESPONSE_HEADER} from '../../common/authentication/auth-http.service';
+import {SnackbarService} from '../../elements/snackbar/snackbar.service';
 
 // Reason for Servicesplitting -> Http: in NgModule AppModule
 @Injectable()
@@ -18,7 +17,7 @@ export class LoginManagingService {
     isLoggedIn = false;
     redirectUrl: string;
 
-    constructor(private router: Router) {
+    constructor(private router: Router, private snackbarService: SnackbarService) {
         this.isLoggedIn = !!localStorage.getItem(JWT_RESPONSE_HEADER);
     }
 
@@ -29,6 +28,10 @@ export class LoginManagingService {
 
     performNotAuthorized() {
         this.redirectUrl = this.router.url;
+        if (this.redirectUrl.includes('login')) {
+            this.snackbarService.showSnackbar('Wrong email or password');
+            return;
+        }
         this.logout();
         this.router.navigate(['/login']);
     }
