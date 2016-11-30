@@ -1,5 +1,5 @@
 <div>
-  <input type="radio" id="{{id}}" [checked]="value" (ngModelChange)="change" class="radio" attr.name="{{name}}">
+  <input type="radio" id="{{id}}" [(ngModel)]="value" [value]="id" class="radio" attr.name="{{name}}">
 
   <label attr.for="{{id}}" class="radio__container">
     <span class="check icon icon--radio-unchecked"></span>

@@ -17,8 +17,6 @@ export class RadioComponent extends InputValueControlAccessor {
     @Input()
     label: string;
 
-    public change: any;
-
     constructor() {
         super();
     }

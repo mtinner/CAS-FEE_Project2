@@ -1,10 +1,11 @@
 <div class="container__page">
   <ul class="list">
-    <div class="list__item group" *ngFor="let group of groupService.groups">
+    <div class="list__item group" *ngFor="let group of groupService.groups;">
       <radio id="{{group.id}}" class="group__radio"
-             (change)="onGroupChange(group)" [name]="'groups'"
+             [name]="'groups'"
              [label]="group.name"
-             [ngModel]="group.isActiveGroup"></radio>
+             [ngModel]="group.isActiveGroup?group.id:''"
+             (ngModelChange)="onGroupChange(group)"></radio>
       <span class="icon icon--settings group__icon" (click)="groupService.goToGroupMembers(group.id)"></span>
     </div>
   </ul>
