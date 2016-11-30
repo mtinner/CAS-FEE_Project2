@@ -1,11 +1,11 @@
-import {NgModule} from '@angular/core';
-import {HttpModule} from '@angular/http';
-import {CommonModule} from '@angular/common';
-import {ElementModule} from '../../elements/element.module';
-import {RouterModule} from '@angular/router';
-import {AddExpenseComponent} from './add-expense.component';
-import {CostManagementModule} from '../costManagement/cost-management.module';
-import {CostManagementService} from '../costManagement/cost-management.service';
+import { NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
+import { CommonModule } from '@angular/common';
+import { ElementModule } from '../../elements/element.module';
+import { RouterModule } from '@angular/router';
+import { AddExpenseComponent } from './add-expense.component';
+import { CostManagementModule } from '../costManagement/cost-management.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     imports: [
@@ -13,7 +13,8 @@ import {CostManagementService} from '../costManagement/cost-management.service';
         CommonModule,
         ElementModule,
         RouterModule,
-        CostManagementModule
+        CostManagementModule,
+        FormsModule
     ],
     declarations: [
         AddExpenseComponent

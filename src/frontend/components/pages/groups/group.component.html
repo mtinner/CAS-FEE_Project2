@@ -1,30 +1,31 @@
 <div class="container__page">
-    <ul class="list">
-        <div class="list__item group" *ngFor="let group of groupService.groups">
-            <radio id="{{group.id}}" class="group__radio"
-                   (change)="onGroupChange(group)" [name]="'groups'"
-                   [label]="group.name"
-                   [checked]="group.isActiveGroup"></radio>
-            <span class="icon icon--settings group__icon" (click)="groupService.goToGroupMembers(group.id)"></span>
-        </div>
-    </ul>
-
-    <div *ngIf="groupService.groups.length === 0" class="sticker">
-        <div class="sticker__circle" (click)="setModalVisibility(true)">
-            <span class="icon icon--add-group"></span>
-            <span class="sticker__label">No Groups</span>
-        </div>
+  <ul class="list">
+    <div class="list__item group" *ngFor="let group of groupService.groups;">
+      <radio id="{{group.id}}" class="group__radio"
+             [name]="'groups'"
+             [label]="group.name"
+             [ngModel]="group.isActiveGroup?group.id:''"
+             (ngModelChange)="onGroupChange(group)"></radio>
+      <span class="icon icon--settings group__icon" (click)="groupService.goToGroupMembers(group.id)"></span>
     </div>
+  </ul>
 
-    <button class="btn btn--round btn--bottom-right icon icon--plus" (click)="setModalVisibility(true)"></button>
-    <div *ngIf="showModal" class="modal" (click)="setModalVisibility(false)">
-        <div class="modal__content" (click)="$event.stopPropagation()">
-            <input-field [placeholder]="'Groupname'"
-                         [type]="'text'" (enteredText)="setGroupname($event)"
-                         (keyup.enter)="!groupname || addGroup()"></input-field>
-
-            <button class="btn btn--bare" [disabled]="!groupname" (click)="addGroup()">Create</button>
-            <button class="btn btn--bare btn--bare--right" (click)="setModalVisibility(false)">Cancel</button>
-        </div>
+  <div *ngIf="groupService.groups.length === 0" class="sticker">
+    <div class="sticker__circle" (click)="setModalVisibility(true)">
+      <span class="icon icon--add-group"></span>
+      <span class="sticker__label">No Groups</span>
     </div>
+  </div>
+
+  <button class="btn btn--round btn--bottom-right icon icon--plus" (click)="setModalVisibility(true)"></button>
+  <div *ngIf="showModal" class="modal" (click)="setModalVisibility(false)">
+    <div class="modal__content" (click)="$event.stopPropagation()">
+      <input-field [placeholder]="'Groupname'"
+                   [type]="'text'" (enteredText)="setGroupname($event)"
+                   (keyup.enter)="!groupname || addGroup()"></input-field>
+
+      <button class="btn btn--bare" [disabled]="!groupname" (click)="addGroup()">Create</button>
+      <button class="btn btn--bare btn--bare--right" (click)="setModalVisibility(false)">Cancel</button>
+    </div>
+  </div>
 </div>
