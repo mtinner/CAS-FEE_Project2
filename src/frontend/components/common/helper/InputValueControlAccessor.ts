@@ -14,7 +14,7 @@ export function ProvideValueAccessor(component: any) {
 
 export class InputValueControlAccessor implements ControlValueAccessor {
 
-    private innerValue: any = '';
+    protected innerValue: any = '';
 
     private onTouchedCallback: () => void = noop;
     private onChangeCallback: (_: any) => void = noop;

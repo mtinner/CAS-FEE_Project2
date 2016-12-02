@@ -4,6 +4,8 @@ import {HeaderService} from '../../elements/header/header.service';
 import {HeaderIcon, HeaderStyle} from '../../elements/header/header.enum';
 import {HeaderConfig} from '../../../models/HeaderConfig';
 import {MemberService} from './member.service';
+import {FormControl, Validators} from '@angular/forms';
+import {validateNotBlank} from '../../validators/not-blank.validator';
 
 @Component({
     moduleId: module.id,
@@ -18,6 +20,7 @@ export class MemberComponent implements OnInit, OnDestroy {
     public showMemberModal: boolean = false;
     public showLeaveModal: boolean = false;
     public showRenameModal: boolean = false;
+    private groupRenameControl: FormControl = new FormControl();
 
     constructor(private headerService: HeaderService, public memberService: MemberService, private route: ActivatedRoute) {
     }
@@ -70,6 +73,7 @@ export class MemberComponent implements OnInit, OnDestroy {
     }
 
     renameGroup(groupname) {
+        groupname = groupname.trim();
         if (this.memberService.group.name !== groupname) {
             this.memberService.renameGroup(this.groupId, groupname)
                 .subscribe(() => {
@@ -89,7 +93,7 @@ export class MemberComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.headerService.headerConfig = new HeaderConfig(`Group ${this.memberService.group.name}`, HeaderStyle.Settings, HeaderIcon.ArrowLeft, this.memberService.goToGroups, HeaderIcon.Edit, this.setRenameModalVisibility);
-
+        this.groupRenameControl = new FormControl(this.memberService.group.name, [Validators.required, validateNotBlank]);
         this.route.params.forEach((params: Params) => {
             this.groupId = params['id'];
             this.memberService.getMembers(this.groupId).subscribe();

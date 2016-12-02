@@ -1,6 +1,6 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { InputValueControlAccessor, ProvideValueAccessor } from '../../common/helper/InputValueControlAccessor';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {FormControl} from '@angular/forms';
+import {InputValueControlAccessor, ProvideValueAccessor} from '../../common/helper/InputValueControlAccessor';
 
 @Component({
     moduleId: module.id,
@@ -9,16 +9,13 @@ import { InputValueControlAccessor, ProvideValueAccessor } from '../../common/he
     styleUrls: ['input-field.component.css'],
     providers: [ProvideValueAccessor(InputFieldComponent)]
 })
-export class InputFieldComponent extends InputValueControlAccessor implements OnInit {
+export class InputFieldComponent extends InputValueControlAccessor {
 
     @Input()
     placeholder: string;
 
     @Input()
     type: string;
-
-    @Input()
-    text: string;
 
     @Input()
     errorMessage: string;
@@ -31,17 +28,8 @@ export class InputFieldComponent extends InputValueControlAccessor implements On
 
     public isFocused: boolean = false;
 
+    //TODO remove
     textEntered(text: string) {
         this.enteredText.emit(text);
-    }
-
-    ngOnInit(): void {
-        this.setFocus(!!this.text);
-    }
-
-    setFocus<T>(...val: Array<T>) {
-        this.isFocused = [...val].some(entry => {
-            return !!entry;
-        });
     }
 }
