@@ -1,9 +1,12 @@
-<div class="login-container">
-    <input-field class="input--login" [placeholder]="'Email'"
+<form class="login-container" [formGroup]="loginForm">
+    <input-field formControlName="email" [inputControl]="loginForm.controls.email" class="input--login"
+                 [placeholder]="'Email'" [errorMessage]="'enter valid Emailaddress'"
                  [type]="'email'" (enteredText)="setEmail($event)"></input-field>
 
-    <input-field class="input--login" [placeholder]="'Password'"
-                 [type]="'password'" (enteredText)="setPassword($event)"></input-field>
+    <input-field formControlName="password" [inputControl]="loginForm.controls.password" class="input--login"
+                 [placeholder]="'Password'"
+                 [type]="'password'" [errorMessage]="'Password required'"
+                 (enteredText)="setPassword($event)"></input-field>
 
-    <button class="btn btn--login" (click)="login()">Login</button>
-</div>
+    <button class="btn btn--login" (click)="login()" [disabled]="loginForm.invalid">Login</button>
+</form>

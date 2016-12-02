@@ -1,12 +1,15 @@
-import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { InputValueControlAccessor, ProvideValueAccessor } from '../../common/helper/InputValueControlAccessor';
 
 @Component({
     moduleId: module.id,
     selector: 'input-field',
     templateUrl: 'input-field.component.html',
     styleUrls: ['input-field.component.css'],
+    providers: [ProvideValueAccessor(InputFieldComponent)]
 })
-export class InputFieldComponent implements OnInit {
+export class InputFieldComponent extends InputValueControlAccessor implements OnInit {
 
     @Input()
     placeholder: string;
@@ -22,6 +25,9 @@ export class InputFieldComponent implements OnInit {
 
     @Output()
     enteredText = new EventEmitter();
+
+    @Input()
+    inputControl: FormControl;
 
     public isFocused: boolean = false;
 
