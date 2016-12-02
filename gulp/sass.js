@@ -1,14 +1,12 @@
 module.exports = function (gulp, data, util, taskName) {
 
     var sass = require('gulp-sass'),
-        livereload = require('gulp-livereload'),
         stream = require('event-stream');
 
     gulp.task(taskName + ':Dist', function () {
         return gulp.src(data.path.frontend + '**/*.scss')
             .pipe(sass().on('error', sass.logError))
-            .pipe(gulp.dest(data.path.dist + 'frontend'))
-            .pipe(livereload());
+            .pipe(gulp.dest(data.path.dist + 'frontend'));
     });
 
     gulp.task(taskName + ':Prod', function () {

@@ -38,8 +38,7 @@ gulp.task('Default', function (callback) {
         'lint:Ts',
         'Build',
         'serve:Dist',
-        'watch:Listen',
-        ['watch:Html', 'watch:Sass', 'watch:Transpiling'],
+        ['watch:All'],
         callback
     );
 });

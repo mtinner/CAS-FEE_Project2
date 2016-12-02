@@ -1,47 +1,22 @@
 module.exports = function (gulp, data, util, taskName) {
 
-    var watch = require('gulp-watch'),
-        print = require('gulp-print'),
-        runSequence = require('run-sequence'),
-        livereload = require('gulp-livereload');
-
-    gulp.task(taskName + ':Listen', function () {
-        livereload.listen();
-    });
+    var runSequence = require('run-sequence'),
+        server = require('gulp-express');
 
     gulp.task(taskName + ':All', function () {
-        return watch(data.path.frontend + '**/*', function () {
-            runSequence(
-                'lint:Es',
-                'lint:Ts',
-                'clean:Dist',
-                ['transpiling:Dist', 'sass:Dist'],
-                'copy:App'
-            );
-        }).pipe(_printChanges());
-    });
-
-    gulp.task(taskName + ':Transpiling', function () {
-        return watch(data.path.frontend + '**/*.ts', function () {
-            runSequence('transpiling:Dist');
-        }).pipe(_printChanges());
-    });
-
-    gulp.task(taskName + ':Sass', function () {
-        return watch(data.path.frontend + '**/*.scss', function () {
-            runSequence('Build');
-        }).pipe(_printChanges());
-    });
-
-    gulp.task(taskName + ':Html', function () {
-        return watch(data.path.frontend + '**/*.html', function () {
-            runSequence('Build');
-        }).pipe(_printChanges());
-    });
-
-    function _printChanges() {
-        return print(function (filepath) {
-            return 'Changed: ' + filepath;
+        gulp.watch([
+            data.path.frontend + '**/*.html',
+            data.path.frontend + '**/*.scss',
+            data.path.frontend + '**/*.ts'
+        ], function(event) {
+            runSequence('Build', reload(event));
         });
+    });
+
+    function reload(event) {
+        return function () {
+            console.log('Autoreload');
+            server.notify(event);
+        }
     }
 };

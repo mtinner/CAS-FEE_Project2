@@ -3,7 +3,6 @@ module.exports = function (gulp, data, util, taskName) {
     var ts = require('gulp-typescript'),
         tsProject = ts.createProject("tsconfig.json"),
         sourcemaps = require('gulp-sourcemaps'),
-        livereload = require('gulp-livereload'),
         exec = require('child_process').exec,
         removeCode = require('gulp-remove-code');
 
@@ -23,8 +22,7 @@ module.exports = function (gulp, data, util, taskName) {
 
         return tsResult.js
             .pipe(sourcemaps.write())
-            .pipe(gulp.dest(data.path.dist + 'frontend'))
-            .pipe(livereload());
+            .pipe(gulp.dest(data.path.dist + 'frontend'));
     });
 
     gulp.task(taskName + ':Spec', function () {
