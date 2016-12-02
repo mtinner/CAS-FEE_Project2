@@ -11,22 +11,23 @@ router.get('/',
     function (req, res) {
         articleManager.getAll(req.user)
             .then(articles => res.status(200).send(articles))
-            .catch(() => res.status(400).send());
+            .catch((err) => res.status(err.status || 400).send(err));
     });
 
 router.post('/',
     authService.protect('user'),
     function (req, res) {
-        articleManager.add(req.body, req.user)
-            .then(article => res.status(201).send(article));
+        articleManager.add(req.user, req.body)
+            .then(article => res.status(201).send(article))
+            .catch((err) => res.status(err.status || 400).send(err));
     });
 
 router.delete('/:id',
     authService.protect('user'),
     function (req, res) {
-        articleManager.remove(req.params.id)
+        articleManager.remove(req.user, req.params.id)
             .then(article => res.status(200).send(article))
-            .catch(() => res.status(400).send());
+            .catch((err) => res.status(err.status || 400).send(err));
     });
 
 router.get('/groups', function (req, res) {

@@ -2,7 +2,8 @@
 let Promise = require('promise'),
     Group = require('../models/Group'),
     GroupService = require('../services/GroupService'),
-    UserService = require('../services/UserService');
+    UserService = require('../services/UserService'),
+    ResponseException = require('../models/ResponseException');
 
 class GroupManager {
     constructor() {
@@ -14,10 +15,10 @@ class GroupManager {
         return this.checkGroupPermission(user, groupId)
             .then(hasGroup => {
                 if (!hasGroup) {
-                    return Promise.reject('Invalid Parameter');
+                    throw new ResponseException(403, 'No permission to get this group if you are not member of');
                 }
                 else {
-                    return this.groupService.get({ id: groupId });
+                    return this.groupService.get({id: groupId});
                 }
             });
     }
@@ -42,7 +43,7 @@ class GroupManager {
                 });
                 return Promise.all(promises)
                     .then(values => {
-                        return { groups: values };
+                        return {groups: values};
                     });
             });
     }
@@ -53,27 +54,30 @@ class GroupManager {
 
         return Promise.all([dbUser, dbGroup])
             .then(values => {
-                values[0].groups.push({ id: values[1].id });
-                return this.userService.update(values[0].id, values[0], { activeGroup: values[1].id })
+                values[0].groups.push({id: values[1].id});
+                return this.userService.update(values[0].id, values[0], {activeGroup: values[1].id})
                     .then(() => values[1]);
             });
     }
 
     join(groupId, memberUser, invitedUser) {
         if (!groupId || !memberUser || !invitedUser) {
-            return Promise.reject('Invalid Parameter');
+            throw new ResponseException(400, 'missing parameter');
         }
         return this.checkGroupPermission(memberUser, groupId)
             .then(group => {
                 if (group) {
                     return this.userService.get(invitedUser)
                         .then(user => {
-                            user.groups.push({ id: groupId });
+                            if (!user) {
+                                throw new ResponseException(422, 'Email does not exist');
+                            }
+                            user.groups.push({id: groupId});
                             return this.userService.update(user.id, user, {})
                                 .then(this.secureUser);
                         });
                 } else {
-                    return Promise.reject('Not allowed to join');
+                    throw new ResponseException(403, 'No group invitation possible in a group in which you are not a member');
                 }
             });
     }
@@ -84,10 +88,10 @@ class GroupManager {
                 if (group) {
                     return this.userService.get(user)
                         .then(user =>
-                            this.userService.update(user.id, user, { activeGroup: groupId })
+                            this.userService.update(user.id, user, {activeGroup: groupId})
                                 .then(this.secureUser(user)));
                 } else {
-                    return Promise.reject('Not allowed to change to this group');
+                    throw new ResponseException(403, 'Can not set a group active you are not member of');
                 }
             });
     }
@@ -96,13 +100,13 @@ class GroupManager {
         return this.checkGroupPermission(user, groupId)
             .then((group) => {
                 if (group) {
-                    return this.userService.getAll({ 'groups.id': groupId })
+                    return this.userService.getAll({'groups.id': groupId})
                         .then((users) => {
                             let members = users.map(this.secureUser);
-                            return { members: members };
+                            return {members: members};
                         });
                 } else {
-                    return Promise.reject('Not allowed to get group members');
+                    throw new ResponseException(403, 'Cannot request member of group you are not member of');
                 }
             });
     }
@@ -111,9 +115,9 @@ class GroupManager {
         return this.checkGroupPermission(user, groupId)
             .then((dbGroup) => {
                 if (dbGroup && group.name) {
-                    return this.groupService.update(groupId, { id: groupId }, { name: group.name });
+                    return this.groupService.update(groupId, {id: groupId}, {name: group.name});
                 } else {
-                    return Promise.reject('Not allowed to rename this group');
+                    throw new ResponseException(403, 'Cannot rename a group you are not member of');
                 }
             });
     }
@@ -124,7 +128,8 @@ class GroupManager {
     }
 
     getCurrentMembers(user) {
-        return this.getMembers(user.activeGroup, user);
+        return this.userService.get(user)
+            .then((user) => this.getMembers(user.activeGroup, user));
     }
 
     hasGroup(user, groupId) {
@@ -132,7 +137,7 @@ class GroupManager {
     }
 
     secureUser(user) {
-        return { id: user.id, email: user.email, username: user.username };
+        return {id: user.id, email: user.email, username: user.username};
     }
 
     leave(groupId, triggeredUser, affecteUser) {
@@ -148,7 +153,7 @@ class GroupManager {
         return Promise.all([triggeredUserHasGroup, affectedUserHasGroup])
             .then((hasGroup) => {
                 if (!hasGroup[0] || !hasGroup[1]) {
-                    return;
+                    throw new ResponseException(403, 'You cannot leave a group or kick a member you are not member of');
                 }
                 let remainingGroups = dbAffectedUser.groups.filter((group) => group.id !== groupId);
 

@@ -1,13 +1,14 @@
 <div class="container__page--vertical">
-	<div>
-		<input-field [placeholder]="'Description'" [type]="'text'" (enteredText)="setDescription($event)"></input-field>
-		<input-field [placeholder]="'Amount'" [type]="'text'" (enteredText)="setAmount($event)"></input-field>
-	</div>
-	<div>
-		<div>These people share the expense with myself:</div>
-		<div class="member-row" *ngFor="let member of costManagementService.members">
-			<checkbox [id]="member.username" [label]="member.username" [(checked)]="member.checked"></checkbox>
-		</div>
-	</div>
-	<button class="btn" (click)="onAddClick()">Add</button>
+    <div>
+        <input-field [placeholder]="'Description'" [type]="'text'" (enteredText)="setDescription($event)"></input-field>
+        <input-field [placeholder]="'Amount'" [type]="'text'" (enteredText)="setAmount($event)"></input-field>
+    </div>
+    <div>
+        <div>These people share the expense with myself:</div>
+        <div class="member-row" *ngFor="let member of costManagementService.members">
+            <checkbox [id]="member.username" [label]="member.username"
+                      [(ngModel)]="member.checked"></checkbox>
+        </div>
+    </div>
+    <button class="btn" (click)="onAddClick()">Add</button>
 </div>

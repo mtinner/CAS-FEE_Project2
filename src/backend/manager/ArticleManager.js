@@ -1,6 +1,7 @@
 'use strict';
 let ArticleService = require('../services/ArticleService'),
-    UserService = require('../services/UserService');
+    UserService = require('../services/UserService'),
+    ResponseException = require('../models/ResponseException');
 
 class ArticleManager {
     constructor() {
@@ -27,7 +28,7 @@ class ArticleManager {
                 .then(articles => ({articles: articles})));
     }
 
-    add(newDoc, user) {
+    add(user, newDoc) {
         return this.userService.get(user)
             .then(user => {
                 Object.assign(newDoc, {groupId: user.activeGroup});
@@ -35,8 +36,19 @@ class ArticleManager {
             });
     }
 
-    remove(id) {
-        return this.articleService.remove(id);
+    remove(user, id) {
+        return this.userService.get(user)
+            .then(dbUser => this.articleService.get({id: id})
+                .then(article => {
+                        if (article && dbUser.activeGroup === article.groupId) {
+                            return this.articleService.remove(id);
+                        }
+                        else {
+                            throw new ResponseException(403, 'You can not remove a group member in witch you are not member');
+                        }
+                    }
+                )
+            );
     }
 }
 

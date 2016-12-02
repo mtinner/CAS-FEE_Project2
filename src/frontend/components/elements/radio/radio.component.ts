@@ -1,12 +1,14 @@
-import {Component, Input, EventEmitter} from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {InputValueControlAccessor, ProvideValueAccessor} from '../../common/helper/InputValueControlAccessor';
 
 @Component({
     moduleId: module.id,
     selector: 'radio',
     templateUrl: 'radio.component.html',
-    styleUrls: ['radio.component.css']
+    styleUrls: ['radio.component.css'],
+    providers: [ProvideValueAccessor(RadioComponent)]
 })
-export class RadioComponent {
+export class RadioComponent extends InputValueControlAccessor {
 
     @Input()
     id: string;
@@ -14,11 +16,8 @@ export class RadioComponent {
     name: string;
     @Input()
     label: string;
-    @Input()
-    checked: boolean;
-
-    public change: any;
 
     constructor() {
+        super();
     }
 }

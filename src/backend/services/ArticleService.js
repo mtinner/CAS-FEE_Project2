@@ -15,6 +15,10 @@ class ArticleService {
         return this[singleton];
     }
 
+    get(article) {
+        return this.nedbRepo.get(article);
+    }
+
     getAll(article) {
         return this.nedbRepo.getAll(article);
     }

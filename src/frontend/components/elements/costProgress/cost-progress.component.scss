@@ -4,73 +4,72 @@ $avatar_radius: 50px;
 $bar-height: 28px;
 
 .container {
-    padding: 1em 0;
+  padding: 1em 0;
 }
 
 .progress {
-    display: flex;
-    flex-flow: row wrap;
+  display: flex;
+  flex-flow: row wrap;
 }
 
 .amount {
-    text-align: right;
-    position: relative;
-    left: -1em;
-    line-height: $avatar_radius;
-    flex: 1 1;
-    order: 1;
+  text-align: right;
+  position: relative;
+  left: -1em;
+  line-height: $avatar_radius;
+  flex: 1 1;
+  order: 1;
 }
 
 .avatar {
-    flex-basis: 0;
-    order: 2;
-    z-index: 10;
+  flex-basis: 0;
+  order: 2;
+  z-index: 10;
+  font-size: 50px;
+  color: $default;
 
-    &__pic {
-        width: $avatar-radius;
-        height: $avatar-radius;
-        border-radius: 100%;
-        background-color: #ccc;
-    }
+  &__icon {
+    cursor: default;
+  }
 }
 
 .bar {
-    flex: 1 1;
-    order: 3;
-    position: relative;
-    left: -10px;
-    width: 100px;
-    height: $avatar_radius;
+  flex: 1 1;
+  order: 3;
+  position: relative;
+  left: -10px;
+  width: 100px;
+  height: $avatar_radius;
 
-    &__progress {
-        background-color: #4CAF50;
-        transition: width 0.5s ease-out; 
-        height: $bar-height;
-        margin-top: $avatar_radius/2 - $bar-height/2;
-    }
+  &__progress {
+    background-color: #4CAF50;
+    transition: width 0.5s ease-out;
+    height: $bar-height;
+    margin-top: $avatar_radius/2 - $bar-height/2;
+  }
 }
 
 .label {
-    text-align: center;
-    font-size: .8em;
-    color: #444
+  text-align: center;
+  font-size: .8em;
+  color: #444
 }
 
 .progress--reversed {
-    @extend .progress;
+  @extend .progress;
 
-    .bar {
-        order: 1;
-        left: 10px;
-            &__progress {
-                float: right;
-                background-color: #d9534f;
-            }
+  .bar {
+    order: 1;
+    left: 10px;
+    &__progress {
+      float: right;
+      background-color: #d9534f;
     }
-    
-    .amount {
-        order: 3;
-        text-align: left;
-        left: 1em;
-    }
+  }
+
+  .amount {
+    order: 3;
+    text-align: left;
+    left: 1em;
+  }
 }
