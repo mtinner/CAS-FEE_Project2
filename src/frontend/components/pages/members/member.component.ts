@@ -4,6 +4,9 @@ import {HeaderService} from '../../elements/header/header.service';
 import {HeaderIcon, HeaderStyle} from '../../elements/header/header.enum';
 import {HeaderConfig} from '../../../models/HeaderConfig';
 import {MemberService} from './member.service';
+import {FormControl, Validators} from '@angular/forms';
+import {validateNotBlank} from '../../validators/not-blank.validator';
+import {validateEmail} from '../../validators/email-input.validator';
 
 @Component({
     moduleId: module.id,
@@ -12,69 +15,55 @@ import {MemberService} from './member.service';
 })
 export class MemberComponent implements OnInit, OnDestroy {
 
-    public invitedErrorMessage: string = '';
-    private invitedEmail: string = '';
     private groupId: string = '';
     public showMemberModal: boolean = false;
     public showLeaveModal: boolean = false;
     public showRenameModal: boolean = false;
+    private groupRenameControl: FormControl = new FormControl();
+    private groupMemberControl: FormControl = new FormControl();
+    // AoT
+    public invitedEmail: string = '';
 
     constructor(private headerService: HeaderService, public memberService: MemberService, private route: ActivatedRoute) {
-    }
-
-    setInvitedEmail(value: string) {
-        this.invitedEmail = value.trim();
-        if (this.isEmailValid()) {
-            this.clearInvitedEmailErrorMessage();
-        }
     }
 
     setMemberModalVisibility(value: boolean) {
         this.showMemberModal = value;
         if (!value) {
-            this.clearInvitedEmailErrorMessage();
+            this.groupMemberControl.reset();
         }
     }
 
-    setRenameModalVisibility = (value: boolean = true) => {
+    setRenameModalVisibility = (value: boolean) => {
         this.showRenameModal = value;
     };
+
+    setRenameModalVisibilityCallback(value: boolean) {
+        return () => {
+            this.setRenameModalVisibility(value);
+        };
+    }
 
     setLeaveModalVisibility(value: boolean) {
         this.showLeaveModal = value;
     }
 
-    isEmailValid() {
-        let regex = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
-        return this.invitedEmail.match(regex);
-    }
+    addMember(email) {
+        this.memberService.addMember(this.groupId, {email: email})
+            .subscribe(() => {
+                this.groupMemberControl.reset();
+                this.showMemberModal = false;
+            });
 
-    clearInvitedEmailErrorMessage() {
-        this.invitedErrorMessage = '';
-    }
-
-    addMember() {
-        if (!this.isEmailValid()) {
-            this.invitedErrorMessage = 'Emailaddress not valid';
-        }
-        else {
-            this.memberService.addMember(this.groupId, {email: this.invitedEmail})
-                .subscribe(() => {
-                        this.invitedEmail = '';
-                        this.showMemberModal = false;
-                    },
-                    () => {
-                        this.invitedErrorMessage = 'Email address not found';
-                    });
-        }
     }
 
     renameGroup(groupname) {
+        groupname = groupname.trim();
         if (this.memberService.group.name !== groupname) {
             this.memberService.renameGroup(this.groupId, groupname)
                 .subscribe(() => {
                     this.setRenameModalVisibility(false);
-                    this.headerService.headerConfig = new HeaderConfig(`Group ${this.memberService.group.name}`, HeaderStyle.Settings, HeaderIcon.ArrowLeft, this.memberService.goToGroups, HeaderIcon.Edit, this.setRenameModalVisibility);
+                    this.headerService.headerConfig = new HeaderConfig(`Group ${this.memberService.group.name}`, HeaderStyle.Settings, HeaderIcon.ArrowLeft, this.memberService.goToGroups, HeaderIcon.Edit, this.setRenameModalVisibilityCallback(true));
                 });
         }
         else {
@@ -88,8 +77,9 @@ export class MemberComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.headerService.headerConfig = new HeaderConfig(`Group ${this.memberService.group.name}`, HeaderStyle.Settings, HeaderIcon.ArrowLeft, this.memberService.goToGroups, HeaderIcon.Edit, this.setRenameModalVisibility);
-
+        this.headerService.headerConfig = new HeaderConfig(`Group ${this.memberService.group.name}`, HeaderStyle.Settings, HeaderIcon.ArrowLeft, this.memberService.goToGroups, HeaderIcon.Edit, this.setRenameModalVisibilityCallback(true));
+        this.groupRenameControl = new FormControl(this.memberService.group.name, [Validators.required, validateNotBlank]);
+        this.groupMemberControl = new FormControl('', [Validators.required, validateNotBlank, validateEmail]);
         this.route.params.forEach((params: Params) => {
             this.groupId = params['id'];
             this.memberService.getMembers(this.groupId).subscribe();

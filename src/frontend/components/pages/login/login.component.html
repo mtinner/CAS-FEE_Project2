@@ -1,9 +1,12 @@
-<div class="login-container">
-    <input-field class="input--login" [placeholder]="'Email'"
-                 [type]="'email'" (enteredText)="setEmail($event)"></input-field>
+<form class="login-container" [formGroup]="loginForm">
+  <input-field formControlName="email" [inputControl]="loginForm.controls['email']" class="input--login"
+               [placeholder]="'Email'" [errorMessage]="'enter valid Emailaddress'"
+               [type]="'email'" [(ngModel)]="email"></input-field>
 
-    <input-field class="input--login" [placeholder]="'Password'"
-                 [type]="'password'" (enteredText)="setPassword($event)"></input-field>
+  <input-field formControlName="password" [inputControl]="loginForm.controls['password']" class="input--login"
+               [placeholder]="'Password'"
+               [type]="'password'" [errorMessage]="'Password required'"
+               [(ngModel)]="password"></input-field>
 
-    <button class="btn btn--login" (click)="login()">Login</button>
-</div>
+  <button class="btn btn--login" (click)="login()" [disabled]="loginForm.invalid">Login</button>
+</form>
