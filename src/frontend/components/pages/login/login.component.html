@@ -1,9 +1,9 @@
 <form class="login-container" [formGroup]="loginForm">
-  <input-field formControlName="email" [inputControl]="loginForm.controls.email" class="input--login"
+  <input-field formControlName="email" [inputControl]="loginForm.controls['email']" class="input--login"
                [placeholder]="'Email'" [errorMessage]="'enter valid Emailaddress'"
                [type]="'email'" [(ngModel)]="email"></input-field>
 
-  <input-field formControlName="password" [inputControl]="loginForm.controls.password" class="input--login"
+  <input-field formControlName="password" [inputControl]="loginForm.controls['password']" class="input--login"
                [placeholder]="'Password'"
                [type]="'password'" [errorMessage]="'Password required'"
                [(ngModel)]="password"></input-field>

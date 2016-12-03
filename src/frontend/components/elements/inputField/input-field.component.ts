@@ -26,9 +26,10 @@ export class InputFieldComponent extends InputValueControlAccessor {
     @Input()
     inputControl: FormControl;
 
+    // AoT
     public isFocused: boolean = false;
 
-    //TODO remove
+    // TODO remove
     textEntered(text: string) {
         this.enteredText.emit(text);
     }

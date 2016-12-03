@@ -11,7 +11,7 @@ import {validateNotBlank} from '../../validators/not-blank.validator';
 })
 export class LoginComponent implements OnInit {
 
-    private email = 'appUser@admin.ch';
+    public email = 'appUser@admin.ch';
     public password = 'pwd';
     public loginForm: FormGroup;
 
@@ -26,6 +26,6 @@ export class LoginComponent implements OnInit {
         this.loginForm = this.formBuilder.group({
             email: ['', [Validators.required, validateEmail, validateNotBlank]],
             password: ['', [Validators.required, validateNotBlank]]
-        })
+        });
     }
 }
