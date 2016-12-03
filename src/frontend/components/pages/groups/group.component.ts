@@ -15,16 +15,13 @@ import {validateNotBlank} from '../../validators/not-blank.validator';
 export class GroupComponent implements OnInit, OnDestroy {
     public showModal: boolean = false;
     private groupNameControl: FormControl = new FormControl();
-    // AoT
-    public groupname: string = '';
-
 
     constructor(private headerService: HeaderService, public groupService: GroupService) {
         this.headerService.headerConfig = new HeaderConfig('Group Settings', HeaderStyle.Settings, HeaderIcon.ArrowLeft, this.groupService.goToSettings);
     }
 
-    addGroup(groupname) {
-        groupname = groupname.trim();
+    addGroup() {
+        let groupname = this.groupNameControl.value.trim();
         this.groupService.addGroup({name: groupname})
             .subscribe(() => {
                 this.groupNameControl.reset();

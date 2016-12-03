@@ -21,8 +21,7 @@ import {ContentSidebarModule} from './pages/routingHelper/contentSidebarRouting/
         routing,
         ContentSidebarModule,
         ContentModule,
-        ReactiveFormsModule,
-        FormsModule
+        ReactiveFormsModule
     ],
     declarations: [
         AppComponent,

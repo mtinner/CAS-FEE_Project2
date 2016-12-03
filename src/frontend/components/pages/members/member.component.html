@@ -20,8 +20,7 @@
                    [placeholder]="'Email'"
                    [type]="'email'"
                    [errorMessage]="'enter valid Emailaddress'"
-                   [(ngModel)]="invitedEmail"
-                   (keyup.enter)="groupMemberControl.valid && addMember(invitedEmail)"></input-field>
+                   (keyup.enter)="groupMemberControl.valid && addMember()"></input-field>
 
       <button class="btn btn--bare" [disabled]="groupMemberControl.invalid" (click)="addMember(invitedEmail)">Add
       </button>
@@ -44,13 +43,12 @@
                    [inputControl]="groupRenameControl"
                    [placeholder]="'Groupname'"
                    [type]="'text'"
-                   (ngModelChange)="groupname=$event;"
                    [ngModel]="this.memberService.group.name"
                    [errorMessage]="'Cannot be empty'"
-                   (keyup.enter)="groupRenameControl.valid && renameGroup(groupname || memberService.group.name)"></input-field>
+                   (keyup.enter)="groupRenameControl.valid && renameGroup()"></input-field>
       <button class="btn btn--bare"
               [disabled]="groupRenameControl.invalid"
-              (click)="renameGroup(groupname || memberService.group.name)">
+              (click)="renameGroup()">
         Rename
       </button>
       <button class="btn btn--bare btn--bare--right" (click)="setRenameModalVisibility(false)">Cancel</button>

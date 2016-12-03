@@ -11,15 +11,13 @@ import {validateNotBlank} from '../../validators/not-blank.validator';
 })
 export class LoginComponent implements OnInit {
 
-    public email = '';
-    public password = '';
     public loginForm: FormGroup;
 
     constructor(private loginService: LoginHttpService, private formBuilder: FormBuilder) {
     }
 
     login = () => {
-        this.loginService.login(this.email, this.password);
+        this.loginService.login(this.loginForm.controls['email'].value, this.loginForm.controls['password'].value);
     };
 
     ngOnInit(): void {

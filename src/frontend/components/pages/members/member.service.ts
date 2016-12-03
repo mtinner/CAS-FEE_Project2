@@ -52,7 +52,7 @@ export class MemberService extends AppService implements CanActivate {
             .map(this.extractData)
             .map((member: Member) => this.members.push(member))
             .catch((error: any) => {
-                this.snackbarService.showSnackbar(`Email ${invitedUser.email} not registered`);
+                this.snackbarService.showSnackbar(`Email ${invitedUser.email} is not registered`);
                 return this.handleError(error);
             });
     }

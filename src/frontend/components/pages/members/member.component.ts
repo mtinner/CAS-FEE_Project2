@@ -21,8 +21,6 @@ export class MemberComponent implements OnInit, OnDestroy {
     public showRenameModal: boolean = false;
     private groupRenameControl: FormControl = new FormControl();
     private groupMemberControl: FormControl = new FormControl();
-    // AoT
-    public invitedEmail: string = '';
 
     constructor(private headerService: HeaderService, public memberService: MemberService, private route: ActivatedRoute) {
     }
@@ -48,8 +46,8 @@ export class MemberComponent implements OnInit, OnDestroy {
         this.showLeaveModal = value;
     }
 
-    addMember(email) {
-        this.memberService.addMember(this.groupId, {email: email})
+    addMember() {
+        this.memberService.addMember(this.groupId, {email: this.groupMemberControl.value})
             .subscribe(() => {
                 this.groupMemberControl.reset();
                 this.showMemberModal = false;
@@ -57,8 +55,8 @@ export class MemberComponent implements OnInit, OnDestroy {
 
     }
 
-    renameGroup(groupname) {
-        groupname = groupname.trim();
+    renameGroup() {
+        let groupname = this.groupRenameControl.value.trim();
         if (this.memberService.group.name !== groupname) {
             this.memberService.renameGroup(this.groupId, groupname)
                 .subscribe(() => {

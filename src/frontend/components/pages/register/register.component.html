@@ -2,17 +2,17 @@
   <input-field formControlName="username" [inputControl]="registerForm.controls['username']"
                [errorMessage]="'username is required'"
                class="input--register" [placeholder]="'Username'"
-               [type]="'text'" [(ngModel)]="username"></input-field>
+               [type]="'text'"></input-field>
 
   <input-field formControlName="email" [inputControl]="registerForm.controls['email']"
                [errorMessage]="'enter valid Emailaddress'"
                class="input--register" [placeholder]="'Email'"
-               [type]="'email'" [(ngModel)]="email"></input-field>
+               [type]="'email'"></input-field>
 
   <input-field formControlName="password" [inputControl]="registerForm.controls['password']"
                [errorMessage]="'Password required'"
                class="input--register" [placeholder]="'Password'"
-               [type]="'password'" [(ngModel)]="password"></input-field>
+               [type]="'password'"></input-field>
 
   <button class="btn btn--register" [disabled]="registerForm.invalid" (click)="register()">Register</button>
 </form>

@@ -23,11 +23,11 @@
       <input-field [formControl]="groupNameControl"
                    [inputControl]="groupNameControl"
                    [placeholder]="'Groupname'"
-                   [type]="'text'" (ngModelChange)="groupname = $event"
+                   [type]="'text'"
                    [errorMessage]="'input is required'"
-                   (keyup.enter)="groupNameControl.valid && addGroup(groupname)"></input-field>
+                   (keyup.enter)="groupNameControl.valid && addGroup()"></input-field>
 
-      <button class="btn btn--bare" [disabled]="groupNameControl.invalid" (click)="addGroup(groupname)">Create</button>
+      <button class="btn btn--bare" [disabled]="groupNameControl.invalid" (click)="addGroup()">Create</button>
       <button class="btn btn--bare btn--bare--right" (click)="setModalVisibility(false)">Cancel</button>
     </div>
   </div>

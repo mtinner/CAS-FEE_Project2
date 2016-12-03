@@ -13,16 +13,17 @@ import {validateNotBlank} from '../../validators/not-blank.validator';
 })
 export class RegisterComponent implements OnInit {
 
-    public username: String;
-    public email: String;
-    public password: String;
     public registerForm: FormGroup;
 
     constructor(private loginService: LoginHttpService, private registerService: RegisterService, private formBuilder: FormBuilder) {
     }
 
     register = () => {
-        this.registerService.register({email: this.email, username: this.username, password: this.password})
+        this.registerService.register({
+            email: this.registerForm.controls['email'].value,
+            username: this.registerForm.controls['username'].value,
+            password: this.registerForm.controls['password'].value
+        })
             .subscribe((user: User) =>
                 this.loginService.login(user.email, user.password)
             );
