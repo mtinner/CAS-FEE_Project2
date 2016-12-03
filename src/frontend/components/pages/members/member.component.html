@@ -15,13 +15,16 @@
   <button class="btn btn--round btn--bottom-right icon icon--plus" (click)="setMemberModalVisibility(true)"></button>
   <div *ngIf="showMemberModal" class="modal" (click)="setMemberModalVisibility(false)">
     <div class="modal__content" (click)="$event.stopPropagation()">
-      <input-field [placeholder]="'Email'"
+      <input-field [formControl]="groupMemberControl"
+                   [inputControl]="groupMemberControl"
+                   [placeholder]="'Email'"
                    [type]="'email'"
-                   [errorMessage]="invitedErrorMessage"
-                   (enteredText)="setInvitedEmail($event)"
-                   (keyup.enter)="addMember()"></input-field>
+                   [errorMessage]="'enter valid Emailaddress'"
+                   [(ngModel)]="invitedEmail"
+                   (keyup.enter)="groupMemberControl.valid && addMember(invitedEmail)"></input-field>
 
-      <button class="btn btn--bare" (click)="addMember()">Add</button>
+      <button class="btn btn--bare" [disabled]="groupMemberControl.invalid" (click)="addMember(invitedEmail)">Add
+      </button>
       <button class="btn btn--bare btn--bare--right" (click)="setMemberModalVisibility(false)">Cancel</button>
     </div>
   </div>
@@ -44,7 +47,7 @@
                    (ngModelChange)="groupname=$event;"
                    [ngModel]="this.memberService.group.name"
                    [errorMessage]="'Cannot be empty'"
-                   (keyup.enter)="renameGroup(groupname || memberService.group.name)"></input-field>
+                   (keyup.enter)="groupRenameControl.valid && renameGroup(groupname || memberService.group.name)"></input-field>
       <button class="btn btn--bare"
               [disabled]="groupRenameControl.invalid"
               (click)="renameGroup(groupname || memberService.group.name)">

@@ -51,7 +51,10 @@ export class MemberService extends AppService implements CanActivate {
         return this.http.put(`${this.groupUrl}/${groupId}/join`, invitedUser)
             .map(this.extractData)
             .map((member: Member) => this.members.push(member))
-            .catch(this.handleError);
+            .catch((error: any) => {
+                this.snackbarService.showSnackbar(`Email ${invitedUser.email} not registered`);
+                return this.handleError(error);
+            });
     }
 
     getMembers(id: string): Observable<any> {
