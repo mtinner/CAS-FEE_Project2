@@ -1,11 +1,11 @@
-import { NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
-import { CommonModule } from '@angular/common';
-import { ElementModule } from '../../elements/element.module';
-import { RouterModule } from '@angular/router';
-import { AddExpenseComponent } from './add-expense.component';
-import { CostManagementModule } from '../costManagement/cost-management.module';
-import { FormsModule } from '@angular/forms';
+import {NgModule} from '@angular/core';
+import {HttpModule} from '@angular/http';
+import {CommonModule} from '@angular/common';
+import {ElementModule} from '../../elements/element.module';
+import {RouterModule} from '@angular/router';
+import {AddExpenseComponent} from './add-expense.component';
+import {CostManagementModule} from '../costManagement/cost-management.module';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
     imports: [
@@ -14,7 +14,8 @@ import { FormsModule } from '@angular/forms';
         ElementModule,
         RouterModule,
         CostManagementModule,
-        FormsModule
+        FormsModule,
+        ReactiveFormsModule
     ],
     declarations: [
         AddExpenseComponent
