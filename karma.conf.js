@@ -1,18 +1,14 @@
 module.exports = function (config) {
     config.set({
-
-        browsers: ['PhantomJS'],
+        frameworks: ['jasmine'],
         files: [
-            {pattern: './src/backend/**/*spec.js', watched: false}
+            { pattern: './src/frontend/**/*spec.js', watched: false }
         ],
-        frameworks: ['browserify', 'jasmine'],
         preprocessors: {
-            './src/backend/**/*spec.js': ['browserify']
+            '**/*.ts': ['typescript']
         },
-        browserify: {
-            transform: [
-                ['babelify', {presets: ['es2015']}]
-            ]
+        transformPath: function (path) {
+            return path.replace(/\.ts$/, '.js');
         },
         exclude: []
 
