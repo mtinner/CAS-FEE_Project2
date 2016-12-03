@@ -17,7 +17,7 @@ https://mtinner.github.io/CAS-FEE_Project2/
 * Own Font for Icons
 * Just Angular2 no other UI-Frameworks or Libs
 * AoT (Ahead of Time) Compilation
-* Application Network traffic < 120kb after Prod-Process 
+* Application Network traffic ~120kb after Prod-Process 
 * Gzip
 * Mobile First
 * Option to add the website to your Android-Homescreen
