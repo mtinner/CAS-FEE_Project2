@@ -11,8 +11,8 @@ import {validateNotBlank} from '../../validators/not-blank.validator';
 })
 export class LoginComponent implements OnInit {
 
-    public email = 'appUser@admin.ch';
-    public password = 'pwd';
+    public email = '';
+    public password = '';
     public loginForm: FormGroup;
 
     constructor(private loginService: LoginHttpService, private formBuilder: FormBuilder) {

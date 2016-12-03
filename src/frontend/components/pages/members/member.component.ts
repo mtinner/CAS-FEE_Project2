@@ -41,7 +41,7 @@ export class MemberComponent implements OnInit, OnDestroy {
     setRenameModalVisibilityCallback(value: boolean) {
         return () => {
             this.setRenameModalVisibility(value);
-        }
+        };
     }
 
     setLeaveModalVisibility(value: boolean) {
