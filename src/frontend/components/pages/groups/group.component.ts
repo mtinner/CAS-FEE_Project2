@@ -4,6 +4,8 @@ import {HeaderService} from '../../elements/header/header.service';
 import {HeaderStyle, HeaderIcon} from '../../elements/header/header.enum';
 import {Group} from '../../../models/Group';
 import {HeaderConfig} from '../../../models/HeaderConfig';
+import {FormControl, Validators} from '@angular/forms';
+import {validateNotBlank} from '../../validators/not-blank.validator';
 
 @Component({
     moduleId: module.id,
@@ -12,27 +14,29 @@ import {HeaderConfig} from '../../../models/HeaderConfig';
 })
 export class GroupComponent implements OnInit, OnDestroy {
 
-    private groupname: string = '';
+    ///public groupname: string = '';
     public showModal: boolean = false;
+    private groupNameControl: FormControl = new FormControl();
+
 
     constructor(private headerService: HeaderService, public groupService: GroupService) {
         this.headerService.headerConfig = new HeaderConfig('Group Settings', HeaderStyle.Settings, HeaderIcon.ArrowLeft, this.groupService.goToSettings);
     }
 
-    setGroupname(value: string) {
-        this.groupname = value.trim();
-    }
-
-    addGroup() {
-        this.groupService.addGroup({name: this.groupname})
+    addGroup(groupname) {
+        groupname = groupname.trim();
+        this.groupService.addGroup({name: groupname})
             .subscribe(() => {
-                this.groupname = '';
+                this.groupNameControl.reset();
                 this.showModal = false;
             });
     }
 
     setModalVisibility(value: boolean) {
         this.showModal = value;
+        if (!value) {
+            this.groupNameControl.reset();
+        }
     }
 
     onGroupChange(obj: Group) {
@@ -41,6 +45,7 @@ export class GroupComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.groupService.fetchGroups().subscribe();
+        this.groupNameControl = new FormControl('', [Validators.required, validateNotBlank]);
     }
 
     ngOnDestroy(): void {

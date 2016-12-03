@@ -21,7 +21,8 @@ export class MemberComponent implements OnInit, OnDestroy {
     public showRenameModal: boolean = false;
     private groupRenameControl: FormControl = new FormControl();
     private groupMemberControl: FormControl = new FormControl();
-    private invitedEmail: string = '';
+    // AoT
+    public invitedEmail: string = '';
 
     constructor(private headerService: HeaderService, public memberService: MemberService, private route: ActivatedRoute) {
     }
@@ -33,9 +34,15 @@ export class MemberComponent implements OnInit, OnDestroy {
         }
     }
 
-    setRenameModalVisibility = (value: boolean = true) => {
+    setRenameModalVisibility = (value: boolean) => {
         this.showRenameModal = value;
     };
+
+    setRenameModalVisibilityCallback(value: boolean) {
+        return () => {
+            this.setRenameModalVisibility(value);
+        }
+    }
 
     setLeaveModalVisibility(value: boolean) {
         this.showLeaveModal = value;
@@ -56,7 +63,7 @@ export class MemberComponent implements OnInit, OnDestroy {
             this.memberService.renameGroup(this.groupId, groupname)
                 .subscribe(() => {
                     this.setRenameModalVisibility(false);
-                    this.headerService.headerConfig = new HeaderConfig(`Group ${this.memberService.group.name}`, HeaderStyle.Settings, HeaderIcon.ArrowLeft, this.memberService.goToGroups, HeaderIcon.Edit, this.setRenameModalVisibility);
+                    this.headerService.headerConfig = new HeaderConfig(`Group ${this.memberService.group.name}`, HeaderStyle.Settings, HeaderIcon.ArrowLeft, this.memberService.goToGroups, HeaderIcon.Edit, this.setRenameModalVisibilityCallback(true));
                 });
         }
         else {
@@ -70,7 +77,7 @@ export class MemberComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.headerService.headerConfig = new HeaderConfig(`Group ${this.memberService.group.name}`, HeaderStyle.Settings, HeaderIcon.ArrowLeft, this.memberService.goToGroups, HeaderIcon.Edit, this.setRenameModalVisibility);
+        this.headerService.headerConfig = new HeaderConfig(`Group ${this.memberService.group.name}`, HeaderStyle.Settings, HeaderIcon.ArrowLeft, this.memberService.goToGroups, HeaderIcon.Edit, this.setRenameModalVisibilityCallback(true));
         this.groupRenameControl = new FormControl(this.memberService.group.name, [Validators.required, validateNotBlank]);
         this.groupMemberControl = new FormControl('', [Validators.required, validateNotBlank, validateEmail]);
         this.route.params.forEach((params: Params) => {
