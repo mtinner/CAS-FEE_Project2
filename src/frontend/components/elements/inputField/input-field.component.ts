@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {InputValueControlAccessor, ProvideValueAccessor} from '../../common/helper/InputValueControlAccessor';
 
@@ -20,17 +20,9 @@ export class InputFieldComponent extends InputValueControlAccessor {
     @Input()
     errorMessage: string;
 
-    @Output()
-    enteredText = new EventEmitter();
-
     @Input()
     inputControl: FormControl;
 
     // AoT
     public isFocused: boolean = false;
-
-    // TODO remove
-    textEntered(text: string) {
-        this.enteredText.emit(text);
-    }
 }

@@ -13,10 +13,10 @@ import {validateNotBlank} from '../../validators/not-blank.validator';
     styleUrls: ['group.component.css']
 })
 export class GroupComponent implements OnInit, OnDestroy {
-
-    ///public groupname: string = '';
     public showModal: boolean = false;
     private groupNameControl: FormControl = new FormControl();
+    // AoT
+    public groupname: string = '';
 
 
     constructor(private headerService: HeaderService, public groupService: GroupService) {
