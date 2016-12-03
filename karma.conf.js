@@ -1,16 +1,22 @@
-module.exports = function (config) {
+module.exports = function(config) {
     config.set({
-        frameworks: ['jasmine'],
+        browsers: ['Chrome'],
+        frameworks: ['jasmine', 'browserify'],
         files: [
-            { pattern: './src/frontend/**/*spec.js', watched: false }
+            { pattern: './src/frontend/**/*spec.ts', watched: true }
         ],
         preprocessors: {
-            '**/*.ts': ['typescript']
+            '**/*.ts': ['typescript'],
+            '**/*.js': ['browserify']
         },
-        transformPath: function (path) {
-            return path.replace(/\.ts$/, '.js');
+        typescriptPreprocessor: {
+            // options passed to the typescript compiler 
+            options: { project: './tsconfig.json' },
+            // transforming the filenames 
+            transformPath: function(path) {
+                return path.replace(/\.ts$/, '.js');
+            }
         },
         exclude: []
-
     });
 };
