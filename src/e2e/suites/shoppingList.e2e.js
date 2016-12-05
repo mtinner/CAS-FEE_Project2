@@ -8,8 +8,8 @@ describe('login', function () {
 
 
     beforeEach(() => {
-        cleanup.removeDB();
-        return login();
+        return cleanup.cleanupDb()
+            .then(login);
     });
 
 

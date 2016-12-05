@@ -7,7 +7,7 @@ var Promise = require('promise');
 describe('login', function () {
 
     beforeEach(() => {
-        cleanup.removeDB();
+       return cleanup.cleanupDb();
     });
 
     it('should login', function () {

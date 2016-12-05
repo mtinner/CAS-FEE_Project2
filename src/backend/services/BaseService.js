@@ -24,6 +24,14 @@ class BaseService {
     update(id, oldDoc, newDoc) {
         return this.nedbRepo.update(id, oldDoc, newDoc);
     }
+
+    // removeIf(production)
+    // just for clean Testsetup
+    deleteAll() {
+        return this.nedbRepo.deleteAll();
+    }
+
+    // endRemoveIf(production)
 }
 
 module.exports = BaseService;

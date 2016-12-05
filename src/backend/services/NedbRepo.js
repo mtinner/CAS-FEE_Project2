@@ -74,6 +74,16 @@ class NedbRepo {
         }
         return doc;
     }
+
+    // removeIf(production)
+    // just for clean Testsetup
+    deleteAll() {
+        return new Promise(resolve =>
+            this.store.remove({}, {multi: true}, (err, numRemoved) => resolve(err, numRemoved))
+        );
+    }
+
+    // endRemoveIf(production)
 }
 
 module.exports = NedbRepo;

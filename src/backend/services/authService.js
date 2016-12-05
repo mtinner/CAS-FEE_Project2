@@ -25,7 +25,7 @@ let authService = (function () {
         {
             email: 'e2e@admin.ch',
             username: 'e2eUser',
-            password: 'pwd',
+            password: 'pwd'
         }
     ];
 

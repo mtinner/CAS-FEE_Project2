@@ -70,6 +70,7 @@
     "mdcss": "~1.5.2",
     "mdcss-theme-engage": "~2.3.0",
     "mocha": "~3.1.2",
+    "request": "^2.75.0",
     "rollup": "~0.36.3",
     "rollup-plugin-commonjs": "~5.0.5",
     "rollup-plugin-node-resolve": "~2.0.0",
