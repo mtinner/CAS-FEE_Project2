@@ -1,5 +1,5 @@
-<div>
-    <span (click)="input.value?enterPressed(input):input.focus()" class="icon icon--centered icon--plus"></span>
-    <input #input (keyup.enter)="enterPressed(input)"
-           placeholder="{{text}}">
+<div class="add">
+  <span (click)="input.value?enterPressed(input):input.focus()" class="icon icon--plus"></span>
+  <input #input class="add__input" (keyup.enter)="enterPressed(input)"
+         placeholder="{{text}}">
 </div>
