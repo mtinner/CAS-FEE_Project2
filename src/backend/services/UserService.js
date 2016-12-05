@@ -1,11 +1,12 @@
 'use strict';
 let NedbRepo = require('./NedbRepo');
+let BaseService = require('./BaseService');
 
 let singleton;
 
-class UserService {
+class UserService extends BaseService{
     constructor() {
-        this.nedbRepo = new NedbRepo('user');
+        super(new NedbRepo('user'));
     }
 
     static get instance() {
@@ -16,21 +17,8 @@ class UserService {
     }
 
     get(user) {
-        return this.nedbRepo.get({email: user.email});
+        return super.get({email: user.email});
     }
-
-    getAll(user) {
-        return this.nedbRepo.getAll(user);
-    }
-
-    update(id, oldDoc, newDoc) {
-        return this.nedbRepo.update(id, oldDoc, newDoc);
-    }
-
-    add(newDoc) {
-        return this.nedbRepo.add(newDoc);
-    }
-
 }
 
 module.exports = UserService;
