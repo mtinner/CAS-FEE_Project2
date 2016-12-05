@@ -8,12 +8,13 @@ https://mtinner.github.io/CAS-FEE_Project2/
 * Install typings: `npm run typings`
 * Build, Run, Watch & Livereload: `npm start`
 
-## Main Gulp Tasks
- * Default (Start App http://:localhost:8080/)
- * Spec (run Jasmine http://localhost:9002/)
- * E2e (Run Protractor http://:localhost:8080/)
+## Main NPM Tasks
+* Build & start dev mode: `npm start` (http://:localhost:8080/)
+* Build & start prod mode: `npm run prod` (http://:localhost:8080/)
+* Run jasmine tests: `npm run test` http://localhost:9876/)
+* Run protractor test: `npm run e2e` (http://:localhost:8080/) Prerequisite: Needs Java installed on your local machine. 
  
-##Application Features
+## Application Features
 * Own Font for Icons
 * Just Angular2 no other UI-Frameworks or Libs
 * AoT (Ahead of Time) Compilation
@@ -26,4 +27,4 @@ https://mtinner.github.io/CAS-FEE_Project2/
 * E2E Tests
 * Karma / Jasmine
 * Moqups (https://mtinner.github.io/CAS-FEE_Project2/) created with https://moqups.com/
-* Custom Projectsetup, no Templates or Skeletons used
+* Custom Projectsetup (with live rebuild), no Templates or Skeletons used
