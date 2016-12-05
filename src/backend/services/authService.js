@@ -21,6 +21,11 @@ let authService = (function () {
             username: 'appUser',
             password: 'pwd',
             roles: ['user']
+        },
+        {
+            email: 'e2e@admin.ch',
+            username: 'e2eUser',
+            password: 'pwd',
         }
     ];
 

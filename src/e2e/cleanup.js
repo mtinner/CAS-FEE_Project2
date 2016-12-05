@@ -3,12 +3,18 @@ var fs = require('fs'),
 
 module.exports = (function () {
 
-    let dbFilenames = ['user.db','article.db','group.db'];
+    let dbFilenames = ['user.db', 'article.db', 'group.db'];
 
     return {
 
         removeDB: function () {
-            dbFilenames.forEach(filename=> fs.unlinkSync(path.join(__dirname,'../','.tmpE2e',filename)));
+            dbFilenames.forEach(filename => {
+                try {
+                    fs.unlinkSync(path.join(__dirname, '../', '.tmpE2e', filename));
+                }
+                catch (err) {
+                }
+            });
         }
     }
 })();

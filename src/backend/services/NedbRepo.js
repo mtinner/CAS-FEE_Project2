@@ -37,15 +37,6 @@ class NedbRepo {
         );
     }
 
-    updateOrInsert(id, newDoc) {
-        return this.get({_id: id}).then(oldDoc => {
-            if (oldDoc) {
-                return this.update(id, oldDoc, newDoc);
-            }
-            return this.add(newDoc);
-        });
-    }
-
     update(id, oldDoc, newDoc) {
         Object.assign(oldDoc, newDoc);
 
