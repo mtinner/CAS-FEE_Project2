@@ -17,7 +17,7 @@ router.get('/',
         }
         expenseManager.getAll(req.user, year, month)
             .then(expenses => res.status(200).send(expenses))
-            .catch(() => res.status(400).send());
+            .catch((err) => res.status(err.status || 400).send(err));
     });
 
 router.post('/',
@@ -25,15 +25,15 @@ router.post('/',
     function (req, res) {
         expenseManager.add(req.body, req.user)
             .then(expense => res.status(201).send(expense))
-            .catch(() => res.status(400).send());
+            .catch((err) => res.status(err.status || 400).send(err));
     });
 
 router.delete('/:id',
     authService.protect('user'),
     function (req, res) {
-        expenseManager.remove(req.params.id)
+        expenseManager.remove(req.params.id, req.user)
             .then(article => res.status(200).send(article))
-            .catch(() => res.status(400).send());
+            .catch((err) => res.status(err.status || 400).send(err));
     });
 
 module.exports = router;

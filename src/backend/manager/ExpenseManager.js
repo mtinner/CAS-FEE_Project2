@@ -1,7 +1,8 @@
 'use strict';
 let Promise = require('promise'),
     ExpenseService = require('../services/ExpenseService'),
-    UserService = require('../services/UserService');
+    UserService = require('../services/UserService'),
+    ResponseException = require('../models/ResponseException');
 
 class ExpenseManager {
     constructor() {
@@ -39,8 +40,17 @@ class ExpenseManager {
             });
     }
 
-    remove(id) {
-        return this.expenseService.remove(id);
+    remove(id, user) {
+        return this.userService.get(user)
+            .then((user) => {
+                return this.expenseService.get({ id: id })
+                    .then((expense) => {
+                        if (user.email === expense.creditor) {
+                            return this.expenseService.remove(id);
+                        }
+                        throw new ResponseException(403, 'No permission to delete this expense. You are not the creditor.');
+                    });
+            });
     }
 
     secureUser(user) {
