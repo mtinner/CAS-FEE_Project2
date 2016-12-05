@@ -19,6 +19,10 @@ class UserService extends BaseService{
     get(user) {
         return super.get({email: user.email});
     }
+
+    getFromProto(user) {
+        return super.get(user);
+    }
 }
 
 module.exports = UserService;

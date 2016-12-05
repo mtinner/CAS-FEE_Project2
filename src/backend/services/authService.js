@@ -68,7 +68,7 @@ let authService = (function () {
     }
 
     function signIn(req, res) {
-        UserService.instance.get({email: req.query.email, password: req.query.password})
+        UserService.instance.getFromProto({email: req.query.email, password: req.query.password})
             .then(matchedUser => {
                 if (matchedUser) {
                     res.setHeader(JWT_RESPONSE_HEADER, createToken(matchedUser));
