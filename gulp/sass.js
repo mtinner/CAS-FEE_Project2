@@ -27,10 +27,4 @@ module.exports = function (gulp, data, util, taskName) {
             .pipe(sass().on('error', sass.logError))
             .pipe(gulp.dest(data.path.tmpE2e + 'frontend'));
     });
-
-    gulp.task(taskName + ':Styleguide', function () {
-        return gulp.src(data.path.frontend + '**/*.scss')
-            .pipe(sass().on('error', sass.logError))
-            .pipe(gulp.dest(data.path.styleguide + 'styles'));
-    });
 };

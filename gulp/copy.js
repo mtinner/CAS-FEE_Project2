@@ -7,13 +7,6 @@ module.exports = function (gulp, data, util, taskName) {
         replace = require('gulp-replace-task'),
         strip = require('gulp-strip-comments');
 
-    gulp.task(taskName + ':StyleguideIcon', function () {
-        return gulp.src([
-            data.path.frontend + 'images/icon.png'
-        ])
-            .pipe(gulp.dest(data.path.styleguide));
-    });
-
     gulp.task(taskName + ':App', function () {
         var app = gulp.src([
             data.path.frontend + 'components/**',

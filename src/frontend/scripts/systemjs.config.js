@@ -7,14 +7,12 @@
     var map = {
         'app': 'frontend', // 'dist',
         '@angular': '@angular',
-        'angular2-in-memory-web-api': 'angular2-in-memory-web-api',
         'rxjs': 'rxjs'
     };
     // packages tells the System loader how to load when no filename and/or no extension
     var packages = {
         'app': {main: 'main.js', defaultExtension: 'js'},
-        'rxjs': {defaultExtension: 'js'},
-        'angular2-in-memory-web-api': {main: 'index.js', defaultExtension: 'js'}
+        'rxjs': {defaultExtension: 'js'}
     };
     var ngPackageNames = [
         'common',
@@ -25,7 +23,6 @@
         'platform-browser',
         'platform-browser-dynamic',
         'router',
-        'router-deprecated',
         'upgrade'
     ];
     // Individual files (~300 requests):

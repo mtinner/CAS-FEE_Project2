@@ -22,9 +22,4 @@ module.exports = function (gulp, data, util, taskName) {
         ], {read: false})
             .pipe(clean({force: true}));
     });
-
-    gulp.task(taskName + ':Styleguide', function () {
-        return gulp.src(data.path.styleguide, {read: false})
-            .pipe(clean({force: true}));
-    });
 };
