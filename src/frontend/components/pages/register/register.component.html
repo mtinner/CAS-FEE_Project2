@@ -1,12 +1,18 @@
-<div class="register-container">
-    <input-field class="input--register" [placeholder]="'Username'"
-                 [type]="'text'" (enteredText)="setUsername($event)"></input-field>
+<form class="register-container" [formGroup]="registerForm">
+  <input-field formControlName="username" [inputControl]="registerForm.controls['username']"
+               [errorMessage]="'username is required'"
+               class="input--register" [placeholder]="'Username'"
+               [type]="'text'"></input-field>
 
-    <input-field class="input--register" [placeholder]="'Email'"
-                 [type]="'email'" (enteredText)="setEmail($event)"></input-field>
+  <input-field formControlName="email" [inputControl]="registerForm.controls['email']"
+               [errorMessage]="'enter valid Emailaddress'"
+               class="input--register" [placeholder]="'Email'"
+               [type]="'email'"></input-field>
 
-    <input-field class="input--register" [placeholder]="'Password'"
-                 [type]="'password'" (enteredText)="setPassword($event)"></input-field>
+  <input-field formControlName="password" [inputControl]="registerForm.controls['password']"
+               [errorMessage]="'Password required'"
+               class="input--register" [placeholder]="'Password'"
+               [type]="'password'"></input-field>
 
-    <button class="btn btn--register" (click)="register()">Register</button>
-</div>
+  <button class="btn btn--register" [disabled]="registerForm.invalid" (click)="register()">Register</button>
+</form>

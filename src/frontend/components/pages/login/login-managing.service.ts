@@ -37,7 +37,7 @@ export class LoginManagingService {
     }
 
     performRedirect() {
-        if (this.redirectUrl) {
+        if (this.redirectUrl && !this.redirectUrl.includes('login')) {
             this.router.navigate([this.redirectUrl]);
         }
         else {

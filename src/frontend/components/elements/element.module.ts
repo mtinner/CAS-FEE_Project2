@@ -8,6 +8,7 @@ import { CheckboxComponent } from './checkbox/checkbox.component';
 import { InputFieldComponent } from './inputField/input-field.component';
 import { CostProgress } from './costProgress/cost-progress.component';
 import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { HeaderService } from './header/header.service';
 import { SideNavComponent } from './sidenav/side-nav.component';
@@ -21,7 +22,8 @@ import { SnackbarService } from './snackbar/snackbar.service';
     imports: [
         FormsModule,
         BrowserModule,
-        RouterModule
+        RouterModule,
+        CommonModule
     ],
     declarations: [
         AddComponent,

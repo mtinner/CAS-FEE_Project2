@@ -20,11 +20,14 @@
   <button class="btn btn--round btn--bottom-right icon icon--plus" (click)="setModalVisibility(true)"></button>
   <div *ngIf="showModal" class="modal" (click)="setModalVisibility(false)">
     <div class="modal__content" (click)="$event.stopPropagation()">
-      <input-field [placeholder]="'Groupname'"
-                   [type]="'text'" (enteredText)="setGroupname($event)"
-                   (keyup.enter)="!groupname || addGroup()"></input-field>
+      <input-field [formControl]="groupNameControl"
+                   [inputControl]="groupNameControl"
+                   [placeholder]="'Groupname'"
+                   [type]="'text'"
+                   [errorMessage]="'input is required'"
+                   (keyup.enter)="groupNameControl.valid && addGroup()"></input-field>
 
-      <button class="btn btn--bare" [disabled]="!groupname" (click)="addGroup()">Create</button>
+      <button class="btn btn--bare" [disabled]="groupNameControl.invalid" (click)="addGroup()">Create</button>
       <button class="btn btn--bare btn--bare--right" (click)="setModalVisibility(false)">Cancel</button>
     </div>
   </div>

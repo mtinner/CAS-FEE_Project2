@@ -1,7 +1,9 @@
 <div class="input-field">
-    <input #input (focus)="setFocus(true)" (blur)="setFocus(false, input.value)"
-           (keyup)="textEntered(input.value)" class="input-field__input" type="{{type}}" value="{{text}}"
-           autocomplete="off">
-    <label class="input-field__label" [class.input-field__label--focus]=isFocused>{{placeholder}}</label>
-    <label class="input-field__error">{{errorMessage}}</label>
+  <input [(ngModel)]="value" (focus)="isFocused=true"
+         (blur)="isFocused=false" class="input-field__input" type="{{type}}"
+         autocomplete="off">
+  <label class="input-field__label"
+         [class.input-field__label--focus]="!!innerValue || isFocused">{{placeholder}}</label>
+  <label *ngIf="!isFocused && inputControl?.invalid && inputControl?.dirty"
+         class="input-field__error">{{errorMessage}}</label>
 </div>

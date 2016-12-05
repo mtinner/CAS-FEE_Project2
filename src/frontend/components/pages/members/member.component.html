@@ -1,51 +1,57 @@
 <div class="container__page">
-    <ul class="list">
-        <panel class="list__item" *ngFor="let member of memberService.members" [title]="member.username"
-               [description]="member.email" [rightIconName]="'cross'"
-               (clickIconRight)="leaveMember=$event;setLeaveModalVisibility(true)"></panel>
-    </ul>
+  <ul class="list">
+    <panel class="list__item" *ngFor="let member of memberService.members" [title]="member.username"
+           [description]="member.email" [rightIconName]="'cross'"
+           (clickIconRight)="leaveMember=$event;setLeaveModalVisibility(true)"></panel>
+  </ul>
 
-    <div *ngIf="memberService.members.length === 1" class="sticker sticker--margin-top">
-        <div class="sticker__circle" (click)="setMemberModalVisibility(true)">
-            <span class="icon icon--add-person"></span>
-            <span class="sticker__label">Seems to be lonely</span>
-        </div>
+  <div *ngIf="memberService.members.length === 1" class="sticker sticker--margin-top">
+    <div class="sticker__circle" (click)="setMemberModalVisibility(true)">
+      <span class="icon icon--add-person"></span>
+      <span class="sticker__label">Seems to be lonely</span>
     </div>
+  </div>
 
-    <button class="btn btn--round btn--bottom-right icon icon--plus" (click)="setMemberModalVisibility(true)"></button>
-    <div *ngIf="showMemberModal" class="modal" (click)="setMemberModalVisibility(false)">
-        <div class="modal__content" (click)="$event.stopPropagation()">
-            <input-field [placeholder]="'Email'"
-                         [type]="'email'"
-                         [errorMessage]="invitedErrorMessage"
-                         (enteredText)="setInvitedEmail($event)"
-                         (keyup.enter)="addMember()"></input-field>
+  <button class="btn btn--round btn--bottom-right icon icon--plus" (click)="setMemberModalVisibility(true)"></button>
+  <div *ngIf="showMemberModal" class="modal" (click)="setMemberModalVisibility(false)">
+    <div class="modal__content" (click)="$event.stopPropagation()">
+      <input-field [formControl]="groupMemberControl"
+                   [inputControl]="groupMemberControl"
+                   [placeholder]="'Email'"
+                   [type]="'email'"
+                   [errorMessage]="'enter valid Emailaddress'"
+                   (keyup.enter)="groupMemberControl.valid && addMember()"></input-field>
 
-            <button class="btn btn--bare" (click)="addMember()">Add</button>
-            <button class="btn btn--bare btn--bare--right" (click)="setMemberModalVisibility(false)">Cancel</button>
-        </div>
+      <button class="btn btn--bare" [disabled]="groupMemberControl.invalid" (click)="addMember(invitedEmail)">Add
+      </button>
+      <button class="btn btn--bare btn--bare--right" (click)="setMemberModalVisibility(false)">Cancel</button>
     </div>
+  </div>
 
-    <div *ngIf="showLeaveModal" class="modal" (click)="setLeaveModalVisibility(false)">
-        <div class="modal__content" (click)="$event.stopPropagation()">
-            <div>Remove '{{leaveMember.description}}' from this group?</div>
+  <div *ngIf="showLeaveModal" class="modal" (click)="setLeaveModalVisibility(false)">
+    <div class="modal__content" (click)="$event.stopPropagation()">
+      <div>Remove '{{leaveMember.description}}' from this group?</div>
 
-            <button class="btn btn--bare" (click)="leaveGroup(leaveMember)">Delete</button>
-            <button class="btn btn--bare btn--bare--right" (click)="setLeaveModalVisibility(false)">Cancel</button>
-        </div>
+      <button class="btn btn--bare" (click)="leaveGroup(leaveMember)">Delete</button>
+      <button class="btn btn--bare btn--bare--right" (click)="setLeaveModalVisibility(false)">Cancel</button>
     </div>
+  </div>
 
-    <div *ngIf="showRenameModal" class="modal" (click)="setRenameModalVisibility(false)">
-        <div class="modal__content" (click)="$event.stopPropagation()">
-            <input-field [placeholder]="'Groupname'"
-                         [type]="'text'"
-                         [text]="this.memberService.group.name"
-                         (enteredText)="groupname=$event.trim();"></input-field>
-            <button class="btn btn--bare"
-                    [disabled]="(groupname === undefined && memberService.group.name)  || (groupname === '')"
-                    (click)="renameGroup(groupname || memberService.group.name)">Rename
-            </button>
-            <button class="btn btn--bare btn--bare--right" (click)="setRenameModalVisibility(false)">Cancel</button>
-        </div>
+  <div *ngIf="showRenameModal" class="modal" (click)="setRenameModalVisibility(false)">
+    <div class="modal__content" (click)="$event.stopPropagation()">
+      <input-field [formControl]="groupRenameControl"
+                   [inputControl]="groupRenameControl"
+                   [placeholder]="'Groupname'"
+                   [type]="'text'"
+                   [ngModel]="this.memberService.group.name"
+                   [errorMessage]="'Cannot be empty'"
+                   (keyup.enter)="groupRenameControl.valid && renameGroup()"></input-field>
+      <button class="btn btn--bare"
+              [disabled]="groupRenameControl.invalid"
+              (click)="renameGroup()">
+        Rename
+      </button>
+      <button class="btn btn--bare btn--bare--right" (click)="setRenameModalVisibility(false)">Cancel</button>
     </div>
+  </div>
 </div>
