@@ -37,15 +37,6 @@ class NedbRepo {
         );
     }
 
-    updateOrInsert(id, newDoc) {
-        return this.get({_id: id}).then(oldDoc => {
-            if (oldDoc) {
-                return this.update(id, oldDoc, newDoc);
-            }
-            return this.add(newDoc);
-        });
-    }
-
     update(id, oldDoc, newDoc) {
         Object.assign(oldDoc, newDoc);
 
@@ -83,6 +74,16 @@ class NedbRepo {
         }
         return doc;
     }
+
+    // removeIf(production)
+    // just for clean Testsetup
+    deleteAll() {
+        return new Promise(resolve =>
+            this.store.remove({}, {multi: true}, (err, numRemoved) => resolve(err, numRemoved))
+        );
+    }
+
+    // endRemoveIf(production)
 }
 
 module.exports = NedbRepo;

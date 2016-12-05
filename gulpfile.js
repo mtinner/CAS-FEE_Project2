@@ -22,8 +22,7 @@ config(gulp, {
                 aot: './src/.aot/',
                 e2e: './src/e2e/',
                 spec: './src/spec/',
-                dist: './src/.dist/',
-                styleguide: './src/.styleguide/'
+                dist: './src/.dist/'
             },
             anyValue: 1,
             anyParams: []
@@ -64,18 +63,6 @@ gulp.task('Prod', function (callback) {
         callback
     );
 });
-
-gulp.task('ServeStyleGuide', function (callback) {
-    runSequence(
-        ['clean:Styleguide'],
-        ['sass:Styleguide'],
-        ['concat:Styleguide'],
-        ['styleguide'],
-        ['copy:StyleguideIcon', 'connect:Styleguide'],
-        callback
-    );
-});
-
 
 gulp.task('Spec', function (callback) {
     runSequence(

@@ -1,8 +1,8 @@
 <div class="container__page">
-    <card *ngFor="let articleGroup of shoppingListService.articleGroups" [title]="articleGroup.name">
-        <chip (chipClicked)="deleteArticle($event)"
-              *ngFor="let article of shoppingListService.articles |articlesByGroup:articleGroup.id"
-              [item]="article"></chip>
-        <add (enterText)="addArticle($event,articleGroup)" [text]="'Add article'"></add>
-    </card>
+  <card *ngFor="let articleGroup of shoppingListService.articleGroups" [title]="articleGroup.name">
+    <chip (chipClicked)="deleteArticle($event)"
+          *ngFor="let article of shoppingListService.articles |articlesByGroup:articleGroup.id"
+          [item]="article"></chip>
+    <add (enterText)="addArticle($event,articleGroup)" [text]="'Add article'"></add>
+  </card>
 </div>

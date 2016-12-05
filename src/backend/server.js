@@ -20,7 +20,7 @@ app.get('/manifest.json', function (req, res) {
 app.use('/api', apiRouting);
 
 //removeIf(production)
-app.use('/frontend', express.static('./src/.dist/frontend'));
+app.use('/frontend', express.static(__dirname + '/frontend'));
 app.use('/@angular', express.static('node_modules/@angular'));
 app.use('/rxjs', express.static('node_modules/rxjs'));
 app.use(require('connect-livereload')());
@@ -31,7 +31,6 @@ app.use('/images', express.static('./prod/images'));
 app.use('/styles', express.static('./prod/styles'));
 app.use('/scripts', express.static('./prod/scripts'));
 app.use('/fonts', express.static('./prod/fonts'));
-
 //endRemoveIf(development)
 
 app.get('*', function (req, res) {

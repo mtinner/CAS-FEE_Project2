@@ -1,14 +1,15 @@
-var fs = require('fs'),
-    path = require("path");
+var request = require('request');
 
 module.exports = (function () {
 
-    let dbFilenames = ['user.db','article.db','group.db'];
-
     return {
+        cleanupDb: function () {
 
-        removeDB: function () {
-            dbFilenames.forEach(filename=> fs.unlinkSync(path.join(__dirname,'../','.tmpE2e',filename)));
+            return new Promise(resolve =>
+                request.del('http://localhost:8080/api/clean', (err, resp) => {
+                    resolve(resp);
+                })
+            );
         }
     }
 })();

@@ -37,6 +37,7 @@ module.exports = function (gulp, data, util, taskName) {
 
     gulp.task(taskName + ':E2e', function () {
         var tsResult = tsProject.src()
+            .pipe(removeCode({development: true}))
             .pipe(sourcemaps.init())
             .pipe(tsProject());
 
