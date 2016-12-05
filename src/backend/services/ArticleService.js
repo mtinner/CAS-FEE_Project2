@@ -1,11 +1,12 @@
 'use strict';
 let NedbRepo = require('./NedbRepo');
+let BaseService = require('./BaseService');
 
 let singleton;
 
-class ArticleService {
+class ArticleService extends BaseService{
     constructor() {
-        this.nedbRepo = new NedbRepo('article');
+        super(new NedbRepo('article'));
     }
 
     static get instance() {
@@ -13,22 +14,6 @@ class ArticleService {
             this[singleton] = new ArticleService();
         }
         return this[singleton];
-    }
-
-    get(article) {
-        return this.nedbRepo.get(article);
-    }
-
-    getAll(article) {
-        return this.nedbRepo.getAll(article);
-    }
-
-    add(newDoc) {
-        return this.nedbRepo.add(newDoc);
-    }
-
-    remove(id) {
-        return this.nedbRepo.remove(id);
     }
 }
 

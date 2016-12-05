@@ -1,30 +1,19 @@
 'use strict';
 let NedbRepo = require('./NedbRepo');
+let BaseService = require('./BaseService');
 
 let singleton;
 
-class GroupService {
+class GroupService extends BaseService {
     constructor() {
-        this.nedbRepo = new NedbRepo('group');
+        super(new NedbRepo('group'));
     }
 
     static get instance() {
-        if (!this[singleton]) {
+        if(!this[singleton]) {
             this[singleton] = new GroupService();
         }
         return this[singleton];
-    }
-
-    get(group) {
-        return this.nedbRepo.get(group);
-    }
-
-    add(newDoc) {
-        return this.nedbRepo.add(newDoc);
-    }
-
-    update(id, oldDoc, newDoc) {
-        return this.nedbRepo.update(id, oldDoc, newDoc);
     }
 }
 
