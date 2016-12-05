@@ -3,6 +3,7 @@ import {Component, Input, EventEmitter, Output} from '@angular/core';
 @Component({
     moduleId: module.id,
     selector: 'add',
+    styleUrls: ['add.component.css'],
     templateUrl: 'add.component.html'
 })
 export class AddComponent {
