@@ -13,7 +13,7 @@ export class AuthGuard implements CanActivate {
     }
 
     checkLogin(url: string): boolean {
-        if (this.loginManaginService.isLoggedIn) {
+        if (this.loginManaginService.isLoggedIn()) {
             return true;
         }
         this.loginManaginService.redirectUrl = url;

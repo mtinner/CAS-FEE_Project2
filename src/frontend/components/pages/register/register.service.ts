@@ -1,8 +1,6 @@
 import {Injectable} from '@angular/core';
-import {Http, Headers, Response} from '@angular/http';
-// Statics
+import {Http} from '@angular/http';
 import 'rxjs/add/observable/throw';
-// Operators
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -13,8 +11,6 @@ import {AppService} from '../../app.service';
 
 @Injectable()
 export class RegisterService extends AppService {
-    isLoggedIn = false;
-    redirectUrl: string;
 
     constructor(private http: Http) {
         super();
