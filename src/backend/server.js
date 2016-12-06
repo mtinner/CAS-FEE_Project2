@@ -10,10 +10,10 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(compression());
 
-app.get('/favicon.ico', function (req, res) {
+app.get('/favicon.ico', function(req, res) {
     res.sendFile(__dirname + '/favicon.ico');
 });
-app.get('/manifest.json', function (req, res) {
+app.get('/manifest.json', function(req, res) {
     res.sendFile(__dirname + '/manifest.json');
 });
 
@@ -21,8 +21,8 @@ app.use('/api', apiRouting);
 
 //removeIf(production)
 app.use('/frontend', express.static(__dirname + '/frontend'));
-app.use('/@angular', express.static('node_modules/@angular'));
-app.use('/rxjs', express.static('node_modules/rxjs'));
+app.use('/node_modules/@angular', express.static('node_modules/@angular'));
+app.use('/node_modules/rxjs', express.static('node_modules/rxjs'));
 app.use(require('connect-livereload')());
 //endRemoveIf(production)
 
@@ -33,7 +33,7 @@ app.use('/scripts', express.static('./prod/scripts'));
 app.use('/fonts', express.static('./prod/fonts'));
 //endRemoveIf(development)
 
-app.get('*', function (req, res) {
+app.get('*', function(req, res) {
     res.sendFile(__dirname + '/index.html');
 });
 
