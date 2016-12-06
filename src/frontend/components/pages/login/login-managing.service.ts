@@ -10,20 +10,21 @@ import 'rxjs/add/operator/toPromise';
 import {Router} from '@angular/router';
 import {JWT_RESPONSE_HEADER} from '../../common/authentication/auth-http.service';
 import {SnackbarService} from '../../elements/snackbar/snackbar.service';
+import {JwtHelper} from 'angular2-jwt';
+import {User} from '../../../models/User';
 
 // Reason for Servicesplitting -> Http: in NgModule AppModule
 @Injectable()
 export class LoginManagingService {
-    isLoggedIn = false;
     redirectUrl: string;
+    loggedInUser: User;
+    jwt: JwtHelper = new JwtHelper();
 
     constructor(private router: Router, private snackbarService: SnackbarService) {
-        this.isLoggedIn = !!localStorage.getItem(JWT_RESPONSE_HEADER);
     }
 
     logout() {
         localStorage.removeItem(JWT_RESPONSE_HEADER);
-        this.isLoggedIn = false;
     }
 
     performNotAuthorized() {
@@ -46,8 +47,19 @@ export class LoginManagingService {
     }
 
     setToken(token) {
-        localStorage.setItem(JWT_RESPONSE_HEADER, token);
-        this.isLoggedIn = true;
+        if (token) {
+            localStorage.setItem(JWT_RESPONSE_HEADER, token);
+            this.loggedInUser = this.jwt.decodeToken(token);
+        }
+    }
+
+    getToken() {
+        return localStorage.getItem(JWT_RESPONSE_HEADER);
+    }
+
+    isLoggedIn() {
+        const token = localStorage.getItem(JWT_RESPONSE_HEADER);
+        return !!token && !this.jwt.isTokenExpired(token);
     }
 
     createHeaders() {

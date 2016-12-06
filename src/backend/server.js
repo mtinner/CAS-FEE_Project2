@@ -23,6 +23,7 @@ app.use('/api', apiRouting);
 app.use('/frontend', express.static(__dirname + '/frontend'));
 app.use('/@angular', express.static('node_modules/@angular'));
 app.use('/rxjs', express.static('node_modules/rxjs'));
+app.use('/angular2-jwt', express.static('node_modules/angular2-jwt'));
 app.use(require('connect-livereload')());
 //endRemoveIf(production)
 

@@ -8,7 +8,7 @@
   left: 10px;
   background: $dark;
   transition: bottom $slide-duration ease-in, opacity $slide-duration ease-in;
-  z-index: 100;
+  z-index: 1001;
   opacity: 0;
 
   @media (min-width: 720px) {
