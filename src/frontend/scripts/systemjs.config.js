@@ -2,12 +2,12 @@
  * System configuration for Angular 2 samples
  * Adjust as necessary for your application needs.
  */
-(function (global) {
+(function(global) {
     // map tells the System loader where to look for things
     var map = {
         'app': 'frontend', // 'dist',
-        '@angular': '@angular',
-        'rxjs': 'rxjs'
+        '@angular': 'npm:@angular',
+        'rxjs': 'npm:rxjs'
     };
     // packages tells the System loader how to load when no filename and/or no extension
     var packages = {
@@ -41,7 +41,10 @@
     ngPackageNames.forEach(setPackageConfig);
     var config = {
         map: map,
-        packages: packages
+        packages: packages,
+        paths: {
+            'npm:': 'node_modules/'
+        },
     };
     System.config(config);
 })(this);
