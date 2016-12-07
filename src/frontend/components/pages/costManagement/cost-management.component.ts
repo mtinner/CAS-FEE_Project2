@@ -1,7 +1,7 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
-import {HeaderService} from '../../elements/header/header.service';
-import {HeaderIcon, HeaderStyle} from '../../elements/header/header.enum';
-import {HeaderConfig} from '../../../models/HeaderConfig';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { HeaderService } from '../../elements/header/header.service';
+import { HeaderIcon, HeaderStyle } from '../../elements/header/header.enum';
+import { HeaderConfig } from '../../../models/HeaderConfig';
 import { CostManagementService } from './cost-management.service';
 
 @Component({
