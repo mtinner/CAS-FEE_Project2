@@ -10,15 +10,11 @@ import 'rxjs/add/operator/toPromise';
 import {Router} from '@angular/router';
 import {JWT_RESPONSE_HEADER} from '../../common/authentication/auth-http.service';
 import {SnackbarService} from '../../elements/snackbar/snackbar.service';
-import {JwtHelper} from 'angular2-jwt';
-import {User} from '../../../models/User';
 
 // Reason for Servicesplitting -> Http: in NgModule AppModule
 @Injectable()
 export class LoginManagingService {
     redirectUrl: string;
-    loggedInUser: User;
-    jwt: JwtHelper = new JwtHelper();
 
     constructor(private router: Router, private snackbarService: SnackbarService) {
     }
@@ -49,7 +45,6 @@ export class LoginManagingService {
     setToken(token) {
         if (token) {
             localStorage.setItem(JWT_RESPONSE_HEADER, token);
-            this.loggedInUser = this.jwt.decodeToken(token);
         }
     }
 
@@ -59,7 +54,7 @@ export class LoginManagingService {
 
     isLoggedIn() {
         const token = localStorage.getItem(JWT_RESPONSE_HEADER);
-        return !!token && !this.jwt.isTokenExpired(token);
+        return !!token;
     }
 
     createHeaders() {
