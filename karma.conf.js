@@ -1,7 +1,6 @@
 module.exports = function(config) {
 
     var appBase = 'src/.dist/frontend/';      // transpiled app JS and map files
-    var appSrcBase = 'src/.dist/frontend/';      // app source TS files
 
     config.set({
         basePath: '',
@@ -14,7 +13,7 @@ module.exports = function(config) {
         ],
 
         client: {
-            builtPaths: [appSrcBase], // add more spec base paths as needed
+            builtPaths: [appBase], // add more spec base paths as needed
             clearContext: false // leave Jasmine Spec Runner output visible in browser
         },
 
@@ -57,8 +56,8 @@ module.exports = function(config) {
             {pattern: appBase + '**/*.css', included: false, watched: true},
 
             // Paths for debugging with source maps in dev tools
-            {pattern: appSrcBase + '**/*.ts', included: false, watched: false},
-            {pattern: appBase + '**/*.js.map', included: false, watched: false},
+            {pattern: appBase + '**/*.ts', included: false, watched: false},
+            {pattern: appBase + '**/*.js.map', included: false, watched: false}
         ],
 
         exclude: [],

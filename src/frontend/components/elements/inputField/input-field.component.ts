@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {InputValueControlAccessor, ProvideValueAccessor} from '../../common/helper/InputValueControlAccessor.js';
+import {InputValueControlAccessor, ProvideValueAccessor} from '../../common/helper/InputValueControlAccessor';
 
 @Component({
     moduleId: module.id,

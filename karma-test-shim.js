@@ -39,7 +39,7 @@ var allSpecFiles = Object.keys(window.__karma__.files)
 System.config({
     baseURL: 'base',
     // Extend usual application package list with test folder
-    packages: {'testing': {main: 'index.js', defaultExtension: 'js'}},
+    packages: {'src/.dist/frontend': {main: 'index.js', defaultExtension: 'js'}},
     paths: {
         // paths serve as alias
         'npm:': 'node_modules/'
