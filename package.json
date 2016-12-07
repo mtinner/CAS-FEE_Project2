@@ -8,7 +8,8 @@
     "build": "gulp Build",
     "typings": "typings i",
     "e2e": "gulp E2e",
-    "prod": "gulp Prod"
+    "prod": "gulp Prod",
+    "tests": "karma start"
   },
   "dependencies": {
     "@angular/common": "~2.1.0",
