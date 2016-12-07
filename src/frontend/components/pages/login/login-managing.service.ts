@@ -24,11 +24,11 @@ export class LoginManagingService {
     }
 
     performNotAuthorized() {
-        this.redirectUrl = this.router.url;
-        if (this.redirectUrl.includes('login')) {
+        if (this.router.url.includes('login')) {
             this.snackbarService.showSnackbar('Wrong email or password');
             return;
         }
+        this.redirectUrl = this.router.url;
         this.logout();
         this.router.navigate(['/login']);
     }
