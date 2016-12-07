@@ -6,7 +6,6 @@ var Promise = require('promise');
 
 describe('login', function () {
 
-
     beforeEach(() => {
         return cleanup.cleanupDb()
             .then(login);
@@ -40,10 +39,6 @@ describe('login', function () {
             .then(() => loginPage.inputPassword().sendKeys('pwd'));
 
         return Promise.all([inputEmail, inputPassword])
-            .then(() => loginPage.loginButton().click()
-                .then(() => {
-                    var EC = protractor.ExpectedConditions;
-                    return browser.wait(EC.urlContains('shopping-list'), 5000);
-                }));
+            .then(() => loginPage.loginButton().click());
     }
 });
