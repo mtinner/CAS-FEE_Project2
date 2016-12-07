@@ -7,14 +7,12 @@
     var map = {
         'app': 'frontend', // 'dist',
         '@angular': '@angular',
-        'rxjs': 'rxjs',
-        'angular2-jwt': 'angular2-jwt/angular2-jwt.js'
+        'rxjs': 'rxjs'
     };
     // packages tells the System loader how to load when no filename and/or no extension
     var packages = {
         'app': {main: 'main.js', defaultExtension: 'js'},
-        'rxjs': {defaultExtension: 'js'},
-        'angular2-jwt': {defaultExtension: 'js'}
+        'rxjs': {defaultExtension: 'js'}
     };
     var ngPackageNames = [
         'common',
