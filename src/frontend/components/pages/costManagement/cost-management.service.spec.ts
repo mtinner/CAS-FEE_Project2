@@ -1,0 +1,66 @@
+import { async, inject, TestBed, ComponentFixture } from '@angular/core/testing';
+import { CostManagementComponent } from './cost-management.component';
+import { CostManagementModule } from './cost-management.module';
+import { CostManagementService } from './cost-management.service';
+import { ElementModule } from '../../elements/element.module';
+import { appRoutingProviders } from '../../app.routing';
+import { LoginHttpService } from '../../pages/login/login-http.service';
+import { LoginManagingService } from '../../pages/login/login-managing.service';
+import { RegisterService } from '../../pages/register/register.service';
+import { authServiceProvider } from '../../common/authentication/auth-http.provider';
+import { HeaderService } from '../../elements/header/header.service';
+import { Expense, ExpenseObj } from '../../../models/Expense';
+import { User } from '../../../models/User';
+import { Http } from '@angular/http';
+import { Router } from '@angular/router';
+
+let service: CostManagementComponent;
+let fixture: ComponentFixture<CostManagementComponent>;
+
+describe('handleExpenses in CostManagementService', () => {
+
+    let service: CostManagementService;
+    let user1 = new User('1', '1', '');
+    let user2 = new User('2', '2', '');
+    let user3 = new User('3', '3', '');
+
+    beforeEach((() => {
+        service = new CostManagementService(null, null);
+    }));
+
+    it('is defined', () => {
+        expect(service.handleExpenses).toBeDefined();
+    });
+
+    it('set empty expenseOverview ', () => {
+        service.handleExpenses(new ExpenseObj([]), 0);
+        expect(service.expenseOverview.length).toBe(0);
+    });
+
+    it('handles 2 users with 1 expense', () => {
+        service.handleExpenses(
+            new ExpenseObj([
+                new Expense('', 0, 0, 0, 0, user1, [user2])
+            ]), 0);
+        expect(service.expenseOverview.length).toBe(2);
+    });
+
+    it('handles 3 users with 3 expenses', () => {
+        service.handleExpenses(
+            new ExpenseObj([
+                new Expense('', 0, 0, 0, 0, user1, [user2]),
+                new Expense('', 0, 0, 0, 0, user1, [user2, user3]),
+                new Expense('', 0, 0, 0, 0, user2, [user1])
+            ]), 0);
+        expect(service.expenseOverview.length).toBe(3);
+    });
+
+    it('adds 2 positive expenses', () => {
+        service.handleExpenses(
+            new ExpenseObj([
+                new Expense('', 10, 0, 0, 0, user1, [user2]),
+                new Expense('', 20, 0, 0, 0, user1, [user2])
+            ]), 0);
+        expect(service.expenseOverview.find(e => e.user === user1).amount).toBe(15);
+    });
+});

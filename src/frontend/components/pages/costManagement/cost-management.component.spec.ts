@@ -29,7 +29,7 @@ describe('CostManagementComponent', () => {
                 { provide: HeaderService, useClass: HeaderService },
                 { provide: CostManagementService, useClass: CostManagementService },
                 { provide: Http, useValue: null },
-                { provide: Router, useValue: null },
+                { provide: Router, useValue: null }
             ],
         }).compileComponents();
     }));
@@ -41,15 +41,15 @@ describe('CostManagementComponent', () => {
         getExpensesSpy = spyOn(costManagementService, 'getExpenses').and.returnValue(Promise.resolve(getExpensesCalled));
     }));
 
-    it('should have a defined component', () => {
+    it('is defined', () => {
         expect(component).toBeDefined();
     });
 
-    it('shoud not call getExpenses before ngInit', () => {
+    it('should not call getExpenses before ngInit', () => {
         expect(getExpensesSpy.calls.any()).toBe(false, 'getExpenses called');
     });
 
-    it('shoud call getExpenses on ngInit', () => {
+    it('should call getExpenses on ngInit', () => {
         fixture.detectChanges();
         expect(getExpensesSpy.calls.any()).toBe(true, 'getExpenses not called');
     });
