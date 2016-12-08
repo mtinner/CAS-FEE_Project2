@@ -51,6 +51,7 @@
     "gulp-copy": "0.0.2",
     "gulp-eslint": "~3.0.1",
     "gulp-express": "~0.3.5",
+    "gulp-karma": "0.0.5",
     "gulp-remove-code": "~1.0.2",
     "gulp-replace-task": "~0.11.0",
     "gulp-sass": "~2.3.2",
