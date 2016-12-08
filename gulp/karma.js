@@ -4,8 +4,7 @@ module.exports = function(gulp, data, util, taskName) {
 
     gulp.task(taskName + ':Frontend', function(done) {
         new Server({
-            configFile: path.join(__dirname, '/../', 'karma.conf.js'),
-            singleRun: true
+            configFile: path.join(__dirname, '/../', 'karma.conf.js')
         }, done).start();
     });
 };

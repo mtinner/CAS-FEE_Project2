@@ -1,21 +1,6 @@
-import { async, inject, TestBed, ComponentFixture } from '@angular/core/testing';
-import { CostManagementComponent } from './cost-management.component';
-import { CostManagementModule } from './cost-management.module';
 import { CostManagementService } from './cost-management.service';
-import { ElementModule } from '../../elements/element.module';
-import { appRoutingProviders } from '../../app.routing';
-import { LoginHttpService } from '../../pages/login/login-http.service';
-import { LoginManagingService } from '../../pages/login/login-managing.service';
-import { RegisterService } from '../../pages/register/register.service';
-import { authServiceProvider } from '../../common/authentication/auth-http.provider';
-import { HeaderService } from '../../elements/header/header.service';
 import { Expense, ExpenseObj } from '../../../models/Expense';
 import { User } from '../../../models/User';
-import { Http } from '@angular/http';
-import { Router } from '@angular/router';
-
-let service: CostManagementComponent;
-let fixture: ComponentFixture<CostManagementComponent>;
 
 describe('handleExpenses in CostManagementService', () => {
 
