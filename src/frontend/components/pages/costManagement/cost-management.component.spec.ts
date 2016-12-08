@@ -17,6 +17,9 @@ let fixture: ComponentFixture<CostManagementComponent>;
 
 describe('CostManagementComponent', () => {
     let component: CostManagementComponent;
+    let getExpensesSpy: jasmine.Spy;
+    let getExpensesCalled = 'getExpensesCalled';
+    let costManagementService: CostManagementService;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -34,9 +37,20 @@ describe('CostManagementComponent', () => {
     beforeEach((() => {
         fixture = TestBed.createComponent(CostManagementComponent);
         component = fixture.componentInstance;
+        costManagementService = fixture.debugElement.injector.get(CostManagementService);
+        getExpensesSpy = spyOn(costManagementService, 'getExpenses').and.returnValue(Promise.resolve(getExpensesCalled));
     }));
 
     it('should have a defined component', () => {
         expect(component).toBeDefined();
+    });
+
+    it('shoud not call getExpenses before ngInit', () => {
+        expect(getExpensesSpy.calls.any()).toBe(false, 'getExpenses called');
+    });
+
+    it('shoud call getExpenses on ngInit', () => {
+        fixture.detectChanges();
+        expect(getExpensesSpy.calls.any()).toBe(true, 'getExpenses not called');
     });
 });
