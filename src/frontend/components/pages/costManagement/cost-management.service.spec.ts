@@ -55,12 +55,47 @@ describe('handleExpenses in CostManagementService', () => {
         expect(service.expenseOverview.length).toBe(3);
     });
 
-    it('adds 2 positive expenses', () => {
+    it('adds 2 expenses from same user', () => {
         service.handleExpenses(
             new ExpenseObj([
                 new Expense('', 10, 0, 0, 0, user1, [user2]),
                 new Expense('', 20, 0, 0, 0, user1, [user2])
             ]), 0);
         expect(service.expenseOverview.find(e => e.user === user1).amount).toBe(15);
+        expect(service.expenseOverview.find(e => e.user === user2).amount).toBe(-15);
+    });
+
+    it('calculates 2 expenses from different users', () => {
+        service.handleExpenses(
+            new ExpenseObj([
+                new Expense('', 10, 0, 0, 0, user1, [user2]),
+                new Expense('', 20, 0, 0, 0, user2, [user1])
+            ]), 0);
+        expect(service.expenseOverview.find(e => e.user === user1).amount).toBe(-5);
+        expect(service.expenseOverview.find(e => e.user === user2).amount).toBe(5);
+    });
+
+    it('calculates 3 expenses from different users', () => {
+        service.handleExpenses(
+            new ExpenseObj([
+                new Expense('', 10, 0, 0, 0, user1, [user2]),
+                new Expense('', 20, 0, 0, 0, user2, [user1]),
+                new Expense('', 30, 0, 0, 0, user3, [user1])
+            ]), 0);
+        expect(service.expenseOverview.find(e => e.user === user1).amount).toBe(-20);
+        expect(service.expenseOverview.find(e => e.user === user2).amount).toBe(5);
+        expect(service.expenseOverview.find(e => e.user === user3).amount).toBe(15);
+    });
+
+    it('calculates 3 expenses from different users with multiple debitors', () => {
+        service.handleExpenses(
+            new ExpenseObj([
+                new Expense('', 10, 0, 0, 0, user1, [user2]),
+                new Expense('', 20, 0, 0, 0, user2, [user1]),
+                new Expense('', 30, 0, 0, 0, user3, [user1, user2])
+            ]), 0);
+        expect(service.expenseOverview.find(e => e.user === user1).amount).toBe(-15);
+        expect(service.expenseOverview.find(e => e.user === user2).amount).toBe(-5);
+        expect(service.expenseOverview.find(e => e.user === user3).amount).toBe(10);
     });
 });
