@@ -9,7 +9,7 @@
     "typings": "typings i",
     "e2e": "gulp E2e",
     "prod": "gulp Prod",
-    "tests": "karma start"
+    "tests": "gulp TestFrontend"
   },
   "dependencies": {
     "@angular/common": "~2.1.0",
