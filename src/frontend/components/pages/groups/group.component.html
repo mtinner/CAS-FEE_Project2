@@ -6,7 +6,7 @@
              [label]="group.name"
              [ngModel]="group.isActiveGroup?group.id:''"
              (ngModelChange)="onGroupChange(group)"></radio>
-      <span class="icon icon--settings group__icon" (click)="groupService.goToGroupMembers(group.id)"></span>
+      <span class="icon icon--settings group__icon" (click)="goToGroupMembers(group.id)"></span>
     </div>
   </ul>
 

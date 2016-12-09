@@ -12,6 +12,7 @@ import {LoginHttpService} from './pages/login/login-http.service';
 import {authServiceProvider} from './common/authentication/auth-http.provider';
 import {ContentModule} from './pages/routingHelper/contentRouting/content.module';
 import {ContentSidebarModule} from './pages/routingHelper/contentSidebarRouting/content-sidebar.module';
+import {ServiceModule} from './common/services/service.module';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import {ContentSidebarModule} from './pages/routingHelper/contentSidebarRouting/
         routing,
         ContentSidebarModule,
         ContentModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        ServiceModule
     ],
     declarations: [
         AppComponent,

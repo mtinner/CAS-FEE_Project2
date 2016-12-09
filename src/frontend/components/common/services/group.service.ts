@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {Http} from '@angular/http';
-import {Router} from '@angular/router';
 import 'rxjs/add/observable/of';
 import {AppService} from '../../app.service';
 import {Group, GroupObj} from '../../../models/Group';
@@ -12,7 +11,7 @@ export class GroupService extends AppService {
 
     public groups: Group[] = [];
 
-    constructor(private http: Http, private router: Router) {
+    constructor(private http: Http) {
         super();
     }
 
@@ -51,12 +50,4 @@ export class GroupService extends AppService {
             })
             .catch(this.handleError);
     }
-
-    goToSettings = () => {
-        this.router.navigate(['settings']);
-    };
-
-    goToGroupMembers = (id) => {
-        this.router.navigate(['groups', id]);
-    };
 }
