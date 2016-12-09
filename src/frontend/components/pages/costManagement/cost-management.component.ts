@@ -1,18 +1,18 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HeaderService } from '../../elements/header/header.service';
-import { HeaderIcon, HeaderStyle } from '../../elements/header/header.enum';
-import { HeaderConfig } from '../../../models/HeaderConfig';
-import { CostManagementService } from './cost-management.service';
+import {Component, OnInit, OnDestroy, ViewEncapsulation} from '@angular/core';
+import {HeaderService} from '../../elements/header/header.service';
+import {HeaderStyle} from '../../elements/header/header.enum';
+import {HeaderConfig} from '../../../models/HeaderConfig';
+import {CostManagementService} from './cost-management.service';
 
 @Component({
     moduleId: module.id,
     templateUrl: 'cost-management.component.html',
+    encapsulation: ViewEncapsulation.None,
     styleUrls: ['cost-management.component.css']
 })
 export class CostManagementComponent implements OnInit, OnDestroy {
-    constructor(
-        private headerService: HeaderService,
-        public costManagementService: CostManagementService) {
+    constructor(private headerService: HeaderService,
+                public costManagementService: CostManagementService) {
     }
 
     ngOnInit(): void {
