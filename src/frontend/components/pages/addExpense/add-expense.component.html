@@ -1,21 +1,24 @@
 <div class="container--vertical">
   <h4>Add expense to your active group</h4>
-  <form class="container--vertical" [formGroup]="expenseForm">
+  <form class="container--small container--stretch" [formGroup]="expenseForm">
 
-    <input-field formControlName="descriptionControl" [inputControl]="expenseForm.controls['description']"
+    <input-field class="input-field" formControlName="descriptionControl"
+                 [inputControl]="expenseForm.controls['description']"
                  [errorMessage]="'Enter a description'"
                  [placeholder]="'Description'" [type]="'text'"></input-field>
-    <input-field formControlName="amountControl" [inputControl]="expenseForm.controls['amount']"
-                 [errorMessage]="'Enter your expense'"
-                 [placeholder]="'Amount'" [type]="'text'"></input-field>
-
-    <div>These people share the expense with myself:</div>
+    <div class="amount">
+      <span class="amount__label">Fr.</span>
+      <input-field class="input-field" formControlName="amountControl" [inputControl]="expenseForm.controls['amount']"
+                   [errorMessage]="'Enter your expense'"
+                   [placeholder]="'Amount'" [type]="'text'"></input-field>
+    </div>
+    <span>These people share the expense with myself:</span>
     <div class="member-row" *ngFor="let member of expenseForm.controls.members.controls;let i = index">
       <checkbox [formControl]="member" [id]="costManagementService.members[i]?.username"
                 [label]="costManagementService.members[i]?.username"
                 [(ngModel)]="costManagementService.members[i].checked"></checkbox>
     </div>
-    <button class="btn" (click)="onAddClick()" [disabled]="expenseForm.invalid">Add
-    </button>
+
   </form>
+  <button class="btn" (click)="onAddClick()" [disabled]="expenseForm.invalid">Add</button>
 </div>

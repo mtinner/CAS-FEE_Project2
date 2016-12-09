@@ -3,3 +3,20 @@
 .member-row {
   margin: 1em 0;
 }
+
+.input-field {
+  color: $cost-management-primary;
+  flex: 1;
+}
+
+.amount {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 40px;
+
+  &__label {
+    font-size: 1.9rem;
+    margin-right: 30px;
+  }
+}
