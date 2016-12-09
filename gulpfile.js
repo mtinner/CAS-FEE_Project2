@@ -73,6 +73,14 @@ gulp.task('Spec', function (callback) {
     );
 });
 
+gulp.task('TestFrontend', function (callback) {
+    runSequence(
+        'Build',
+        'karma:Frontend',
+        callback
+    );
+});
+
 gulp.task('E2e', function (callback) {
     runSequence(
         'clean:E2e',

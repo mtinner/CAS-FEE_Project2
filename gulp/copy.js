@@ -1,13 +1,14 @@
 'use strict';
 
-module.exports = function (gulp, data, util, taskName) {
+module.exports = function(gulp, data, util, taskName) {
 
     let stream = require('event-stream'),
         removeCode = require('gulp-remove-code'),
         replace = require('gulp-replace-task'),
+        uglify = require('gulp-uglify'),
         strip = require('gulp-strip-comments');
 
-    gulp.task(taskName + ':App', function () {
+    gulp.task(taskName + ':App', function() {
         var app = gulp.src([
             data.path.frontend + 'components/**',
             '!./**/*.ts',
@@ -55,7 +56,7 @@ module.exports = function (gulp, data, util, taskName) {
     });
 
 
-    gulp.task(taskName + ':tmpProd', function () {
+    gulp.task(taskName + ':tmpProd', function() {
         var app = gulp.src([
             data.path.frontend + '**/*.ts',
             data.path.frontend + '**/*.html',
@@ -76,7 +77,7 @@ module.exports = function (gulp, data, util, taskName) {
         return stream.merge([app, mainTs]);
     });
 
-    gulp.task(taskName + ':ProdMain', function () {
+    gulp.task(taskName + ':ProdMain', function() {
         var app = gulp.src([
             data.path.frontend + '**/main.ts'
         ], {base: './src/frontend'})
@@ -86,7 +87,7 @@ module.exports = function (gulp, data, util, taskName) {
         return stream.merge([app]);
     });
 
-    gulp.task(taskName + ':Prod', function () {
+    gulp.task(taskName + ':Prod', function() {
         var index = gulp.src([
             './src/index.html',
             './src/**/manifest.json'
@@ -106,9 +107,11 @@ module.exports = function (gulp, data, util, taskName) {
         ], {base: './src/frontend'})
             .pipe(gulp.dest(data.path.prod));
 
-        var zone = gulp.src([
-            './node_modules/zone.js/dist/zone.min.js'
-        ], {base: './node_modules/zone.js/dist/'})
+        var scripts = gulp.src([
+            './node_modules/zone.js/dist/zone.min.js',
+            './node_modules/reflect-metadata/Reflect.js'
+        ])
+            .pipe(uglify())
             .pipe(gulp.dest(data.path.prod + 'scripts'));
 
         var backend = gulp.src([
@@ -125,10 +128,10 @@ module.exports = function (gulp, data, util, taskName) {
             .pipe(removeCode({production: true}))
             .pipe(gulp.dest(data.path.prod));
 
-        return stream.merge([index, favicon, imagFonts, zone, backend]);
+        return stream.merge([index, favicon, imagFonts, scripts, backend]);
     });
 
-    gulp.task(taskName + ':E2eApp', function () {
+    gulp.task(taskName + ':E2eApp', function() {
         var app = gulp.src([
             data.path.frontend + 'components/**',
             '!./**/*.ts',
