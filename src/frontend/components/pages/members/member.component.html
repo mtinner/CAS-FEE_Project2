@@ -1,11 +1,11 @@
 <div class="container__page">
   <ul class="list">
-    <panel class="list__item" *ngFor="let member of memberService.members" [title]="member.username"
+    <panel class="list__item" *ngFor="let member of groupService.members" [title]="member.username"
            [description]="member.email" [rightIconName]="'cross'"
            (clickIconRight)="leaveMember=$event;setLeaveModalVisibility(true)"></panel>
   </ul>
 
-  <div *ngIf="memberService.members.length === 1" class="sticker sticker--margin-top">
+  <div *ngIf="groupService.members.length === 1" class="sticker sticker--margin-top">
     <div class="sticker__circle" (click)="setMemberModalVisibility(true)">
       <span class="icon icon--add-person"></span>
       <span class="sticker__label">Seems to be lonely</span>
@@ -43,7 +43,7 @@
                    [inputControl]="groupRenameControl"
                    [placeholder]="'Groupname'"
                    [type]="'text'"
-                   [ngModel]="this.memberService.group.name"
+                   [ngModel]="this.groupService.group.name"
                    [errorMessage]="'Cannot be empty'"
                    (keyup.enter)="groupRenameControl.valid && renameGroup()"></input-field>
       <button class="btn btn--bare"

@@ -1,12 +1,12 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
-import {Params, ActivatedRoute} from '@angular/router';
+import {Params, ActivatedRoute, Router} from '@angular/router';
 import {HeaderService} from '../../elements/header/header.service';
 import {HeaderIcon, HeaderStyle} from '../../elements/header/header.enum';
 import {HeaderConfig} from '../../../models/HeaderConfig';
-import {MemberService} from './member.service';
 import {FormControl, Validators} from '@angular/forms';
 import {validateNotBlank} from '../../validators/not-blank.validator';
 import {validateEmail} from '../../validators/email-input.validator';
+import {GroupService} from '../../common/services/group.service';
 
 @Component({
     moduleId: module.id,
@@ -22,7 +22,7 @@ export class MemberComponent implements OnInit, OnDestroy {
     private groupRenameControl: FormControl = new FormControl();
     private groupMemberControl: FormControl = new FormControl();
 
-    constructor(private headerService: HeaderService, public memberService: MemberService, private route: ActivatedRoute) {
+    constructor(private headerService: HeaderService, public groupService: GroupService, private route: ActivatedRoute, private router: Router) {
     }
 
     setMemberModalVisibility(value: boolean) {
@@ -47,7 +47,7 @@ export class MemberComponent implements OnInit, OnDestroy {
     }
 
     addMember() {
-        this.memberService.addMember(this.groupId, {email: this.groupMemberControl.value})
+        this.groupService.addMember(this.groupId, {email: this.groupMemberControl.value})
             .subscribe(() => {
                 this.groupMemberControl.reset();
                 this.showMemberModal = false;
@@ -57,11 +57,11 @@ export class MemberComponent implements OnInit, OnDestroy {
 
     renameGroup() {
         let groupname = this.groupRenameControl.value.trim();
-        if (this.memberService.group.name !== groupname) {
-            this.memberService.renameGroup(this.groupId, groupname)
+        if (this.groupService.group.name !== groupname) {
+            this.groupService.renameGroup(this.groupId, groupname)
                 .subscribe(() => {
                     this.setRenameModalVisibility(false);
-                    this.headerService.headerConfig = new HeaderConfig(`Group ${this.memberService.group.name}`, HeaderStyle.Settings, HeaderIcon.ArrowLeft, this.memberService.goToGroups, HeaderIcon.Edit, this.setRenameModalVisibilityCallback(true));
+                    this.headerService.headerConfig = new HeaderConfig(`Group ${this.groupService.group.name}`, HeaderStyle.Settings, HeaderIcon.ArrowLeft, this.goToGroups, HeaderIcon.Edit, this.setRenameModalVisibilityCallback(true));
                 });
         }
         else {
@@ -70,17 +70,21 @@ export class MemberComponent implements OnInit, OnDestroy {
     }
 
     leaveGroup(event) {
-        this.memberService.leaveGroup(this.groupId, event.description)
-            .subscribe(() => this.memberService.goToGroups());
+        this.groupService.leaveGroup(this.groupId, event.description)
+            .subscribe(() => this.goToGroups());
     }
 
+    goToGroups = () => {
+        this.router.navigate(['groups']);
+    };
+
     ngOnInit(): void {
-        this.headerService.headerConfig = new HeaderConfig(`Group ${this.memberService.group.name}`, HeaderStyle.Settings, HeaderIcon.ArrowLeft, this.memberService.goToGroups, HeaderIcon.Edit, this.setRenameModalVisibilityCallback(true));
-        this.groupRenameControl = new FormControl(this.memberService.group.name, [Validators.required, validateNotBlank]);
+        this.headerService.headerConfig = new HeaderConfig(`Group ${this.groupService.group.name}`, HeaderStyle.Settings, HeaderIcon.ArrowLeft, this.goToGroups, HeaderIcon.Edit, this.setRenameModalVisibilityCallback(true));
+        this.groupRenameControl = new FormControl(this.groupService.group.name, [Validators.required, validateNotBlank]);
         this.groupMemberControl = new FormControl('', [Validators.required, validateNotBlank, validateEmail]);
         this.route.params.forEach((params: Params) => {
             this.groupId = params['id'];
-            this.memberService.getMembers(this.groupId).subscribe();
+            this.groupService.getMembers(this.groupId).subscribe();
         });
     }
 
