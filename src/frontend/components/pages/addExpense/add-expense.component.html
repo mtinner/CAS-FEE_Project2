@@ -13,7 +13,7 @@
                    [placeholder]="'Amount'" [type]="'text'"></input-field>
     </div>
     <span>These people share the expense with myself:</span>
-    <div class="member-row" *ngFor="let member of expenseForm.controls.members.controls;let i = index">
+    <div class="member-row" *ngFor="let member of expenseForm.controls['members']['controls'];let i = index">
       <checkbox [formControl]="member" [id]="costManagementService.members[i]?.username"
                 [label]="costManagementService.members[i]?.username"
                 [(ngModel)]="costManagementService.members[i].checked"></checkbox>
