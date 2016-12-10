@@ -1,13 +1,14 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
-import {HeaderService} from '../../elements/header/header.service';
-import {HeaderStyle, HeaderIcon} from '../../elements/header/header.enum';
-import {HeaderConfig} from '../../../models/HeaderConfig';
-import {ExpenseInsert} from '../../../models/ExpenseInsert';
-import {CostManagementService} from '../costManagement/cost-management.service';
-import {Validators, FormBuilder, FormGroup, FormArray, FormControl} from '@angular/forms';
-import {Router} from '@angular/router';
-import {validateNotBlank} from '../../validators/not-blank.validator';
-import {validateSomeOfArray} from '../../validators/some-of-array.validator';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { HeaderService } from '../../elements/header/header.service';
+import { HeaderStyle, HeaderIcon } from '../../elements/header/header.enum';
+import { HeaderConfig } from '../../../models/HeaderConfig';
+import { ExpenseInsert } from '../../../models/ExpenseInsert';
+import { LoginManagingService } from '../../pages/login/login-managing.service';
+import { CostManagementService } from '../costManagement/cost-management.service';
+import { Validators, FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+import { validateNotBlank } from '../../validators/not-blank.validator';
+import { validateSomeOfArray } from '../../validators/some-of-array.validator';
 
 @Component({
     moduleId: module.id,
@@ -17,8 +18,11 @@ import {validateSomeOfArray} from '../../validators/some-of-array.validator';
 export class AddExpenseComponent implements OnInit, OnDestroy {
     public expenseForm: FormGroup;
 
-    constructor(private headerService: HeaderService,
-                public costManagementService: CostManagementService, private router: Router, private formBuilder: FormBuilder) {
+    constructor(
+        private headerService: HeaderService,
+        public costManagementService: CostManagementService,
+        public loginManagingService: LoginManagingService,
+        private router: Router, private formBuilder: FormBuilder) {
     }
 
     onAddClick() {
@@ -37,11 +41,13 @@ export class AddExpenseComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.headerService.headerConfig = new HeaderConfig('Add Expense', HeaderStyle.CostManagement, HeaderIcon.ArrowLeft, this.costManagementService.goToCostManagement);
-        this.costManagementService.getCurrentMembers().subscribe((members) => {
-            members.forEach((member) => {
-                const control = <FormArray>this.expenseForm.controls['members'];
-                control.push(new FormControl(member.checked));
-            });
+        this.costManagementService
+            .getCurrentMembers(m => m.email !== this.loginManagingService.loggedInUser.email)
+            .subscribe((members) => {
+                members.forEach((member) => {
+                    const control = <FormArray>this.expenseForm.controls['members'];
+                    control.push(new FormControl(member.checked));
+                });
         });
         this.expenseForm = this.formBuilder.group({
             descriptionControl: ['', [Validators.required, validateNotBlank]],
