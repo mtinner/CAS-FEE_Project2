@@ -51,6 +51,9 @@ export class CostManagementService extends AppService {
     }
 
     handleExpenses(expensesObj: ExpenseObj, month: number) {
+        if (!expensesObj.expenses || expensesObj.expenses.length === 0) {
+            return;
+        }
         this.expenses[month] = expensesObj.expenses;
         if (month === 0) {
             this.expenses[0].forEach(expense => {
