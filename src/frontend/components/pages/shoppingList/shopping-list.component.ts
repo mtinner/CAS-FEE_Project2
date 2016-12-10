@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Component, OnInit, OnDestroy, ViewEncapsulation} from '@angular/core';
 import {ShoppingListService} from './shopping-list.service';
 import {Article} from '../../../models/Article';
 import {HeaderService} from '../../elements/header/header.service';
@@ -9,6 +9,7 @@ import {HeaderConfig} from '../../../models/HeaderConfig';
 @Component({
     moduleId: module.id,
     templateUrl: 'shopping-list.component.html',
+    encapsulation: ViewEncapsulation.None,
     providers: [ShoppingListService]
 })
 export class ShoppingListComponent implements OnInit, OnDestroy {

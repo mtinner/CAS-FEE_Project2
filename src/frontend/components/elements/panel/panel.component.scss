@@ -8,6 +8,10 @@
 
   &__item {
 
+    &--right {
+      text-align: end;
+    }
+
     &__description {
       font-size: 0.8em;
       color: $default;

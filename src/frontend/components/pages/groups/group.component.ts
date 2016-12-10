@@ -1,7 +1,8 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
-import {GroupService} from './group.service';
+import {GroupService} from '../../common/services/group.service';
 import {HeaderService} from '../../elements/header/header.service';
 import {HeaderStyle, HeaderIcon} from '../../elements/header/header.enum';
+import {Router} from '@angular/router';
 import {Group} from '../../../models/Group';
 import {HeaderConfig} from '../../../models/HeaderConfig';
 import {FormControl, Validators} from '@angular/forms';
@@ -16,8 +17,8 @@ export class GroupComponent implements OnInit, OnDestroy {
     public showModal: boolean = false;
     private groupNameControl: FormControl = new FormControl();
 
-    constructor(private headerService: HeaderService, public groupService: GroupService) {
-        this.headerService.headerConfig = new HeaderConfig('Group Settings', HeaderStyle.Settings, HeaderIcon.ArrowLeft, this.groupService.goToSettings);
+    constructor(private headerService: HeaderService, public groupService: GroupService, private router: Router) {
+        this.headerService.headerConfig = new HeaderConfig('Group Settings', HeaderStyle.Settings, HeaderIcon.ArrowLeft, this.goToSettings);
     }
 
     addGroup() {
@@ -48,4 +49,12 @@ export class GroupComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
         this.headerService.resetHeader();
     }
+
+    goToSettings = () => {
+        this.router.navigate(['settings']);
+    };
+
+    goToGroupMembers = (id) => {
+        this.router.navigate(['groups', id]);
+    };
 }

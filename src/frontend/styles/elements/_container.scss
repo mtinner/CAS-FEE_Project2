@@ -6,12 +6,24 @@
       flex-wrap: wrap;
       display: flex;
     }
+  }
 
-    &--vertical {
-      @extend .container__page;
-      flex-direction: column;
-      align-items: flex-start;
-      margin-left: 10px;
+  &--vertical {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin-top: 15%;
+    align-items: center;
+    @media (min-width: 720px) {
+      margin-top: 5%;
     }
+  }
+
+  &--small {
+    margin: 0 10px;
+  }
+
+  &--strech {
+    align-items: stretch;
   }
 }

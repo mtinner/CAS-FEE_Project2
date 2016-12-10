@@ -5,8 +5,17 @@
   box-sizing: border-box;
 
   &__item {
-    padding: 10px 50px;
+    padding: 10px 30px;
     display: block;
+
+    @media (min-width: 720px) {
+      padding: 10px 50px;
+    }
+
+    &--segmented {
+      background-color: $dark-snow;
+      margin: 5px;
+    }
 
     &--selectable {
       cursor: pointer;

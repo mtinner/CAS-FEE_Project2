@@ -1,19 +1,19 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {Http} from '@angular/http';
-import {Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
 import 'rxjs/add/observable/of';
+import {Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
 import {AppService} from '../../app.service';
-import {Group} from '../../../models/Group';
-import {Member, MemberObj} from '../../../models/Member';
+import {Group, GroupObj} from '../../../models/Group';
 import {SnackbarService} from '../../elements/snackbar/snackbar.service';
+import {Member, MemberObj} from '../../../models/Member';
 
 @Injectable()
-export class MemberService extends AppService implements CanActivate {
-
+export class GroupService extends AppService  implements CanActivate {
     private groupUrl = `${this.baseUrl}groups`;
     public group: Group;
     public members: Member[] = [];
+    public groups: Group[] = [];
 
     constructor(private http: Http, private router: Router, private snackbarService: SnackbarService) {
         super();
@@ -36,10 +36,24 @@ export class MemberService extends AppService implements CanActivate {
             .catch(this.handleError);
     }
 
+    fetchGroups(): Observable<any> {
+        return this.http.get(`${this.groupUrl}`)
+            .map(this.extractData)
+            .map((groupObj: GroupObj) => this.groups = groupObj.groups)
+            .catch(this.handleError);
+    }
+
     renameGroup(groupId: string, groupname: any) {
         return this.http.put(`${this.groupUrl}/${groupId}`, {name: groupname})
             .map(this.extractData)
             .map((group: Group) => this.group = group)
+            .catch(this.handleError);
+    }
+
+    getMembers(id: string): Observable<any> {
+        return this.http.get(`${this.groupUrl}/${id}/members`)
+            .map(this.extractData)
+            .map((memberObj: MemberObj) => this.members = memberObj.members)
             .catch(this.handleError);
     }
 
@@ -57,10 +71,16 @@ export class MemberService extends AppService implements CanActivate {
             });
     }
 
-    getMembers(id: string): Observable<any> {
-        return this.http.get(`${this.groupUrl}/${id}/members`)
+    addGroup(body): Observable<any> {
+        return this.http.post(`${this.groupUrl}`, body, this.jsonOptions)
             .map(this.extractData)
-            .map((memberObj: MemberObj) => this.members = memberObj.members)
+            .map((group: Group) => {
+                this.groups.forEach((group: Group) => {
+                    group.isActiveGroup = false;
+                });
+                group.isActiveGroup = true;
+                this.groups.push(group);
+            })
             .catch(this.handleError);
     }
 
@@ -71,7 +91,19 @@ export class MemberService extends AppService implements CanActivate {
             .catch(this.handleError);
     }
 
-    goToGroups = () => {
-        this.router.navigate(['groups']);
-    };
+    setActiveGroup(id: number): Observable<any> {
+        return this.http.post(`${this.groupUrl}/${id}/active`, null)
+            .map(this.extractData)
+            .map(() => {
+                this.groups.forEach((group: Group) => {
+                    if (group.id !== id) {
+                        group.isActiveGroup = false;
+                    }
+                    else {
+                        group.isActiveGroup = true;
+                    }
+                });
+            })
+            .catch(this.handleError);
+    }
 }

@@ -10,7 +10,7 @@
 
   &__header {
     height: 45px;
-    background-color: $shopping-primary;
+    background-color: inherit;
     display: flex;
     align-items: center;
     border-top-left-radius: 2px;
@@ -25,5 +25,14 @@
 
   &__content {
     min-height: 50px;
+    background-color: $snow;
+  }
+
+  &--cost-management &__header {
+    background-color: $cost-management-primary;
+  }
+
+  &--shopping-list &__header {
+    background-color: $shopping-primary;
   }
 }

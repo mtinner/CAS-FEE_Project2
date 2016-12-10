@@ -1,6 +1,6 @@
 'use strict';
 
-let Expense = function (id, name, year, month, day, creditor, debitors) {
+let Expense = function (id, name, year, month, day, creditor, debitors, date) {
     this.id = id;
     this.name = name;
     this.year = year;
@@ -8,6 +8,7 @@ let Expense = function (id, name, year, month, day, creditor, debitors) {
     this.day = day;
     this.creditor = creditor;
     this.debitors = debitors;
+    this.date = date;
 };
 
 module.exports = Expense;

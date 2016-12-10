@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {HttpModule} from '@angular/http';
 import {CommonModule} from '@angular/common';
 import {ElementModule} from '../../elements/element.module';
-import {GroupService} from './group.service';
 import {GroupComponent} from './group.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
@@ -16,8 +15,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     ],
     declarations: [
         GroupComponent
-    ],
-    providers: [GroupService]
+    ]
 })
 export class GroupModule {
 }

@@ -5,5 +5,11 @@
             {{description}}
         </div>
     </aside>
+    <aside class="panel__item--right">
+        {{titleRight}}
+        <div class="panel__item__description">
+            {{descriptionRight}}
+        </div>
+    </aside>
     <div *ngIf="rightIconName" class="panel__item__icon icon icon--{{rightIconName}}" (click)="iconRightClicked()"></div>
 </div>

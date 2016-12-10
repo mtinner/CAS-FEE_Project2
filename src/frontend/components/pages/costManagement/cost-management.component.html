@@ -1,19 +1,22 @@
 <div class="container__page">
-	<button class="btn btn--round btn--bottom-right icon icon--plus" routerLink="add"></button>
+  <button class="btn btn--round btn--bottom-right icon icon--plus" routerLink="add"></button>
 
-	<card [title]="'Overview'">
-		<cost-progress 
-			*ngFor="let entry of costManagementService.expenseOverview" 
-			[label]="entry.user.username" 
-			[amount]="entry.amount" 
-			[percentage]="entry.percentage"></cost-progress>
-	</card>
+  <card class="card--cost-management" [title]="'Overview'">
+    <cost-progress
+        *ngFor="let entry of costManagementService.expenseOverview"
+        [label]="entry.user.username"
+        [amount]="entry.amount"
+        [percentage]="entry.percentage"></cost-progress>
+  </card>
 
-	<card *ngFor="let month of costManagementService.expenses" [title]="'Month'">
-		<div *ngFor="let expense of month" class="entry">
-			<div class="entry__column">{{expense.creditor.username}}</div>
-			<div class="entry__column">{{expense.description}}</div>
-			<div class="entry__column">CHF {{expense.amount}}</div>
-		</div>
-	</card>
+  <card class="card--cost-management" *ngFor="let month of costManagementService.expenses"
+        [title]="month[0]?.date |date:'MMMM'">
+    <ul class="list">
+      <panel class="list__item list__item--segmented" *ngFor="let expense of month"
+             [title]="expense.description"
+             [description]="expense.date |date:'dd.M.y'"
+             [titleRight]="'Fr. ' + expense.amount"
+             [descriptionRight]="expense.creditor.username"></panel>
+    </ul>
+  </card>
 </div>
