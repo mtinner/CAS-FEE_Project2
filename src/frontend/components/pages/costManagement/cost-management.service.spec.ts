@@ -81,6 +81,6 @@ describe('handleExpenses in CostManagementService', () => {
             ]), 0);
         expect(service.expenseOverview.find(e => e.user === user1).amount).toBe(-15);
         expect(service.expenseOverview.find(e => e.user === user2).amount).toBe(-5);
-        expect(service.expenseOverview.find(e => e.user === user3).amount).toBe(10);
+        expect(service.expenseOverview.find(e => e.user === user3).amount).toBe(20);
     });
 });

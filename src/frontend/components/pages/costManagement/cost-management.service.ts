@@ -60,7 +60,7 @@ export class CostManagementService extends AppService {
                 // creditor
                 const creditorEntries = this.expenseOverview
                     .filter(entry => entry.user.email === expense.creditor.email);
-                const amount = expense.amount / (expense.debitors.length + 1);
+                const amount = expense.amount / (expense.debitors.length + 1) * expense.debitors.length;
                 if (creditorEntries.length > 0) {
                     creditorEntries[0].amount += amount;
                 } else {
