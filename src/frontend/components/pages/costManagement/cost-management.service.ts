@@ -91,7 +91,7 @@ export class CostManagementService extends AppService {
                 : 0;
             this.expenseOverview.forEach(entry => {
                 entry.percentage = 100 / totalAmount * entry.amount;
-                entry.amount = Math.round(entry.amount);
+                entry.amount = this.round(entry.amount, 2);
             });
         }
     }
@@ -99,5 +99,9 @@ export class CostManagementService extends AppService {
     clearExpenses() {
         this.expenses = [[]];
         this.expenseOverview = [];
+    }
+
+    private round(value, decimals) {
+        return Number(Math.round(+(value + 'e' + decimals)) + 'e-' + decimals);
     }
 }
