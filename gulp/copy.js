@@ -38,8 +38,7 @@ module.exports = function(gulp, data, util, taskName) {
             .pipe(gulp.dest(data.path.dist + 'frontend/scripts/vendor'));
 
         var backend = gulp.src([
-            data.path.backend + '**',
-            '!./**/*mocha.js',
+            data.path.backend + '**'
         ], {base: data.path.backend})
             .pipe(replace({
                 patterns: [
@@ -161,8 +160,7 @@ module.exports = function(gulp, data, util, taskName) {
             .pipe(gulp.dest(data.path.tmpE2e + 'frontend/scripts/vendor'));
 
         var backend = gulp.src([
-            data.path.backend + '**',
-            '!./**/*mocha.js',
+            data.path.backend + '**'
         ], {base: data.path.backend})
             .pipe(replace({
                 patterns: [

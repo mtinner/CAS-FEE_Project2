@@ -8,7 +8,6 @@
   },
   "env": {
     "node": true,
-    "mocha": true,
     "jasmine": true,
     "commonjs": true,
     "protractor": true
