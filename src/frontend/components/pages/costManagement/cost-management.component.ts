@@ -21,5 +21,6 @@ export class CostManagementComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         this.headerService.resetHeader();
+        this.costManagementService.clearExpenses();
     }
 }

@@ -95,4 +95,9 @@ export class CostManagementService extends AppService {
             });
         }
     }
+
+    clearExpenses() {
+        this.expenses = [[]];
+        this.expenseOverview = [];
+    }
 }
