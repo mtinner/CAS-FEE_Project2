@@ -10,28 +10,30 @@ import 'rxjs/add/operator/toPromise';
 import {Router} from '@angular/router';
 import {JWT_RESPONSE_HEADER} from '../../common/authentication/auth-http.service';
 import {SnackbarService} from '../../elements/snackbar/snackbar.service';
+import {User} from '../../../models/User';
+import {Jwt} from '../../common/helper/Jwt';
 
 // Reason for Servicesplitting -> Http: in NgModule AppModule
 @Injectable()
 export class LoginManagingService {
-    isLoggedIn = false;
     redirectUrl: string;
+    loggedInUser: User;
+    jwt: Jwt = new Jwt;
 
     constructor(private router: Router, private snackbarService: SnackbarService) {
-        this.isLoggedIn = !!localStorage.getItem(JWT_RESPONSE_HEADER);
     }
 
     logout() {
+        this.loggedInUser = null;
         localStorage.removeItem(JWT_RESPONSE_HEADER);
-        this.isLoggedIn = false;
     }
 
     performNotAuthorized() {
-        this.redirectUrl = this.router.url;
-        if (this.redirectUrl.includes('login')) {
+        if (this.router.url.includes('login')) {
             this.snackbarService.showSnackbar('Wrong email or password');
             return;
         }
+        this.redirectUrl = this.router.url;
         this.logout();
         this.router.navigate(['/login']);
     }
@@ -46,8 +48,19 @@ export class LoginManagingService {
     }
 
     setToken(token) {
-        localStorage.setItem(JWT_RESPONSE_HEADER, token);
-        this.isLoggedIn = true;
+        if (token) {
+            this.loggedInUser = this.jwt.decode(token);
+            localStorage.setItem(JWT_RESPONSE_HEADER, token);
+        }
+    }
+
+    getToken() {
+        return localStorage.getItem(JWT_RESPONSE_HEADER);
+    }
+
+    isLoggedIn() {
+        const token = localStorage.getItem(JWT_RESPONSE_HEADER);
+        return !!token;
     }
 
     createHeaders() {

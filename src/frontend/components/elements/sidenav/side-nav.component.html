@@ -1,15 +1,22 @@
 <aside>
-    <ul class="navigation-drawer" [ngClass]="{'navigation-drawer--hide': !sideNavService.showNavigation}">
-        <li *ngFor="let item of menuItems" (click)="itemClicked(item)" routerLink="{{item.route}}"
-            routerLinkActive="navigation-drawer__item--selected" class="navigation-drawer__item">
-            <a class="link link__navigation-drawer">
-                <span class="navigation-drawer__item__icon icon icon--{{item.icon}}"></span>
-                <span class="navigation-drawer__item__text">{{item.name}}</span>
-            </a>
-        </li>
+  <div class="navigation-drawer" [ngClass]="{'navigation-drawer--hide': !sideNavService.showNavigation}">
+    <div class="navigation-drawer__user" *ngIf="loginManagingService.loggedInUser">
+      <span class="icon icon--avatar navigation-drawer__user__avatar"></span>
+      <span>{{loginManagingService.loggedInUser.username}}</span>
+      <small>{{loginManagingService.loggedInUser.email}}</small>
+    </div>
+    <ul class="navigation-drawer__list">
+      <li *ngFor="let item of menuItems" (click)="itemClicked(item)" routerLink="{{item.route}}"
+          routerLinkActive="navigation-drawer__item--selected" class="navigation-drawer__item">
+        <a class="link link__navigation-drawer">
+          <span class="navigation-drawer__item__icon icon icon--{{item.icon}}"></span>
+          <span class="navigation-drawer__item__text">{{item.name}}</span>
+        </a>
+      </li>
     </ul>
-    <div (click)="sideNavService.toggleNavigation()" class="navigation-drawer__cover"
-         [ngClass]="{'navigation-drawer__cover--hide': !sideNavService.showNavigation}"></div>
-    <div class="navigation-drawer__solid-imitator"
-         [ngClass]="{'navigation-drawer__solid-imitator--hide': !sideNavService.showNavigation}"></div>
+  </div>
+  <div (click)="sideNavService.toggleNavigation()" class="navigation-drawer__cover"
+       [ngClass]="{'navigation-drawer__cover--hide': !sideNavService.showNavigation}"></div>
+  <div class="navigation-drawer__solid-imitator"
+       [ngClass]="{'navigation-drawer__solid-imitator--hide': !sideNavService.showNavigation}"></div>
 </aside>

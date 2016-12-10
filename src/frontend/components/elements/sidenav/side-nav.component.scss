@@ -1,7 +1,6 @@
 @import "../../../styles/utils/variables";
 
 .navigation-drawer {
-  list-style: none;
   z-index: 10;
   right: 22%;
   margin: 0;
@@ -12,6 +11,24 @@
   padding: 5rem 30px 0 10px;
   transition: padding-left $slide-duration, padding-right $slide-duration, left $slide-duration ease-in, right $slide-duration ease-in;
   left: 0;
+
+  &__user {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid $default;
+    padding-bottom: 10px;
+
+    &__avatar {
+      font-size: 50px;
+      color: $default;
+      cursor: default;
+    }
+  }
+
+  &__list {
+    list-style: none;
+    padding-left: 0;
+  }
 
   @media (min-width: 720px) {
     width: 220px;

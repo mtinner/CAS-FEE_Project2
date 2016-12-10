@@ -15,7 +15,7 @@ export class SideNavComponent implements OnInit {
     public menuItems: Array<any> = [];
     private selectedIndex: number = 0;
 
-    constructor(private router: Router, public sideNavService: SideNavService, private loginManagingService: LoginManagingService) {
+    constructor(private router: Router, public sideNavService: SideNavService, public loginManagingService: LoginManagingService) {
         this.menuItems = sideNavService.getMenuItems();
     }
 

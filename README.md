@@ -21,7 +21,13 @@ https://mtinner.github.io/CAS-FEE_Project2/
 * Gzip
 * Mobile First
 * Option to add the website to your Android-Homescreen
-* Blank Slate Pattern on Groups and Members
+* UI-Pattern
+    * Settings: http://ui-patterns.com/patterns/settings
+    * InputPromt: http://ui-patterns.com/patterns/InputPrompt
+    * NavigationTabs in Sidenav: http://ui-patterns.com/patterns/NavigationTabs
+    * ModalWindow: http://ui-patterns.com/patterns/modal-windows
+    * Cards: http://ui-patterns.com/patterns/cards
+    * ...
 * JWT (JavascriptWebToken)
 * E2E Tests
 * Karma / Jasmine
