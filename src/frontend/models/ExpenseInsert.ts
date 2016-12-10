@@ -4,6 +4,7 @@ export class ExpenseInsert {
                 public year: number,
                 public month: number,
                 public day: number,
-                public debitors: string[]) {
+                public debitors: string[],
+                public date: Date) {
     }
 }

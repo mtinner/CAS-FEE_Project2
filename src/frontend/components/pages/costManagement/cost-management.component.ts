@@ -7,8 +7,7 @@ import {CostManagementService} from './cost-management.service';
 @Component({
     moduleId: module.id,
     templateUrl: 'cost-management.component.html',
-    encapsulation: ViewEncapsulation.None,
-    styleUrls: ['cost-management.component.css']
+    encapsulation: ViewEncapsulation.None
 })
 export class CostManagementComponent implements OnInit, OnDestroy {
     constructor(private headerService: HeaderService,

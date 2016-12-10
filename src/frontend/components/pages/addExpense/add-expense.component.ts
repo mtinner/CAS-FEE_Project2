@@ -30,7 +30,8 @@ export class AddExpenseComponent implements OnInit, OnDestroy {
             today.getFullYear(),
             today.getMonth() + 1,
             today.getDate(),
-            debitorsEmails
+            debitorsEmails,
+            new Date()
         )).subscribe(() => this.router.navigate(['cost-management']));
     }
 

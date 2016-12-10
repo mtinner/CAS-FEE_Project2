@@ -13,6 +13,10 @@ export class PanelComponent {
     @Input()
     description: string;
     @Input()
+    titleRight: string;
+    @Input()
+    descriptionRight: string;
+    @Input()
     rightIconName: string;
     @Output()
     clickIconRight = new EventEmitter();

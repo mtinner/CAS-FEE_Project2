@@ -1,4 +1,4 @@
-<div class="container--vertical">
+<div *ngIf="costManagementService.members.length" class="container--vertical">
   <h4>Add expense to your active group</h4>
   <form class="container--small container--stretch" [formGroup]="expenseForm">
 
@@ -18,7 +18,13 @@
                 [label]="costManagementService.members[i]?.username"
                 [(ngModel)]="costManagementService.members[i].checked"></checkbox>
     </div>
-
   </form>
   <button class="btn" (click)="onAddClick()" [disabled]="expenseForm.invalid">Add</button>
 </div>
+<div *ngIf="!costManagementService.members.length" class="sticker">
+  <div class="sticker__circle" [routerLink]="'/groups'">
+    <span class="icon icon--add-group"></span>
+    <span class="sticker__label">You are not member of a group, click here to go there</span>
+  </div>
+</div>
+
