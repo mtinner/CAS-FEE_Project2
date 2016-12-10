@@ -1,5 +1,5 @@
 import {AppComponent} from './app.component';
-import {appRoutingProviders, routing} from './app.routing';
+import {routing, appRoutingProviders} from './app.routing';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {LoginComponent} from './pages/login/login.component';
@@ -12,8 +12,9 @@ import {LoginHttpService} from './pages/login/login-http.service';
 import {authServiceProvider} from './common/authentication/auth-http.provider';
 import {ContentModule} from './pages/routingHelper/contentRouting/content.module';
 import {ContentSidebarModule} from './pages/routingHelper/contentSidebarRouting/content-sidebar.module';
-import {ServiceModule} from './common/services/service.module';
+import {GroupService} from './common/services/group.service';
 
+const commonServices: any[] = [GroupService];
 
 @NgModule({
     imports: [
@@ -22,8 +23,7 @@ import {ServiceModule} from './common/services/service.module';
         routing,
         ContentSidebarModule,
         ContentModule,
-        ReactiveFormsModule,
-        ServiceModule
+        ReactiveFormsModule
     ],
     declarations: [
         AppComponent,
@@ -35,7 +35,8 @@ import {ServiceModule} from './common/services/service.module';
         LoginHttpService,
         LoginManagingService,
         RegisterService,
-        authServiceProvider
+        authServiceProvider,
+        commonServices
     ],
     bootstrap: [AppComponent]
 })
