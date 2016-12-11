@@ -50,6 +50,28 @@ export class CostManagementService extends AppService {
         }
     }
 
+    getExpensesInSingleCall(monthCount: number) {
+        const date = new Date();
+        this.http.get(`${this.expenseUrl}?recentMonths=${monthCount}`)
+            .map(this.extractData)
+            .map((obj: ExpenseObj) => this.handleCondensedExpenses(obj, monthCount))
+            .catch(this.handleError).subscribe();
+        date.setMonth(date.getMonth() - 1);
+    }
+
+    handleCondensedExpenses(expensesObj: ExpenseObj, monthCount: number) {
+        let date = new Date();
+        let now = new Date();
+        for (let monthAgo = 0; monthAgo < monthCount; monthAgo++) {
+            date.setMonth(now.getMonth() - monthAgo);
+            let expenses = expensesObj.expenses.filter(e =>
+                e.month === date.getMonth() + 1 &&
+                e.year === date.getFullYear()
+            );
+            this.handleExpenses(new ExpenseObj(expenses), monthAgo);
+        }
+    }
+
     handleExpenses(expensesObj: ExpenseObj, month: number) {
         if (!expensesObj.expenses || expensesObj.expenses.length === 0) {
             return;
