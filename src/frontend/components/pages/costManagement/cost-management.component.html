@@ -9,10 +9,10 @@
         [percentage]="entry.percentage"></cost-progress>
   </card>
 
-  <card class="card--cost-management" *ngFor="let month of costManagementService.expenses"
-        [title]="month[0]?.date |date:'MMMM'">
+  <card class="card--cost-management" *ngFor="let monthsAgo of costManagementService.expenses"
+        [title]="monthsAgo[0]?.date |date:'MMMM'">
     <ul class="list">
-      <panel class="list__item list__item--segmented" *ngFor="let expense of month"
+      <panel class="list__item list__item--segmented" *ngFor="let expense of monthsAgo"
              [title]="expense.description"
              [description]="expense.date |date:'dd.M.y'"
              [titleRight]="'Fr. ' + expense.amount"

@@ -41,43 +41,32 @@ export class CostManagementService extends AppService {
 
     getExpenses(monthCount: number) {
         const date = new Date();
-        for (let m = 0; m < monthCount; m++) {
-            this.http.get(`${this.expenseUrl}?year=${date.getFullYear()}&month=${date.getMonth() + 1}`)
-                .map(this.extractData)
-                .map((obj: ExpenseObj) => this.handleExpenses(obj, m))
-                .catch(this.handleError).subscribe();
-            date.setMonth(date.getMonth() - 1);
-        }
-    }
-
-    getExpensesInSingleCall(monthCount: number) {
-        const date = new Date();
         this.http.get(`${this.expenseUrl}?recentMonths=${monthCount}`)
             .map(this.extractData)
-            .map((obj: ExpenseObj) => this.handleCondensedExpenses(obj, monthCount))
+            .map((obj: ExpenseObj) => this.handleExpenses(obj, monthCount))
             .catch(this.handleError).subscribe();
         date.setMonth(date.getMonth() - 1);
     }
 
-    handleCondensedExpenses(expensesObj: ExpenseObj, monthCount: number) {
+    handleExpenses(expensesObj: ExpenseObj, monthCount: number) {
         let date = new Date();
         let now = new Date();
-        for (let monthAgo = 0; monthAgo < monthCount; monthAgo++) {
-            date.setMonth(now.getMonth() - monthAgo);
+        for (let monthsAgo = 0; monthsAgo < monthCount; monthsAgo++) {
+            date.setMonth(now.getMonth() - monthsAgo);
             let expenses = expensesObj.expenses.filter(e =>
                 e.month === date.getMonth() + 1 &&
                 e.year === date.getFullYear()
             );
-            this.handleExpenses(new ExpenseObj(expenses), monthAgo);
+            this.handleExpensesPerMonthsAgo(new ExpenseObj(expenses), monthsAgo);
         }
     }
 
-    handleExpenses(expensesObj: ExpenseObj, month: number) {
+    handleExpensesPerMonthsAgo(expensesObj: ExpenseObj, monthsAgo: number) {
         if (!expensesObj.expenses || expensesObj.expenses.length === 0) {
             return;
         }
-        this.expenses[month] = expensesObj.expenses;
-        if (month === 0) {
+        this.expenses[monthsAgo] = expensesObj.expenses;
+        if (monthsAgo === 0) {
             this.expenses[0].forEach(expense => {
                 // creditor
                 const creditorEntries = this.expenseOverview

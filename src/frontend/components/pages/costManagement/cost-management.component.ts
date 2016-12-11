@@ -16,7 +16,7 @@ export class CostManagementComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.headerService.headerConfig = new HeaderConfig('Cost Management', HeaderStyle.CostManagement);
-        this.costManagementService.getExpensesInSingleCall(4);
+        this.costManagementService.getExpenses(4);
     }
 
     ngOnDestroy(): void {
