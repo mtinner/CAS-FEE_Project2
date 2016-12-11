@@ -41,7 +41,7 @@ export class CostManagementService extends AppService {
 
     getExpenses(monthCount: number) {
         const date = new Date();
-        this.http.get(`${this.expenseUrl}?recentMonths=${monthCount}`)
+        this.http.get(`${this.expenseUrl}?monthsCount=${monthCount}`)
             .map(this.extractData)
             .map((obj: ExpenseObj) => this.handleExpenses(obj, monthCount))
             .catch(this.handleError).subscribe();

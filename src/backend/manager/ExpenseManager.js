@@ -10,11 +10,11 @@ class ExpenseManager {
         this.userService = UserService.instance;
     }
 
-    getRecentMonths(user, recentMonths) {
+    getByMonthsCount(user, mounthsCount) {
         let promises = [];
         let date = new Date();
         let now = new Date();
-        for (let i = 0; i < recentMonths; i++) {
+        for (let i = 0; i < mounthsCount; i++) {
             date.setMonth(now.getMonth() - i);
             let year = date.getFullYear();
             let month = date.getMonth() + 1;
