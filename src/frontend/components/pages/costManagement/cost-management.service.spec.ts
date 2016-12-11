@@ -2,7 +2,7 @@ import {CostManagementService} from './cost-management.service';
 import {Expense, ExpenseObj} from '../../../models/Expense';
 import {User} from '../../../models/User';
 
-describe('handleExpenses in CostManagementService', () => {
+describe('handleExpensesPerMonthsAgo in CostManagementService', () => {
 
     let service: CostManagementService;
     let user1 = new User('1', '1', '');
@@ -14,16 +14,16 @@ describe('handleExpenses in CostManagementService', () => {
     }));
 
     it('is defined', () => {
-        expect(service.handleExpenses).toBeDefined();
+        expect(service.handleExpensesPerMonthsAgo).toBeDefined();
     });
 
     it('set empty expenseOverview ', () => {
-        service.handleExpenses(new ExpenseObj([]), 0);
+        service.handleExpensesPerMonthsAgo(new ExpenseObj([]), 0);
         expect(service.expenseOverview.length).toBe(0);
     });
 
     it('handles 2 users with 1 expense', () => {
-        service.handleExpenses(
+        service.handleExpensesPerMonthsAgo(
             new ExpenseObj([
                 new Expense('', 0, 0, 0, 0, user1, [user2], new Date())
             ]), 0);
@@ -31,7 +31,7 @@ describe('handleExpenses in CostManagementService', () => {
     });
 
     it('handles 3 users with 3 expenses', () => {
-        service.handleExpenses(
+        service.handleExpensesPerMonthsAgo(
             new ExpenseObj([
                 new Expense('', 0, 0, 0, 0, user1, [user2], new Date()),
                 new Expense('', 0, 0, 0, 0, user1, [user2, user3], new Date()),
@@ -41,7 +41,7 @@ describe('handleExpenses in CostManagementService', () => {
     });
 
     it('adds 2 expenses from same user', () => {
-        service.handleExpenses(
+        service.handleExpensesPerMonthsAgo(
             new ExpenseObj([
                 new Expense('', 10, 0, 0, 0, user1, [user2], new Date()),
                 new Expense('', 20, 0, 0, 0, user1, [user2], new Date())
@@ -51,7 +51,7 @@ describe('handleExpenses in CostManagementService', () => {
     });
 
     it('calculates 2 expenses from different users', () => {
-        service.handleExpenses(
+        service.handleExpensesPerMonthsAgo(
             new ExpenseObj([
                 new Expense('', 10, 0, 0, 0, user1, [user2], new Date()),
                 new Expense('', 20, 0, 0, 0, user2, [user1], new Date())
@@ -61,7 +61,7 @@ describe('handleExpenses in CostManagementService', () => {
     });
 
     it('calculates 3 expenses from different users', () => {
-        service.handleExpenses(
+        service.handleExpensesPerMonthsAgo(
             new ExpenseObj([
                 new Expense('', 10, 0, 0, 0, user1, [user2], new Date()),
                 new Expense('', 20, 0, 0, 0, user2, [user1], new Date()),
@@ -73,7 +73,7 @@ describe('handleExpenses in CostManagementService', () => {
     });
 
     it('calculates 3 expenses from different users with multiple debitors', () => {
-        service.handleExpenses(
+        service.handleExpensesPerMonthsAgo(
             new ExpenseObj([
                 new Expense('', 10, 0, 0, 0, user1, [user2], new Date()),
                 new Expense('', 20, 0, 0, 0, user2, [user1], new Date()),
