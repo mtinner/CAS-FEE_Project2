@@ -11,13 +11,18 @@ router.get('/',
     function (req, res) {
         const year = +req.query.year;
         const month = +req.query.month;
-        if (!year || !month) {
+        const recentMonths = +req.query.recentMonths;
+        if (year && month) {
+            expenseManager.getAll(req.user, year, month)
+                .then(expenses => res.status(200).send(expenses))
+                .catch((err) => res.status(err.status || 400).send(err));
+        } else if (recentMonths) {
+            expenseManager.getRecentMonths(req.user, recentMonths)
+                .then(expenses => res.status(200).send(expenses))
+                .catch((err) => res.status(err.status || 400).send(err));
+        } else {
             res.status(400).send();
-            return;
         }
-        expenseManager.getAll(req.user, year, month)
-            .then(expenses => res.status(200).send(expenses))
-            .catch((err) => res.status(err.status || 400).send(err));
     });
 
 router.post('/',
