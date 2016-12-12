@@ -1,10 +1,10 @@
-import {ModuleWithProviders}  from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
-import {ContentSidebarComponent} from './content-sidebar.component';
-import {AuthGuard} from '../../login/auth-guard.service';
-import {costManagementRoute} from '../../costManagement/cost-management.routing';
-import {shoppingListRoute} from '../../shoppingList/shopping-list.route';
-import {settingsRoute} from '../../settings/settings.route';
+import { ModuleWithProviders }  from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { ContentSidebarComponent } from './content-sidebar.component';
+import { AuthGuard } from '../../login/auth-guard.service';
+import { costManagementRoute } from '../../costManagement/cost-management.routing';
+import { shoppingListRoute } from '../../shoppingList/shopping-list.route';
+import { settingsRoute } from '../../settings/settings.route';
 
 const contentSidebarRoutes: Routes = [
     {
@@ -12,6 +12,7 @@ const contentSidebarRoutes: Routes = [
         component: ContentSidebarComponent,
         canActivate: [AuthGuard],
         children: [
+            { path: '', redirectTo: '/shopping-list', pathMatch: 'full' },
             shoppingListRoute,
             costManagementRoute,
             settingsRoute
