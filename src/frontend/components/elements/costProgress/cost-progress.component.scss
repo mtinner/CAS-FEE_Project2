@@ -42,10 +42,10 @@ $bar-height: 28px;
   height: $avatar_radius;
 
   &__progress {
-    background-color: #4CAF50;
     transition: width 0.5s ease-out;
     height: $bar-height;
     margin-top: $avatar_radius/2 - $bar-height/2;
+    background: linear-gradient(to right, #4CAF50, transparent);
   }
 }
 
@@ -63,7 +63,7 @@ $bar-height: 28px;
     left: 10px;
     &__progress {
       float: right;
-      background-color: #d9534f;
+      background: linear-gradient(to left, #d9534f, transparent);
     }
   }
 
