@@ -12,7 +12,6 @@ const contentSidebarRoutes: Routes = [
         component: ContentSidebarComponent,
         canActivate: [AuthGuard],
         children: [
-            {path: '', redirectTo: '/shopping-list', pathMatch: 'full'},
             shoppingListRoute,
             costManagementRoute,
             settingsRoute

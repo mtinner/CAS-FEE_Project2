@@ -6,7 +6,8 @@ import {RegisterComponent} from './pages/register/register.component';
 
 const appRoutes: Routes = [
     {path: 'login', component: LoginComponent},
-    {path: 'register', component: RegisterComponent}
+    {path: 'register', component: RegisterComponent},
+    {path: '**', redirectTo: '/shopping-list', pathMatch: 'full'}
 ];
 
 export const appRoutingProviders: any[] = [AuthGuard];
