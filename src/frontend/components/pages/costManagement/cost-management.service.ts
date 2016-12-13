@@ -7,6 +7,7 @@ import { ExpenseMember, ExpenseMemberObj } from '../../../models/ExpenseMember';
 import { Expense, ExpenseObj } from '../../../models/Expense';
 import { ExpenseInsert } from '../../../models/ExpenseInsert';
 import { ExpenseOverviewEntry } from '../../../models/ExpenseOverviewEntry';
+import { User } from '../../../models/User';
 import 'rxjs/add/operator/share';
 import 'rxjs/add/observable/of';
 
@@ -29,7 +30,18 @@ export class CostManagementService extends AppService {
     getCurrentMembers(filter: (m: ExpenseMember) => boolean = () => true): Observable<ExpenseMember[]> {
         return this.http.get(`${this.groupUrl}/currentMembers`)
             .map(this.extractData)
-            .map((membersObj: ExpenseMemberObj) => this.members = membersObj.members.filter(filter))
+            .map((membersObj: ExpenseMemberObj) => {
+                this.members = [];
+                membersObj.members.forEach(member => {
+                    this.members.push(member);
+                    if (this.expenseOverview.findIndex(e => e.user.email === member.email) < 0) {
+                        // this.expenseOverview.push(new ExpenseOverviewEntry(
+                        //     new User(member.username, member.email, ''), 0, 0
+                        // ));
+                    }
+                });
+                return this.members;
+            })
             .catch(this.handleError);
     }
 
