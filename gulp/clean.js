@@ -15,11 +15,4 @@ module.exports = function (gulp, data, util, taskName) {
         return gulp.src(data.path.tmpE2e, {read: false})
             .pipe(clean({force: true}));
     });
-
-    gulp.task(taskName + ':Spec', function () {
-        return gulp.src([
-            data.path.spec + 'frontend',
-        ], {read: false})
-            .pipe(clean({force: true}));
-    });
 };

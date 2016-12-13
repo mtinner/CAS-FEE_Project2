@@ -21,7 +21,6 @@ config(gulp, {
                 tmpProd: './src/.tmpProd/',
                 aot: './src/.aot/',
                 e2e: './src/e2e/',
-                spec: './src/spec/',
                 dist: './src/.dist/'
             },
             anyValue: 1,
@@ -60,15 +59,6 @@ gulp.task('Prod', function (callback) {
         ['transpiling:Prod'],
         ['copy:Prod', 'rollup:Prod'],
         'serve:Prod',
-        callback
-    );
-});
-
-gulp.task('Spec', function (callback) {
-    runSequence(
-        'clean:Spec',
-        ['transpiling:Spec'],
-        'connect:Spec',
         callback
     );
 });
