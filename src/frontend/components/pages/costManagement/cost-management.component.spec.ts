@@ -1,6 +1,6 @@
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
 import { CostManagementComponent } from './cost-management.component';
-import { CostManagementService } from './cost-management.service';
+import {CostManagementService} from '../../common/services/cost-management.service';
 import { ElementModule } from '../../elements/element.module';
 import { HeaderService } from '../../elements/header/header.service';
 import {HeaderConfig} from '../../../models/HeaderConfig';

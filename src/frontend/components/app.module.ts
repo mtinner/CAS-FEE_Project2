@@ -13,6 +13,7 @@ import {authServiceProvider} from './common/authentication/auth-http.provider';
 import {ContentModule} from './pages/routingHelper/contentRouting/content.module';
 import {ContentSidebarModule} from './pages/routingHelper/contentSidebarRouting/content-sidebar.module';
 import {GroupService} from './common/services/group.service';
+import {CostManagementService} from './common/services/cost-management.service';
 
 const commonServices: any[] = [GroupService];
 
@@ -36,7 +37,8 @@ const commonServices: any[] = [GroupService];
         LoginManagingService,
         RegisterService,
         authServiceProvider,
-        commonServices
+        commonServices,
+        CostManagementService
     ],
     bootstrap: [AppComponent]
 })

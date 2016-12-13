@@ -5,7 +5,7 @@ import { HeaderConfig } from '../../../models/HeaderConfig';
 import { ExpenseInsert } from '../../../models/ExpenseInsert';
 import { ExpenseMember } from '../../../models/ExpenseMember';
 import { LoginManagingService } from '../../pages/login/login-managing.service';
-import { CostManagementService } from '../costManagement/cost-management.service';
+import { CostManagementService } from '../../common/services/cost-management.service';
 import { Validators, FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { validateNotBlank } from '../../validators/not-blank.validator';
