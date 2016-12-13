@@ -9,14 +9,8 @@ let express = require('express'),
 router.get('/',
     authService.protect('user'),
     function (req, res) {
-        const year = +req.query.year;
-        const month = +req.query.month;
         const monthsCount = +req.query.monthsCount;
-        if (year && month) {
-            expenseManager.getAll(req.user, year, month)
-                .then(expenses => res.status(200).send(expenses))
-                .catch((err) => res.status(err.status || 400).send(err));
-        } else if (monthsCount) {
+        if (monthsCount) {
             expenseManager.getByMonthsCount(req.user, monthsCount)
                 .then(expenses => res.status(200).send(expenses))
                 .catch((err) => res.status(err.status || 400).send(err));
