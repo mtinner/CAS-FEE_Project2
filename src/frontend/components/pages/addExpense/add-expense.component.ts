@@ -43,7 +43,7 @@ export class AddExpenseComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.headerService.headerConfig = new HeaderConfig('Add Expense', HeaderStyle.CostManagement, HeaderIcon.ArrowLeft, this.costManagementService.goToCostManagement);
         this.costManagementService
-            .getCurrentMembers(m => m.email !== this.loginManagingService.loggedInUser.email)
+            .getCurrentMembers()
             .subscribe((members) => {
                 members.forEach((member) => {
                     const control = <FormArray>this.expenseForm.controls['members'];
