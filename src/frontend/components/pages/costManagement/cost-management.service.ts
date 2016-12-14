@@ -34,7 +34,7 @@ export class CostManagementService extends AppService {
                 this.members = [];
                 membersObj.members.forEach(member => {
                     this.members.push(member);
-                    if (this.expenseOverview.findIndex(e => e.user.email === member.email) < 0) {
+                    if (!this.expenseOverview.find(e => e.user.email === member.email)) {
                         // this.expenseOverview.push(new ExpenseOverviewEntry(
                         //     new User(member.username, member.email, ''), 0, 0
                         // ));
