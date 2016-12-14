@@ -4,6 +4,7 @@ import { HeaderStyle } from '../../elements/header/header.enum';
 import { HeaderConfig } from '../../../models/HeaderConfig';
 import { CostManagementService } from './cost-management.service';
 import { Router } from '@angular/router';
+import { addExpenseRoute } from '../addExpense/add-expense.route';
 
 @Component({
     moduleId: module.id,
@@ -18,7 +19,7 @@ export class CostManagementComponent implements OnInit, OnDestroy {
     }
 
     navigateToAdd() {
-        this.router.navigate(['cost-management/add']);
+        this.router.navigate([addExpenseRoute.path]);
     }
 
     ngOnInit(): void {
