@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { HeaderService } from '../../elements/header/header.service';
 import { HeaderStyle } from '../../elements/header/header.enum';
 import { HeaderConfig } from '../../../models/HeaderConfig';
-import { CostManagementService } from './cost-management.service';
+import { CostManagementService } from '../../common/services/cost-management.service';
 import { Router } from '@angular/router';
 import { addExpenseRoute } from '../addExpense/add-expense.route';
 
@@ -24,7 +24,7 @@ export class CostManagementComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.headerService.headerConfig = new HeaderConfig('Cost Management', HeaderStyle.CostManagement);
-        this.costManagementService.getCurrentMembers();
+        // this.costManagementService.getCurrentMembers();
         this.costManagementService.getExpenses(4);
     }
 

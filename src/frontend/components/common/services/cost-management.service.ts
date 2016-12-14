@@ -26,10 +26,21 @@ export class CostManagementService extends AppService {
         this.router.navigate(['cost-management']);
     };
 
-    getCurrentMembers(): Observable<ExpenseMember[]> {
+    getCurrentMembers(filter: (m: ExpenseMember) => boolean = () => true): Observable<ExpenseMember[]> {
         return this.http.get(`${this.groupUrl}/currentMembers`)
             .map(this.extractData)
-            .map((membersObj: ExpenseMemberObj) => this.members = membersObj.members)
+            .map((membersObj: ExpenseMemberObj) => {
+                this.members = [];
+                membersObj.members.forEach(member => {
+                    this.members.push(member);
+                    if (!this.expenseOverview.find(e => e.user.email === member.email)) {
+                        // this.expenseOverview.push(new ExpenseOverviewEntry(
+                        //     new User(member.username, member.email, ''), 0, 0
+                        // ));
+                    }
+                });
+                return this.members;
+            })
             .catch(this.handleError);
     }
 
@@ -41,16 +52,27 @@ export class CostManagementService extends AppService {
 
     getExpenses(monthCount: number) {
         const date = new Date();
-        for (let m = 0; m < monthCount; m++) {
-            this.http.get(`${this.expenseUrl}?year=${date.getFullYear()}&month=${date.getMonth() + 1}`)
-                .map(this.extractData)
-                .map((obj: ExpenseObj) => this.handleExpenses(obj, m))
-                .catch(this.handleError).subscribe();
-            date.setMonth(date.getMonth() - 1);
+        this.http.get(`${this.expenseUrl}?monthsCount=${monthCount}`)
+            .map(this.extractData)
+            .map((obj: ExpenseObj) => this.handleExpenses(obj, monthCount))
+            .catch(this.handleError).subscribe();
+        date.setMonth(date.getMonth() - 1);
+    }
+
+    handleExpenses(expensesObj: ExpenseObj, monthCount: number) {
+        let date = new Date();
+        let now = new Date();
+        for (let monthsAgo = 0; monthsAgo < monthCount; monthsAgo++) {
+            date.setMonth(now.getMonth() - monthsAgo);
+            let expenses = expensesObj.expenses.filter(e =>
+                e.month === date.getMonth() + 1 &&
+                e.year === date.getFullYear()
+            );
+            this.handleExpensesPerMonthsAgo(new ExpenseObj(expenses), monthsAgo);
         }
     }
 
-    handleExpenses(expensesObj: ExpenseObj, month: number) {
+    handleExpensesPerMonthsAgo(expensesObj: ExpenseObj, month: number) {
         if (!expensesObj.expenses || expensesObj.expenses.length === 0) {
             return;
         }
