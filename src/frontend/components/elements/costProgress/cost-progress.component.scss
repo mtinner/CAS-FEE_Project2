@@ -45,7 +45,8 @@ $bar-height: 28px;
     transition: width 0.5s ease-out;
     height: $bar-height;
     margin-top: $avatar_radius/2 - $bar-height/2;
-    background: linear-gradient(to right, #4CAF50, transparent);
+    background: #4CAF50;
+    border-radius: 2px;
   }
 }
 
@@ -63,7 +64,8 @@ $bar-height: 28px;
     left: 10px;
     &__progress {
       float: right;
-      background: linear-gradient(to left, #d9534f, transparent);
+      background: #d9534f;
+      border-radius: 2px;
     }
   }
 
