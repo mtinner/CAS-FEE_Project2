@@ -26,10 +26,10 @@ export class CostManagementService extends AppService {
         this.router.navigate(['cost-management']);
     };
 
-    getCurrentMembers(filter: (m: ExpenseMember) => boolean = () => true): Observable<ExpenseMember[]> {
+    getCurrentMembers(): Observable<ExpenseMember[]> {
         return this.http.get(`${this.groupUrl}/currentMembers`)
             .map(this.extractData)
-            .map((membersObj: ExpenseMemberObj) => this.members = membersObj.members.filter(filter))
+            .map((membersObj: ExpenseMemberObj) => this.members = membersObj.members)
             .catch(this.handleError);
     }
 
@@ -60,13 +60,12 @@ export class CostManagementService extends AppService {
                 // creditor
                 const creditorEntries = this.expenseOverview
                     .filter(entry => entry.user.email === expense.creditor.email);
-                const amount = expense.amount / (expense.debitors.length + 1) * expense.debitors.length;
                 if (creditorEntries.length > 0) {
-                    creditorEntries[0].amount += amount;
+                    creditorEntries[0].amount += expense.amount;
                 } else {
                     this.expenseOverview.push(new ExpenseOverviewEntry(
                         expense.creditor,
-                        amount,
+                        expense.amount,
                         0
                     ));
                 }
@@ -74,7 +73,7 @@ export class CostManagementService extends AppService {
                 expense.debitors.forEach(debitor => {
                     const debitorEntries = this.expenseOverview
                         .filter(entry => entry.user.email === debitor.email);
-                    const amount = expense.amount / (expense.debitors.length + 1);
+                    const amount = expense.amount / expense.debitors.length;
                     if (debitorEntries.length > 0) {
                         debitorEntries[0].amount -= amount;
                     } else {

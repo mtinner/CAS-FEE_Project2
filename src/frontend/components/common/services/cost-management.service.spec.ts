@@ -40,44 +40,44 @@ describe('handleExpenses in CostManagementService', () => {
         expect(service.expenseOverview.length).toBe(3);
     });
 
-    it('adds 2 expenses from same user', () => {
+    it('calculates 2 expenses with another debitor', () => {
         service.handleExpenses(
             new ExpenseObj([
                 new Expense('', 10, 0, 0, 0, user1, [user2], new Date()),
                 new Expense('', 20, 0, 0, 0, user1, [user2], new Date())
             ]), 0);
-        expect(service.expenseOverview.find(e => e.user === user1).amount).toBe(15);
-        expect(service.expenseOverview.find(e => e.user === user2).amount).toBe(-15);
+        expect(service.expenseOverview.find(e => e.user === user1).amount).toBe(30);
+        expect(service.expenseOverview.find(e => e.user === user2).amount).toBe(-30);
     });
 
-    it('calculates 2 expenses from different users', () => {
+    it('calculates 2 expenses with each other as debitors', () => {
         service.handleExpenses(
             new ExpenseObj([
                 new Expense('', 10, 0, 0, 0, user1, [user2], new Date()),
                 new Expense('', 20, 0, 0, 0, user2, [user1], new Date())
             ]), 0);
-        expect(service.expenseOverview.find(e => e.user === user1).amount).toBe(-5);
-        expect(service.expenseOverview.find(e => e.user === user2).amount).toBe(5);
+        expect(service.expenseOverview.find(e => e.user === user1).amount).toBe(-10);
+        expect(service.expenseOverview.find(e => e.user === user2).amount).toBe(10);
     });
 
-    it('calculates 3 expenses from different users', () => {
+    it('calculates 3 expenses with creditor as debitors', () => {
         service.handleExpenses(
             new ExpenseObj([
-                new Expense('', 10, 0, 0, 0, user1, [user2], new Date()),
-                new Expense('', 20, 0, 0, 0, user2, [user1], new Date()),
-                new Expense('', 30, 0, 0, 0, user3, [user1], new Date())
+                new Expense('', 10, 0, 0, 0, user1, [user1, user2], new Date()),
+                new Expense('', 20, 0, 0, 0, user2, [user2, user1], new Date()),
+                new Expense('', 30, 0, 0, 0, user3, [user3, user1], new Date())
             ]), 0);
         expect(service.expenseOverview.find(e => e.user === user1).amount).toBe(-20);
         expect(service.expenseOverview.find(e => e.user === user2).amount).toBe(5);
         expect(service.expenseOverview.find(e => e.user === user3).amount).toBe(15);
     });
 
-    it('calculates 3 expenses from different users with multiple debitors', () => {
+    it('calculates 3 expenses from different users with multiple other debitors', () => {
         service.handleExpenses(
             new ExpenseObj([
-                new Expense('', 10, 0, 0, 0, user1, [user2], new Date()),
-                new Expense('', 20, 0, 0, 0, user2, [user1], new Date()),
-                new Expense('', 30, 0, 0, 0, user3, [user1, user2], new Date())
+                new Expense('', 10, 0, 0, 0, user1, [user1, user2], new Date()),
+                new Expense('', 20, 0, 0, 0, user2, [user2, user1], new Date()),
+                new Expense('', 30, 0, 0, 0, user3, [user3, user1, user2], new Date())
             ]), 0);
         expect(service.expenseOverview.find(e => e.user === user1).amount).toBe(-15);
         expect(service.expenseOverview.find(e => e.user === user2).amount).toBe(-5);

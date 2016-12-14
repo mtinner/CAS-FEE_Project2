@@ -2,7 +2,7 @@ import {Component, OnInit, OnDestroy, ViewEncapsulation} from '@angular/core';
 import {HeaderService} from '../../elements/header/header.service';
 import {HeaderStyle} from '../../elements/header/header.enum';
 import {HeaderConfig} from '../../../models/HeaderConfig';
-import {CostManagementService} from './cost-management.service';
+import {CostManagementService} from '../../common/services/cost-management.service';
 
 @Component({
     moduleId: module.id,
