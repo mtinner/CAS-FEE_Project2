@@ -10,6 +10,25 @@ class ExpenseManager {
         this.userService = UserService.instance;
     }
 
+    getByMonthsCount(user, mounthsCount) {
+        let promises = [];
+        let date = new Date();
+        let now = new Date();
+        for (let i = 0; i < mounthsCount; i++) {
+            date.setMonth(now.getMonth() - i);
+            let year = date.getFullYear();
+            let month = date.getMonth() + 1;
+            promises.push(this.getAll(user, year, month));
+        }
+        return Promise.all(promises).then(expenses => {
+            let allExpenses = [];
+            for (let i = 0; i < expenses.length; i++) {
+                allExpenses = allExpenses.concat(expenses[i].expenses);
+            }
+            return { expenses: allExpenses };
+        });
+    }
+
     getAll(user, year, month) {
         return this.userService.get(user)
             .then((user) => {

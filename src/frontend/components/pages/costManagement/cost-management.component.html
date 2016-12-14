@@ -1,22 +1,25 @@
 <div class="container__page">
+
+  <div *ngIf="costManagementService.expenses[0].length === 0" class="sticker sticker--margin-top">
+    <div class="sticker__circle" (click)="navigateToAdd()">
+      <span class="icon icon--receipt"></span>
+      <span class="sticker__label">Add new expense</span>
+    </div>
+  </div>
+
   <button class="btn btn--round btn--bottom-right icon icon--plus" routerLink="add"></button>
 
-  <card class="card--cost-management" [title]="'Overview'">
-    <cost-progress
-        *ngFor="let entry of costManagementService.expenseOverview"
-        [label]="entry.user.username"
-        [amount]="entry.amount"
+  <div *ngIf="costManagementService.expenses[0].length > 0" class="overview-content">
+    <card class="card--cost-management" [title]="'Overview'">
+      <cost-progress *ngFor="let entry of costManagementService.expenseOverview" [label]="entry.user.username" [amount]="entry.amount"
         [percentage]="entry.percentage"></cost-progress>
-  </card>
+    </card>
 
-  <card class="card--cost-management" *ngFor="let month of costManagementService.expenses"
-        [title]="month[0]?.date |date:'MMMM'">
-    <ul class="list">
-      <panel class="list__item list__item--segmented" *ngFor="let expense of month"
-             [title]="expense.description"
-             [description]="expense.date |date:'dd.M.y'"
-             [titleRight]="'Fr. ' + expense.amount"
-             [descriptionRight]="expense.creditor.username"></panel>
-    </ul>
-  </card>
+    <card class="card--cost-management" *ngFor="let monthsAgo of costManagementService.expenses" [title]="monthsAgo[0]?.date |date:'MMMM'">
+      <ul class="list">
+        <panel class="list__item list__item--segmented" *ngFor="let expense of monthsAgo" [title]="expense.description" [description]="expense.date |date:'dd.M.y'"
+          [titleRight]="'Fr. ' + expense.amount" [descriptionRight]="expense.creditor.username"></panel>
+      </ul>
+    </card>
+  </div>
 </div>
