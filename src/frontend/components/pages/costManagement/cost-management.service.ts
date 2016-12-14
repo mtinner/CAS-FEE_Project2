@@ -7,7 +7,6 @@ import { ExpenseMember, ExpenseMemberObj } from '../../../models/ExpenseMember';
 import { Expense, ExpenseObj } from '../../../models/Expense';
 import { ExpenseInsert } from '../../../models/ExpenseInsert';
 import { ExpenseOverviewEntry } from '../../../models/ExpenseOverviewEntry';
-import { User } from '../../../models/User';
 import 'rxjs/add/operator/share';
 import 'rxjs/add/observable/of';
 
