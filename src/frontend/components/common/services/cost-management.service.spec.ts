@@ -10,7 +10,7 @@ describe('handleExpensesPerMonthsAgo in CostManagementService', () => {
     let user3 = new User('3', '3', '');
 
     beforeEach((() => {
-        service = new CostManagementService(null, null);
+        service = new CostManagementService(null);
     }));
 
     it('is defined', () => {

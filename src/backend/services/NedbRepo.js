@@ -53,7 +53,7 @@ class NedbRepo {
 
     remove(id) {
         return this.get({_id: id}).then(doc => {
-            if (!doc) throw new Error('casFee2 not found');
+            if (!doc) throw new Error('share not found');
             return new Promise(resolve => {
                 this.store.remove({_id: id}, () => resolve(doc));
             });
