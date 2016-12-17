@@ -12,7 +12,7 @@
                    [errorMessage]="'Enter your expense'"
                    [placeholder]="'Amount'" [type]="'text'"></input-field>
     </div>
-    <span>These people share the expense with myself:</span>
+    <span>Share the expense with these people:</span>
     <div class="member-row" *ngFor="let member of expenseForm.controls['members']['controls'];let i = index">
       <checkbox [formControl]="member" [id]="costManagementService.members[i]?.username"
                 [label]="costManagementService.members[i]?.username"
