@@ -10,7 +10,7 @@ module.exports = function(gulp, data, util, taskName) {
 
     gulp.task(taskName + ':App', function() {
         var app = gulp.src([
-            data.path.frontend + 'components/**',
+            data.path.frontend + 'app/**',
             '!./**/*.ts',
             '!./**/*.scss',
             data.path.frontend + 'images/**',
@@ -132,7 +132,7 @@ module.exports = function(gulp, data, util, taskName) {
 
     gulp.task(taskName + ':E2eApp', function() {
         var app = gulp.src([
-            data.path.frontend + 'components/**',
+            data.path.frontend + 'app/**',
             '!./**/*.ts',
             '!./**/*.scss',
             data.path.frontend + 'images/**',

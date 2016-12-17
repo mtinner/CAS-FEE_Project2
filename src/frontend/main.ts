@@ -1,5 +1,5 @@
 // removeIf(development)
-import { AppModuleNgFactory } from '../.aot/src/.tmpProd/components/app.module.ngfactory';
+import { AppModuleNgFactory } from '../.aot/src/.tmpProd/app/app.module.ngfactory';
 import { platformBrowser } from '@angular/platform-browser';
 import { enableProdMode } from '@angular/core';
 
@@ -10,7 +10,7 @@ platformBrowser().bootstrapModuleFactory(AppModuleNgFactory);
 
 // removeIf(production)
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { AppModule } from './components/app.module';
+import { AppModule } from './app/app.module';
 
 platformBrowserDynamic().bootstrapModule(AppModule);
 // endRemoveIf(production)

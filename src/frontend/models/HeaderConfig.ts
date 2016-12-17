@@ -1,4 +1,4 @@
-import {HeaderStyle, HeaderIcon} from '../components/elements/header/header.enum';
+import {HeaderStyle, HeaderIcon} from '../app/elements/header/header.enum';
 export class HeaderConfig {
 
     constructor(public title: string, public style: HeaderStyle, public leftIcon = HeaderIcon.Burger, public leftCallback?: Function, public rightIcon?: HeaderIcon, public rightCallback?: Function) {
