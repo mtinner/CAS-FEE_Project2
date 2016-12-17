@@ -11,9 +11,7 @@ import {HeaderConfig} from '../../../models/HeaderConfig';
 })
 export class SettingsComponent implements OnDestroy {
     public settings: Setting[] = [
-        new Setting('/groups', 'Group Membership', `Manage with whom you're sharing shopping list & expenses`),
-        new Setting('.', 'Article Groups', 'Set how individual articles should be grouped'),
-        new Setting('.', 'History')
+        new Setting('/groups', 'Group Membership', `Manage with whom you're sharing shopping list & expenses`)
     ];
 
     constructor(private headerService: HeaderService) {
