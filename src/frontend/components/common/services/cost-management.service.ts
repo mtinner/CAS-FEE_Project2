@@ -24,18 +24,7 @@ export class CostManagementService extends AppService {
     getCurrentMembers(filter: (m: ExpenseMember) => boolean = () => true): Observable<ExpenseMember[]> {
         return this.http.get(`${this.groupUrl}/currentMembers`)
             .map(this.extractData)
-            .map((membersObj: ExpenseMemberObj) => {
-                this.members = [];
-                membersObj.members.forEach(member => {
-                    this.members.push(member);
-                    if (!this.expenseOverview.find(e => e.user.email === member.email)) {
-                        // this.expenseOverview.push(new ExpenseOverviewEntry(
-                        //     new User(member.username, member.email, ''), 0, 0
-                        // ));
-                    }
-                });
-                return this.members;
-            })
+            .map((membersObj: ExpenseMemberObj) => this.members = membersObj.members)
             .catch(this.handleError);
     }
 
