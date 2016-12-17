@@ -10,7 +10,7 @@
       <span class="amount__label">Fr.</span>
       <input-field class="input-field" formControlName="amountControl" [inputControl]="expenseForm.controls['amount']"
                    [errorMessage]="'Enter your expense'"
-                   [placeholder]="'Amount'" [type]="'text'"></input-field>
+                   [placeholder]="'Amount'" [type]="'number'"></input-field>
     </div>
     <span>Share the expense with these people:</span>
     <div class="member-row" *ngFor="let member of expenseForm.controls['members']['controls'];let i = index">
