@@ -1,12 +1,11 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { Http } from '@angular/http';
-import { AppService } from '../../app.service';
-import { Router } from '@angular/router';
-import { ExpenseMember, ExpenseMemberObj } from '../../../models/ExpenseMember';
-import { Expense, ExpenseObj } from '../../../models/Expense';
-import { ExpenseInsert } from '../../../models/ExpenseInsert';
-import { ExpenseOverviewEntry } from '../../../models/ExpenseOverviewEntry';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
+import {Http} from '@angular/http';
+import {AppService} from '../../app.service';
+import {ExpenseMember, ExpenseMemberObj} from '../../../models/ExpenseMember';
+import {Expense, ExpenseObj} from '../../../models/Expense';
+import {ExpenseInsert} from '../../../models/ExpenseInsert';
+import {ExpenseOverviewEntry} from '../../../models/ExpenseOverviewEntry';
 import 'rxjs/add/operator/share';
 import 'rxjs/add/observable/of';
 
@@ -18,13 +17,9 @@ export class CostManagementService extends AppService {
     public expenses: Expense[][] = [[]];
     public expenseOverview: ExpenseOverviewEntry[] = [];
 
-    constructor(private http: Http, private router: Router) {
+    constructor(private http: Http) {
         super();
     }
-
-    goToCostManagement = () => {
-        this.router.navigate(['cost-management']);
-    };
 
     getCurrentMembers(filter: (m: ExpenseMember) => boolean = () => true): Observable<ExpenseMember[]> {
         return this.http.get(`${this.groupUrl}/currentMembers`)
