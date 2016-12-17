@@ -10,8 +10,8 @@ class UserManager {
     }
 
     add(newDoc) {
-        return this.groupService.add(new Group(undefined, 'Private'))
-            .then(group=>
+        return this.groupService.add(new Group(undefined, 'myGroup'))
+            .then(group =>
                 this.userService.add(Object.assign(newDoc, {
                     activeGroup: group.id,
                     groups: [{id: group.id}],
