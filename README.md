@@ -9,7 +9,7 @@ https://mtinner.github.io/CAS-FEE_Project2/
 
 ## Main NPM Tasks
 * Build & start dev mode: `npm start` (http://localhost:8080/)
-* Build & start prod mode: `npm run prod` (http://localhost:8080/)
+* Build & start prod mode (AoT compilation): `npm run prod` (http://localhost:8080/)
 * Run jasmine tests: `npm run test` http://localhost:9876/)
 * Run protractor test: `npm run e2e` (http://localhost:8080/) Prerequisite: Needs Java installed on your local machine. 
  
