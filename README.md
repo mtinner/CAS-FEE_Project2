@@ -33,3 +33,6 @@ https://mtinner.github.io/CAS-FEE_Project2/
 * Karma / Jasmine
 * Moqups (https://mtinner.github.io/CAS-FEE_Project2/) created with https://moqups.com/
 * Custom Projectsetup (with live rebuild), no Templates or Skeletons used
+
+## Known Issues
+* Current bugs can be found here: https://github.com/mtinner/CAS-FEE_Project2/labels/bug
