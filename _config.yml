@@ -1,0 +1,8 @@
+title: Cas-fee project2
+description: angular2
+google_analytics: 
+show_downloads: true
+theme: jekyll-theme-cayman
+
+gems:
+  - jekyll-mentions
